@@ -4,24 +4,18 @@
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.UserDAO;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import model.Account;
-import model.User;
 
 /**
  *
  * @author hieum
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class RegisterController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +34,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
+            out.println("<title>Servlet LoginController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +55,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("client/register.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -75,24 +69,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        
-        Account acc = new Account(username, password, phone, email, phone, true);
-        User user = new User();
-        
-        user.setUsername(username);
-        AccountDAO accDB = new AccountDAO();
-        if(accDB.getAccountByUsername(acc) != null){
-            response.sendRedirect("register.jsp");
-        }else{
-            accDB.createAccount(username, password, phone, email, phone, true);
-            UserDAO uDB = new UserDAO();
-            uDB.createUser(user);
-            request.getRequestDispatcher("login").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
