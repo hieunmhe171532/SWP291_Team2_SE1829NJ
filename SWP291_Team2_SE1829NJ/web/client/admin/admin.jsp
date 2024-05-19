@@ -1,14 +1,10 @@
-<%-- 
-    Document   : admin
-    Created on : May 19, 2024, 10:35:01 PM
-    Author     : HUNG
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-\   <title>Quản trị Admin</title>
+        <title>Quản trị Admin</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,10 +20,13 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+
     </head>
+
     <body onload="time()" class="app sidebar-mini rtl">
-        
-         <header class="app-header">
+        <!-- Navbar-->
+        <header class="app-header">
             <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
                                             aria-label="Hide Sidebar"></a>
             <!-- Navbar Right Menu-->
@@ -77,8 +76,8 @@
 
             </ul>
         </aside>
-                    
-                    <main class="app-content">
+        
+        <main class="app-content">
             <div class="row">
                 <div class="col-md-12">
                     <div class="app-title">
@@ -277,5 +276,8 @@
 
 
         </main>
+
+
     </body>
+
 </html>
