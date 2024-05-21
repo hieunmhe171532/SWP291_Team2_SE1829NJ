@@ -61,7 +61,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("client/register.jsp").forward(request, response);
+         request.getRequestDispatcher("/client/register.jsp").forward(request, response);
     }
 
     /**
@@ -86,12 +86,12 @@ public class RegisterController extends HttpServlet {
         user.setUsername(username);
         AccountDAO accDB = new AccountDAO();
         if(accDB.getAccountByUsername(acc) != null){
-            response.sendRedirect("register.jsp");
+            response.sendRedirect("register");
         }else{
             accDB.createAccount(username, password, phone, email, phone, true);
             UserDAO uDB = new UserDAO();
             uDB.createUser(user);
-            request.getRequestDispatcher("login").forward(request, response);
+            request.getRequestDispatcher("/client/login.jsp").forward(request, response);
         }
     }
 
