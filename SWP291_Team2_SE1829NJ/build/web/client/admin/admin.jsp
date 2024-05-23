@@ -146,9 +146,9 @@
                             <div class="widget-small info coloured-icon"><i class='icon bx bx-building-house fa-3x'></i>
                                 <div class="info">
                                     <h4>All Rooms</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.room} phong</b></p>
                                             <p class="info-tong"> </p>
-                                    <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
+                                    <p class="info-tong">Tổng số phong được quản lý.</p>
                                 </div>
                             </div>
                         </div>
