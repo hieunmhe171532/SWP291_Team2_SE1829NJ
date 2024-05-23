@@ -14,7 +14,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Account;
+import model.Blog;
 
 /**
  *
@@ -35,6 +37,8 @@ public class BlogManage extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         BlogDAO daob = new BlogDAO();
+        List<Blog> listb = null;
+
         AccountDAO daoa = new AccountDAO();
         String action=request.getParameter("action");
         if(action.equals("add")){
@@ -50,6 +54,16 @@ public class BlogManage extends HttpServlet {
 
             daob.insertBlog(title, detail, brief, image, f, "hieplh");
             response.sendRedirect("addblog.jsp");
+        }else if(action.equals("list")){
+            String txt = request.getParameter("txt");
+            if (txt != null) {
+                listb = daob.getBlogByTitle(txt);
+            } else {
+                listb = daob.getAllBlog();
+            }
+            request.setAttribute("listb", listb);
+            request.getRequestDispatcher("manageblog.jsp").forward(request, response);
+
         }
     } 
 
