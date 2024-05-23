@@ -5,6 +5,7 @@
 
 package controller.admin;
 
+import dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -28,19 +29,24 @@ public class Dashboard extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Dashboard</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Dashboard at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
+        
+        
+        
+        
+
     } 
+    
+                  public static void main(String[] args) {
+        
+                                 RoomDAO rdao = new RoomDAO();
+//                MenuDAO mdao = new MenuDAO();
+            int count = rdao.CountRoom();
+        System.out.println("Number of rooms: " + count);
+                
+                
+                  
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
