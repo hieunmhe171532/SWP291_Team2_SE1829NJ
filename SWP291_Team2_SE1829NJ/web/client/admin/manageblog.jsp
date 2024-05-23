@@ -232,7 +232,7 @@
                             <form action="blogmanage?action=edit" method="post">
                                 <div class="modal-body">
                                     <div class="modal-header">						
-                                        <h4 class="modal-title">Edit Product</h4>
+                                        <h4 class="modal-title" style="color: black">Edit Product</h4>
                                     </div>
                                     <div class="form-group">
                                         <label>Id</label>
