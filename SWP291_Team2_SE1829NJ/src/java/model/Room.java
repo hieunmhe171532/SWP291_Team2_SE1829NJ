@@ -4,11 +4,11 @@
  */
 package model;
 
-import java.security.Timestamp;
+import java.sql.Date;
 
 /**
  *
- * @author hieum
+ * @author ADMIN
  */
 public class Room {
     private int id;
@@ -20,17 +20,17 @@ public class Room {
     private float price;
     private boolean status;
     private String description;
-    private int hotel_id;
-    private int type_id;
-    private Timestamp createAt;
-    private Timestamp updateAt;
-    private Timestamp delateAt;
-    private boolean isDelete;
+    private Hotel hotel;
+    private TypeRoom typeRoom;
+     private boolean isDelete;
+    private Date createAt;
+    private Date deleteAt;
+    private Date updateAt;
 
     public Room() {
     }
 
-    public Room(int id, String name, String image, int userQuantity, float area, int quantity, float price, boolean status, String description, int hotel_id, int type_id, Timestamp createAt, Timestamp updateAt, Timestamp delateAt, boolean isDelete) {
+    public Room(int id, String name, String image, int userQuantity, float area, int quantity, float price, boolean status, String description, Hotel hotel, TypeRoom typeRoom, boolean isDelete, Date createAt, Date deleteAt, Date updateAt) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -40,12 +40,17 @@ public class Room {
         this.price = price;
         this.status = status;
         this.description = description;
-        this.hotel_id = hotel_id;
-        this.type_id = type_id;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.delateAt = delateAt;
+        this.hotel = hotel;
+        this.typeRoom = typeRoom;
         this.isDelete = isDelete;
+        this.createAt = createAt;
+        this.deleteAt = deleteAt;
+        this.updateAt = updateAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", userQuantity=" + userQuantity + ", area=" + area + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + ", createAt=" + createAt + ", deleteAt=" + deleteAt + ", updateAt=" + updateAt + '}';
     }
 
     public int getId() {
@@ -120,44 +125,20 @@ public class Room {
         this.description = description;
     }
 
-    public int getHotel_id() {
-        return hotel_id;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setHotel_id(int hotel_id) {
-        this.hotel_id = hotel_id;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
-    public int getType_id() {
-        return type_id;
+    public TypeRoom getTypeRoom() {
+        return typeRoom;
     }
 
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public Timestamp getDelateAt() {
-        return delateAt;
-    }
-
-    public void setDelateAt(Timestamp delateAt) {
-        this.delateAt = delateAt;
+    public void setTypeRoom(TypeRoom typeRoom) {
+        this.typeRoom = typeRoom;
     }
 
     public boolean isIsDelete() {
@@ -168,13 +149,29 @@ public class Room {
         this.isDelete = isDelete;
     }
 
-    @Override
-    public String toString() {
-        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", userQuantity=" + userQuantity + ", area=" + area + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", description=" + description + ", hotel_id=" + hotel_id + ", type_id=" + type_id + ", createAt=" + createAt + ", updateAt=" + updateAt + ", delateAt=" + delateAt + ", isDelete=" + isDelete + '}';
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
+    public Date getDeleteAt() {
+        return deleteAt;
+    }
+
+    public void setDeleteAt(Date deleteAt) {
+        this.deleteAt = deleteAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
     
     
 }
