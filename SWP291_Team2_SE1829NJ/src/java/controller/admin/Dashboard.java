@@ -30,17 +30,14 @@ public class Dashboard extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-
-        
+                RoomDAO rdao = new RoomDAO();
+           int count = rdao.CountRoom();
+           
+           
+           
+           request.setAttribute("room",  count);
               request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
               
-            
-            
-            
-            
-        
-        
-
     } 
     
                   public static void main(String[] args) {

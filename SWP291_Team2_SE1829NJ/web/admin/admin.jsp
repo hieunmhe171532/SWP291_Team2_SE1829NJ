@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="maincss/newcss.css">
+  <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
 
                       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
@@ -44,7 +44,7 @@
         
         <!--code item custom icon side bar-->
         <aside class="app-sidebar">
-            <div class="app-sidebar__user"> <img class="app-sidebar__user-avatar" src="images/user.png" width="50px"
+            <div class="app-sidebar__user"> <img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
                                                 alt="User Image">
                 <div>
                     <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
