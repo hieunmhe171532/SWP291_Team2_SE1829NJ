@@ -4,30 +4,31 @@
  */
 package model;
 
-import java.security.Timestamp;
+import java.sql.Date;
 
 /**
  *
- * @author hieum
+ * @author ADMIN
  */
 public class TypeRoom {
+
     private int id;
     private String name;
-    private Timestamp createAt;
-    private Timestamp updateAt;
-    private Timestamp delateAt;
     private boolean isDelete;
+    private Date createAt;
+    private Date deleteAt;
+    private Date updateAt;
 
-    public TypeRoom() {
-    }
-
-    public TypeRoom(int id, String name, Timestamp createAt, Timestamp updateAt, Timestamp delateAt, boolean isDelete) {
+    public TypeRoom(int id, String name, boolean isDelete, Date createAt, Date deleteAt, Date updateAt) {
         this.id = id;
         this.name = name;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.delateAt = delateAt;
         this.isDelete = isDelete;
+        this.createAt = createAt;
+        this.deleteAt = deleteAt;
+        this.updateAt = updateAt;
+    }
+
+    public TypeRoom() {
     }
 
     public int getId() {
@@ -46,30 +47,6 @@ public class TypeRoom {
         this.name = name;
     }
 
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public Timestamp getDelateAt() {
-        return delateAt;
-    }
-
-    public void setDelateAt(Timestamp delateAt) {
-        this.delateAt = delateAt;
-    }
-
     public boolean isIsDelete() {
         return isDelete;
     }
@@ -78,12 +55,34 @@ public class TypeRoom {
         this.isDelete = isDelete;
     }
 
-    @Override
-    public String toString() {
-        return "TypeRoom{" + "id=" + id + ", name=" + name + ", createAt=" + createAt + ", updateAt=" + updateAt + ", delateAt=" + delateAt + ", isDelete=" + isDelete + '}';
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getDeleteAt() {
+        return deleteAt;
+    }
+
+    public void setDeleteAt(Date deleteAt) {
+        this.deleteAt = deleteAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeRoom{" + "id=" + id + ", name=" + name + ", isDelete=" + isDelete + ", createAt=" + createAt + ", deleteAt=" + deleteAt + ", updateAt=" + updateAt + '}';
+    }
     
     
 }
