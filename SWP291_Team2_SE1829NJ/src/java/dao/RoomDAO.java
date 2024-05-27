@@ -13,11 +13,11 @@ import model.*;
 public class RoomDAO {
 
     private final DBContext dbContext;
-    private Connection conn;
+    private final Connection connection;
 
     public RoomDAO() {
         dbContext = DBContext.getInstance();
-        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+        connection = dbContext.getConnection();
     }
 
     public void mapParams(PreparedStatement ps, List<Object> args) throws SQLException {
@@ -76,7 +76,7 @@ public class RoomDAO {
             params.add(typeRoomId);
         }
 
-        try ( PreparedStatement preparedStatement = conn.prepareStatement(query.toString())) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
             for (int i = 0; i < params.size(); i++) {
                 preparedStatement.setObject(i + 1, params.get(i));
             }
@@ -120,6 +120,68 @@ public class RoomDAO {
         return rooms;
     }
 
+    public int countRoom() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS countRoom FROM Room";
+        try (
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery()
+        ) {
+            if (rs.next()) {
+                count = rs.getInt("countRoom");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int countEmptyRoom() {
+        return countRoomsByStatus(1);
+    }
+
+    public int countBookingRoom() {
+        return countRoomsByStatus(2);
+    }
+
+    public int countUsingRoom() {
+        return countRoomsByStatus(3);
+    }
+
+    public int countRepairingRoom() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS countRoom FROM Room WHERE isActive = 0";
+        try (
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery()
+        ) {
+            if (rs.next()) {
+                count = rs.getInt("countRoom");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    private int countRoomsByStatus(int statusId) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS countRoom FROM Room WHERE status_id = ?";
+        try (
+            PreparedStatement st = connection.prepareStatement(sql)
+        ) {
+            st.setInt(1, statusId);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt("countRoom");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    
     public static void main(String[] args) {
         RoomDAO dao = new RoomDAO();
         List<Room> list = dao.getAllByParam("", "", 1);
@@ -128,4 +190,7 @@ public class RoomDAO {
             System.out.println(r);
         }
     }
+    
+    
+    
 }
