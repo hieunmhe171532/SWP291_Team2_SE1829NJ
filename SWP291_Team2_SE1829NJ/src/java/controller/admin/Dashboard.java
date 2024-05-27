@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Booking;
 //import model.User;
 
 /**
@@ -88,6 +89,12 @@ public class Dashboard extends HttpServlet {
     request.setAttribute("boRoom", countBookingRoom);
     request.setAttribute("usRoom", countUsingRoom);
 
+    
+           // Retrieve booking details
+            List<Booking> bookings = bidao.getAllBookings(); // Implement getAllBookings method in BillDAO
+            request.setAttribute("bookings", bookings);
+    
+    
     // Forward the request to the admin JSP page
     request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 
