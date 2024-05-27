@@ -47,7 +47,7 @@
             <div class="app-sidebar__user"> <img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
                                                 alt="User Image">
                 <div>
-                    <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
+                    <!--<p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>-->
                     <p class="app-sidebar__user-designation">WELCOME TO HOME</p>
                 </div>
             </div>
@@ -96,9 +96,9 @@
                             <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
                                 <div class="info">
                                     <h4>all users</h4>
-
+                                 <p><b>${requestScope.totalUser} users</b></p>
                                     <!--<p class="info-tong">that all number users.</p>-->
-                                            <p class="info-tong"> </p>
+                                            <!--<p class="info-tong"> </p>-->
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
                                 <div class="info">
                                     <h4>Bills Booking</h4>
-                                    <!--<p><b>${requestScope.bill} đơn hàng</b></p>-->
+                                    <p><b>${requestScope.totalBill} bills</b></p>
                                     <!--<p class="info-tong">All bill booking.</p>-->
                                             <p class="info-tong"> </p>
                                 </div>
@@ -120,7 +120,7 @@
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
                                 <div class="info">
                                     <h4>All Blogs</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.totalBlog} blogs</b></p>
                                     <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
                                             <p class="info-tong"> </p>
                                 </div>
@@ -132,7 +132,7 @@
                             <div class="widget-small blogadmin coloured-icon"><i class='icon bx bxs-food-menu fa-3x'></i>
                                 <div class="info">
                                     <h4>All Foods</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.totalFood} dish</b></p>
                                     <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
                                             <p class="info-tong"> </p>
                                 </div>
@@ -146,9 +146,9 @@
                             <div class="widget-small info coloured-icon"><i class='icon bx bx-building-house fa-3x'></i>
                                 <div class="info">
                                     <h4>All Rooms</h4>
-                                    <p><b>${requestScope.room} phong</b></p>
+                                    <p><b>${requestScope.totalRoom} rooms</b></p>
                                             <p class="info-tong"> </p>
-                                    <p class="info-tong">Tổng số phong được quản lý.</p>
+                                    <!--<p class="info-tong">Tổng số phong được quản lý.</p>-->
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
                                 <div class="info">
                                     <h4>repairing room</h4>
-                                    <!--<p><b>${requestScope.low} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.reRoom} rooms</b></p>
                                             <p class="info-tong"> </p>
                                     <!--<p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>-->
                                 </div>
@@ -169,7 +169,7 @@
                             <div class="widget-small emptyroom coloured-icon"><i class='icon bx bx-door-open fa-3x'></i>
                                 <div class="info">
                                     <h4>Empty Room</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.emRoom} rooms</b></p>
                                     <p class="info-tong"> </p>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                             <div class="widget-small bookingroom coloured-icon"><i class='icon bx bx-calendar-check fa-3x'></i>
                                 <div class="info">
                                     <h4>Booking Room</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.boRoom} rooms</b></p>
                                     <p class="info-tong"> <p>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
                             <div class="widget-small usingroom coloured-icon"><i class='icon bx bx-user-check fa-3x'></i>
                                 <div class="info">
                                     <h4>Using Room</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.usRoom} rooms</b></p>
                                     <p class="info-tong"> </p>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                                                 <th>Room name</th>
                                                 <th>Name customer</th>
                                                 <th>Phone numbers</th>
-                                                <th>Gmails</th>
+<!--                                                <th>Gmails</th>-->
                                                 <th>Address</th>
                                                 <th>StartDate</th>
                                                 <th>Enddate</th>
@@ -222,7 +222,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!--                                            <c:forEach items="${billbyday}" var="b">
+<!--                                                                                        <c:forEach items="${billbyday}" var="b"> 
                                                                                             <tr>
                                                                                                 <td>${b.bill_id}</td>
                                                                                                 <td>${b.user.user_name}</td>
@@ -252,7 +252,7 @@
                                                 <th>Room name</th>
                                                 <th>Name customer</th>
                                                 <th>Phone numbers</th>
-                                                <th>Gmails</th>
+                                                <!--<th>Gmails</th>-->
                                                 <th>Address</th>
                                                 <th>StartDate</th>
                                                 <th>Enddate</th>
