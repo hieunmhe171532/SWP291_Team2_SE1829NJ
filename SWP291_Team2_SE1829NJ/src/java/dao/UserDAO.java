@@ -28,10 +28,12 @@ import java.util.logging.Logger;
 
 public class UserDAO{
 
-    DBContext dbContext;
+     private final DBContext dbContext;
+    private final Connection connection;
 
-    public UserDAO(){
+    public UserDAO() {
         dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
     }
 
     public void createUser(User user) {
@@ -53,9 +55,62 @@ public class UserDAO{
         }
     }
 
-    public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        User user = new User("abc", "John Doe", new java.util.Date(),false , "123 Test St, Test City");
-        userDAO.createUser(user);
+    
+//                      public int countUser() {
+//    int count = 0;
+//    String sql = " SELECT COUNT(*) AS TotalUsers FROM [dbo].[User]";
+//    
+//    try (Connection conn = dbContext.getConnection();
+//         PreparedStatement stm = conn.prepareStatement(sql);
+//         ResultSet rs = stm.executeQuery()) {
+//        
+//        if (rs.next()) {
+//            count = rs.getInt(1);
+//        }
+//        
+//    } catch (SQLException e) {
+//        // Xử lý ngoại lệ (ví dụ: log lỗi, thông báo cho người dùng, etc.)
+//
+//    }
+//    
+//    return count;
+//}
+    
+public int countUsers() {
+    int count = 0;
+    String sql = "SELECT COUNT(*) AS TotalUsers FROM [dbo].[User]";
+
+    try (
+             PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            ) {
+
+        if (rs.next()) {
+            count = rs.getInt("TotalUsers");
+        }
+
+    } catch (SQLException e) {
+        // Handle exception appropriately (log, notify user, etc.)
+        e.printStackTrace();
     }
+
+    return count;
+}
+
+
+    
+    public static void main(String[] args) {
+     UserDAO udao = new UserDAO();
+        int count = udao.countUsers();
+        System.out.println("Number of user: " + count);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
