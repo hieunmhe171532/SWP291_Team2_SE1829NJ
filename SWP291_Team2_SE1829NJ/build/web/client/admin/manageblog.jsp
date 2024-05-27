@@ -285,13 +285,13 @@
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <span class="thong-tin-thanh-toan">
-                                                <h5>Bạn có chắc chắn muốn xóa khách hàng này?</h5>
+                                                <h5>Bạn có chắc chắn muốn xóa Blog này?</h5>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <input hidden name="user_id" value="${u.user_id}">
+                                            <input hidden name="id" value="${b.id}">
                                         </div>
                                     </div>
                                     <BR>

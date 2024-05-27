@@ -63,17 +63,15 @@ public class BlogDAO  {
                 + "    [detail] = ?,\n"
                 + "    [briefinfo] = ?,\n"
                 + "    [Image] = ?,\n"
-                + "    [flag] = ?,\n"
-                + "    [createAt] = ?\n"
+                + "    [flag] = ?\n"
                 + "WHERE id=?";
         try (Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
             pstmt.setString(4, image);
-            pstmt.setString(5, date);
-            pstmt.setString(6, flag);
-            pstmt.setString(7, id);
+            pstmt.setString(5, flag);
+            pstmt.setString(6, id);
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
@@ -196,10 +194,11 @@ public class BlogDAO  {
     public static void main(String[] args) {
         BlogDAO dao = new BlogDAO();
 //        dao.Insert("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
-//        dao.Edit("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "1", "2");
+//        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
 //        List<Blog> b=dao.searchByTitle("k");
 //        for (Blog blog : b) {
 //            System.out.println(blog);
 //        }
+dao.deleteBlog("4006");
     }
 }

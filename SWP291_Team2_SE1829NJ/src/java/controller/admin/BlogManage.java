@@ -37,10 +37,11 @@ public class BlogManage extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         BlogDAO daob = new BlogDAO();
-        List<Blog> listb = null;
+        List<Blog> listb ;
 
         AccountDAO daoa = new AccountDAO();
         String action=request.getParameter("action");
+        
         if(action.equals("add")){
             String title = request.getParameter("title");
             String brief = request.getParameter("brief");
@@ -51,20 +52,42 @@ public class BlogManage extends HttpServlet {
                 flag = "0";
             }
             int f = Integer.parseInt(flag);
-
             daob.insertBlog(title, detail, brief, image, f, "hieplh");
-            response.sendRedirect("addblog.jsp");
-        }else if(action.equals("list")){
+            response.sendRedirect("blogmanage?action=list");
+        } 
+        if (action.equals("edit")) {
+            String id = request.getParameter("id");
+            String title = request.getParameter("title");
+            String brief = request.getParameter("brief");
+            String detail = request.getParameter("detail");
+            String image = request.getParameter("image");
+            String flag = request.getParameter("flag");
+            if (flag == null) {
+                flag = "0";
+            }
+            daob.editBlog(title, detail, brief, image, flag, id);
+            response.sendRedirect("blogmanage?action=list");
+
+        }
+        if (action.equals("delete")) {
+            String id=request.getParameter("id");
+            daob.deleteBlog(id);
+            response.sendRedirect("blogmanage?action=list");
+
+        }
+        if (action.equals("list")) {
             String txt = request.getParameter("txt");
             if (txt != null) {
                 listb = daob.getBlogByTitle(txt);
             } else {
                 listb = daob.getAllBlog();
             }
+
             request.setAttribute("listb", listb);
             request.getRequestDispatcher("manageblog.jsp").forward(request, response);
 
         }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
