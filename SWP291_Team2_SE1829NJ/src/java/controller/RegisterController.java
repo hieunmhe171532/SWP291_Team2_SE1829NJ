@@ -89,7 +89,7 @@ public class RegisterController extends HttpServlet {
             response.sendRedirect("register");
         }else{
             accDB.createAccount(username, password, phone, email, "user", true);
-            UserDAO uDB = new User(user);
+            UserDAO uDB = new UserDAO();
             uDB.createUser(user);
             request.getRequestDispatcher("/client/login.jsp").forward(request, response);
         }
