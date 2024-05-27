@@ -77,7 +77,6 @@
                 left: 0;
                 bottom: 0;
                 border-radius: 1px;
-                margin-top: 15px;
                 transition: transform var(--timing) ease;
             }
             /* Hover on Input */

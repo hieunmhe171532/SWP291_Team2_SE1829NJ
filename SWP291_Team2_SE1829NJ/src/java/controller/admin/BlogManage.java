@@ -53,7 +53,7 @@ public class BlogManage extends HttpServlet {
             }
             int f = Integer.parseInt(flag);
             daob.insertBlog(title, detail, brief, image, f, "hieplh");
-            response.sendRedirect("blogmanage?action=list");
+            response.sendRedirect("listblog");
         } 
         if (action.equals("edit")) {
             String id = request.getParameter("id");
@@ -66,13 +66,13 @@ public class BlogManage extends HttpServlet {
                 flag = "0";
             }
             daob.editBlog(title, detail, brief, image, flag, id);
-            response.sendRedirect("blogmanage?action=list");
+            response.sendRedirect("listblog");
 
         }
         if (action.equals("delete")) {
             String id=request.getParameter("id");
             daob.deleteBlog(id);
-            response.sendRedirect("blogmanage?action=list");
+            response.sendRedirect("listblog");
 
         }
         if (action.equals("list")) {

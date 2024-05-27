@@ -71,7 +71,7 @@
                             class="app-menu__label">Staff Management</span></a></li>
                 <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Customer Management</span></a></li>
-                <li><a class="app-menu__item" href="blogmanage?action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            <li><a class="app-menu__item" href="blogmanage?action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Blog Management</span></a></li>
                 <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Foods Management</span></a></li>
