@@ -4,31 +4,33 @@
  */
 package model;
 
-import java.security.Timestamp;
+import java.sql.Date;
 
 /**
  *
- * @author hieum
+ * @author ADMIN
  */
 public class Hotel {
     private int id;
-    private String name;
+    private String name;	
     private String image;
     private String address;
     private String phone;
     private float rating;
     private boolean isActive;
+    
     private String description;
     private String feedback;
-    private Timestamp createAt;
-    private Timestamp deleteAt;
-    private Timestamp updateAt;
-    private boolean isDelete;
+    private Date createAt;
+    private Date deleteAt;
+    private Date updateAt;
+    private boolean  isDelete;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String image, String address, String phone, float rating, boolean isActive, String description, String feedback, Timestamp createAt, Timestamp deleteAt, Timestamp updateAt, boolean isDelete) {
+    
+    public Hotel(int id, String name, String image, String address, String phone, float rating, boolean isActive, String description, String feedback, Date createAt, Date deleteAt, Date updateAt, boolean isDelete) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -116,27 +118,27 @@ public class Hotel {
         this.feedback = feedback;
     }
 
-    public Timestamp getCreateAt() {
+    public Date getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Timestamp createAt) {
+    public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 
-    public Timestamp getDeleteAt() {
+    public Date getDeleteAt() {
         return deleteAt;
     }
 
-    public void setDeleteAt(Timestamp deleteAt) {
+    public void setDeleteAt(Date deleteAt) {
         this.deleteAt = deleteAt;
     }
 
-    public Timestamp getUpdateAt() {
+    public Date getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
+    public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
 
@@ -152,8 +154,6 @@ public class Hotel {
     public String toString() {
         return "Hotel{" + "id=" + id + ", name=" + name + ", image=" + image + ", address=" + address + ", phone=" + phone + ", rating=" + rating + ", isActive=" + isActive + ", description=" + description + ", feedback=" + feedback + ", createAt=" + createAt + ", deleteAt=" + deleteAt + ", updateAt=" + updateAt + ", isDelete=" + isDelete + '}';
     }
-
-    
     
     
 }
