@@ -53,9 +53,9 @@ public class UserDAO{
         }
     }
 
-    public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        User user = new User("abc", "John Doe", new java.util.Date(),false , "123 Test St, Test City");
-        userDAO.createUser(user);
-    }
+//    public static void main(String[] args) {
+//        UserDAO userDAO = new UserDAO();
+//        User user = new User("abc", "John Doe", new java.sql.Date(),false , "123 Test St, Test City");
+//        userDAO.createUser(user);
+//    }
 }

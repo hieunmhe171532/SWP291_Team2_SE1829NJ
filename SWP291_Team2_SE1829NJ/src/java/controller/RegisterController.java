@@ -80,7 +80,7 @@ public class RegisterController extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         
-        Account acc = new Account(username, password, phone, email, phone, true);
+        Account acc = new Account(username, password, phone, email, "user", true);
         User user = new User();
         
         user.setUsername(username);
@@ -88,8 +88,8 @@ public class RegisterController extends HttpServlet {
         if(accDB.getAccountByUsername(acc) != null){
             response.sendRedirect("register");
         }else{
-            accDB.createAccount(username, password, phone, email, phone, true);
-            UserDAO uDB = new UserDAO();
+            accDB.createAccount(username, password, phone, email, "user", true);
+            UserDAO uDB = new User(user);
             uDB.createUser(user);
             request.getRequestDispatcher("/client/login.jsp").forward(request, response);
         }
