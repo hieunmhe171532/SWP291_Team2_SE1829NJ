@@ -222,19 +222,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-<!--                             <c:forEach items="${bookings}" var="booking">
--->                            <tr>
-                                <td>${booking.id}</td>
-                                <td>${booking.roomName}</td>
-                                <td>${booking.customerName}</td>
-                                <td>${booking.phoneNumber}</td>
-                                <td>${booking.address}</td>
-                                <td>${booking.startDate}</td>
-                                <td>${booking.endDate}</td>
-                                <td>${booking.fees}</td>
-                                <td><span class="badge bg-success">${booking.paymentMode}</span></td>
+
+                                 
+                                       <c:forEach items="${bookingByDay}" var="bBD">
+                            <tr>
+                                <td>${bBD.id}</td>
+                                <td>${bBD.roomName}</td>
+                                <td>${bBD.customerName}</td>
+                                <td>${bBD.phoneNumber}</td>
+                                <td>${bBD.address}</td>
+                                <td>${bBD.startDate}</td>
+                                <td>${bBD.endDate}</td>
+                                <td>${bBD.fees}</td>
+                                <td><span class="badge bg-success">${bBD.paymentMode}</span></td>
                                 <td>
-                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${booking.id}">
+                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${bBD.id}">
 >
                                         <i class="fa"></i> Chi tiết đơn hàng
                                     </a>
@@ -268,7 +270,28 @@
                                                 <th>Functions</th>
                                             </tr>
                                         </thead>
-
+                                     <tbody>
+<!--                       <!--                             <c:forEach items="${bookings}" var="booking">
+-->                            <tr>
+                                <td>${booking.id}</td>
+                                <td>${booking.roomName}</td>
+                                <td>${booking.customerName}</td>
+                                <td>${booking.phoneNumber}</td>
+                                <td>${booking.address}</td>
+                                <td>${booking.startDate}</td>
+                                <td>${booking.endDate}</td>
+                                <td>${booking.fees}</td>
+                                <td><span class="badge bg-success">${booking.paymentMode}</span></td>
+                                <td>
+                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${booking.id}">
+>
+                                        <i class="fa"></i> Chi tiết đơn hàng
+                                    </a>
+                                </td>
+                            </tr><!--
+                        </c:forEach>
+                                            -->
+                                        </tbody>
                                     </table>
                                 </div>
                                 <!-- / div trống-->

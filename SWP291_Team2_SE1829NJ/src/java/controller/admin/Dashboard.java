@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import model.Booking;
 //import model.User;
@@ -93,6 +94,9 @@ public class Dashboard extends HttpServlet {
            // Retrieve booking details
             List<Booking> bookings = bidao.getAllBookings(); // Implement getAllBookings method in BillDAO
             request.setAttribute("bookings", bookings);
+            
+             List<Booking> bookingByDay = bidao.getBookingsByDay(LocalDate.now()); // Implement getAllBookings method in BillDAO
+            request.setAttribute("bookingByDay", bookingByDay);
     
     
     // Forward the request to the admin JSP page
