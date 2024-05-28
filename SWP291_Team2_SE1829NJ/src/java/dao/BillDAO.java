@@ -153,62 +153,62 @@ public class BillDAO {
 //    }
     
     
-  public List<Booking> getBookingsByDay(LocalDate day) {
-        List<Booking> bookingsByDay = new ArrayList<>();
-        String sql = "SELECT " +
-                     "b.id AS BookingID, " +
-                     "r.name AS RoomName, " +
-                     "u.name AS CustomerName, " +
-                     "a.phone AS PhoneNumber, " +
-                     "u.address AS Address, " +
-                     "b.startDate, " +
-                     "b.endDate, " +
-                     "bl.total AS Fees, " +
-                     "CASE " +
-                     "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
-                     "    ELSE 'Other' " +
-                     "END AS PaymentMode " +
-                     "FROM Booking b " +
-                     "JOIN [User] u ON b.user_id = u.id " +
-                     "JOIN Account a ON u.username = a.username " +
-                     "JOIN Room r ON b.room_id = r.id " +
-                     "JOIN Bill bl ON b.id = bl.booking_id " +
-                     "WHERE date = cast(getdate() as Date)"; // Filter by start date
+ public List<Booking> getBookingsByDay(LocalDate day) {
+    List<Booking> bookingsByDay = new ArrayList<>();
+    String sql = "SELECT " +
+                 "b.id AS BookingID, " +
+                 "r.name AS RoomName, " +
+                 "u.name AS CustomerName, " +
+                 "a.phone AS PhoneNumber, " +
+                 "u.address AS Address, " +
+                 "b.startDate, " +
+                 "b.endDate, " +
+                 "bl.total AS Fees, " +
+                 "CASE " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
+                 "    ELSE 'Other' " +
+                 "END AS PaymentMode " +
+                 "FROM Booking b " +
+                 "JOIN [User] u ON b.user_id = u.id " +
+                 "JOIN Account a ON u.username = a.username " +
+                 "JOIN Room r ON b.room_id = r.id " +
+                 "JOIN Bill bl ON b.id = bl.booking_id " +
+                 "WHERE b.startDate = ?"; // Use placeholder for parameter
 
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setObject(1, day);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Booking booking = new Booking(
-                        rs.getInt("BookingID"),
-                        rs.getString("RoomName"),
-                        rs.getString("CustomerName"),
-                        rs.getString("PhoneNumber"),
-                        rs.getString("Address"),
-                        rs.getDate("startDate"),
-                        rs.getDate("endDate"),
-                        rs.getFloat("Fees"),
-                        rs.getString("PaymentMode")
-                );
-                bookingsByDay.add(booking);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    try (PreparedStatement st = connection.prepareStatement(sql)) {
+        st.setObject(1, day); // Set the parameter for the placeholder
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            Booking booking = new Booking(
+                    rs.getInt("BookingID"),
+                    rs.getString("RoomName"),
+                    rs.getString("CustomerName"),
+                    rs.getString("PhoneNumber"),
+                    rs.getString("Address"),
+                    rs.getDate("startDate"),
+                    rs.getDate("endDate"),
+                    rs.getFloat("Fees"),
+                    rs.getString("PaymentMode")
+            );
+            bookingsByDay.add(booking);
         }
-        return bookingsByDay;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
-
+    return bookingsByDay;
+}
     
     
-    public static void main(String[] args) {
+public static void main(String[] args) {
     BillDAO billDAO = new BillDAO();
     int count = billDAO.countBill();
     System.out.println("Number of Bills: " + count);
 
-    // Fetch and print all booking details
-    List<Booking> bookings = billDAO.getAllBookings();
+    // Fetch and print booking details for the current day
+    List<Booking> bookings = billDAO.getBookingsByDay(LocalDate.now());
     for (Booking booking : bookings) {
         System.out.println(booking);
     }
 }
+
 }
