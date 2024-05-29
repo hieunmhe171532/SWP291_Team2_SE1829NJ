@@ -3,15 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/admin/Dashboard.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Máy%20tính/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/client/homepage.jsp</file>
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/client/register.jsp</file>
+=======
+>>>>>>> Stashed changes
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/admin/Dashboard.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/client/homepage.jsp</file>
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+=======
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/HotelDAO.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
+            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/BillDAO.java</file>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
