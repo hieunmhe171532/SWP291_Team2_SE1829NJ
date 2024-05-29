@@ -1,37 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp; // Corrected import
 import java.util.Date;
 
 /**
- *
- * @author hieum
+ * Booking class representing a booking record.
+ * 
+ * Author: hieum
  */
 public class Booking {
     private int id;
-    private int room_id;
-    private int user_id;
+    private int roomId; // Changed to camelCase for consistency
+    private int userId; // Changed to camelCase for consistency
+    private Room room;
+    private String roomName; // New field
+    private String customerName; // New field
+    private String phoneNumber; // New field
+    private String address; // New field
     private Date startDate;
     private Date endDate;
-    private Timestamp createAt;
-    private Timestamp deleteAt;
+    private float fees; // New field
+    private String paymentMode; // New field
+    private Timestamp createdAt; // Changed to camelCase for consistency
+    private Timestamp deletedAt; // Changed to camelCase for consistency
 
+    // Default constructor
     public Booking() {
     }
 
-    public Booking(int id, int room_id, int user_id, Date startDate, Date endDate, Timestamp createAt, Timestamp deleteAt) {
+    // Parameterized constructor
+//    public Booking(int id, int roomId, int userId, String roomName, String customerName, String phoneNumber, String address, Date startDate, Date endDate, float fees, String paymentMode, Timestamp createdAt, Timestamp deletedAt) {
+//        this.id = id;
+//        this.roomId = roomId;
+//        this.userId = userId;
+//        this.roomName = roomName;
+//        this.customerName = customerName;
+//        this.phoneNumber = phoneNumber;
+//        this.address = address;
+//        this.startDate = startDate;
+//        this.endDate = endDate;
+//        this.fees = fees;
+//        this.paymentMode = paymentMode;
+//        this.createdAt = createdAt;
+//        this.deletedAt = deletedAt;
+//    }
+
+        public Booking(int id, String roomName, String customerName, String phoneNumber, String address, Date startDate, Date endDate, float fees, String paymentMode) {
         this.id = id;
-        this.room_id = room_id;
-        this.user_id = user_id;
+        this.roomName = roomName;
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.createAt = createAt;
-        this.deleteAt = deleteAt;
+        this.fees = fees;
+        this.paymentMode = paymentMode;
     }
+    // Getter and setter methods
 
     public int getId() {
         return id;
@@ -41,20 +66,52 @@ public class Booking {
         this.id = id;
     }
 
-    public int getRoom_id() {
-        return room_id;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setRoom_id(int room_id) {
-        this.room_id = room_id;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getStartDate() {
@@ -73,25 +130,54 @@ public class Booking {
         this.endDate = endDate;
     }
 
-    public Timestamp getCreateAt() {
-        return createAt;
+    public float getFees() {
+        return fees;
     }
 
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
+    public void setFees(float fees) {
+        this.fees = fees;
     }
 
-    public Timestamp getDeleteAt() {
-        return deleteAt;
+    public String getPaymentMode() {
+        return paymentMode;
     }
 
-    public void setDeleteAt(Timestamp deleteAt) {
-        this.deleteAt = deleteAt;
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     @Override
     public String toString() {
-        return "Booking{" + "id=" + id + ", room_id=" + room_id + ", user_id=" + user_id + ", startDate=" + startDate + ", endDate=" + endDate + ", createAt=" + createAt + ", deleteAt=" + deleteAt + '}';
+        return "Booking{" +
+                "id=" + id +
+                ", roomId=" + roomId +
+                ", userId=" + userId +
+                ", roomName='" + roomName + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", fees=" + fees +
+                ", paymentMode='" + paymentMode + '\'' +
+               
+               
+                '}';
     }
-    
 }

@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Main CSS-->
-        <link rel="stylesheet" type="text/css" href="maincss/newcss.css">
+  <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
 
                       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
@@ -44,10 +44,10 @@
         
         <!--code item custom icon side bar-->
         <aside class="app-sidebar">
-            <div class="app-sidebar__user"> <img class="app-sidebar__user-avatar" src="images/user.png" width="50px"
+            <div class="app-sidebar__user"> <img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
                                                 alt="User Image">
                 <div>
-                    <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
+                    <!--<p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>-->
                     <p class="app-sidebar__user-designation">WELCOME TO HOME</p>
                 </div>
             </div>
@@ -96,9 +96,9 @@
                             <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
                                 <div class="info">
                                     <h4>all users</h4>
-
+                                 <p><b>${requestScope.totalUser} users</b></p>
                                     <!--<p class="info-tong">that all number users.</p>-->
-                                            <p class="info-tong"> </p>
+                                            <!--<p class="info-tong"> </p>-->
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
                                 <div class="info">
                                     <h4>Bills Booking</h4>
-                                    <!--<p><b>${requestScope.bill} đơn hàng</b></p>-->
+                                    <p><b>${requestScope.totalBill} bills</b></p>
                                     <!--<p class="info-tong">All bill booking.</p>-->
                                             <p class="info-tong"> </p>
                                 </div>
@@ -120,7 +120,7 @@
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
                                 <div class="info">
                                     <h4>All Blogs</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.totalBlog} blogs</b></p>
                                     <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
                                             <p class="info-tong"> </p>
                                 </div>
@@ -132,7 +132,7 @@
                             <div class="widget-small blogadmin coloured-icon"><i class='icon bx bxs-food-menu fa-3x'></i>
                                 <div class="info">
                                     <h4>All Foods</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.totalFood} dish</b></p>
                                     <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
                                             <p class="info-tong"> </p>
                                 </div>
@@ -146,9 +146,9 @@
                             <div class="widget-small info coloured-icon"><i class='icon bx bx-building-house fa-3x'></i>
                                 <div class="info">
                                     <h4>All Rooms</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.totalRoom} rooms</b></p>
                                             <p class="info-tong"> </p>
-                                    <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
+                                    <!--<p class="info-tong">Tổng số phong được quản lý.</p>-->
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
                                 <div class="info">
                                     <h4>repairing room</h4>
-                                    <!--<p><b>${requestScope.low} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.reRoom} rooms</b></p>
                                             <p class="info-tong"> </p>
                                     <!--<p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>-->
                                 </div>
@@ -169,7 +169,7 @@
                             <div class="widget-small emptyroom coloured-icon"><i class='icon bx bx-door-open fa-3x'></i>
                                 <div class="info">
                                     <h4>Empty Room</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.emRoom} rooms</b></p>
                                     <p class="info-tong"> </p>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                             <div class="widget-small bookingroom coloured-icon"><i class='icon bx bx-calendar-check fa-3x'></i>
                                 <div class="info">
                                     <h4>Booking Room</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.boRoom} rooms</b></p>
                                     <p class="info-tong"> <p>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
                             <div class="widget-small usingroom coloured-icon"><i class='icon bx bx-user-check fa-3x'></i>
                                 <div class="info">
                                     <h4>Using Room</h4>
-                                    <!--<p><b>${requestScope.product} sản phẩm</b></p>-->
+                                    <p><b>${requestScope.usRoom} rooms</b></p>
                                     <p class="info-tong"> </p>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                                                 <th>Room name</th>
                                                 <th>Name customer</th>
                                                 <th>Phone numbers</th>
-                                                <th>Gmails</th>
+
                                                 <th>Address</th>
                                                 <th>StartDate</th>
                                                 <th>Enddate</th>
@@ -222,18 +222,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!--                                            <c:forEach items="${billbyday}" var="b">
-                                                                                            <tr>
-                                                                                                <td>${b.bill_id}</td>
-                                                                                                <td>${b.user.user_name}</td>
-                                                                                                <td>(+84)${b.phone}</td>
-                                                                                                <td>${b.address}</td>
-                                                                                                <td>${b.date}</td>
-                                                                                                <td>${b.total}</td>
-                                                                                                <td><span class="badge bg-success">${b.payment}</span></td>                                  
-                                                                                                <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ordermanager?action=showdetail&bill_id=${b.bill_id}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
-                                                                                            </tr>
-                                            </c:forEach>
+
+                                 
+                                       <c:forEach items="${bookingByDay}" var="bBD">
+                            <tr>
+                                <td>${bBD.id}</td>
+                                <td>${bBD.roomName}</td>
+                                <td>${bBD.customerName}</td>
+                                <td>${bBD.phoneNumber}</td>
+                                <td>${bBD.address}</td>
+                                <td>${bBD.startDate}</td>
+                                <td>${bBD.endDate}</td>
+                                <td>${bBD.fees}</td>
+                                <td><span class="badge bg-success">${bBD.paymentMode}</span></td>
+                                <td>
+                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${bBD.id}">
+>
+                                        <i class="fa"></i> Chi tiết đơn hàng
+                                    </a>
+                                </td>
+                            </tr><!--
+                        </c:forEach>
                                             -->
                                         </tbody>
                                     </table>
@@ -252,7 +261,7 @@
                                                 <th>Room name</th>
                                                 <th>Name customer</th>
                                                 <th>Phone numbers</th>
-                                                <th>Gmails</th>
+                                               <!--<th>Gmails</th>-->
                                                 <th>Address</th>
                                                 <th>StartDate</th>
                                                 <th>Enddate</th>
@@ -261,7 +270,28 @@
                                                 <th>Functions</th>
                                             </tr>
                                         </thead>
-
+                                     <tbody>
+<!--                       <!--                             <c:forEach items="${bookings}" var="booking">
+-->                            <tr>
+                                <td>${booking.id}</td>
+                                <td>${booking.roomName}</td>
+                                <td>${booking.customerName}</td>
+                                <td>${booking.phoneNumber}</td>
+                                <td>${booking.address}</td>
+                                <td>${booking.startDate}</td>
+                                <td>${booking.endDate}</td>
+                                <td>${booking.fees}</td>
+                                <td><span class="badge bg-success">${booking.paymentMode}</span></td>
+                                <td>
+                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${booking.id}">
+>
+                                        <i class="fa"></i> Chi tiết đơn hàng
+                                    </a>
+                                </td>
+                            </tr><!--
+                        </c:forEach>
+                                            -->
+                                        </tbody>
                                     </table>
                                 </div>
                                 <!-- / div trống-->
@@ -276,6 +306,84 @@
 
 
         </main>
+      <script src="admin/js/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="admin/js/popper.min.js"></script>
+        <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+        <!--===============================================================================================-->
+        <script src="admin/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="admin/js/main.js"></script>
+        <!--===============================================================================================-->
+        <script src="admin/js/plugins/pace.min.js"></script>
+        <!--===============================================================================================-->
+        <!--===============================================================================================-->
+        <script type="text/javascript">
+                            var data = {
+                                labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+                                datasets: [{
+                                        ill: "rgb(255, 212, 59)",
+                                        pointHighlightStroke: "rgb(255, 212, 59)",
+                                        data: [20, 59, 90, 51, 56, 100]
+                                    },
+                                    {
+                                        label: "Dữ liệu kế tiếp",
+                                        fillColor: "rgba(9, 109, 239, 0.651)  ",
+                                        pointColor: "rgb(9, 109, 239)",
+                                        strokeColor: "rgb(9, 109, 239)",
+                                        pointStrokeColor: "rgb(9, 109, 239)",
+                                        pointHighlightFill: "rgb(9, 109, 239)",
+                                        pointHighlightStroke: "rgb(9, 109, 239)",
+                                        data: [48, 48, 49, 39, 86, 10]
+                                    }
+                                ]
+                            };
+                            var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+                            var lineChart = new Chart(ctxl).Line(data);
+
+                            var ctxb = $("#barChartDemo").get(0).getContext("2d");
+                            var barChart = new Chart(ctxb).Bar(data);
+        </script>
+        <script type="text/javascript">
+            //Thời Gian
+            function time() {
+                var today = new Date();
+                var weekday = new Array(7);
+                weekday[0] = "Chủ Nhật";
+                weekday[1] = "Thứ Hai";
+                weekday[2] = "Thứ Ba";
+                weekday[3] = "Thứ Tư";
+                weekday[4] = "Thứ Năm";
+                weekday[5] = "Thứ Sáu";
+                weekday[6] = "Thứ Bảy";
+                var day = weekday[today.getDay()];
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                m = checkTime(m);
+                nowTime = h + ":" + m + "";
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                        '</span>';
+                document.getElementById("clock").innerHTML = tmp;
+                clocktime = setTimeout("time()", "1000", "Javascript");
+
+                function checkTime(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+            }
+        </script>
 
 
     </body>
