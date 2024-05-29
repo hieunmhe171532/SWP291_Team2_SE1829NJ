@@ -53,7 +53,7 @@
             </div>
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="blogmanage?action=add" method="post">
+                    <form action="blogmanage" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Title</label>
@@ -82,7 +82,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" onclick='window.history.go(-1);'>
-                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="submit" class="btn btn-success" name="action" value="Add">
                         </div>
                     </form>
                 </div>

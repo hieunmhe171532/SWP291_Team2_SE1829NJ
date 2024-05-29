@@ -12,6 +12,10 @@
         <servlet-name>BlogManage</servlet-name>
         <servlet-class>controller.admin.BlogManage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListBlogManage</servlet-name>
+        <servlet-class>controller.admin.ListBlogManage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -23,5 +27,9 @@
     <servlet-mapping>
         <servlet-name>BlogManage</servlet-name>
         <url-pattern>/client/admin/blogmanage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListBlogManage</servlet-name>
+        <url-pattern>/client/admin/listblogmanage</url-pattern>
     </servlet-mapping>
 </web-app>

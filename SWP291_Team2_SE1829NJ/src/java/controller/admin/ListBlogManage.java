@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.admin;
 
 import dao.AccountDAO;
@@ -22,25 +21,42 @@ import model.Blog;
  *
  * @author admin
  */
-public class BlogManage extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+public class ListBlogManage extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-    } 
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        BlogDAO daob = new BlogDAO();
+        List<Blog> listb;
+        listb = daob.getAllBlog();
+//        AccountDAO daoa = new AccountDAO();
+//        String txt = request.getParameter("txt");
+//        if (txt != null) {
+//            listb = daob.getBlogByTitle(txt);
+//        } else {
+//            listb = daob.getAllBlog();
+//        }
+
+        request.setAttribute("listb", listb);
+        request.getRequestDispatcher("manageblog.jsp").forward(request, response);
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -48,12 +64,13 @@ public class BlogManage extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-    } 
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -61,51 +78,13 @@ public class BlogManage extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("acc");
-        BlogDAO daob = new BlogDAO();
-        List<Blog> listb;
-
-        AccountDAO daoa = new AccountDAO();
-        String action = request.getParameter("action");
-        if (action.equals("Add")) {
-            String title = request.getParameter("title");
-            String brief = request.getParameter("brief");
-            String detail = request.getParameter("detail");
-            String image = request.getParameter("image");
-            String flag = request.getParameter("flag");
-            if (flag == null) {
-                flag = "0";
-            }
-            int f = Integer.parseInt(flag);
-            daob.insertBlog(title, detail, brief, image, f, "hieplh");
-            response.sendRedirect("listblogmanage");
-        }
-        if (action.equals("edit")) {
-            String id = request.getParameter("id");
-            String title = request.getParameter("title");
-            String brief = request.getParameter("brief");
-            String detail = request.getParameter("detail");
-            String image = request.getParameter("image");
-            String flag = request.getParameter("flag");
-            if (flag == null) {
-                flag = "0";
-            }
-            daob.editBlog(title, detail, brief, image, flag, id);
-            response.sendRedirect("blogmanage?action=list");
-
-        }
-        if (action.equals("delete")) {
-            String id = request.getParameter("id");
-            daob.deleteBlog(id);
-            response.sendRedirect("blogmanage?action=list");
-
-        }
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
