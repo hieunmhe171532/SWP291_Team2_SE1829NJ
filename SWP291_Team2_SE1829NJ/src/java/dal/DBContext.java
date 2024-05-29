@@ -43,8 +43,8 @@ public class DBContext {
     private final String DB_HOST = "localhost";
     private final String DB_PORT = "1433";
     private final String DB_NAME = "HotelBooking";
-    private final String DB_USER = "test";
-    private final String DB_PASS = "12345678";
+    private final String DB_USER = "sa";
+    private final String DB_PASS = "12345";
 
     public static DBContext getInstance() {
         if (instance == null) {
