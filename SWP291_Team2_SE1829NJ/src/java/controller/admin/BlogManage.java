@@ -2,13 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.admin;
 
 import dao.AccountDAO;
 import dao.BlogDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,24 +21,26 @@ import model.Blog;
  * @author admin
  */
 public class BlogManage extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-    } 
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -48,12 +48,13 @@ public class BlogManage extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-    } 
+            throws ServletException, IOException {
+        request.getRequestDispatcher("addblog.jsp").forward(request, response);
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -61,13 +62,13 @@ public class BlogManage extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         BlogDAO daob = new BlogDAO();
         List<Blog> listb;
 
-        AccountDAO daoa = new AccountDAO();
+//        AccountDAO daoa=new AccountDAO();
         String action = request.getParameter("action");
         if (action.equals("Add")) {
             String title = request.getParameter("title");
@@ -80,7 +81,7 @@ public class BlogManage extends HttpServlet {
             }
             int f = Integer.parseInt(flag);
             daob.insertBlog(title, detail, brief, image, f, "hieplh");
-            response.sendRedirect("listblogmanage");
+            response.sendRedirect("blogmanage");
         }
         if (action.equals("edit")) {
             String id = request.getParameter("id");
@@ -93,19 +94,20 @@ public class BlogManage extends HttpServlet {
                 flag = "0";
             }
             daob.editBlog(title, detail, brief, image, flag, id);
-            response.sendRedirect("blogmanage?action=list");
+            response.sendRedirect("blogmanage");
 
         }
         if (action.equals("delete")) {
             String id = request.getParameter("id");
             daob.deleteBlog(id);
-            response.sendRedirect("blogmanage?action=list");
+            response.sendRedirect("blogmanage");
 
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

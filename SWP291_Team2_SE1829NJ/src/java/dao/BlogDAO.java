@@ -50,7 +50,7 @@ public class BlogDAO  {
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void editBlog(String title, String detail, String briefinfo, String image, String flag, String id) {
@@ -75,7 +75,7 @@ public class BlogDAO  {
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void deleteBlog(String id) {
@@ -90,7 +90,7 @@ public class BlogDAO  {
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -122,7 +122,7 @@ public class BlogDAO  {
                 return b;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -152,7 +152,7 @@ public class BlogDAO  {
                 t.add(b);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return t;
@@ -184,7 +184,7 @@ public class BlogDAO  {
                 t.add(b);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return t;
@@ -196,9 +196,10 @@ public class BlogDAO  {
 //        dao.Insert("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
 //        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
 //        List<Blog> b=dao.searchByTitle("k");
-//        for (Blog blog : b) {
-//            System.out.println(blog);
-//        }
-dao.deleteBlog("4006");
+List<Blog> b=dao.getAllBlog();
+        for (Blog blog : b) {
+            System.out.println(blog);
+        }
+//dao.deleteBlog("4006");
     }
 }

@@ -7,7 +7,6 @@ package controller.admin;
 import dao.AccountDAO;
 import dao.BlogDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,14 +38,14 @@ public class ListBlogManage extends HttpServlet {
         Account a = (Account) session.getAttribute("acc");
         BlogDAO daob = new BlogDAO();
         List<Blog> listb;
-        listb = daob.getAllBlog();
+//        listb = daob.getAllBlog();
 //        AccountDAO daoa = new AccountDAO();
-//        String txt = request.getParameter("txt");
-//        if (txt != null) {
-//            listb = daob.getBlogByTitle(txt);
-//        } else {
-//            listb = daob.getAllBlog();
-//        }
+        String txt = request.getParameter("txt");
+        if (txt != null) {
+            listb = daob.getBlogByTitle(txt);
+        } else {
+            listb = daob.getAllBlog();
+        }
 
         request.setAttribute("listb", listb);
         request.getRequestDispatcher("manageblog.jsp").forward(request, response);

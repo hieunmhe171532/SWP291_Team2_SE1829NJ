@@ -122,7 +122,7 @@
                     <div class="col-12">
                         <div class="app-title">
                             <ul class="app-breadcrumb breadcrumb">
-                                <li class="breadcrumb-item"><a href="blogmanage?action=list"><b>Blog List</b></a></li>
+                                <li class="breadcrumb-item"><a href="listblogmanage"><b>Blog List</b></a></li>
                                 <li class="breadcrumb-item"><a href="addblog.jsp"><b>Add New Blog</b></a></li>
                             </ul>
                             <div id="clock"></div>
@@ -135,8 +135,8 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h4 class="card-title col-9" style="font-size: 30px">Blog List</h4>
-                                    <form class="form" action="blogmanage" style="margin-left: 30px" method="get">
-                                        <button type="submit" name="action" value="list">
+                                    <form class="form" action="listblogmanage" style="margin-left: 30px" method="get">
+                                        <button type="submit">
                                             <svg width="17"  height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
                                             <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
