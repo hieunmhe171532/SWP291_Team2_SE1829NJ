@@ -11,6 +11,7 @@
         <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
 <link rel="stylesheet" type="text/css" href="maincss/newcss.css">
+
                       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -63,6 +64,8 @@
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Rooms management</span></a>
                 </li>
 
+                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Accounts Management</span></a></li>
                 <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Staff Management</span></a></li>
                 <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
