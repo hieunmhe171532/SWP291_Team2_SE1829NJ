@@ -9,7 +9,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
+   <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
+<link rel="stylesheet" type="text/css" href="maincss/newcss.css">
 
                       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
@@ -67,70 +68,12 @@
         </aside>
         
         <main class="app-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="app-title">
-                        <ul class="app-breadcrumb breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><b>Dashboard</b></a></li>
-                        </ul>
-                        <div id="clock"></div>
-                    </div>
-                </div>
-            </div>
+        
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div class="row">
-                        <!-- col-6 -->
-                        <div class="col-md-6">
-                            <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
-                                <div class="info">
-                                    <h4>all users</h4>
-                                 <p><b>${requestScope.totalUser} users</b></p>
-                                    <!--<p class="info-tong">that all number users.</p>-->
-                                            <!--<p class="info-tong"> </p>-->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- col-6 -->
-
-                        <div class="col-md-6">
-                            <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
-                                <div class="info">
-                                    <h4>Bills Booking</h4>
-                                    <p><b>${requestScope.totalBill} bills</b></p>
-                                    <!--<p class="info-tong">All bill booking.</p>-->
-                                            <p class="info-tong"> </p>
-                                </div>
-                            </div>
-                        </div>
-                          <!-- col-6 -->
-                        <div class="col-md-6">
-                            <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
-                                <div class="info">
-                                    <h4>All Blogs</h4>
-                                    <p><b>${requestScope.totalBlog} blogs</b></p>
-                                    <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
-                                            <p class="info-tong"> </p>
-                                </div>
-                            </div>
-                        </div>
-
-                             <!-- col-6 -->
-                        <div class="col-md-6">
-                            <div class="widget-small blogadmin coloured-icon"><i class='icon bx bxs-food-menu fa-3x'></i>
-                                <div class="info">
-                                    <h4>All Foods</h4>
-                                    <p><b>${requestScope.totalFood} dish</b></p>
-                                    <!--<p class="info-tong">Tổng số sản phẩm được quản lý.</p>-->
-                                            <p class="info-tong"> </p>
-                                </div>
-                            </div>
-                        </div>
-                                    
-             
-
-                                      <!-- col-6 -->
+                
+        
                         <div class="col-md-6">
                             <div class="widget-small info coloured-icon"><i class='icon bx bx-building-house fa-3x'></i>
                                 <div class="info">
@@ -186,114 +129,76 @@
                             </div>
                         </div>   
 
+                                    <div class="col-md-4">
+    <div class="widget-small room-status-control coloured-icon">
+        <i class='icon bx bx-user-check fa-3x'></i>
+        <div class="info">
+            <h4>Room Status Control</h4>
+            <table class="table">
+                <tr>
+                    <td>Is Active</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" id="isActiveToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Empty</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" id="emptyToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Booking</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" id="bookingToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Using</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" id="usingToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <p><b>${requestScope.usRoom} rooms</b></p>
+            <p class="info-tong"></p>
+        </div>
+    </div>
+</div>
 
-
-                        <!-- col-12 -->
-                        <div class="col-md-12">
-                            <div class="tile">
-                                <h3 class="tile-title">Orders todays</h3>
-                                <div>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Booking room</th>
-                                                <th>Room name</th>
-                                                <th>Name customer</th>
-                                                <th>Phone numbers</th>
-
-                                                <th>Address</th>
-                                                <th>StartDate</th>
-                                                <th>Enddate</th>
-                                                <th>Fees</th>
-                                                <th>Payment</th>
-                                                <th>Functions</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                 
-                                       <c:forEach items="${bookingByDay}" var="bBD">
-                            <tr>
-                                <td>${bBD.id}</td>
-                                <td>${bBD.roomName}</td>
-                                <td>${bBD.customerName}</td>
-                                <td>${bBD.phoneNumber}</td>
-                                <td>${bBD.address}</td>
-                                <td>${bBD.startDate}</td>
-                                <td>${bBD.endDate}</td>
-                                <td>${bBD.fees}</td>
-                                <td><span class="badge bg-success">${bBD.paymentMode}</span></td>
-                                <td>
-                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${bBD.id}">
->
-                                        <i class="fa"></i> Chi tiết đơn hàng
-                                    </a>
-                                </td>
-                            </tr><!--
-                        </c:forEach>
-                                            -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- / div trống-->
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="tile">
-                                <h3 class="tile-title">Orders totals</h3>
-                                <div>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Booking room</th>
-                                                <th>Room name</th>
-                                                <th>Name customer</th>
-                                                <th>Phone numbers</th>
-                                               <!--<th>Gmails</th>-->
-                                                <th>Address</th>
-                                                <th>StartDate</th>
-                                                <th>Enddate</th>
-                                                <th>Fees</th>
-                                                <th>Payment</th>
-                                                <th>Functions</th>
-                                            </tr>
-                                        </thead>
-                                     <tbody>
-<!--                       <!--                             <c:forEach items="${bookings}" var="booking">
--->                            <tr>
-                                <td>${booking.id}</td>
-                                <td>${booking.roomName}</td>
-                                <td>${booking.customerName}</td>
-                                <td>${booking.phoneNumber}</td>
-                                <td>${booking.address}</td>
-                                <td>${booking.startDate}</td>
-                                <td>${booking.endDate}</td>
-                                <td>${booking.fees}</td>
-                                <td><span class="badge bg-success">${booking.paymentMode}</span></td>
-                                <td>
-                                    <a style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;" href="ordermanager?action=showdetail&booking_id=${booking.id}">
->
-                                        <i class="fa"></i> Chi tiết đơn hàng
-                                    </a>
-                                </td>
-                            </tr><!--
-                        </c:forEach>
-                                            -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- / div trống-->
-                            </div>
-                        </div>
-                        <!-- / col-12 -->
-
-                    </div>
-                </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
             </div>
 
-
-
+ </div>
+ </div>
         </main>
       <script src="admin/js/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
