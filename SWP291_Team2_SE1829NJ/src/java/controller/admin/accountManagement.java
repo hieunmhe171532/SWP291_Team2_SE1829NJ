@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
@@ -28,17 +30,41 @@ public class accountManagement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet accountManagement</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet accountManagement at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            String action = request.getParameter("action");
+            if (user.getIsAdmin().equalsIgnoreCase("true")) {
+                if (action.equalsIgnoreCase("getuser")) {
+                    UserDAO dao = new UserDAO();
+                    List<User> user1 = dao.getUser();
+                    request.setAttribute("user", user1);
+                    request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
+                }
+                if (action.equals("deleteuser")) {
+                    String user_id = request.getParameter("user_id");
+                    int id = Integer.parseInt(user_id);
+                    UserDAO dao = new UserDAO();
+                    dao.deleteUser(id);
+                    response.sendRedirect("customermanager?action=getuser");
+                }
+                if (action.equals("update")) {
+                    String user_id = request.getParameter("user_id");
+                    String isAdmin = request.getParameter("permission");
+                    int id = Integer.parseInt(user_id);
+                    UserDAO dao = new UserDAO();
+                    dao.setAdmin(id, isAdmin);
+                    response.sendRedirect("customermanager?action=getuser");
+                }
+
+            } else {
+                response.sendRedirect("user?action=login");
+            }
+        } catch (Exception e) {
+            response.sendRedirect("404.jsp");
         }
     } 
 
