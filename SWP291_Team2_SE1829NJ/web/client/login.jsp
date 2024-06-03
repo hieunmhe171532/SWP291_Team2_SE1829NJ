@@ -36,7 +36,7 @@ height: 100%;
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-            <form action="login" method="post" style="width: 23rem;">
+            <form action="/SWP291_Team2_SE1829NJ/login" method="post" style="width: 23rem;">
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
 

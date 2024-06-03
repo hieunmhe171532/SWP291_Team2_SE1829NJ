@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import model.Account;
 import model.User;
 
-
 /**
  *
  * @author hieum
@@ -26,28 +25,25 @@ import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserDAO{
+public class UserDAO {
 
-     private final DBContext dbContext;
-    private final Connection connection;
+    DBContext dbContext;
 
     public UserDAO() {
         dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
     }
 
     public void createUser(User user) {
-        String name,gender,address;
+        String name, gender, address;
         Date dob;
         String sql = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = dbContext.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-           
+        try (Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getName());
-            pstmt.setDate(3,new Date (user.getDob().getTime()));
-            pstmt.setBoolean(4,user.isGender());
-            pstmt.setString(5,user.getAddress());
+            pstmt.setDate(3, new Date(user.getDob().getTime()));
+            pstmt.setBoolean(4, user.isGender());
+            pstmt.setString(5, user.getAddress());
             pstmt.executeUpdate();
             System.out.println("User created successfully!");
         } catch (SQLException ex) {
@@ -55,62 +51,40 @@ public class UserDAO{
         }
     }
 
-    
-//                      public int countUser() {
-//    int count = 0;
-//    String sql = " SELECT COUNT(*) AS TotalUsers FROM [dbo].[User]";
-//    
-//    try (Connection conn = dbContext.getConnection();
-//         PreparedStatement stm = conn.prepareStatement(sql);
-//         ResultSet rs = stm.executeQuery()) {
-//        
-//        if (rs.next()) {
-//            count = rs.getInt(1);
-//        }
-//        
-//    } catch (SQLException e) {
-//        // Xử lý ngoại lệ (ví dụ: log lỗi, thông báo cho người dùng, etc.)
+//    public User getUserbyUsername(Account acc) {
 //
+//        try {
+//            String sql = "SELECT * FROM [User] WHERE username = ?";
+//            Connection conn = dbContext.getConnection();
+//            PreparedStatement stm = conn.prepareStatement(sql);
+//            stm.setString(1, acc.getUsername()); // Assuming you have a getUsername method in the Account class
+//
+//            ResultSet rs = stm.executeQuery();
+//
+//            if (rs.next()) {
+//                // User found, create a User object with the retrieved data
+//                int id = rs.getInt("id");
+//                String name = rs.getString("name");
+//                Date dob = rs.getDate("dob");
+//                boolean gender = rs.getBoolean("gender");
+//                String address = rs.getString("address");
+//
+//                // Retrieve other user properties here
+//                User user = new User(id, name, dob, gender, address, name, createAt, updateAt, gender);
+//
+//                return user;
+//
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        return null;
 //    }
-//    
-//    return count;
-//}
-    
-public int countUsers() {
-    int count = 0;
-    String sql = "SELECT COUNT(*) AS TotalUsers FROM [dbo].[User]";
 
-    try (
-             PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            ) {
-
-        if (rs.next()) {
-            count = rs.getInt("TotalUsers");
-        }
-
-    } catch (SQLException e) {
-        // Handle exception appropriately (log, notify user, etc.)
-        e.printStackTrace();
-    }
-
-    return count;
-}
-
-
-    
-    public static void main(String[] args) {
-     UserDAO udao = new UserDAO();
-        int count = udao.countUsers();
-        System.out.println("Number of user: " + count);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//    public static void main(String[] args) {
+//        UserDAO userDAO = new UserDAO();
+//        User user = new User("abc", "John Doe", new java.sql.Date(),false , "123 Test St, Test City");
+//        userDAO.createUser(user);
+//    }
 }
