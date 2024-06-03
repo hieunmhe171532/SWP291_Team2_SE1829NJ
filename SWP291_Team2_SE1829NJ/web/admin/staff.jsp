@@ -119,79 +119,83 @@
 
 
                         <!-- col-4 -->
-                        <div class="col-md-4">
-                            <div class="widget-small usingroom coloured-icon"><i class='icon bx bx-user-check fa-3x'></i>
-                                <div class="info">
-                                    <h4>Using Room</h4>
-                                    <p><b>${requestScope.usRoom} rooms</b></p>
-                                    <p class="info-tong"> </p>
-                                </div>
-                            </div>
-                        </div>   
-
-                                    <div class="col-md-4">
-    <div class="widget-small room-status-control coloured-icon">
+                <!-- col-4 -->
+<div class="col-md-4">
+    <div class="widget-small usingroom coloured-icon">
         <i class='icon bx bx-user-check fa-3x'></i>
         <div class="info">
-            <h4>Room Status Control</h4>
-            <table class="table">
-                <tr>
-                    <td>Is Active</td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" id="isActiveToggle">
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" id="emptyToggle">
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Booking</td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" id="bookingToggle">
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Using</td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" id="usingToggle">
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                </tr>
-            </table>
+            <div class="header">
+                
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <p><b>${requestScope.usRoom} rooms</b></p>
             <p class="info-tong"></p>
         </div>
     </div>
 </div>
 
+            
+       <div class="col-md-4">
+  <div class="widget-small usingroom coloured-icon">
+    <i class='icon bx bx-user-check fa-3x'></i>
+    <div class="info">
+      <div class="header">
+          <table class="table toggle-group"> 
+          <tr>
+          <td>Is Active</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" id="isActiveToggle">
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        
+      </table>
+        <h4>Room Status Control</h4>
+      </div>
+      <p><b>${requestScope.usRoom} rooms</b></p>
+      <p class="info-tong"></p>
+
+      <table class="table toggle-group"> 
+  
+        <tr>
+          <td>Empty</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" id="emptyToggle" class="toggle-checkbox">  <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>Booking</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" id="bookingToggle" class="toggle-checkbox">  <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>Using</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" id="usingToggle" class="toggle-checkbox">  <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
                                     
                                     
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                   
                                     
                                     
                                     
@@ -212,6 +216,25 @@
         <script src="admin/js/plugins/pace.min.js"></script>
         <!--===============================================================================================-->
         <!--===============================================================================================-->
+                  <script type="text/javascript">
+
+                            // Assuming you have JavaScript to handle toggle behavior
+
+const toggleCheckboxes = document.querySelectorAll('.toggle-checkbox');
+
+toggleCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      toggleCheckboxes.forEach(otherCheckbox => {
+        if (otherCheckbox !== this) {
+          otherCheckbox.checked = false;
+        }
+      });
+    }
+  });
+});
+
+        </script>
         <script type="text/javascript">
                             var data = {
                                 labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
@@ -237,7 +260,12 @@
 
                             var ctxb = $("#barChartDemo").get(0).getContext("2d");
                             var barChart = new Chart(ctxb).Bar(data);
+                            
+                            // Assuming you have JavaScript to handle toggle behavior
+
+
         </script>
+      
         <script type="text/javascript">
             //Thời Gian
             function time() {
