@@ -11,7 +11,6 @@
         <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
 <link rel="stylesheet" type="text/css" href="maincss/newcss.css">
-
                       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
