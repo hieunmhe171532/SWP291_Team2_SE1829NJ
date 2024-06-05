@@ -58,16 +58,21 @@ public class RoomDAO {
                     query.append("AND r.userQuantity = ? ");
                     params.add(Integer.valueOf(userQuantity));
                 }
-                case "5+" -> query.append("AND r.userQuantity >= 5 ");
+                case "5+" ->
+                    query.append("AND r.userQuantity >= 5 ");
             }
         }
 
         if (priceRange != null && !priceRange.isEmpty()) {
             switch (priceRange) {
-                case "0-500.000" -> query.append("AND r.price BETWEEN 0 AND 500000 ");
-                case "500.000-1.000.000" -> query.append("AND r.price BETWEEN 500000 AND 1000000 ");
-                case "1.000.000-2.000.000" -> query.append("AND r.price BETWEEN 1000000 AND 2000000 ");
-                case "2.000.000-5.000.000" -> query.append("AND r.price BETWEEN 2000000 AND 5000000 ");
+                case "0-500.000" ->
+                    query.append("AND r.price BETWEEN 0 AND 500000 ");
+                case "500.000-1.000.000" ->
+                    query.append("AND r.price BETWEEN 500000 AND 1000000 ");
+                case "1.000.000-2.000.000" ->
+                    query.append("AND r.price BETWEEN 1000000 AND 2000000 ");
+                case "2.000.000-5.000.000" ->
+                    query.append("AND r.price BETWEEN 2000000 AND 5000000 ");
             }
         }
 
@@ -76,12 +81,12 @@ public class RoomDAO {
             params.add(typeRoomId);
         }
 
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
             for (int i = 0; i < params.size(); i++) {
                 preparedStatement.setObject(i + 1, params.get(i));
             }
 
-            try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Room room = new Room();
                     room.setId(resultSet.getInt("rId"));
@@ -114,7 +119,7 @@ public class RoomDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("lỗi "+ e);
+            System.out.println("lỗi " + e);
         }
 
         return rooms;
@@ -124,9 +129,7 @@ public class RoomDAO {
         int count = 0;
         String sql = "SELECT COUNT(*) AS countRoom FROM Room";
         try (
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery()
-        ) {
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
             if (rs.next()) {
                 count = rs.getInt("countRoom");
             }
@@ -152,9 +155,7 @@ public class RoomDAO {
         int count = 0;
         String sql = "SELECT COUNT(*) AS countRoom FROM Room WHERE isActive = 0";
         try (
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery()
-        ) {
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
             if (rs.next()) {
                 count = rs.getInt("countRoom");
             }
@@ -168,8 +169,7 @@ public class RoomDAO {
         int count = 0;
         String sql = "SELECT COUNT(*) AS countRoom FROM Room WHERE status_id = ?";
         try (
-            PreparedStatement st = connection.prepareStatement(sql)
-        ) {
+                PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, statusId);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
@@ -181,16 +181,60 @@ public class RoomDAO {
         }
         return count;
     }
-    
+
+    public Room getById(int roomId) {
+        Room room = null;
+        String query = "SELECT r.id as rId, r.name as rName, r.image as rImage, r.deleteAt as RdeleteAt, "
+                + "r.updateAt as RupdateAt, r.createAt as RcreateAt , r.isDelete as rIsDelete,"
+                + "r.userQuantity, r.area, r.quantity, r.price, r.status as rStatus, r.description, "
+                + "h.id as hId, h.name as hName, t.id as tId, t.name as tName "
+                + "FROM Room r "
+                + "JOIN Hotel h ON h.id = r.hotel_id "
+                + "JOIN TypeRoom t ON t.id = r.type_id "
+                + "WHERE r.id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, roomId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    room = new Room();
+                    room.setId(rs.getInt("rId"));
+                    room.setName(rs.getString("rName"));
+                    room.setImage(rs.getString("rImage"));
+                    room.setUserQuantity(rs.getInt("userQuantity"));
+                    room.setArea(rs.getFloat("area"));
+                    room.setQuantity(rs.getInt("quantity"));
+                    room.setPrice(rs.getFloat("price"));
+                    room.setStatus(rs.getBoolean("rStatus"));
+                    room.setDescription(rs.getString("description"));
+                    room.setIsDelete(rs.getBoolean("rIsDelete"));
+                    room.setCreateAt(rs.getDate("RcreateAt"));
+                    room.setDeleteAt(rs.getDate("RdeleteAt"));
+                    room.setUpdateAt(rs.getDate("RupdateAt"));
+
+                    Hotel hotel = new Hotel();
+                    hotel.setId(rs.getInt("hId"));
+                    hotel.setName(rs.getString("hName"));
+                    // Set other Hotel fields...
+                    room.setHotel(hotel);
+
+                    TypeRoom typeRoom = new TypeRoom();
+                    typeRoom.setId(rs.getInt("tId"));
+                    typeRoom.setName(rs.getString("tName"));
+                    // Set other TypeRoom fields...
+                    room.setTypeRoom(typeRoom);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return room;
+    }
+
     public static void main(String[] args) {
         RoomDAO dao = new RoomDAO();
-        List<Room> list = dao.getAllByParam("", "", 1);
-        System.out.println("Number of rooms: " + list.size());
-        for (Room r : list) {
-            System.out.println(r);
-        }
+        Room r = dao.getById(1);
+        System.out.println(r);
     }
-    
-    
-    
+
 }
