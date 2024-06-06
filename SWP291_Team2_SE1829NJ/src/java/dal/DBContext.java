@@ -90,7 +90,7 @@ public class DBContext {
     private final String DB_PORT = "1433";
     private final String DB_NAME = "HotelBooking";
     private final String DB_USER = "sa";
-    private final String DB_PASS = "Password.1";
+
 
     public static DBContext getInstance() {
         if (instance == null) {

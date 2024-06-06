@@ -37,14 +37,14 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Harbor<span>lights</span></a>
+                <a class="navbar-brand" href="searchRooms">Harbor<span>lights</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="searchRooms" class="nav-link">Home</a></li>
                         <li class="nav-item active"><a href="searchRooms" class="nav-link">Our Rooms</a></li>
                         <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
@@ -61,7 +61,7 @@
                 <div class="row no-gutters slider-text d-flex align-itemd-center justify-content-center">
                     <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
                         <div class="text">
-                            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>Restaurant</span></p>
+                            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="searchRooms">Home</a></span> <span>Restaurant</span></p>
                             <h1 class="mb-4 bread">Rooms</h1>
                         </div>
                     </div>
@@ -115,14 +115,14 @@
                         <c:forEach var="room" items="${rooms}">
                             <div class="col-lg-6">
                                 <div class="room-wrap d-md-flex ftco-animate">
-                                    <a href="#" class="img" style="background-image: url(../bootstrap/images/${room.image});"></a>
+                                    <a href="room-detail?id=${room.id}" class="img" style="background-image: url(../bootstrap/images/${room.image});"></a>
                                     <div class="half left-arrow d-flex align-items-center">
                                         <div class="text p-4 text-center">
                                             <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
                                             <p class="mb-0"><span class="price mr-1">${room.area}</span> <span class="per">m</span></p>
                                             <p class="mb-0"><span class="price mr-1">${room.price}</span> <span class="per">per night</span></p>
-                                            <h3 class="mb-3"><a href="rooms.html">${room.name}</a></h3>
-                                            <p class="pt-1"><a href="rooms-single.html" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
+                                            <h3 class="mb-3"><a href="room-detail?id=${room.image}">${room.name}</a></h3>
+                                            <p class="pt-1"><a href="room-detail?id=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
                                         </div>
                                     </div>
                                 </div>
