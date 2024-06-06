@@ -70,8 +70,8 @@
             <!--menu cac phan nho-->
             <ul class="app-menu">
 
-                <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Dashboard</span></a></li>
+                <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">View Customer</span></a></li>
 
                 <li><a class="app-menu__item" href="ProductManagement?action=allproduct"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Rooms management</span></a>
