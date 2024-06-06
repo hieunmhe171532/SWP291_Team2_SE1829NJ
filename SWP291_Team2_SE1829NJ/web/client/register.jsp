@@ -72,7 +72,7 @@ height: 100%;
        
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-            <p> <a href="login" class="link-info">Login</a></p>
+            <p> <a href="login.jsp" class="link-info">Login</a></p>
 
           </form>
 
