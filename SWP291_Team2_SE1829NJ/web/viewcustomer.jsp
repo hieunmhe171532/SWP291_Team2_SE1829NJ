@@ -1,4 +1,4 @@
->
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,16 +12,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/open-iconic-bootstrap.min.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/animate.css">
         <link rel="stylesheet" type="text/css" href="css/animate.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.carousel.min.css">
         <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.theme.default.min.css">
         <link rel="stylesheet" type="text/css" href="css/owl.theme.default.min.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/magnific-popup.css">
         <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
 
@@ -33,17 +33,17 @@
 
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-datepicker.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.timepicker.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
 
 
         <link rel="stylesheet" type="text/css" href="bootstrap/css/flaticon.css">
         <link rel="stylesheet" type="text/css" href="css/flaticon.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/icomoon.css">
         <link rel="stylesheet" type="text/css" href="css/icomoon.css">
-        
+
         <link rel="stylesheet" type="text/css" href="bootstrap/css/newcss.css">
         <link rel="stylesheet" type="text/css" href="css/newcss.css">
 
@@ -180,69 +180,52 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-1">
-                                                    ID
-                                                </th>
-                                                <th class="col-1">
-                                                    Title
+                                                    Id
                                                 </th>
                                                 <th class="col-2">
-                                                    Brief Information
-                                                </th>
-                                                <th class="col-3">
-                                                    Detail
+                                                    Name
                                                 </th>
                                                 <th class="col-2">
-                                                    CreatedAt
+                                                    Phone
                                                 </th>
                                                 <th class="col-2">
-                                                    Image
+                                                    Email
                                                 </th>
                                                 <th class="col-1">
-                                                    flag
+                                                    Gender
                                                 </th>
                                                 <th class="col-1">
-                                                    Action
+                                                  
                                                 </th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${listb}" var="b">
-                                            <tr>
-                                                <td>
-                                                    ${b.getId()}
-                                                </td>
-                                                <td>
-                                                    ${b.title}
-                                                </td>
-                                                <td>
-                                                    ${b.briefinfo}
-                                                </td>
-                                                <td>
-                                                    ${b.detail}
-                                                </td>
-                                                <td>
-                                                    ${b.createAt}
-                                                </td>
-                                                <td>
-                                                    <img src="${b.image}" width="50%" height="50%" alt="loi"/>
-                                                    
-                                                </td>
-                                                <td>
-                                                    ${b.flag}
-                                                </td>
-                                                <td class="d-flex">
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp" data-toggle="modal"
-                                                            data-target="#ModalUP${b.id}" ><i class="fa-solid fa-edit"></i></button>
-                                                    <button class="btn btn-danger btn-sm delete" type="button" title="Delete" id="show-emp" data-toggle="modal"
-                                                            data-target="#ModalDEL${b.id}"><i class="fas fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                    
+                                        <c:forEach items="${listu}" var="u">
+                                        <tr>
+                                            <td>
+                                                ${u.id}
+                                            </td>
+                                            <td>
+                                                ${u.name}
+                                            </td>
+                                            <td>
+                                                ${u.username.getPhone()}
+                                            </td>
+                                            <td>
+                                                ${u.username.getEmail()}
+                                            </td>
+                                            <td>
+                                                ${u.gender}
+                                            </td>
+                                            <td class="d-flex justify-content-center">
+                                                <button class="btn btn-primary btn-sm info" type="button" title="Information" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP${u.id}"  ><i class="fa fa-circle-info"  ></i></button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
@@ -250,21 +233,20 @@
 
 
             </div>
-            <c:forEach items="${listb}" var="b">
-                <!-- Edit modal window -->
+            <c:forEach items="${listu}" var="u">
 
-                <div class="modal fade" id="ModalUP${b.id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                <div class="modal fade" id="ModalUP${u.id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                      data-keyboard="false">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <form action="editblog" method="post">
                                 <div class="modal-body">
                                     <div class="modal-header">						
-                                        <h4 class="modal-title" style="color: black">Edit Product</h4>
+                                        <h4 class="modal-title" style="color: black">Information</h4>
                                     </div>
                                     <div class="form-group">
                                         <label>Id</label>
-                                        <input name="id" type="text" class="form-control" value="${b.getId()}" readonly="" required>
+                                        <input name="id" type="text" class="form-control" value="${u.getId()}" readonly="" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Title</label>
@@ -303,35 +285,7 @@
                     </div>
                 </div>
 
-                <!-- Delete modal window -->
-                <div class="modal fade" id="ModalDEL${b.getId()}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                     data-keyboard="false">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <form method="POST" action="deleteblog">
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <span class="thong-tin-thanh-toan">
-                                                <h5>Bạn có chắc chắn muốn xóa Blog này?.</h5>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <input hidden name="id" value="${b.id}">
-                                        </div>
-                                    </div>
-                                    <BR>
-                                    <button class="btn btn-danger" type="submit">Xóa</button>
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</button>
-                                    <BR>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
+               
             </c:forEach>
 
         </main>
