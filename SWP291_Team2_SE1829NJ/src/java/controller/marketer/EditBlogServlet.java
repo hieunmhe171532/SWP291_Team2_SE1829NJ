@@ -3,22 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin;
+package controller.marketer;
 
+import dao.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Blog;
 
 /**
  *
- * @author HUNG
+ * @author admin
  */
-public class accountManagement extends HttpServlet {
+public class EditBlogServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,41 +31,17 @@ public class accountManagement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            String action = request.getParameter("action");
-            if (user.getIsAdmin().equalsIgnoreCase("true")) {
-                if (action.equalsIgnoreCase("getuser")) {
-                    UserDAO dao = new UserDAO();
-                    List<User> user1 = dao.getUser();
-                    request.setAttribute("user", user1);
-                    request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
-                }
-                if (action.equals("deleteuser")) {
-                    String user_id = request.getParameter("user_id");
-                    int id = Integer.parseInt(user_id);
-                    UserDAO dao = new UserDAO();
-                    dao.deleteUser(id);
-                    response.sendRedirect("customermanager?action=getuser");
-                }
-                if (action.equals("update")) {
-                    String user_id = request.getParameter("user_id");
-                    String isAdmin = request.getParameter("permission");
-                    int id = Integer.parseInt(user_id);
-                    UserDAO dao = new UserDAO();
-                    dao.setAdmin(id, isAdmin);
-                    response.sendRedirect("customermanager?action=getuser");
-                }
-
-            } else {
-                response.sendRedirect("user?action=login");
-            }
-        } catch (Exception e) {
-            response.sendRedirect("404.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EditBlogServlet</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EditBlogServlet at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     } 
 
@@ -92,7 +69,21 @@ public class accountManagement extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        BlogDAO daob = new BlogDAO();
+        List<Blog> listb;
+        String id = request.getParameter("id");
+        String title = request.getParameter("title");
+        String brief = request.getParameter("brief");
+        String detail = request.getParameter("detail");
+        String image = request.getParameter("image");
+        String flag = request.getParameter("flag");
+        if (flag == null) {
+            flag = "0";
+        } else {
+            flag = "1";
+        }
+        daob.editBlog(title, detail, brief, image, flag, id);
+        response.sendRedirect("listmanageblog");
     }
 
     /** 

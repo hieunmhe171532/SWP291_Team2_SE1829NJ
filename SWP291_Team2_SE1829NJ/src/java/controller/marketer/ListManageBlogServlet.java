@@ -3,22 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin;
+package controller.marketer;
 
+import dao.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Blog;
 
 /**
  *
- * @author HUNG
+ * @author admin
  */
-public class accountManagement extends HttpServlet {
+public class ListManageBlogServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,42 +31,26 @@ public class accountManagement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            String action = request.getParameter("action");
-            if (user.getIsAdmin().equalsIgnoreCase("true")) {
-                if (action.equalsIgnoreCase("getuser")) {
-                    UserDAO dao = new UserDAO();
-                    List<User> user1 = dao.getUser();
-                    request.setAttribute("user", user1);
-                    request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
-                }
-                if (action.equals("deleteuser")) {
-                    String user_id = request.getParameter("user_id");
-                    int id = Integer.parseInt(user_id);
-                    UserDAO dao = new UserDAO();
-                    dao.deleteUser(id);
-                    response.sendRedirect("customermanager?action=getuser");
-                }
-                if (action.equals("update")) {
-                    String user_id = request.getParameter("user_id");
-                    String isAdmin = request.getParameter("permission");
-                    int id = Integer.parseInt(user_id);
-                    UserDAO dao = new UserDAO();
-                    dao.setAdmin(id, isAdmin);
-                    response.sendRedirect("customermanager?action=getuser");
-                }
-
-            } else {
-                response.sendRedirect("user?action=login");
-            }
-        } catch (Exception e) {
-            response.sendRedirect("404.jsp");
+        BlogDAO daob=new BlogDAO();
+        List<Blog> listb=daob.getAllBlog();
+        if(listb.isEmpty()){
+            PrintWriter out=response.getWriter();
+            out.print("sdada");
+        }else{
+            request.setAttribute("listb", listb);
+            request.getRequestDispatcher("manageblog.jsp").forward(request, response);
         }
+//        String txt = request.getParameter("txt");
+//        if (txt != null) {
+//            listb = daob.getBlogByTitle(txt);
+//        } else {
+//            listb = daob.getAllBlog();
+//        }
+
+       
+        
+        
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
