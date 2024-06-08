@@ -72,21 +72,10 @@
 
                 <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">View Customer</span></a></li>
-
-                <li><a class="app-menu__item" href="ProductManagement?action=allproduct"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Rooms management</span></a>
+                <li><a class="app-menu__item" href="listmanageblog"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
                 </li>
 
-                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Accounts Management</span></a></li>
-                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Staff Management</span></a></li>
-                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Customer Management</span></a></li>
-                <li><a class="app-menu__item" href="blogmanage?action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Blog Management</span></a></li>
-                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Foods Management</span></a></li>
 
             </ul>
         </aside>

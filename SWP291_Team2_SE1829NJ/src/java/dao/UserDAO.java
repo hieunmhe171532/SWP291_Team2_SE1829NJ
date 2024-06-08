@@ -181,7 +181,7 @@ public class UserDAO {
 
     public static void main(String[] args) {
         UserDAO udao = new UserDAO();
-        List<User> list=udao.getAllUser();
+        List<User> list=udao.getUserByName("hie");
         for (User user : list) {
             System.out.println(user);
         }

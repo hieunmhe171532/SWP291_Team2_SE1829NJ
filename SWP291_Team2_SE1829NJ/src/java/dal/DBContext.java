@@ -75,7 +75,6 @@ import java.util.logging.Logger;
 //        DBContext.getInstance().getConnection();
 //    }
 //}
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -90,7 +89,7 @@ public class DBContext {
     private final String DB_PORT = "1433";
     private final String DB_NAME = "HotelBooking";
     private final String DB_USER = "sa";
-
+    private final String DB_PASS = "Password.1";
 
     public static DBContext getInstance() {
         if (instance == null) {
