@@ -145,23 +145,12 @@
 
             <main class="app-content">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="app-title">
-                            <ul class="app-breadcrumb breadcrumb">
-                                <li class="breadcrumb-item"><a href="listmanageblog"><b>Blog List</b></a></li>
-                                <li class="breadcrumb-item"><a href="addblog"><b>Add New Blog</b></a></li>
-                            </ul>
-                            <div id="clock"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h4 class="card-title col-9" style="font-size: 30px">Blog List</h4>
-                                    <form class="form" action="listmanageblog" style="margin-left: 30px" method="get">
+                                    <h4 class="card-title col-9" style="font-size: 30px">Customer List</h4>
+                                    <form class="form" action="viewcustomer" style="margin-left: 30px" method="get">
                                         <button type="submit">
                                             <svg width="17"  height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
                                             <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -195,34 +184,34 @@
                                                     Gender
                                                 </th>
                                                 <th class="col-1">
-                                                  
+
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${listu}" var="u">
-                                        <tr>
-                                            <td>
-                                                ${u.id}
-                                            </td>
-                                            <td>
-                                                ${u.name}
-                                            </td>
-                                            <td>
-                                                ${u.username.getPhone()}
-                                            </td>
-                                            <td>
-                                                ${u.username.getEmail()}
-                                            </td>
-                                            <td>
-                                                ${u.gender}
-                                            </td>
-                                            <td class="d-flex justify-content-center">
-                                                <button class="btn btn-primary btn-sm info" type="button" title="Information" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${u.id}"  ><i class="fa fa-circle-info"  ></i></button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                            <tr>
+                                                <td>
+                                                    ${u.id}
+                                                </td>
+                                                <td>
+                                                    ${u.name}
+                                                </td>
+                                                <td>
+                                                    ${u.username.getPhone()}
+                                                </td>
+                                                <td>
+                                                    ${u.username.getEmail()}
+                                                </td>
+                                                <td>
+                                                    ${u.isGender()}
+                                                </td>
+                                                <td class="d-flex justify-content-center">
+                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Information" id="show-emp" data-toggle="modal"
+                                                            data-target="#ModalUP${u.id}" ><i class="fa-solid fa-info-circle"></i></button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
 
@@ -242,15 +231,15 @@
                             <form action="editblog" method="post">
                                 <div class="modal-body">
                                     <div class="modal-header">						
-                                        <h4 class="modal-title" style="color: black">Information</h4>
+                                        <h4 class="modal-title" style="color: black">Customer List</h4>
                                     </div>
                                     <div class="form-group">
-                                        <label>Id</label>
-                                        <input name="id" type="text" class="form-control" value="${u.getId()}" readonly="" required>
+                                        <label>Name</label>
+                                        <input name="id" type="text" class="form-control" value="${u.name}" readonly="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Title</label>
-                                        <input name="title" type="text" value="${b.title}" class="form-control" required>
+                                        <label>Date of birth</label>
+                                        <input name="title" type="text" value="${u.dob}" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Brief Infomation</label>
@@ -285,7 +274,7 @@
                     </div>
                 </div>
 
-               
+
             </c:forEach>
 
         </main>
