@@ -66,7 +66,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="text-center">
-                    <h2 class="display-5 fw-bold">About Us</h2>
+                    <h2 class="display-5 fw-bold">About Harborlights</h2>
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Welcome to Harborlights Hotel</h3>
@@ -104,7 +104,7 @@
                         <strong>Address:</strong> [Hotel Address]<br>
                         <strong>Phone:</strong> [Hotel Phone Number]<br>
                         <strong>Email:</strong> [Hotel Email Address]<br>
-                        <strong>Follow us:</strong> [Links to Social Media Sites]
+                        
                     </p>
                 </div>
             </div>
