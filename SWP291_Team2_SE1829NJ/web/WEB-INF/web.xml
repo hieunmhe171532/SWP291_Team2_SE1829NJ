@@ -40,6 +40,10 @@
         <servlet-name>ViewCustomerServlet</servlet-name>
         <servlet-class>controller.marketer.ViewCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>homepage</servlet-name>
+        <servlet-class>controller.homepage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -79,5 +83,9 @@
     <servlet-mapping>
         <servlet-name>ViewCustomerServlet</servlet-name>
         <url-pattern>/viewcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homepage</servlet-name>
+        <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
 </web-app>

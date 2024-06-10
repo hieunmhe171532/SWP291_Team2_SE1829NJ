@@ -24,10 +24,12 @@ import model.Blog;
  */
 public class BlogDAO {
 
-    DBContext dbContext;
+    private final DBContext dbContext;
+    private final Connection connection;
 
     public BlogDAO() {
-        dbContext = DBContext.getInstance();
+         dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
     }
     
     
@@ -203,18 +205,51 @@ public class BlogDAO {
         return t;
     }
 
-    public static void main(String[] args) {
-        BlogDAO dao = new BlogDAO();
-//       dao.insertBlog("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
-//        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
-//        List<Blog> b=dao.searchByTitle("k");
-        List<Blog> b = dao.getAllBlog();
-//        b.stream().forEach(c -> {
-//            System.out.println(c);
-//        });
-        for (Blog blog : b) {
-            System.out.println(blog);
+//    public static void main(String[] args) {
+//        BlogDAO dao = new BlogDAO();
+////       dao.insertBlog("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
+////        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
+////        List<Blog> b=dao.searchByTitle("k");
+//        List<Blog> b = dao.getAllBlog();
+////        b.stream().forEach(c -> {
+////            System.out.println(c);
+////        });
+//        for (Blog blog : b) {
+//            System.out.println(blog);
+//        }
+////        dao.deleteBlog("6005");
+//    }
+    
+    public int countBlog() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS countBlog FROM Blog";
+
+        try (
+                 PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery()
+                ) {
+
+            if (rs.next()) {
+                count = rs.getInt("countBlog");
+            }
+
+        } catch (SQLException e) {
+            // Handle exception (e.g., log error, notify user, etc.)
+            e.printStackTrace();
         }
-//        dao.deleteBlog("6005");
+
+        return count;
     }
+
+    /**
+     * Main method to test countBlog() functionality.
+     * 
+     * @param args The command line arguments (not used).
+     */
+    public static void main(String[] args) {
+        BlogDAO blogDAO = new BlogDAO();
+        int count = blogDAO.countBlog();
+        System.out.println("Number of Blogs: " + count);
+    }
+    
 }
