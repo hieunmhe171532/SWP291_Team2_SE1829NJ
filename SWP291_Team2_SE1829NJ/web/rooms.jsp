@@ -26,12 +26,12 @@
         <link rel="stylesheet" href="../bootstrap/css/ionicons.min.css">
 
         <link rel="stylesheet" href="../bootstrap/css/bootstrap-datepicker.css">
-        <link rel="stylesheet" href="../bootstrap/css/jquery.timepicker.css">
+        <link rel="stylesheet" href="bootstrap/css/jquery.timepicker.css">
 
 
-        <link rel="stylesheet" href="../bootstrap/css/flaticon.css">
-        <link rel="stylesheet" href="../bootstrap/css/icomoon.css">
-        <link rel="stylesheet" href="../bootstrap/css/style.css">
+        <link rel="stylesheet" href="bootstrap/css/flaticon.css">
+        <link rel="stylesheet" href="bootstrap/css/icomoon.css">
+        <link rel="stylesheet" href="bootstrap/css/style.css">
     </head>
     <body>
 
