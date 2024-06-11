@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profile</title>
-        <%@include file="../Component/setupCss.jsp" %>
+        <%@include file="Component/setupCss.jsp" %>
         <style>
             .form-control:focus {
                 box-shadow: none;
@@ -110,7 +110,7 @@
     <!-- Section: Design Block -->
 
     <!--Footer->
-    <%@include file="../Component/footer.jsp" %>
+    <%@include file="Component/footer.jsp" %>
     <!--Footer-->
 
     <!--Script-->
