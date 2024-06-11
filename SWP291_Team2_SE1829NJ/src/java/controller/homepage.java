@@ -29,7 +29,7 @@ public class homepage extends HttpServlet {
     throws ServletException, IOException {
        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-    request.getRequestDispatcher("hompage.jsp").forward(request, response);
+    request.getRequestDispatcher("homepage.jsp").forward(request, response);
         }
     
 

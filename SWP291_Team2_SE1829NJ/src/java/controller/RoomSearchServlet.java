@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author ADMIN
  */
-//@WebServlet(name = "RoomSearchServlet", urlPatterns = {"/client/searchRooms"})
+//@WebServlet(name = "RoomSearchServlet", urlPatterns = {"/searchRooms"})
 //public class RoomSearchServlet extends HttpServlet {
 //
 //    @Override
@@ -65,7 +65,7 @@ import java.util.logging.Logger;
 //
 //   
 //}
-@WebServlet(name = "RoomSearchServlet", urlPatterns = {"/client/searchRooms"})
+@WebServlet(name = "RoomSearchServlet", urlPatterns = {"/searchRooms"})
 public class RoomSearchServlet extends HttpServlet {
     
     private static final Logger logger = Logger.getLogger(RoomSearchServlet.class.getName());
