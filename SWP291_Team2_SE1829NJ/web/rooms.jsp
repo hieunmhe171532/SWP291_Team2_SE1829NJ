@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="bootstrap/css/style.css">
     </head>
     <body>
-
+<!--
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="searchRooms">Harbor<span>lights</span></a>
@@ -53,8 +53,9 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-        <!-- END nav -->
+        </nav>-->
+ <jsp:include page="layout/navbarmenu.jsp"/>
+      
         <div class="hero-wrap" style="background-image: url('images/bg_3.jpg'); max-height: 400px">
             <div class="overlay"></div>
             <div class="container">
@@ -68,6 +69,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <section class="ftco-section ftco-no-pb ftco-room">
             <div class="container-fluid px-0">
