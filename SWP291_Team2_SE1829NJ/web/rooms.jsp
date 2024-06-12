@@ -14,18 +14,18 @@
 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="../bootstrap/css/open-iconic-bootstrap.min.css">
-        <link rel="stylesheet" href="../bootstrap/css/animate.css">
+        <link rel="stylesheet" href="bootstrap/css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/animate.css">
 
-        <link rel="stylesheet" href="../bootstrap/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../bootstrap/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="../bootstrap/css/magnific-popup.css">
+        <link rel="stylesheet" href="bootstrap/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="bootstrap/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="bootstrap/css/magnific-popup.css">
 
-        <link rel="stylesheet" href="../bootstrap/css/aos.css">
+        <link rel="stylesheet" href="bootstrap/css/aos.css">
 
-        <link rel="stylesheet" href="../bootstrap/css/ionicons.min.css">
+        <link rel="stylesheet" href="bootstrap/css/ionicons.min.css">
 
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="bootstrap/css/jquery.timepicker.css">
 
 
@@ -115,7 +115,7 @@
                         <c:forEach var="room" items="${rooms}">
                             <div class="col-lg-6">
                                 <div class="room-wrap d-md-flex ftco-animate">
-                                    <a href="room-detail?id=${room.id}" class="img" style="background-image: url(../bootstrap/images/${room.image});"></a>
+                                    <a href="room-detail?id=${room.id}" class="img" style="background-image: url(bootstrap/images/${room.image});"></a>
                                     <div class="half left-arrow d-flex align-items-center">
                                         <div class="text p-4 text-center">
                                             <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
@@ -203,22 +203,22 @@
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-        <script src="../bootstrap/js/jquery.min.js"></script>
-        <script src="../bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="../bootstrap/js/popper.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../bootstrap/js/jquery.easing.1.3.js"></script>
-        <script src="../bootstrap/js/jquery.waypoints.min.js"></script>
-        <script src="../bootstrap/js/jquery.stellar.min.js"></script>
-        <script src="../bootstrap/js/owl.carousel.min.js"></script>
-        <script src="../bootstrap/js/jquery.magnific-popup.min.js"></script>
-        <script src="../bootstrap/js/aos.js"></script>
-        <script src="../bootstrap/js/jquery.animateNumber.min.js"></script>
-        <script src="../bootstrap/js/bootstrap-datepicker.js"></script>
-        <script src="../bootstrap/js/scrollax.min.js"></script>
+        <script src="bootstrap/js/jquery.min.js"></script>
+        <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="bootstrap/js/popper.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="bootstrap/js/jquery.easing.1.3.js"></script>
+        <script src="bootstrap/js/jquery.waypoints.min.js"></script>
+        <script src="bootstrap/js/jquery.stellar.min.js"></script>
+        <script src="bootstrap/js/owl.carousel.min.js"></script>
+        <script src="bootstrap/js/jquery.magnific-popup.min.js"></script>
+        <script src="bootstrap/js/aos.js"></script>
+        <script src="bootstrap/js/jquery.animateNumber.min.js"></script>
+        <script src="bootstrap/js/bootstrap-datepicker.js"></script>
+        <script src="bootstrap/js/scrollax.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="../bootstrap/js/google-map.js"></script>
-        <script src="../bootstrap/js/main.js"></script>
+        <script src="bootstrap/js/google-map.js"></script>
+        <script src="bootstrap/js/main.js"></script>
 
     </body>
 </html>
