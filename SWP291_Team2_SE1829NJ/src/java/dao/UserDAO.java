@@ -58,25 +58,6 @@ public class UserDAO {
         }
     }
 
-//                      public int countUser() {
-//    int count = 0;
-//    String sql = " SELECT COUNT(*) AS TotalUsers FROM [dbo].[User]";
-//    
-//    try (Connection conn = dbContext.getConnection();
-//         PreparedStatement stm = conn.prepareStatement(sql);
-//         ResultSet rs = stm.executeQuery()) {
-//        
-//        if (rs.next()) {
-//            count = rs.getInt(1);
-//        }
-//        
-//    } catch (SQLException e) {
-//        // Xử lý ngoại lệ (ví dụ: log lỗi, thông báo cho người dùng, etc.)
-//
-//    }
-//    
-//    return count;
-//}
     public List<User> getAllUser() {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
@@ -125,9 +106,10 @@ public class UserDAO {
         List<User> t = new ArrayList<>();
 
         try {
-            String sql = "SELECT * from Account a JOIN [User] u \n"
-                    + "on a.username=u.username\n"
-                    + "WHERE name like ? ";
+            String sql = """
+                         SELECT * from Account a JOIN [User] u 
+                         on a.username=u.username
+                         WHERE name like ? """;
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + name + "%");
 
