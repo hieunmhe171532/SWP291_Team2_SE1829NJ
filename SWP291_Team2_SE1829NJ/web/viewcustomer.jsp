@@ -151,7 +151,7 @@
                                 <div class="d-flex">
                                     <h4 class="card-title col-9" style="font-size: 30px">Customer List</h4>
                                     <form class="form" action="viewcustomer" style="margin-left: 30px" method="get">
-                                        <button type="submit">
+                                        <button type="submit" style="margin-top: 10px">
                                             <svg width="17"  height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
                                             <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
@@ -204,11 +204,19 @@
                                                     ${u.username.getEmail()}
                                                 </td>
                                                 <td>
-                                                    ${u.isGender()}
+                                                    <c:if test="${u.isGender()==true}">
+                                                        <img src="bootstrap/images/gtnam.png" style="width: 40%;" alt="male"/>
+                                                    </c:if>
+                                                    <c:if test="${u.isGender()==false}">
+                                                        <img src="bootstrap/images/gtnu.png" style="width: 40%" alt="famale"/>
+                                                    </c:if> 
                                                 </td>
                                                 <td class="d-flex justify-content-center">
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Information" id="show-emp" data-toggle="modal"
-                                                            data-target="#ModalUP${u.id}" ><i class="fa-solid fa-info-circle"></i></button>
+                                                    <form action="viewcustomer" method="post">
+                                                        <button class="btn btn-primary btn-sm edit" type="button" title="Information" id="show-emp" data-toggle="modal"
+                                                                data-target="#ModalUP${u.id}" ><i class="fa-solid fa-info-circle"></i></button>
+                                                    </form>
+
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -231,7 +239,7 @@
                             <form action="editblog" method="post">
                                 <div class="modal-body">
                                     <div class="modal-header">						
-                                        <h4 class="modal-title" style="color: black">Customer List</h4>
+                                        <h4 class="modal-title" style="color: black">Customer Detail</h4>
                                     </div>
                                     <div class="form-group">
                                         <label>Name</label>
@@ -242,31 +250,39 @@
                                         <input name="title" type="text" value="${u.dob}" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Brief Infomation</label>
-                                        <input name="brief" type="text" value="${b.briefinfo}" class="form-control" required>
+                                        <label>Phone</label>
+                                        <input name="brief" type="text" value="${u.username.getPhone()}" class="form-control" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <label>Detail</label>
-                                        <input name="detail" type="text" value="${b.detail}" class="form-control" required>
+                                        <label>Email</label>
+                                        <input name="detail" type="text" value="${u.username.getEmail()}" class="form-control" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <label>Image</label>
-                                        <input name="image" type="url" value="${b.image}" class="form-control" required>
+                                        <label>Address</label>
+                                        <input name="image" type="text" value="${u.address}" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CreateAt</label>
+                                        <input name="create" type="text" value="${u.createAt}" class="form-control" required>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <div><label>Flag</label>
-                                            <input type="checkbox" value="${b.flag}" name="flag">
-                                        </div>
+                                        <label>Gender</label>
+                                        <c:if test="${u.isGender()==true}">
+                                            <img src="bootstrap/images/gtnam.png" style="width: 10%" alt="male"/>
+                                        </c:if>
+                                        <c:if test="${u.isGender()==false}">
+                                            <img src="bootstrap/images/gtnu.png" style="width: 10%" alt="famale"/>
+                                        </c:if> 
+
                                     </div>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</button>
-                                    <input type="submit" class="btn btn-success" value="Edit">
+                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
                                 </div>
                             </form>
 
