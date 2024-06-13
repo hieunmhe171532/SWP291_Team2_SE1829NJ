@@ -1,22 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import dao.RoomDAO;
 import dao.TypeRoomDAO;
-import java.io.IOException;
+import model.Room;
+import model.TypeRoom;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
-import model.Room;
-import model.TypeRoom;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< Updated upstream
 /**
  *
  * @author ADMIN
@@ -66,46 +66,64 @@ import java.util.logging.Logger;
 //   
 //}
 @WebServlet(name = "RoomSearchServlet", urlPatterns = {"/client/searchRooms"})
+=======
+@WebServlet(name = "RoomSearchServlet", urlPatterns = {"/searchRooms"})
+>>>>>>> Stashed changes
 public class RoomSearchServlet extends HttpServlet {
-    
+
     private static final Logger logger = Logger.getLogger(RoomSearchServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TypeRoomDAO typeRoomDAO = new TypeRoomDAO();
-        List<TypeRoom> typeRooms = typeRoomDAO.listAllTypeRooms();
-        for(TypeRoom t : typeRooms){
-            logger.info(t.toString());
-        }
-        
-        String userQuantity = request.getParameter("userQuantity");
-        String priceRange = request.getParameter("priceRange");
-        String typeRoomIdStr = request.getParameter("typeRoomId");
-        Integer typeRoomId = null;
-
-        logger.info(userQuantity + " " + priceRange + " " + typeRoomIdStr);
-        
         try {
+            // Fetch all type rooms
+            TypeRoomDAO typeRoomDAO = new TypeRoomDAO();
+            List<TypeRoom> typeRooms = typeRoomDAO.listAllTypeRooms();
+            typeRooms.forEach(typeRoom -> logger.info(typeRoom.toString()));
+
+            // Get parameters
+            String userQuantity = request.getParameter("userQuantity");
+            String priceRange = request.getParameter("priceRange");
+            String typeRoomIdStr = request.getParameter("typeRoomId");
+
+            // Log parameters
+            logger.info(String.format("Search parameters - userQuantity: %s, priceRange: %s, typeRoomId: %s", 
+                                      userQuantity, priceRange, typeRoomIdStr));
+
+            // Convert typeRoomId to Integer if not null or empty
+            Integer typeRoomId = null;
             if (typeRoomIdStr != null && !typeRoomIdStr.trim().isEmpty()) {
                 typeRoomId = Integer.valueOf(typeRoomIdStr);
             }
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", "ID loại phòng không hợp lệ.");
+
+            // Fetch rooms based on parameters
+            RoomDAO roomDAO = new RoomDAO();
+            List<Room> rooms = roomDAO.getAllByParam(userQuantity, priceRange, typeRoomId);
+
+            // Check if rooms are found
+            if (rooms.isEmpty()) {
+                request.setAttribute("message", "No matching rooms found.");
+            }
+
+            // Log the number of rooms found
+            logger.info(String.format("Number of rooms found: %d", rooms.size()));
+
+            // Set attributes and forward to JSP
+            request.setAttribute("rooms", rooms);
+            request.setAttribute("typeRooms", typeRooms);
             request.getRequestDispatcher("rooms.jsp").forward(request, response);
-            return;
+
+        } catch (NumberFormatException e) {
+            // Handle invalid typeRoomId format
+            logger.log(Level.SEVERE, "Invalid typeRoomId format", e);
+            request.setAttribute("error", "Invalid room type ID.");
+            request.getRequestDispatcher("rooms.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+            // Handle any other exceptions
+            logger.log(Level.SEVERE, "An unexpected error occurred", e);
+            request.setAttribute("error", "An error occurred while searching for rooms.");
+            request.getRequestDispatcher("rooms.jsp").forward(request, response);
         }
-
-        RoomDAO roomDAO = new RoomDAO();
-        List<Room> rooms = roomDAO.getAllByParam(userQuantity, priceRange, typeRoomId);
-
-        if (rooms.isEmpty()) {
-            request.setAttribute("message", "Không tìm thấy phòng nào phù hợp.");
-        }
-
-        logger.info("Số lượng phòng tìm thấy: " + rooms.size());
-        request.setAttribute("rooms", rooms);
-        request.setAttribute("typeRooms", typeRooms);
-        request.getRequestDispatcher("rooms.jsp").forward(request, response);
     }
 }
