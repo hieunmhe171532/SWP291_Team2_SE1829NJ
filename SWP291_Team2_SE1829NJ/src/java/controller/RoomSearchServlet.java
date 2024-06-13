@@ -16,6 +16,57 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< HEAD
+=======
+/**
+ *
+ * @author ADMIN
+ */
+//@WebServlet(name = "RoomSearchServlet", urlPatterns = {"/searchRooms"})
+//public class RoomSearchServlet extends HttpServlet {
+//
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        // Fetch all type rooms
+//        TypeRoomDAO typeRoomDAO = new TypeRoomDAO();
+//        List<TypeRoom> typeRooms = typeRoomDAO.listAllTypeRooms();
+////        System.out.println(typeRooms.size());
+//        // Set type rooms as request attribute
+//        for(TypeRoom t : typeRooms){
+//            System.out.println(t);
+//        }
+//        
+//        
+//        String userQuantity = request.getParameter("userQuantity");
+//        String priceRange = request.getParameter("priceRange");
+//        String typeRoomIdStr = request.getParameter("typeRoomId");
+//        Integer typeRoomId = null;
+//
+//        System.out.println(userQuantity +" "+ priceRange +" "+ typeRoomIdStr);
+//        // Convert typeRoomId to Integer if it's not null or empty
+//        if (typeRoomIdStr != null && !typeRoomIdStr.trim().isEmpty()) {
+//            typeRoomId = Integer.valueOf(typeRoomIdStr);
+//        }
+//
+//        // Call the DAO method
+//        RoomDAO roomDAO = new RoomDAO();
+//        List<Room> rooms = roomDAO.getAllByParam(userQuantity, priceRange, typeRoomId);
+//
+//        // Fetch all type rooms again to re-populate the dropdown
+//       
+//
+//        // Set the rooms and type rooms as request attributes
+//        System.out.println(rooms.size());
+//        request.setAttribute("rooms", rooms);
+//        request.setAttribute("typeRooms", typeRooms);
+//        // Forward to the search form JSP
+//        request.getRequestDispatcher("rooms.jsp").forward(request, response);
+//    }
+//
+//   
+//}
+>>>>>>> 9c0891cafa1249f751bd01011efd1040815c95b8
 @WebServlet(name = "RoomSearchServlet", urlPatterns = {"/searchRooms"})
 public class RoomSearchServlet extends HttpServlet {
 
