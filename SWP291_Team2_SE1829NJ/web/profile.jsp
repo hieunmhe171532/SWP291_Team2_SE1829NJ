@@ -95,26 +95,40 @@
                                 <input type="text" class="form-control" placeholder="fullname" value="${Account.email}" 
                                        name="email" readonly="">
                             </div>
-
+                            <!-- Adding the new fields if they are not already present -->
+                            <div class="col-md-12"><label class="labels">Full Name</label>
+                                <input type="text" class="form-control" placeholder="fullname" value="${Account.getName()}" 
+                                       name="name">
+                            </div>
+                            <div class="col-md-12"><label class="labels">Date of Birth</label>
+                                <input type="date" class="form-control" value="${Account.getDob()}" name="dob">
+                            </div>
+                            <div class="col-md-12"><label class="labels">Gender</label>
+                                <select class="form-control" name="gender">
+                                    <option value="1" ${Account.getGender() == 1 ? 'selected' : ''}>Male</option>
+                                    <option value="0" ${Account.getGender() == 0 ? 'selected' : ''}>Female</option>
+                                </select>
+                            </div>
 
                     </div>
-                                       <div class="mt-5 text-center" style="padding-bottom: 20px"><button class="btn btn-primary profile-button" type="submit">Save
-                            Profile</button>
-                    </div>
-                    </form>
                 </div>
+                <div class="mt-5 text-center" style="padding-bottom: 20px"><button class="btn btn-primary profile-button" type="submit">Save
+                        Profile</button>
+                </div>
+                </form>
             </div>
-
         </div>
+
     </div>
-    <!-- Section: Design Block -->
+</div>
+<!-- Section: Design Block -->
 
-    <!--Footer->
-    <%@include file="Component/footer.jsp" %>
-    <!--Footer-->
+<!--Footer->
+<%@include file="Component/footer.jsp" %>
+<!--Footer-->
 
-    <!--Script-->
-    <!--Script-->
+<!--Script-->
+<!--Script-->
 
 </body>
 </html>
