@@ -288,13 +288,18 @@
 
                                     <div class="form-group">
                                         <div><label>Flag</label>
-                                            <input type="checkbox" value="${b.flag}" name="flag">
+                                            <c:if test="${b.flag==1}">
+                                            <input type="checkbox" checked="" value="${b.flag}" name="flag">
+                                            </c:if>
+                                            <c:if test="${b.flag==0}">
+                                                <input type="checkbox" value="${b.flag}" name="flag">
+                                            </c:if>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</button>
+                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
                                     <input type="submit" class="btn btn-success" value="Edit">
                                 </div>
                             </form>
@@ -323,8 +328,8 @@
                                         </div>
                                     </div>
                                     <BR>
-                                    <button class="btn btn-danger" type="submit">Xóa</button>
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</button>
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
                                     <BR>
                                 </div>
                             </form>

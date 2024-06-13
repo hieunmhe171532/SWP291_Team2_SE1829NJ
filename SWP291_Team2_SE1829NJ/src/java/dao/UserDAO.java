@@ -141,6 +141,45 @@ public class UserDAO {
 
         return t;
     }
+    public User getUserById(String id) {
+        Connection conn = dbContext.getConnection();
+
+        try {
+            String sql = "SELECT * from Account a JOIN [User] u \n"
+                    + "on a.username=u.username\n"
+                    + "WHERE id = ? ";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, id);
+
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                User u = new User();
+                Account a = new Account();
+                a.setUsername(result.getString(1));
+                a.setPassword(result.getString(2));
+                a.setPhone(result.getString(3));
+                a.setEmail(result.getString(4));
+                a.setRole(result.getString(5));
+                a.setIsActive(result.getBoolean(6));
+                u.setId(result.getInt(7));
+                u.setName(result.getString(8));
+                u.setDob(result.getDate(9));
+                u.setGender(result.getBoolean(10));
+                u.setAddress(result.getString(11));
+                u.setUsername(a);
+                u.setCreateAt(result.getString(13));
+                u.setUpdateAt(result.getString(14));
+                u.setIsDelete(result.getBoolean(15));
+                return u;
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+        
+    }
 
     public int countUsers() {
         int count = 0;
@@ -163,10 +202,12 @@ public class UserDAO {
 
     public static void main(String[] args) {
         UserDAO udao = new UserDAO();
-        List<User> list=udao.getUserByName("hie");
-        for (User user : list) {
-            System.out.println(user);
-        }
+//        List<User> list=udao.getUserByName("hie");
+//        for (User user : list) {
+//            System.out.println(user);
+//        }
+User u=udao.getUserById("8");
+        System.out.println(u);
     }
 
 }
