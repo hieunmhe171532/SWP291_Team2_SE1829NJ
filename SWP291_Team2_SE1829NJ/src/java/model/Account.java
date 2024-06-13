@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author hieum
@@ -15,7 +17,11 @@ public class Account {
     private String email;
     private String role;
     private boolean isActive;
-
+    private String fullname;
+    private Date dob;
+    private boolean gender;
+    private String address;
+        
     public Account() {
     }
 
@@ -27,6 +33,22 @@ public class Account {
         this.role = role;
         this.isActive = isActive;
     }
+
+    public Account(String username, String password, String phone, String email, String role, boolean isActive, String fullname, Date dob, boolean gender, String address) {
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.isActive = isActive;
+        this.fullname = fullname;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+    }
+    
+    
+    
 
     public String getUsername() {
         return username;
@@ -46,6 +68,38 @@ public class Account {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setPhone(String phone) {

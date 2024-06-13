@@ -1,8 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : Oct 19, 2021, 11:22:48 PM
-    Author     : Khuong Hung
---%>
+>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -195,7 +191,7 @@
                                                 <th class="col-3">
                                                     Detail
                                                 </th>
-                                                <th class="col-1">
+                                                <th class="col-2">
                                                     CreatedAt
                                                 </th>
                                                 <th class="col-2">
@@ -237,7 +233,7 @@
                                                 </td>
                                                 <td class="d-flex">
                                                     <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp" data-toggle="modal"
-                                                            data-target="#ModalUP${b.id}" style="width: 70%" ><i class="fa-solid fa-edit"></i></button>
+                                                            data-target="#ModalUP${b.id}" ><i class="fa-solid fa-edit"></i></button>
                                                     <button class="btn btn-danger btn-sm delete" type="button" title="Delete" id="show-emp" data-toggle="modal"
                                                             data-target="#ModalDEL${b.id}"><i class="fas fa-trash"></i>
                                                     </button>
@@ -292,13 +288,18 @@
 
                                     <div class="form-group">
                                         <div><label>Flag</label>
-                                            <input type="checkbox" value="${b.flag}" name="flag">
+                                            <c:if test="${b.flag==1}">
+                                            <input type="checkbox" checked="" value="${b.flag}" name="flag">
+                                            </c:if>
+                                            <c:if test="${b.flag==0}">
+                                                <input type="checkbox" value="${b.flag}" name="flag">
+                                            </c:if>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</button>
+                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
                                     <input type="submit" class="btn btn-success" value="Edit">
                                 </div>
                             </form>
@@ -327,8 +328,8 @@
                                         </div>
                                     </div>
                                     <BR>
-                                    <button class="btn btn-danger" type="submit">Xóa</button>
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</button>
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
                                     <BR>
                                 </div>
                             </form>
