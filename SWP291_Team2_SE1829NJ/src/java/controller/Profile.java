@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import java.io.IOException;
@@ -10,10 +6,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account; // Assuming there's an Account model class
+import dao.AccountDAO; // Assuming there's a DAO class for database operations
 
 /**
  *
- * @author Linh Linh
+ * @author Linh
  */
 public class Profile extends HttpServlet {
 
@@ -29,17 +27,54 @@ public class Profile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        // Get parameters from the request
+        String accountId = request.getParameter("accountId");
+        String accountName = request.getParameter("account_name");
+        String customerName = request.getParameter("customer_name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String dob = request.getParameter("dob");
+        String gender = request.getParameter("gender");
+
+        // Create an Account object with the new details
+        Account account = new Account();
+        account.setAccountId(accountId);
+        account.setAccountName(accountName);
+        account.setCustomer_name(customerName);
+        account.setPhone(phone);
+        account.setAddress(address);
+        account.setEmail(email);
+        account.setName(name);
+        account.setDob(dob);
+        account.setGender(Integer.parseInt(gender));
+
+        // Update the account details in the database using AccountDAO
+        AccountDAO accountDAO = new AccountDAO();
+        boolean updateSuccessful = accountDAO.updateAccount(account);
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Profile</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Profile at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            if (updateSuccessful) {
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Profile Updated</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Profile updated successfully!</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            } else {
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Profile Update Failed</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Failed to update profile.</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
     }
 
@@ -79,7 +114,6 @@ public class Profile extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Profile Servlet";
     }// </editor-fold>
-
 }
