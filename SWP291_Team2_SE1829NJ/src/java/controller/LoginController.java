@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
             model.Account acc = dao.checkAcc(username, user_pass);
             if (acc == null) {
                 request.setAttribute("error", "Tài khoản không tồn tại !");
-                request.getRequestDispatcher("user?action=login").forward(request, response);
+                request.getRequestDispatcher("login?action=login").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("acc", acc);
