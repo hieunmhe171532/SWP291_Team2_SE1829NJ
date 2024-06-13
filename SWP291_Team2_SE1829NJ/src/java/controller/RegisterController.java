@@ -83,7 +83,7 @@ public class RegisterController extends HttpServlet {
         Account acc = new Account(username, password, phone, email, "user", true);
         User user = new User();
         
-        user.setUsername(username);
+//        user.setUsername(username);
         AccountDAO accDB = new AccountDAO();
         if(accDB.getAccountByUsername(acc) != null){
             response.sendRedirect("register");
