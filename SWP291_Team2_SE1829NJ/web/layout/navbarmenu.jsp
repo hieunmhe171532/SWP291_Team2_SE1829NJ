@@ -42,7 +42,7 @@
                                 <div class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
                                     <a class="dropdown-item" href="my-account.html">${sessionScope.acc.username}</a>
                                     <a class="dropdown-item" href="user?action=myaccount">Edit Profile</a>
-                                    <a class="dropdown-item" href="user?action=logout">Logout</a>
+                                    <a class="dropdown-item" href="login?action=logout">Logout</a>
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role) == '1'}">
                                         <a class="dropdown-item" href="dashboard">Admin Management</a>
                                     </c:if>

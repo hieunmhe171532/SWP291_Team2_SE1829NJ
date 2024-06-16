@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
+import model.Account;
 import model.Booking;
 //import model.User;
 
@@ -41,9 +42,9 @@ public class Dashboard extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
-//            HttpSession session = request.getSession(); ///////////////////////////////////////////////////////////////////////////////////////////////////////
-//            model.User user = (User) session.getAttribute("user");
-//            if (user.getIsAdmin().equalsIgnoreCase("true")) {
+            HttpSession session = request.getSession(); ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            model.Account acc = (Account) session.getAttribute("acc");
+            if (acc.getRole().equalsIgnoreCase("1")) {
 
 //             
     UserDAO udao = new UserDAO();
@@ -103,9 +104,9 @@ public class Dashboard extends HttpServlet {
     request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 
           
-//            } else {
-//                response.sendRedirect("login");
-//            }
+            } else {
+                response.sendRedirect("login");
+            }
         } catch (ServletException | IOException e) {
             response.sendRedirect("404.jsp");
         }
