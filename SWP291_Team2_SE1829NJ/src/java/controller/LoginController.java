@@ -71,8 +71,8 @@ public class LoginController extends HttpServlet {
 
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
-            session.removeAttribute("user");
-            response.sendRedirect("home");
+            session.removeAttribute("acc");
+            response.sendRedirect("homepage");
         }
 
         }
@@ -104,7 +104,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/client/login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
