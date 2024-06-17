@@ -38,11 +38,12 @@ public class UserAccountDAO {
                      "FROM [User] u " +
                      "JOIN [Account] a ON u.username = a.username " +
                      "WHERE a.username = ?";
-        try (Connection conn = dbContext.getConnection();
-             PreparedStatement stm = conn.prepareStatement(sql)) {
+        try (  PreparedStatement ps = connection.prepareStatement(sql);
+   
+          ) {
 
-            stm.setString(1, username);
-            ResultSet result = stm.executeQuery();
+            ps.setString(1, username);
+            ResultSet result = ps.executeQuery();
 
             if (result.next()) {
                 int id = result.getInt("id");

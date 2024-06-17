@@ -15,22 +15,76 @@ public class Account {
     private String password;
     private String phone;
     private String email;
-    private String role;
+    private String role_id;
     private boolean isActive;
+<<<<<<< Updated upstream
     private String fullname;
     private Date dob;
     private boolean gender;
     private String address;
         
+=======
+
+      private String fullname;
+    private Date dob;
+    private boolean gender;
+    private String address;
+    
+>>>>>>> Stashed changes
     public Account() {
     }
 
-    public Account(String username, String password, String phone, String email, String role, boolean isActive) {
+    public Account(String username, String password, String phone, String email, String role_id, boolean isActive, String fullname, Date dob, boolean gender, String address) {
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
-        this.role = role;
+        this.role_id = role_id;
+        this.isActive = isActive;
+        this.fullname = fullname;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Account(String username, String password, String phone, String email, String role_id, boolean isActive) {
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.role_id = role_id;
         this.isActive = isActive;
     }
 
@@ -114,13 +168,6 @@ public class Account {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public boolean isIsActive() {
         return isActive;
@@ -130,12 +177,25 @@ public class Account {
         this.isActive = isActive;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role=" + role + ", isActive=" + isActive + '}';
+    public String getRole_id() {
+        return role_id;
     }
 
-    
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role=" + role_id + ", isActive=" + isActive + '}';
+//    }
+//
+//    
+
+    @Override
+    public String toString() {
+        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role_id=" + role_id + ", isActive=" + isActive + ", fullname=" + fullname + ", dob=" + dob + ", gender=" + gender + ", address=" + address + '}';
+    }
     
     
 }

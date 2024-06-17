@@ -44,7 +44,7 @@ public class Dashboard extends HttpServlet {
         try {
             HttpSession session = request.getSession(); ///////////////////////////////////////////////////////////////////////////////////////////////////////
             model.Account acc = (Account) session.getAttribute("acc");
-            if (acc.getRole().equalsIgnoreCase("1")) {
+            if (acc.getRole_id().equalsIgnoreCase("1")) {
 
 //             
     UserDAO udao = new UserDAO();
@@ -101,7 +101,7 @@ public class Dashboard extends HttpServlet {
     
     
     // Forward the request to the admin JSP page
-    request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+    request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
 
           
             } else {
