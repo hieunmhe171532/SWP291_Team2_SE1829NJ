@@ -6,57 +6,56 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Account; // Assuming there's an Account model class
-import dao.AccountDAO; // Assuming there's a DAO class for database operations
+import model.Account;
+import model.UserAccount;
+import dao.AccountDAO;
+import dao.UserAccountDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- *
- * @author Linh
- */
 public class Profile extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        // Get parameters from the request
-        String accountId = request.getParameter("accountId");
-        String accountName = request.getParameter("account_name");
-        String customerName = request.getParameter("customer_name");
+        String accountIdStr = request.getParameter("account_id");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String dob = request.getParameter("dob");
-        String gender = request.getParameter("gender");
+        String role = request.getParameter("role");
+        String isActiveStr = request.getParameter("is_active");
+        String fullname = request.getParameter("fullname");
+        String dobStr = request.getParameter("dob");
+        String genderStr = request.getParameter("gender");
+        String address = request.getParameter("address");
+        String isDeleteStr = request.getParameter("is_delete");
 
-        // Create an Account object with the new details
-        Account account = new Account();
-        account.setAccountId(accountId);
-        account.setAccountName(accountName);
-        account.setCustomer_name(customerName);
-        account.setPhone(phone);
-        account.setAddress(address);
-        account.setEmail(email);
-        account.setName(name);
-        account.setDob(dob);
-        account.setGender(Integer.parseInt(gender));
+        int accountId = Integer.parseInt(accountIdStr);
+        boolean isActive = Boolean.parseBoolean(isActiveStr);
+        boolean gender = Boolean.parseBoolean(genderStr);
+        boolean isDelete = Boolean.parseBoolean(isDeleteStr);
 
-        // Update the account details in the database using AccountDAO
+        Date dob = null;
+        try {
+            dob = new SimpleDateFormat("yyyy-MM-dd").parse(dobStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Account account = new Account(accountId, username, password, phone, email, role, isActive, null, null);
+        UserAccount userAccount = new UserAccount(0, accountId, fullname, dob, gender, address, isDelete);
+
         AccountDAO accountDAO = new AccountDAO();
+        UserAccountDAO userAccountDAO = new UserAccountDAO();
+
         boolean updateSuccessful = accountDAO.updateAccount(account);
+        boolean userUpdateSuccessful = userAccountDAO.updateUserAccount(userAccount);
 
         try (PrintWriter out = response.getWriter()) {
-            if (updateSuccessful) {
+            if (updateSuccessful && userUpdateSuccessful) {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Profile Updated</title>");
@@ -78,42 +77,20 @@ public class Profile extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Profile Servlet";
-    }// </editor-fold>
+    }
 }
