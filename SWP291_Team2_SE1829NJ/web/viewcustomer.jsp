@@ -234,58 +234,59 @@
 
                 <div class="modal fade" id="ModalUP${u.id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                      data-keyboard="false">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog  modal-lg" role="document">
                         <div class="modal-content">
-                            <form action="editblog" method="post">
-                                <div class="modal-body">
-                                    <div class="modal-header">						
-                                        <h4 class="modal-title" style="color: black">Customer Detail</h4>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Name</label>
+                            <div class="modal-body">
+                                <div class="modal-header">						
+                                    <h1 class="modal-title" style="color: black">Customer Detail</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6" >
+                                        <h4>Name</h4>
                                         <input name="id" type="text" class="form-control" value="${u.name}" readonly="" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Date of birth</label>
-                                        <input name="title" type="text" value="${u.dob}" class="form-control" required>
+                                    <div class="form-group col-md-6">
+                                        <h4>Date of birth</h4>
+                                        <input name="title" type="text" value="${u.dob}" class="form-control" readonly required>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input name="brief" type="text" value="${u.username.getPhone()}" class="form-control" required>
+                                </div>
+                                <div class="row">    
+                                    <div class="form-group col-6">
+                                        <h4>Phone</h4>
+                                        <input name="brief" type="text" value="${u.username.getPhone()}" readonly class="form-control" required>
 
                                     </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input name="detail" type="text" value="${u.username.getEmail()}" class="form-control" required>
+                                    <div class="form-group col-6">
+                                        <h4>Email</h4>
+                                        <input name="detail" type="text" value="${u.username.getEmail()}" readonly class="form-control" required>
 
                                     </div>
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <input name="image" type="text" value="${u.address}" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>CreateAt</label>
-                                        <input name="create" type="text" value="${u.createAt}" class="form-control" required>
-                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Address</h4>
+                                    <input name="image" type="text" value="${u.address}" class="form-control" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <h4>CreateAt</h4>
+                                    <input name="create" type="text" value="${u.createAt}" class="form-control" readonly required>
+                                </div>
 
 
-                                    <div class="form-group">
-                                        <label>Gender</label>
-                                        <c:if test="${u.isGender()==true}">
-                                            <img src="bootstrap/images/gtnam.png" style="width: 10%" alt="male"/>
-                                        </c:if>
-                                        <c:if test="${u.isGender()==false}">
-                                            <img src="bootstrap/images/gtnu.png" style="width: 10%" alt="famale"/>
-                                        </c:if> 
-
-                                    </div>
+                                <div class="form-group">
+                                    <h4>Gender</h4>
+                                    <c:if test="${u.isGender()==true}">
+                                        <img src="bootstrap/images/gtnam.png" style="width: 10%" alt="male"/>
+                                    </c:if>
+                                    <c:if test="${u.isGender()==false}">
+                                        <img src="bootstrap/images/gtnu.png" style="width: 10%" alt="famale"/>
+                                    </c:if> 
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
-                                </div>
-                            </form>
 
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>

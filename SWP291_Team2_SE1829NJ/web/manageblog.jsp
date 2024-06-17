@@ -260,34 +260,34 @@
                             <form action="editblog" method="post">
                                 <div class="modal-body">
                                     <div class="modal-header">						
-                                        <h4 class="modal-title" style="color: black">Edit Product</h4>
+                                        <h2 class="modal-title" style="color: black">Edit Blog</h2>
                                     </div>
                                     <div class="form-group">
-                                        <label>Id</label>
+                                        <label><b>Id</b></label>
                                         <input name="id" type="text" class="form-control" value="${b.getId()}" readonly="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Title</label>
+                                        <label><b>Title</b></label>
                                         <input name="title" type="text" value="${b.title}" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Brief Infomation</label>
+                                        <label><b>Brief Infomation</b></label>
                                         <input name="brief" type="text" value="${b.briefinfo}" class="form-control" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <label>Detail</label>
+                                        <label><b>Detail</b></label>
                                         <input name="detail" type="text" value="${b.detail}" class="form-control" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label><b>Image</b></label>
                                         <input name="image" type="url" value="${b.image}" class="form-control" required>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <div><label>Flag</label>
+                                        <div><label><b>Flag</b></label>
                                             <c:if test="${b.flag==1}">
                                             <input type="checkbox" checked="" value="${b.flag}" name="flag">
                                             </c:if>
@@ -318,7 +318,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <span class="thong-tin-thanh-toan">
-                                                <h5>Bạn có chắc chắn muốn xóa Blog này?.</h5>
+                                                <h5>Are you sure you want to delete this Blog?</h5>
                                             </span>
                                         </div>
                                     </div>
