@@ -241,39 +241,39 @@ public Account getAllAccWithUserByUseName(String username) {
     }
 
 // 
-//    public static void main(String[] args) {
-//        AccountDAO dao = new AccountDAO();
-//        Account account = dao.getAllAccWithUserByUseName("admin");
-//        if (account != null) {
-//            System.out.println("Account found: " + account);
-//        } else {
-//            System.out.println("Account not found");
-//        }
-//        
-//        
-//    }
-//    
-    
-    
-    
     public static void main(String[] args) {
-    // Create an instance of AccountDAO
-    AccountDAO dao = new AccountDAO();
-
-    // Specify the username of the account you want to delete
-    String usernameToDelete = "customer1";
-
-    // Call the AccDelete method with the specified username
-    dao.AccDelete(usernameToDelete);
-
-    // Optional: Check if the account was deleted successfully
-    Account deletedAccount = dao.getAnAccountByUsername(usernameToDelete);
-    if (deletedAccount == null) {
-        System.out.println("Account with username '" + usernameToDelete + "' successfully deleted.");
-    } else {
-        System.out.println("Failed to delete account with username '" + usernameToDelete + "'.");
+        AccountDAO dao = new AccountDAO();
+        Account account = dao.getAllAccWithUserByUseName("admin");
+        if (account != null) {
+            System.out.println("Account found: " + account);
+        } else {
+            System.out.println("Account not found");
+        }
+        
+        
     }
-}
+    
+    
+    
+    
+//    public static void main(String[] args) {
+//    // Create an instance of AccountDAO
+//    AccountDAO dao = new AccountDAO();
+//
+//    // Specify the username of the account you want to delete
+//    String usernameToDelete = "customer1";
+//
+//    // Call the AccDelete method with the specified username
+//    dao.AccDelete(usernameToDelete);
+//
+//    // Optional: Check if the account was deleted successfully
+//    Account deletedAccount = dao.getAnAccountByUsername(usernameToDelete);
+//    if (deletedAccount == null) {
+//        System.out.println("Account with username '" + usernameToDelete + "' successfully deleted.");
+//    } else {
+//        System.out.println("Failed to delete account with username '" + usernameToDelete + "'.");
+//    }
+//}
     
     
     

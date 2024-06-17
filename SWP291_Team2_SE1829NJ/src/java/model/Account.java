@@ -15,7 +15,7 @@ public class Account {
     private String password;
     private String phone;
     private String email;
-    private String role_id;
+    private String role;
     private boolean isActive;
 
     private String fullname;
@@ -29,12 +29,12 @@ public class Account {
     public Account() {
     }
 
-    public Account(String username, String password, String phone, String email, String role_id, boolean isActive, String fullname, Date dob, boolean gender, String address) {
+    public Account(String username, String password, String phone, String email, String role, boolean isActive, String fullname, Date dob, boolean gender, String address) {
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
-        this.role_id = role_id;
+        this.role = role;
         this.isActive = isActive;
         this.fullname = fullname;
         this.dob = dob;
@@ -74,28 +74,16 @@ public class Account {
         this.address = address;
     }
 
-    public Account(String username, String password, String phone, String email, String role_id, boolean isActive) {
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.email = email;
-        this.role_id = role_id;
-        this.isActive = isActive;
-    }
-
-    public Account(String username, String password, String phone, String email, String role, boolean isActive, String fullname, Date dob, boolean gender, String address) {
+    public Account(String username, String password, String phone, String email, String role, boolean isActive) {
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
         this.role = role;
         this.isActive = isActive;
-        this.fullname = fullname;
-        this.dob = dob;
-        this.gender = gender;
-        this.address = address;
     }
-    
+
+
     
     
 
@@ -119,37 +107,6 @@ public class Account {
         return phone;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -173,23 +130,23 @@ public class Account {
     }
 
     public String getRole_id() {
-        return role_id;
+        return role;
     }
 
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
+    public void setRole_id(String role) {
+        this.role = role;
     }
 
 //    @Override
 //    public String toString() {
-//        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role=" + role_id + ", isActive=" + isActive + '}';
+//        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role=" + role + ", isActive=" + isActive + '}';
 //    }
 //
 //    
 
     @Override
     public String toString() {
-        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role_id=" + role_id + ", isActive=" + isActive + ", fullname=" + fullname + ", dob=" + dob + ", gender=" + gender + ", address=" + address + '}';
+        return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role=" + role + ", isActive=" + isActive + ", fullname=" + fullname + ", dob=" + dob + ", gender=" + gender + ", address=" + address + '}';
     }
     
     
