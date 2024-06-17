@@ -5,6 +5,11 @@
 
 package controller.admin;
 
+import dao.BillDAO;
+import dao.BlogDAO;
+import dao.MenuDAO;
+import dao.RoomDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +17,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
+import model.Account;
+import model.Booking;
 
 /**
  *
@@ -30,42 +38,81 @@ public class accountManagement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            String action = request.getParameter("action");
-            if (user.getIsAdmin().equalsIgnoreCase("true")) {
-                if (action.equalsIgnoreCase("getuser")) {
-                    UserDAO dao = new UserDAO();
-                    List<User> user1 = dao.getUser();
-                    request.setAttribute("user", user1);
-                    request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
-                }
-                if (action.equals("deleteuser")) {
-                    String user_id = request.getParameter("user_id");
-                    int id = Integer.parseInt(user_id);
-                    UserDAO dao = new UserDAO();
-                    dao.deleteUser(id);
-                    response.sendRedirect("customermanager?action=getuser");
-                }
-                if (action.equals("update")) {
-                    String user_id = request.getParameter("user_id");
-                    String isAdmin = request.getParameter("permission");
-                    int id = Integer.parseInt(user_id);
-                    UserDAO dao = new UserDAO();
-                    dao.setAdmin(id, isAdmin);
-                    response.sendRedirect("customermanager?action=getuser");
-                }
 
+        try {
+            HttpSession session = request.getSession(); ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            model.Account acc = (Account) session.getAttribute("acc");
+            if (acc.getRole().equalsIgnoreCase("1")) {
+
+//             
+    UserDAO udao = new UserDAO();
+    BillDAO bidao = new BillDAO();
+    BlogDAO bldao = new BlogDAO();
+    MenuDAO mdao = new MenuDAO();
+    RoomDAO rdao = new RoomDAO();
+
+    // Retrieve counts
+    int countUser = udao.countUsers();
+    int countBill = bidao.countBill();
+    int countBlog = bldao.countBlog();
+    int countFood = mdao.countFood();
+    int countRoom = rdao.countRoom();
+    int countReparingRoom = rdao.countRepairingRoom();
+    int countEmptyRoom = rdao.countEmptyRoom();
+    int countBookingRoom = rdao.countBookingRoom();
+    int countUsingRoom = rdao.countUsingRoom();
+
+ 
+    
+    
+    
+    
+    System.out.println("Total Users: " + countUser);
+    System.out.println("Total Bills: " + countBill); 
+    System.out.println("Total Blogs: " + countBlog); 
+    System.out.println("Total Foods: " + countFood);
+    System.out.println("Total Rooms: " + countRoom);
+    System.out.println("Repairing Rooms: " + countReparingRoom);
+    System.out.println("Empty Rooms: " + countEmptyRoom); 
+    System.out.println("Booking Rooms: " + countBookingRoom); 
+    System.out.println("Using Rooms: " + countUsingRoom);
+    
+    
+    // Set attributes in the request scope
+    request.setAttribute("totalUser", countUser);
+    request.setAttribute("totalBill", countBill);
+    request.setAttribute("totalBlog", countBlog);
+    request.setAttribute("totalFood", countFood);
+    request.setAttribute("totalRoom", countRoom);
+    request.setAttribute("reRoom", countReparingRoom);
+    request.setAttribute("emRoom", countEmptyRoom);
+    request.setAttribute("boRoom", countBookingRoom);
+    request.setAttribute("usRoom", countUsingRoom);
+
+    
+           // Retrieve booking details
+            List<Booking> bookings = bidao.getAllBookings(); // Implement getAllBookings method in BillDAO
+            request.setAttribute("bookings", bookings);
+            
+             List<Booking> bookingByDay = bidao.getBookingsByDay(LocalDate.now()); // Implement getAllBookings method in BillDAO
+            request.setAttribute("bookingByDay", bookingByDay);
+    
+    
+    // Forward the request to the admin JSP page
+    request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+
+          
             } else {
-                response.sendRedirect("user?action=login");
+                response.sendRedirect("login");
             }
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
             response.sendRedirect("404.jsp");
         }
+
+        
+        
+        
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
