@@ -2,43 +2,48 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< Updated upstream
         <group>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/client/register.jsp</file>
-=======
->>>>>>> Stashed changes
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/admin/Dashboard.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/web/client/homepage.jsp</file>
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
-=======
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/HotelDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
-            <file>file:/C:/Users/hieum/OneDrive/Desktop/New%20folder%20(2)/SWP291_Team2_SE1829NJ/src/java/dao/BillDAO.java</file>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/TypeRoomDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RoomSearchServlet.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/manager.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/login.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/BillDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/utils/SHA512.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/UserAccount.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/feedbackManager.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/WEB-INF/web.xml</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/Dashboard.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Room.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/accountManagement.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RoomDetailController.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/profile.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/RoomDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/roomManagement.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/managerbooking.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/HotelDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/marketer.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/roomCrAndEdit.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/rooms.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/staff.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Bill.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/MenuDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Status.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/homepage.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/manageblog.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/roomSwit.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/admin.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Booking.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/UserAccountDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/nvarbar-admin.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/addblog.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1306p5/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/layout/navbarmenu.jsp</file>
         </group>
-=======
-        <group/>
->>>>>>> Stashed changes
     </open-files>
 </project-private>

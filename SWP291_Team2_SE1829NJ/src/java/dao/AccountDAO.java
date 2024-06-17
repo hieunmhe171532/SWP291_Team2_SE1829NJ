@@ -96,14 +96,26 @@ public class AccountDAO {
         return null;
     }
 
+ 
+ 
+ 
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
-        Account account = dao.checkAcc("jane_smith", "password456");
+        Account account = dao.checkAcc("admin", "admin_password");
         if (account != null) {
             System.out.println("Account found: " + account);
         } else {
             System.out.println("Account not found");
         }
+        
+        
     }
+    
+    
+    
+    
+    
+    
+    
     
 }
