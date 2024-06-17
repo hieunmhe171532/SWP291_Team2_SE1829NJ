@@ -78,7 +78,7 @@ public class LoginController extends HttpServlet {
         }
 
        public static void main(String[] args) {
-      String username = "admin_user";
+      String username = "john_doe";
             String user_pass = "password123";
             
             AccountDAO dao = new AccountDAO();
