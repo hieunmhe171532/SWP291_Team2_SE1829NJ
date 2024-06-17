@@ -35,7 +35,7 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="homepage"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="accountmanagement"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
@@ -71,78 +71,68 @@
         <div id="clock"></div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tile">
-                <div class="tile-body">
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
 
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()">
-                                <i class="fas fa-print"></i> In dữ liệu
-                            </a>
-                        </div>
+                <div class="row element-button">
+                    <div class="col-sm-2">
+                        <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()">
+                            <i class="fas fa-print"></i> In dữ liệu
+                        </a>
                     </div>
-
-                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-                           id="sampleTable">
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Role ID</th> 
-                                <th>Active</th>
-                                <th>Fullname</th>
-                                <th>Date of Birth</th>
-                                <th>Gender</th>
-                                <th>Address</th>
-                                <th width="100">Functions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${acc1}" var="u">
-                                <tr>
-                                    <td>${u.username}</td>
-                                    <td>${u.password}</td>
-                                    <td>${u.phone}</td>
-                                    <td>${u.email}</td>
-                                    <td>${u.role_id}</td>
-                                    <td>${u.isActive ? 'Active' : 'Inactive'}</td>
-                                    <td>${u.fullname}</td>
-                                    <td>${u.dob}</td> <!-- Format as needed -->
-                                    <td>${u.gender ? 'Male' : 'Female'}</td>
-                                    <td>${u.address}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
-                                                data-target="#ModalUP${u.username}">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm delete" type="button" title="Xóa" data-toggle="modal"
-                                                data-target="#ModalDEL${u.username}">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-
                 </div>
+
+                <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                       id="sampleTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Role ID</th> 
+                            <th>Active</th>
+                            <th>Fullname</th>
+                            <th>Date of Birth</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th width="100">Functions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${acc1.username}</td>
+                            <td>${acc1.password}</td>
+                            <td>${acc1.phone}</td>
+                            <td>${acc1.email}</td>
+                            <td>${acc1.role_id}</td>
+                            <td>${acc1.isActive ? 'Active' : 'Inactive'}</td>
+                            <td>${acc1.fullname}</td>
+                            <td>${acc1.dob}</td> <!-- Format as needed -->
+                            <td>${acc1.gender ? 'Male' : 'Female'}</td>
+                            <td>${acc1.address}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
+                                        data-target="#ModalUP${acc1.username}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                      
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
+</div>
+
 </main>
-
-
-
-
-
-
-            <!-- Delete modal window -->
-        <c:forEach items="${accountusers}" var="u">
-            <div class="modal fade" id="ModalDEL${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                    
+                                    
+       <div class="modal fade" id="ModalDEL${acc1.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <form method="POST" action="customermanager?action=deleteuser">
@@ -154,7 +144,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <input type="hidden" name="user_id" value="${u.username}">
+                                        <input type="hidden" name="user_id" value="${acc1.username}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -168,7 +158,76 @@
                     </div>
                 </div>
             </div>
-        </c:forEach>
+
+
+
+
+
+            <!-- Delete modal window -->
+   
+    <!-- Modal for editing product -->
+<!--  <div class="modal fade" id="ModalUP${p.product_id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+             
+                    <form method="post" action="ProductManagement?action=updateproduct">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span class="thong-tin-thanh-toan">
+                                    <h5>Chỉnh sửa thông tin account</h5>
+                                </span>
+                            </div>
+                        </div>
+                         Form for editing product information 
+                        <div class="form-group col-md-9">
+                            <label class="control-label">Mã sản phẩm </label>
+                            <input type="text" name="product_id" class="form-control" placeholder="Product ID.."  value="${p.product_id}" required>
+                        </div>
+
+                        <label for="exampleSelect1" class="control-label">Danh mục</label>
+
+                        <select name="category_id" class="custom-select custom-select-md mb-3 select-width">
+                            <option selected>Open this select category</option>
+                            <c:forEach var="category" items="${CategoryData}">
+                                <option value="${category.category_id}" ${p.cate.category_name eq category.category_name ? 'selected' : ''}>${category.category_name}</option>
+                            </c:forEach>
+                        </select>
+
+                        <div class="form-group col-md-9">
+                            <label class="control-label">Tên sản phẩm</label>
+                            <input type="text" name="product_name" class="form-control" placeholder="Product Name.." value="${p.product_name}" required>
+                        </div>
+
+                        <div class="form-group  col-md-9">
+                            <label class="control-label">Giá bán</label>
+                            <input type="text" name="price" class="form-control" placeholder="Listed Price.." value="${p.product_price}" required>
+                        </div>
+
+                        <div class="form-group  col-md-9">
+                            <label class="control-label">Số lượng</label>
+                            <input type="number" name="quality" class="form-control" placeholder="Quantity.." value="${p.quantity}" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="control-label">path Ảnh sản phẩm</label>
+                            <input type="text" name="product_img" class="form-control" placeholder="Images path here..." value="${p.product_id}.png" required>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Mô tả sản phẩm</label>
+                            <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="3"  required>${p.product_description}</textarea>
+                        </div>
+                        <button class="btn btn-save" type="submit">Lưu lại</button>
+                        &nbsp;
+                        <a class="btn btn-cancel" href="ProductManagement?action=allproduct">Hủy bỏ</a>
+                    </form>
+            
+            </div>
+        </div>
+    </div>
+-->
+
+
+           
 
 
 
