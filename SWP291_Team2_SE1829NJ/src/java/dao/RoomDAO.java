@@ -94,9 +94,9 @@ public class RoomDAO {
                     room.setImage(resultSet.getString("rImage"));
                     room.setUserQuantity(resultSet.getInt("userQuantity"));
                     room.setArea(resultSet.getFloat("area"));
-                    room.setQuantity(resultSet.getInt("quantity"));
+       
                     room.setPrice(resultSet.getFloat("price"));
-                    room.setStatus(resultSet.getBoolean("rStatus"));
+                    room.setStatus(resultSet.getInt("rStatus"));
                     room.setDescription(resultSet.getString("description"));
                     room.setIsDelete(resultSet.getBoolean("rIsDelete"));
                     room.setCreateAt(resultSet.getDate("RcreateAt"));
@@ -185,8 +185,8 @@ public class RoomDAO {
     public Room getById(int roomId) {
         Room room = null;
         String query = "SELECT r.id as rId, r.name as rName, r.image as rImage, r.deleteAt as RdeleteAt, "
-                + "r.updateAt as RupdateAt, r.createAt as RcreateAt , r.isDelete as rIsDelete,"
-                + "r.userQuantity, r.area, r.quantity, r.price, r.status as rStatus, r.description, "
+                + "r.updateAt as RupdateAt, r.createAt as RcreateAt,"
+                + "r.userQuantity, r.area, r.price, r.status_id as rStatus, r.description, "
                 + "h.id as hId, h.name as hName, t.id as tId, t.name as tName "
                 + "FROM Room r "
                 + "JOIN Hotel h ON h.id = r.hotel_id "
@@ -197,32 +197,30 @@ public class RoomDAO {
             ps.setInt(1, roomId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    room = new Room();
-                    room.setId(rs.getInt("rId"));
-                    room.setName(rs.getString("rName"));
-                    room.setImage(rs.getString("rImage"));
-                    room.setUserQuantity(rs.getInt("userQuantity"));
-                    room.setArea(rs.getFloat("area"));
-                    room.setQuantity(rs.getInt("quantity"));
-                    room.setPrice(rs.getFloat("price"));
-                    room.setStatus(rs.getBoolean("rStatus"));
-                    room.setDescription(rs.getString("description"));
-                    room.setIsDelete(rs.getBoolean("rIsDelete"));
-                    room.setCreateAt(rs.getDate("RcreateAt"));
-                    room.setDeleteAt(rs.getDate("RdeleteAt"));
-                    room.setUpdateAt(rs.getDate("RupdateAt"));
+                    room = new Room();     room.setId(rs.getInt("rId"));
+                room.setName(rs.getString("rName"));
+                room.setImage(rs.getString("rImage"));
+                room.setDeleteAt(rs.getDate("RdeleteAt"));
+                room.setUpdateAt(rs.getDate("RupdateAt"));
+                room.setCreateAt(rs.getDate("RcreateAt"));
+                room.setArea(rs.getFloat("area"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("rStatus"));
+                room.setDescription(rs.getString("description"));
 
-                    Hotel hotel = new Hotel();
-                    hotel.setId(rs.getInt("hId"));
-                    hotel.setName(rs.getString("hName"));
-                    // Set other Hotel fields...
-                    room.setHotel(hotel);
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("hId"));
+                hotel.setName(rs.getString("hName"));
+                // Set other hotel fields if needed
 
-                    TypeRoom typeRoom = new TypeRoom();
-                    typeRoom.setId(rs.getInt("tId"));
-                    typeRoom.setName(rs.getString("tName"));
-                    // Set other TypeRoom fields...
-                    room.setTypeRoom(typeRoom);
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt("tId"));
+                typeRoom.setName(rs.getString("tName"));
+
+                room.setTypeRoom(typeRoom);
                 }
             }
         } catch (SQLException e) {
@@ -231,10 +229,84 @@ public class RoomDAO {
         return room;
     }
 
-    public static void main(String[] args) {
-        RoomDAO dao = new RoomDAO();
-        Room r = dao.getById(1);
-        System.out.println(r);
+  public List<Room> getAll() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT r.id as rId, r.name as rName, r.image as rImage, r.deleteAt as RdeleteAt, " +
+                     "r.updateAt as RupdateAt, r.createAt as RcreateAt, r.area, r.userQuantity, r.price, " +
+                     "r.status_id as rStatus, r.description, h.id as hId, h.name as hName, " +
+                     "t.id as tId, t.name as tName " +
+                     "FROM Room r " +
+                     "JOIN Hotel h ON h.id = r.hotel_id " +
+                     "JOIN TypeRoom t ON t.id = r.type_id";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+            
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Room room = new Room();
+                room.setId(rs.getInt("rId"));
+                room.setName(rs.getString("rName"));
+                room.setImage(rs.getString("rImage"));
+                room.setDeleteAt(rs.getDate("RdeleteAt"));
+                room.setUpdateAt(rs.getDate("RupdateAt"));
+                room.setCreateAt(rs.getDate("RcreateAt"));
+                room.setArea(rs.getFloat("area"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("rStatus"));
+                room.setDescription(rs.getString("description"));
+
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("hId"));
+                hotel.setName(rs.getString("hName"));
+                // Set other hotel fields if needed
+
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt("tId"));
+                typeRoom.setName(rs.getString("tName"));
+
+                room.setTypeRoom(typeRoom);
+
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
     }
 
+    
+  public static void main(String[] args) {
+        RoomDAO roomDAO = new RoomDAO();
+//        List<Room> rooms = roomDAO.getAll();
+//
+//        for (Room room : rooms) {
+//            System.out.println("Room ID: " + room.getId());
+//            System.out.println("Room Name: " + room.getName());
+//  
+//            System.out.println("---------------------------");
+//        }
+
+ Room s1 = roomDAO.getById(2);
+ 
+      System.out.println(s1.getId());
+        System.out.println(s1.getStatus());
+
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
