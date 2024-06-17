@@ -17,20 +17,15 @@ public class Account {
     private String email;
     private String role_id;
     private boolean isActive;
-<<<<<<< Updated upstream
+
     private String fullname;
     private Date dob;
     private boolean gender;
     private String address;
         
-=======
 
-      private String fullname;
-    private Date dob;
-    private boolean gender;
-    private String address;
-    
->>>>>>> Stashed changes
+
+
     public Account() {
     }
 
