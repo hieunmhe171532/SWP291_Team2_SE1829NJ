@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import utils.Email;
 
 public class AccountDAO {  
     private final DBContext dbContext;
@@ -30,6 +31,17 @@ public class AccountDAO {
             pstmt.setBoolean(6, isActive);
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
+
+            // Gửi email xác nhận
+            String subject = "Sign Up Success";
+            String content = "Dear " + username + ", Thank you for subscribing to our service!";
+
+            boolean emailSent = Email.sendEmail(email, subject, content);
+            if (emailSent) {
+                System.out.println("Gửi email đăng ký thành công.");
+            } else {
+                System.out.println("Gửi email đăng ký thất bại.");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
