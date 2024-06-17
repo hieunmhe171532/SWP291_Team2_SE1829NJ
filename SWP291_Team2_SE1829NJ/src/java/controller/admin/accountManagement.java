@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.admin;
 
+import dao.AccountDAO;
 import dao.BillDAO;
 import dao.BlogDAO;
 import dao.MenuDAO;
 import dao.RoomDAO;
+import dao.UserAccountDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,87 +22,55 @@ import java.time.LocalDate;
 import java.util.List;
 import model.Account;
 import model.Booking;
+import model.UserAccount;
 
 /**
  *
  * @author HUNG
  */
 public class accountManagement extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
+  
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
         try {
-            HttpSession session = request.getSession(); ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            HttpSession session = request.getSession(); 
             model.Account acc = (Account) session.getAttribute("acc");
-            if (acc.getRole().equalsIgnoreCase("1")) {
+            if (acc.getRole_id().equalsIgnoreCase("1")) {
 
 //             
-    UserDAO udao = new UserDAO();
-    BillDAO bidao = new BillDAO();
-    BlogDAO bldao = new BlogDAO();
-    MenuDAO mdao = new MenuDAO();
-    RoomDAO rdao = new RoomDAO();
+                AccountDAO udao = new AccountDAO();
 
-    // Retrieve counts
-    int countUser = udao.countUsers();
-    int countBill = bidao.countBill();
-    int countBlog = bldao.countBlog();
-    int countFood = mdao.countFood();
-    int countRoom = rdao.countRoom();
-    int countReparingRoom = rdao.countRepairingRoom();
-    int countEmptyRoom = rdao.countEmptyRoom();
-    int countBookingRoom = rdao.countBookingRoom();
-    int countUsingRoom = rdao.countUsingRoom();
+                // Retrieve counts
+                List<Account> Accounts = udao.getAllAccWithUser();
 
- 
-    
-    
-    
-    
-    System.out.println("Total Users: " + countUser);
-    System.out.println("Total Bills: " + countBill); 
-    System.out.println("Total Blogs: " + countBlog); 
-    System.out.println("Total Foods: " + countFood);
-    System.out.println("Total Rooms: " + countRoom);
-    System.out.println("Repairing Rooms: " + countReparingRoom);
-    System.out.println("Empty Rooms: " + countEmptyRoom); 
-    System.out.println("Booking Rooms: " + countBookingRoom); 
-    System.out.println("Using Rooms: " + countUsingRoom);
-    
-    
-    // Set attributes in the request scope
-    request.setAttribute("totalUser", countUser);
-    request.setAttribute("totalBill", countBill);
-    request.setAttribute("totalBlog", countBlog);
-    request.setAttribute("totalFood", countFood);
-    request.setAttribute("totalRoom", countRoom);
-    request.setAttribute("reRoom", countReparingRoom);
-    request.setAttribute("emRoom", countEmptyRoom);
-    request.setAttribute("boRoom", countBookingRoom);
-    request.setAttribute("usRoom", countUsingRoom);
+                // Retrieve booking details
+                request.setAttribute("accountusers", Accounts);
 
-    
-           // Retrieve booking details
-            List<Booking> bookings = bidao.getAllBookings(); // Implement getAllBookings method in BillDAO
-            request.setAttribute("bookings", bookings);
-            
-             List<Booking> bookingByDay = bidao.getBookingsByDay(LocalDate.now()); // Implement getAllBookings method in BillDAO
-            request.setAttribute("bookingByDay", bookingByDay);
-    
-    
-    // Forward the request to the admin JSP page
-    request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+                
+//                     UserAccountDAO udao = new UserAccountDAO();
+//
+//                // Retrieve counts
+//                List<UserAccount> Accounts = udao.getAllUserAccount();
+//
+//                // Retrieve booking details
+//                request.setAttribute("accountusers", Accounts);
+//                
+                // Forward the request to the admin JSP page
+                request.getRequestDispatcher("/admin/accountManager.jsp").forward(request, response);
 
-          
             } else {
                 response.sendRedirect("login");
             }
@@ -109,15 +78,34 @@ public class accountManagement extends HttpServlet {
             response.sendRedirect("404.jsp");
         }
 
+    }
+
+    public static void main(String[] args) {
+  AccountDAO udao = new AccountDAO();
+
+                // Retrieve counts
+                List<Account> allAccounts = udao.getAllAccWithUser();
+        if (allAccounts != null && !allAccounts.isEmpty()) {
+            System.out.println("All accounts:");
+            for (Account userAccount : allAccounts) {
+                System.out.println(userAccount);
+            }
+        } else {
+            System.out.println("No accounts found");
+        }
         
         
         
         
-    } 
+        
+        
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -125,12 +113,13 @@ public class accountManagement extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -138,12 +127,13 @@ public class accountManagement extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

@@ -45,8 +45,20 @@
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SubmitFeedback</servlet-name>
-        <servlet-class>controller.SubmitFeedback</servlet-class>
+        <servlet-name>accDetail</servlet-name>
+        <servlet-class>controller.admin.accDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accCreate</servlet-name>
+        <servlet-class>controller.admin.accCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accEdit</servlet-name>
+        <servlet-class>controller.admin.accEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accDelete</servlet-name>
+        <servlet-class>controller.admin.accDelete</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -93,7 +105,19 @@
         <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SubmitFeedback</servlet-name>
-        <url-pattern>/submitfeedback</url-pattern>
+        <servlet-name>accDetail</servlet-name>
+        <url-pattern>/accdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accCreate</servlet-name>
+        <url-pattern>/acccreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accEdit</servlet-name>
+        <url-pattern>/accedit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accDelete</servlet-name>
+        <url-pattern>/accdelete</url-pattern>
     </servlet-mapping>
 </web-app>

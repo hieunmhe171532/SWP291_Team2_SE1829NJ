@@ -62,125 +62,86 @@
 
             </ul>
         </aside>
-        <main class="app-content">
-            <div class="app-title">
-                <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách người dùng</b></a></li>
-                </ul>
-                <div id="clock"></div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="tile">
-                        <div class="tile-body">
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item active"><a href="#"><b>THONG TIN CHI TIET</b></a></li>
+        </ul>
+        <div id="clock"></div>
+    </div>
 
-                            <div class="row element-button">
-                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                            class="fas fa-print"></i> In dữ liệu</a>
-                                </div>
-                            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
 
-                            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-                                   id="sampleTable">
-                                <thead>
-                                    <tr>
-                                        <th>ID customer</th>
-                                        <th>Name Customer</th>
-                                        <th>Number phone</th>
-                                        <th>Email</th>
-                                        <th>Role</th> 
-                                        <th>isActive</th>
-                                        <th width="100">Functions</th> <!-- Adjusted width for better display -->
-                                        <th>Details</th> <!-- Adjusted width for better display -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${accountusers}" var="u">
-                                        <tr>
-                                            <td>${u.username}</td> <!-- Assuming 'id' is the ID of the user -->
-                                            <td>${u.password}</td> <!-- Adjust to match your UserAccount attributes -->
-                                            <td>${u.phone}</td> <!-- Assuming 'phone' is the phone number of the user -->
-                                            <td>${u.email}</td> <!-- Assuming 'email' is the email address of the user -->
-                                            <td>${u.role_id}</td> <!-- Assuming 'role' is the role of the user -->
-                                            <td>${u.isActive}</td> <!-- Assuming 'role' is the role of the user -->
-                                            <td>
-                                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
-                                                        data-target="#ModalUP${u.username}">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-sm delete" type="button" title="Xóa" data-toggle="modal"
-                                                        data-target="#ModalDEL${u.username}">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-info btn-sm more-details" type="button" title="Moredetails"
-                                                        onclick="redirectToAccDetails('${u.username}')">
-                                                    <i class="fas fa-info-circle"></i>
-                                                </button>
-
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-
+                    <div class="row element-button">
+                        <div class="col-sm-2">
+                            <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()">
+                                <i class="fas fa-print"></i> In dữ liệu
+                            </a>
                         </div>
                     </div>
+
+                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                           id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Role ID</th> 
+                                <th>Active</th>
+                                <th>Fullname</th>
+                                <th>Date of Birth</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th width="100">Functions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${acc1}" var="u">
+                                <tr>
+                                    <td>${u.username}</td>
+                                    <td>${u.password}</td>
+                                    <td>${u.phone}</td>
+                                    <td>${u.email}</td>
+                                    <td>${u.role_id}</td>
+                                    <td>${u.isActive ? 'Active' : 'Inactive'}</td>
+                                    <td>${u.fullname}</td>
+                                    <td>${u.dob}</td> <!-- Format as needed -->
+                                    <td>${u.gender ? 'Male' : 'Female'}</td>
+                                    <td>${u.address}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
+                                                data-target="#ModalUP${u.username}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm delete" type="button" title="Xóa" data-toggle="modal"
+                                                data-target="#ModalDEL${u.username}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-        </main>
-
-
-
-
-
-        <!-- Delete modal window -->
+        </div>
+    </div>
+</main>
 
 
 
 
 
 
-        <!-- Delete modal window -->
+            <!-- Delete modal window -->
         <c:forEach items="${accountusers}" var="u">
-            <div class="modal fade" id="ModalUP${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                 data-keyboard="false">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <form method="POST" action="customermanager?action=update">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="form-group  col-md-12">
-                                        <span class="thong-tin-thanh-toan">
-                                            <h5>chinh lai role</h5>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="exampleSelect1" class="control-label">select Role for account </label>
-                                        <input hidden name="user_id" value="${u.role_id}">
-                                        <select name="permission" class="form-control" id="exampleSelect1">
-                                            <option value="True">Cho phép</option>
-                                            <option value="False">Hủy bỏ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <BR>
-                                <button class="btn btn-save" type="submit">Lưu lại</button>
-                                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                                <BR>
-                            </div>
-                        </form>
-                        <div class="modal-footer">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="modal fade" id="ModalDEL${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -250,7 +211,6 @@
 //            });
 
             //Thời Gian
-            
             <script type="text/javascript">
             var data = {
                     labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
@@ -270,20 +230,20 @@
                             data: [48, 48, 49, 39, 86, 10]
                     }
                     ]
-                };
-                var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+            };
+            var ctxl = $("#lineChartDemo").get(0).getContext("2d");
                 var lineChart = new Chart(ctxl).Line(data);
-                            
-                            var ctxb = $("#barChartDemo").get(0).getContext("2d");
-            var barChart = new Chart(ctxb).Bar(data);
+            
+            var ctxb = $("#barChartDemo").get(0).getContext("2d");
+                var barChart = new Chart(ctxb).Bar(data);
 </script>
-                            <script type="text/javascript">                             //Thời Gian
-                                function time() {
-                                var today = new Date();
+            <script type="text/javascript">                 //Thời Gian
+                            function time() {
+                    var today = new Date();
             var weekday = new Array(7);
             weekday[0] = "Chủ Nhật";
-                                weekday[1] = "Thứ Hai";
-                                weekday[2] = "Thứ Ba";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
             weekday[3] = "Thứ Tư";
             weekday[4] = "Thứ Năm";
             weekday[5] = "Thứ Sáu";
@@ -313,8 +273,8 @@
             }
             return i;
             }
-                                        }
-                                        </script            >
+        }
+            < /script            >
 
 //
 //$(document)            .re            ady(function() {
@@ -323,19 +283,7 @@
 //        $(targ            et).modal('show');
 //    });
 //});
-                           
-                     </body>
-                     
-                     
-                     
-                     <script>
-    function redirectToAccDetails(username) {
-        // Construct the URL with the username parameter
-        var url = "accdetail?username=" + encodeURIComponent(username);
-        
-        // Redirect to the URL
-        window.location.href = url;
-    }
-</script>
-
-                    </html>
+                    </
+            script > 
+                     < /body>
+                    </html >

@@ -98,7 +98,7 @@ public class UserDAO {
                 a.setPassword(result.getString(2));
                 a.setPhone(result.getString(3));
                 a.setEmail(result.getString(4));
-                a.setRole(result.getString(5));
+                a.setRole_id(result.getString(5));
                 a.setIsActive(result.getBoolean(6));
                 u.setId(result.getInt(7));
                 u.setName(result.getString(8));
@@ -140,7 +140,7 @@ public class UserDAO {
                 a.setPassword(result.getString(2));
                 a.setPhone(result.getString(3));
                 a.setEmail(result.getString(4));
-                a.setRole(result.getString(5));
+                a.setRole_id(result.getString(5));
                 a.setIsActive(result.getBoolean(6));
                 u.setId(result.getInt(7));
                 u.setName(result.getString(8));
@@ -159,7 +159,7 @@ public class UserDAO {
 
         return t;
     }
-    public User getUserById(String id) {
+    public User getUserById(String id){
         Connection conn = dbContext.getConnection();
 
         try {
@@ -178,7 +178,7 @@ public class UserDAO {
                 a.setPassword(result.getString(2));
                 a.setPhone(result.getString(3));
                 a.setEmail(result.getString(4));
-                a.setRole(result.getString(5));
+                a.setRole_id(result.getString(5));
                 a.setIsActive(result.getBoolean(6));
                 u.setId(result.getInt(7));
                 u.setName(result.getString(8));
