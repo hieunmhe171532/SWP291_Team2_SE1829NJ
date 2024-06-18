@@ -13,6 +13,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Account;
 
 /**
@@ -47,20 +51,15 @@ public class accEdit extends HttpServlet {
                 // Retrieve counts
                 udao.AccDelete(namedele);
 
-//                     UserAccountDAO udao = new UserAccountDAO();
-//
-//                // Retrieve counts
-//                List<UserAccount> Accounts = udao.getAllUserAccount();
-//
-//                // Retrieve booking details
-//                request.setAttribute("accountusers", Accounts);
-//                
+//            
                 // Forward the request to the admin JSP page
                 request.getRequestDispatcher("/admin/accountManager.jsp").forward(request, response);
 
             } else {
                 response.sendRedirect("login");
             }
+            
+            
         } catch (ServletException | IOException e) {
             response.sendRedirect("404.jsp");
         }
@@ -91,7 +90,39 @@ public class accEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+          try (PrintWriter out = response.getWriter()) {
+        HttpSession session = request.getSession(); 
+        model.Account acc = (model.Account) session.getAttribute("acc");
+
+        if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) {
+            // Retrieve form data
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            int role = Integer.parseInt(request.getParameter("role")); // Assuming role is stored as integer in DB
+            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+            String fullname = request.getParameter("fullname");
+            Date dob = Date.valueOf(request.getParameter("dob")); // Conversion to Date
+            boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+            String address = request.getParameter("address");
+
+            // Create an AccountDAO instance and call the method to create an account
+            AccountDAO accountDAO = new AccountDAO();
+           
+            accountDAO.updateAccountAndUser(username, password, phone, email, role, isActive, fullname, dob, gender, address, gender);
+           
+
+            request.getRequestDispatcher("accountmanagement").forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
+    } catch (ServletException | IOException e) {
+        response.sendRedirect("404.jsp");
+    }   catch (SQLException ex) {
+            Logger.getLogger(accEdit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
 
     /** 

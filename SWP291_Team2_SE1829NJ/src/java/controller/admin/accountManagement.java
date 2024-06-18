@@ -84,15 +84,7 @@ public class accountManagement extends HttpServlet {
   AccountDAO udao = new AccountDAO();
 
                 // Retrieve counts
-                List<Account> allAccounts = udao.getAllAccWithUser();
-        if (allAccounts != null && !allAccounts.isEmpty()) {
-            System.out.println("All accounts:");
-            for (Account userAccount : allAccounts) {
-                System.out.println(userAccount);
-            }
-        } else {
-            System.out.println("No accounts found");
-        }
+ 
         
         
         

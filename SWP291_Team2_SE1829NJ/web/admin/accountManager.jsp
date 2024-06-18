@@ -56,10 +56,10 @@
             <ul class="app-menu">
                 <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
-                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Quản lý khách hàng</span></a></li>
-                <li><a class="app-menu__item" href="ProductManagement?action=allproduct"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
+                <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Quản lý Account</span></a></li>
+                 <li><a class="app-menu__item" href="acccreate"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
                 </li>
 
             </ul>
@@ -155,45 +155,78 @@
 
         <!-- Delete modal window -->
         <c:forEach items="${accountusers}" var="u">
-            <div class="modal fade" id="ModalUP${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                 data-keyboard="false">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <form method="POST" action="customermanager?action=update">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="form-group  col-md-12">
-                                        <span class="thong-tin-thanh-toan">
-                                            <h5>chinh lai role</h5>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="exampleSelect1" class="control-label">select Role for account </label>
-                                        <input hidden name="user_id" value="${u.role_id}">
-                                        <select name="permission" class="form-control" id="exampleSelect1">
-                                            <option value="True">Cho phép</option>
-                                            <option value="False">Hủy bỏ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <BR>
-                                <button class="btn btn-save" type="submit">Lưu lại</button>
-                                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                                <BR>
-                            </div>
-                        </form>
-                        <div class="modal-footer">
+    <c:forEach items="${accountusers}" var="u">
+    <div class="modal fade" id="ModalUP${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+         data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form method="POST" action="accedit">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Account and User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="username" value="${u.username}"> <!-- Hidden field for username -->
+                        <div class="form-group">
+                            <label for="password${u.username}">Password:</label>
+                            <input type="text" class="form-control" id="password${u.username}" name="password" value="${u.password}" placeholder="Enter new password">
+                            <small class="form-text text-muted">Leave blank to keep the current password.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone${u.username}">Phone Number:</label>
+                            <input type="text" class="form-control" id="phone${u.username}" name="phone" value="${u.phone}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email${u.username}">Email:</label>
+                            <input type="email" class="form-control" id="email${u.username}" name="email" value="${u.email}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role${u.username}">Role:</label>
+                            <select class="form-control" id="role${u.username}" name="role">
+                                <option value="1" ${u.role_id == 1 ? 'selected' : ''}>Admin</option>
+                                <option value="2" ${u.role_id == 2 ? 'selected' : ''}>Manager</option>
+                                <option value="3" ${u.role_id == 3 ? 'selected' : ''}>Marketer</option>
+                                <option value="4" ${u.role_id == 4 ? 'selected' : ''}>Staff</option>
+                                <option value="5" ${u.role_id == 5 ? 'selected' : ''}>Customer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname${u.username}">Fullname:</label>
+                            <input type="text" class="form-control" id="fullname${u.username}" name="fullname" value="${u.fullname}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob${u.username}">Date of Birth:</label>
+                            <input type="date" class="form-control" id="dob${u.username}" name="dob" value="${u.dob}">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender${u.username}">Gender:</label>
+                            <select class="form-control" id="gender${u.username}" name="gender">
+                                <option value="true" ${u.gender ? 'selected' : ''}>Male</option>
+                                <option value="false" ${!u.gender ? 'selected' : ''}>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address${u.username}">Address:</label>
+                            <input type="text" class="form-control" id="address${u.username}" name="address" value="${u.address}" required>
                         </div>
                     </div>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-
+        </div>
+    </div>
+</c:forEach>
+   
+ 
             <div class="modal fade" id="ModalDEL${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form method="POST" action="customermanager?action=deleteuser">
+                        <form method="POST" action="accdelete">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="form-group col-md-12">
@@ -202,7 +235,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <input type="hidden" name="user_id" value="${u.username}">
+                                        <input type="hidden" name="username" value="${u.username}">
                                     </div>
                                 </div>
                                 <div class="row">
