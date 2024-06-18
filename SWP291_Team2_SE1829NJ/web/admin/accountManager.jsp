@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,14 +88,17 @@
                                    id="sampleTable">
                                 <thead>
                                     <tr>
-                                        <th>ID customer</th>
-                                        <th>Name Customer</th>
-                                        <th>Number phone</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Phone</th>
                                         <th>Email</th>
-                                        <th>Role</th> 
-                                        <th>isActive</th>
-                                        <th width="100">Functions</th> <!-- Adjusted width for better display -->
-                                        <th>Details</th> <!-- Adjusted width for better display -->
+                                        <th>Role ID</th> 
+                                        <th>Active</th>
+                                        <th>Fullname</th>
+                                        <th>Date of Birth</th>
+                                        <th>Gender</th>
+                                        <th>Address</th>
+                                        <th width="100">Functions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,7 +109,11 @@
                                             <td>${u.phone}</td> <!-- Assuming 'phone' is the phone number of the user -->
                                             <td>${u.email}</td> <!-- Assuming 'email' is the email address of the user -->
                                             <td>${u.role_id}</td> <!-- Assuming 'role' is the role of the user -->
-                                            <td>${u.isActive}</td> <!-- Assuming 'role' is the role of the user -->
+                                            <td>${u.isActive ? 'Active' : 'Inactive'}</td>
+                                            <td>${u.fullname}</td>
+                                          <td><fmt:formatDate value="${u.dob}" pattern="dd-MM-yyyy"/></td>
+                                            <td>${u.gender ? 'Male' : 'Female'}</td>
+                                            <td>${u.address}</td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
                                                         data-target="#ModalUP${u.username}">
@@ -115,13 +124,13 @@
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </td>
-                                            <td>
+<!--                                            <td>
                                                 <button class="btn btn-info btn-sm more-details" type="button" title="Moredetails"
                                                         onclick="redirectToAccDetails('${u.username}')">
                                                     <i class="fas fa-info-circle"></i>
                                                 </button>
 
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -250,7 +259,7 @@
 //            });
 
             //Thời Gian
-            
+
             <script type="text/javascript">
             var data = {
                     labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
@@ -271,19 +280,18 @@
                     }
                     ]
                 };
-                var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-                var lineChart = new Chart(ctxl).Line(data);
-                            
-                            var ctxb = $("#barChartDemo").get(0).getContext("2d");
+            var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+            var lineChart = new Chart(ctxl).Line(data);
+            var ctxb = $("#barChartDemo").get(0).getContext("2d");
             var barChart = new Chart(ctxb).Bar(data);
 </script>
                             <script type="text/javascript">                             //Thời Gian
                                 function time() {
-                                var today = new Date();
+                    var today = new Date();
             var weekday = new Array(7);
             weekday[0] = "Chủ Nhật";
-                                weekday[1] = "Thứ Hai";
-                                weekday[2] = "Thứ Ba";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
             weekday[3] = "Thứ Tư";
             weekday[4] = "Thứ Năm";
             weekday[5] = "Thứ Sáu";
@@ -314,28 +322,27 @@
             return i;
             }
                                         }
-                                        </script            >
+                                </script            >
 
 //
-//$(document)            .re            ady(function() {
+//$(document)            .re             ady(function() {
 //    $('.delete            ').click(function() {
 //        var ta            rget = $(this).data('target');
 //        $(targ            et).modal('show');
 //    });
 //});
-                           
-                     </body>
-                     
-                     
-                     
-                     <script>
-    function redirectToAccDetails(username) {
-        // Construct the URL with the username parameter
-        var url = "accdetail?username=" + encodeURIComponent(username);
-        
-        // Redirect to the URL
-        window.location.href = url;
-    }
+
+                    </body>
+
+
+
+                    <script>
+                                        function redir e ctToAccDetails(username) {
+                    // Construct the URL with the username pa r ameter 
+                                        var url = "accdetail?username=" + encodeURIComponent(username);
+            // Redirect to the URL
+            window.location.href = url;
+                                    }
 </script>
 
                     </html>
