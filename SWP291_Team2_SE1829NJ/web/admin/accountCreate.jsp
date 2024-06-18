@@ -35,7 +35,7 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="homepage"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="accountmanagement"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
@@ -54,10 +54,10 @@
             <ul class="app-menu">
                 <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
-                <li><a class="app-menu__item" href="customermanager?action=getuser"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Quản lý khách hàng</span></a></li>
-                <li><a class="app-menu__item" href="ProductManagement?action=allproduct"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
+              <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Quản lý Account</span></a></li>
+                 <li><a class="app-menu__item" href="acccreate"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
                 </li>
 
             </ul>
@@ -73,7 +73,7 @@
                                 <h4 class="text-center">Create New Account</h4>
                             </div>
                             <div class="card-body">
-                                <form action="createAccountServlet" method="post">
+                                <form action="acccreate" method="post">
                                     <div class="form-group">
                                         <label for="username">Username:</label>
                                         <input type="text" class="form-control" id="username" name="username" required>

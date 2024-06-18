@@ -244,7 +244,7 @@ public Account getAllAccWithUserByUseName(String username) {
     
 
 
-public void updateAccountAndUser(String password,String username, String newPhone, String newEmail, int newRoleId, boolean newIsActive,
+public void updateAccountAndUser(String username,String password, String newPhone, String newEmail, int newRoleId, boolean newIsActive,
                                  String newName, Date newDob, boolean newGender, String newAddress, boolean newIsDelete) throws SQLException {
     String updateAccountSQL = "UPDATE Account SET password =? , phone = ?, email = ?, role_id = ?, isActive = ? WHERE username = ?";
     String updateUserSQL = "UPDATE [User] SET name = ?, dob = ?, gender = ?, address = ?, isDelete = ? WHERE username = ?";
@@ -361,7 +361,7 @@ public void updateAccountAndUser(String password,String username, String newPhon
    AccountDAO dao = new AccountDAO(); // Tạo đối tượng DAO
 
         // Thông tin tài khoản và người dùng để tạo mới
-        String username = "valorant";
+        String username = "bipca69";
         String password = "csgo";
         String phone = "1234567890";
         String email = "newuser2024@example.com";
@@ -376,13 +376,15 @@ public void updateAccountAndUser(String password,String username, String newPhon
 
         // Gọi phương thức để tạo tài khoản và thông tin người dùng
         try {
-            dao.createAccountWithUser(username, password, phone, email, role, isActive, fullName, dob, gender, address);
-            System.out.println("Tạo tài khoản và thông tin người dùng thành công cho: " + username);
+            dao.updateAccountAndUser(username, password, phone, email, role, isActive, username, dob, gender, address, gender);
+            System.out.println("cập nhật  người dùng thành công hehe: " + username);
         } catch (Exception e) {
             System.out.println("Có lỗi xảy ra trong quá trình tạo tài khoản và thông tin người dùng: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+  
     
     
     

@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import model.Account;
 
 /**
  *
@@ -27,47 +29,16 @@ public class accCreate extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-   response.setContentType("text/html;charset=UTF-8");
-    try (PrintWriter out = response.getWriter()) {
-        // Retrieve form data
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        int role = Integer.parseInt(request.getParameter("role")); // Assuming role is stored as integer in DB
-        boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
-        String fullname = request.getParameter("fullname");
-        Date dob = Date.valueOf(request.getParameter("dob")); // Ensure this conversion aligns with your DB format
-        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
-        String address = request.getParameter("address");
+    response.setContentType("text/html;charset=UTF-8");
 
-        // Create an AccountDAO instance and call the method to create account
-        AccountDAO accountDAO = new AccountDAO();
-        try {
-            accountDAO.createAccountWithUser(username, password, phone, email, role, isActive, fullname, dob, gender, address);
-            out.println("<html><body>");
-            out.println("<h2>Account successfully created for: " + username + "</h2>");
-            out.println("<a href='login.jsp'>Login Now</a>");
-            out.println("</body></html>");
-        } catch (Exception e) {
-            out.println("<html><body>");
-            out.println("<h2>Error creating account for: " + username + "</h2>");
-            out.println("<p>Error details: " + e.getMessage() + "</p>");
-            out.println("<a href='createAccount.jsp'>Try Again</a>");
-            out.println("</body></html>");
-        }
-    }
-        
-        
-        
-        
-        
-        
-        
-    } 
+  request.getRequestDispatcher("/admin/accountCreate.jsp").forward(request, response);
+    
+    
+    
+}
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -93,7 +64,47 @@ public class accCreate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+          try (PrintWriter out = response.getWriter()) {
+        HttpSession session = request.getSession(); 
+        model.Account acc = (model.Account) session.getAttribute("acc");
+
+        if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) {
+            // Retrieve form data
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            int role = Integer.parseInt(request.getParameter("role")); // Assuming role is stored as integer in DB
+            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+            String fullname = request.getParameter("fullname");
+            Date dob = Date.valueOf(request.getParameter("dob")); // Conversion to Date
+            boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+            String address = request.getParameter("address");
+
+            // Create an AccountDAO instance and call the method to create an account
+            AccountDAO accountDAO = new AccountDAO();
+            try {
+                accountDAO.createAccountWithUser(username, password, phone, email, role, isActive, fullname, dob, gender, address);
+                out.println("<html><body>");
+                out.println("<h2>Account successfully created for: " + username + "</h2>");
+                out.println("<a href='login.jsp'>Login Now</a>");
+                out.println("</body></html>");
+            } catch (Exception e) {
+                out.println("<html><body>");
+                out.println("<h2>Error creating account for: " + username + "</h2>");
+                out.println("<p>Error details: " + e.getMessage() + "</p>");
+                out.println("<a href='createAccount.jsp'>Try Again</a>");
+                out.println("</body></html>");
+            }
+
+            request.getRequestDispatcher("accountmanagement").forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
+    } catch (ServletException | IOException e) {
+        response.sendRedirect("404.jsp");
+    }
+    
     }
 
     /** 

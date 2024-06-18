@@ -34,39 +34,6 @@ public class accDelete extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-
-        try {
-            HttpSession session = request.getSession();
-            model.Account acc = (Account) session.getAttribute("acc");
-            if (acc.getRole_id().equalsIgnoreCase("1")) {
-
-//             
-                String namedele = (String) request.getAttribute("usernamedele");
-                AccountDAO udao = new AccountDAO();
-
-                // Retrieve counts
-                udao.AccDelete(namedele);
-
-//                     UserAccountDAO udao = new UserAccountDAO();
-//
-//                // Retrieve counts
-//                List<UserAccount> Accounts = udao.getAllUserAccount();
-//
-//                // Retrieve booking details
-//                request.setAttribute("accountusers", Accounts);
-//                
-                // Forward the request to the admin JSP page
-                request.getRequestDispatcher("/admin/accountManager.jsp").forward(request, response);
-
-            } else {
-                response.sendRedirect("login");
-            }
-        } catch (ServletException | IOException e) {
-            response.sendRedirect("404.jsp");
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,7 +62,32 @@ public class accDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
+        try {
+            HttpSession session = request.getSession();
+            model.Account acc = (Account) session.getAttribute("acc");
+            if (acc.getRole_id().equalsIgnoreCase("1")) {
+
+//             
+                String namedele = request.getParameter("username");
+                System.out.println("Username to delete: " + namedele); // Kiểm tra giá trị nhận được
+                if (namedele != null) {
+                    AccountDAO udao = new AccountDAO();
+                    udao.AccDelete(namedele);
+                    request.getRequestDispatcher("accountmanagement").forward(request, response);
+                } else {
+                    System.out.println("No username received for deletion.");
+                    response.sendRedirect("errorPage.jsp"); // Chuyển hướng đến trang lỗi nếu không có dữ liệu
+                }
+
+            } else {
+                response.sendRedirect("login");
+            }
+        } catch (ServletException | IOException e) {
+            response.sendRedirect("404.jsp");
+        }
     }
 
     /**
