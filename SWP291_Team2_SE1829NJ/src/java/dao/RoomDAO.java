@@ -280,20 +280,20 @@ public class RoomDAO {
 
     
   public static void main(String[] args) {
-        RoomDAO roomDAO = new RoomDAO();
-//        List<Room> rooms = roomDAO.getAll();
-//
-//        for (Room room : rooms) {
-//            System.out.println("Room ID: " + room.getId());
-//            System.out.println("Room Name: " + room.getName());
-//  
-//            System.out.println("---------------------------");
-//        }
+RoomDAO roomDAO = new RoomDAO();
+        List<Room> rooms = roomDAO.getAll();
 
- Room s1 = roomDAO.getById(2);
- 
-      System.out.println(s1.getId());
-        System.out.println(s1.getStatus());
+        for (Room room : rooms) {
+            System.out.println("Room: " + room);
+          
+  
+            System.out.println("---------------------------");
+        }
+
+// Room s1 = roomDAO.getById(2);
+// 
+//      System.out.println(s1.getId());
+//        System.out.println(s1.getStatus());
 
 
     }
