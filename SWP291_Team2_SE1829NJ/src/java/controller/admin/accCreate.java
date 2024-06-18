@@ -5,12 +5,14 @@
 
 package controller.admin;
 
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 
 /**
  *
@@ -28,7 +30,36 @@ public class accCreate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-   
+   response.setContentType("text/html;charset=UTF-8");
+    try (PrintWriter out = response.getWriter()) {
+        // Retrieve form data
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        int role = Integer.parseInt(request.getParameter("role")); // Assuming role is stored as integer in DB
+        boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+        String fullname = request.getParameter("fullname");
+        Date dob = Date.valueOf(request.getParameter("dob")); // Ensure this conversion aligns with your DB format
+        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+        String address = request.getParameter("address");
+
+        // Create an AccountDAO instance and call the method to create account
+        AccountDAO accountDAO = new AccountDAO();
+        try {
+            accountDAO.createAccountWithUser(username, password, phone, email, role, isActive, fullname, dob, gender, address);
+            out.println("<html><body>");
+            out.println("<h2>Account successfully created for: " + username + "</h2>");
+            out.println("<a href='login.jsp'>Login Now</a>");
+            out.println("</body></html>");
+        } catch (Exception e) {
+            out.println("<html><body>");
+            out.println("<h2>Error creating account for: " + username + "</h2>");
+            out.println("<p>Error details: " + e.getMessage() + "</p>");
+            out.println("<a href='createAccount.jsp'>Try Again</a>");
+            out.println("</body></html>");
+        }
+    }
         
         
         

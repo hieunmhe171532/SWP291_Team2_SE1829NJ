@@ -2,6 +2,7 @@ package dao;
 
 
 import dal.DBContext;
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -243,41 +244,145 @@ public Account getAllAccWithUserByUseName(String username) {
     
 
 
-    
-// 
-    public static void main(String[] args) {
-        AccountDAO dao = new AccountDAO();
-        Account account = dao.getAllAccWithUserByUseName("admin");
-        if (account != null) {
-            System.out.println("Account found: " + account);
-        } else {
-            System.out.println("Account not found");
+public void updateAccountAndUser(String password,String username, String newPhone, String newEmail, int newRoleId, boolean newIsActive,
+                                 String newName, Date newDob, boolean newGender, String newAddress, boolean newIsDelete) throws SQLException {
+    String updateAccountSQL = "UPDATE Account SET password =? , phone = ?, email = ?, role_id = ?, isActive = ? WHERE username = ?";
+    String updateUserSQL = "UPDATE [User] SET name = ?, dob = ?, gender = ?, address = ?, isDelete = ? WHERE username = ?";
+
+    try {
+        connection.setAutoCommit( false);
+
+        try (PreparedStatement psAccount = connection.prepareStatement(updateAccountSQL);
+             PreparedStatement psUser = connection.prepareStatement(updateUserSQL)) {
+
+            // Cập nhật bảng Account
+              psAccount.setString(1, password);
+            psAccount.setString(2, newPhone);
+            psAccount.setString(3, newEmail);
+            psAccount.setInt(4, newRoleId);
+            psAccount.setBoolean(5, newIsActive);
+            psAccount.setString(6, username);
+            psAccount.executeUpdate();
+
+            // Cập nhật bảng User
+            psUser.setString(1, newName);
+            psUser.setDate(2, new java.sql.Date(newDob.getTime()));
+            psUser.setBoolean(3, newGender);
+            psUser.setString(4, newAddress);
+       
+            psUser.setBoolean(5, newIsDelete);
+            psUser.setString(6, username);
+            psUser.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(true);
         }
-        
-        
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        throw ex;
+    }
+}
+
+  public void createAccountWithUser(String username, String password, String phone, String email, int role, boolean isActive,
+                                      String fullName, Date dob, boolean gender, String address) {
+        // SQL statement for Account
+        String sqlAccount = "INSERT INTO Account (username, password, phone, email, role_id, isActive) VALUES (?, ?, ?, ?, ?, ?)";
+        // SQL statement for User
+        String sqlUser = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            // Set auto-commit to false
+            connection.setAutoCommit(false);
+
+            // Insert into Account
+            try (PreparedStatement pstmtAccount = connection.prepareStatement(sqlAccount)) {
+                pstmtAccount.setString(1, username);
+                pstmtAccount.setString(2, password);
+                pstmtAccount.setString(3, phone);
+                pstmtAccount.setString(4, email);
+                pstmtAccount.setInt(5, role);
+                pstmtAccount.setBoolean(6, isActive);
+                pstmtAccount.executeUpdate();
+            }
+
+            // Insert into User
+            try (PreparedStatement pstmtUser = connection.prepareStatement(sqlUser)) {
+                pstmtUser.setString(1, username);
+                pstmtUser.setString(2, fullName);
+                pstmtUser.setDate(3, new java.sql.Date(dob.getTime())); // Convert java.util.Date to java.sql.Date
+                pstmtUser.setBoolean(4, gender);
+                pstmtUser.setString(5, address);
+                pstmtUser.executeUpdate();
+            }
+
+            // Commit both transactions
+            connection.commit();
+            System.out.println("Account and User created successfully!");
+        } catch (SQLException ex) {
+            try {
+                // Rollback any changes if exception occurs
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException se2) {
+            }
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                // Reset default commit behavior
+                connection.setAutoCommit(true);
+            } catch (SQLException se) {
+
+            }
+        }
     }
     
-    
-    
-    
+// 
 //    public static void main(String[] args) {
-//    // Create an instance of AccountDAO
-//    AccountDAO dao = new AccountDAO();
-//
-//    // Specify the username of the account you want to delete
-//    String usernameToDelete = "customer1";
-//
-//    // Call the AccDelete method with the specified username
-//    dao.AccDelete(usernameToDelete);
-//
-//    // Optional: Check if the account was deleted successfully
-//    Account deletedAccount = dao.getAnAccountByUsername(usernameToDelete);
-//    if (deletedAccount == null) {
-//        System.out.println("Account with username '" + usernameToDelete + "' successfully deleted.");
-//    } else {
-//        System.out.println("Failed to delete account with username '" + usernameToDelete + "'.");
+//        AccountDAO dao = new AccountDAO();
+//        Account account = dao.getAllAccWithUserByUseName("admin");
+//        if (account != null) {
+//            System.out.println("Account found: " + account);
+//        } else {
+//            System.out.println("Account not found");
+//        }
+        
+        
 //    }
-//}
+    
+    
+    
+    
+  public static void main(String[] args) {
+   AccountDAO dao = new AccountDAO(); // Tạo đối tượng DAO
+
+        // Thông tin tài khoản và người dùng để tạo mới
+        String username = "valorant";
+        String password = "csgo";
+        String phone = "1234567890";
+        String email = "newuser2024@example.com";
+        int role = 5; // Giả sử 1 là ID cho role người dùng bình thường
+        boolean isActive = true;
+
+        // Thông tin người dùng liên quan
+        String fullName = "New User Fullname";
+        Date dob = new Date(); // Sử dụng ngày hiện tại
+        boolean gender = true; // true cho Male, false cho Female, giả sử theo định dạng này
+        String address = "123 New Street, New City";
+
+        // Gọi phương thức để tạo tài khoản và thông tin người dùng
+        try {
+            dao.createAccountWithUser(username, password, phone, email, role, isActive, fullName, dob, gender, address);
+            System.out.println("Tạo tài khoản và thông tin người dùng thành công cho: " + username);
+        } catch (Exception e) {
+            System.out.println("Có lỗi xảy ra trong quá trình tạo tài khoản và thông tin người dùng: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     
     
     
