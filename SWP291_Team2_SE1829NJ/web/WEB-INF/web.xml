@@ -72,10 +72,7 @@
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>roomManagement</servlet-name>
-        <url-pattern>/roommanagement</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>accountManagement</servlet-name>
         <url-pattern>/accountmanagement</url-pattern>
