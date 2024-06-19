@@ -255,7 +255,7 @@
 
                 <div class="modal fade" id="ModalUP${b.id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                      data-keyboard="false">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <form action="editblog" method="post">
                                 <div class="modal-body">
@@ -311,7 +311,7 @@
                 <!-- Delete modal window -->
                 <div class="modal fade" id="ModalDEL${b.getId()}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                      data-keyboard="false">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <form method="POST" action="deleteblog">
                                 <div class="modal-body">
