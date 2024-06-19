@@ -1,5 +1,6 @@
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import model.TypeRoom;
 
-public class TypeRoomDAO  extends DBContext{
-//      private final DBContext dbContext;
-//    private final Connection conn;
-//
-//    public TypeRoomDAO() {
-//        dbContext = DBContext.getInstance();
-//        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
-//    }
-//    
+public class TypeRoomDAO  {
+      DBContext dbContext;
+     Connection connection;
+
+    public TypeRoomDAO() {
+        dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+    }
+    
     // Get TypeRoom by ID
     public TypeRoom getTypeRoomByID(int id) {
         TypeRoom typeRoom = new TypeRoom();
