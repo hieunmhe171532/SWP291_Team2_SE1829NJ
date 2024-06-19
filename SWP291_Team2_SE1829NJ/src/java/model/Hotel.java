@@ -29,6 +29,9 @@ public class Hotel {
     public Hotel() {
     }
 
+       public Hotel(int id) {
+        this.id = id;
+    }
     
     public Hotel(int id, String name, String image, String address, String phone, float rating, boolean isActive, String description, String feedback, Date createAt, Date deleteAt, Date updateAt, boolean isDelete) {
         this.id = id;

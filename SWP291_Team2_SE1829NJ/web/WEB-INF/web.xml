@@ -72,6 +72,14 @@
         <servlet-name>roommanagement</servlet-name>
         <servlet-class>controller.room.roomManagement</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>roomDetail</servlet-name>
+        <servlet-class>controller.room.roomDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roomEditStatus</servlet-name>
+        <servlet-class>controller.room.roomEditStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -139,5 +147,13 @@
     <servlet-mapping>
         <servlet-name>roommanagement</servlet-name>
         <url-pattern>/roommanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roomDetail</servlet-name>
+        <url-pattern>/roomdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roomEditStatus</servlet-name>
+        <url-pattern>/roomeditstatus</url-pattern>
     </servlet-mapping>
 </web-app>

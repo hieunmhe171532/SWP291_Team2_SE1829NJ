@@ -5,7 +5,6 @@
 
 package controller.room;
 
-
 import dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,15 +13,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Hotel;
-import model.Room;
-import model.TypeRoom;
 
 /**
  *
  * @author HUNG
  */
-public class roomEdit extends HttpServlet {
+public class roomEditStatus extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,48 +29,43 @@ public class roomEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-           request.setCharacterEncoding("UTF-8"); // Support for Unicode data sent from the form
-         response.setContentType("text/html; charset=UTF-8");
-        // Parsing form data
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String roomFloor = request.getParameter("room_floor");
-        String image = request.getParameter("image");
-        int userQuantity = Integer.parseInt(request.getParameter("userQuantity"));
-        float area = Float.parseFloat(request.getParameter("area"));
-        float price = Float.parseFloat(request.getParameter("price"));
-        int statusId = Integer.parseInt(request.getParameter("status_id"));
-        int hotelId = Integer.parseInt(request.getParameter("hotel_id"));
-        int typeId = Integer.parseInt(request.getParameter("type_id"));
-        String description = request.getParameter("description");
-        boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
 
-        // Creating a room object from the data
-        Room room = new Room();
-        room.setId(id);
-        room.setName(name);
-        room.setRoom_floor(roomFloor);
-        room.setImage(image);
-        room.setUserQuantity(userQuantity);
-        room.setArea(area);
-        room.setPrice(price);
-        room.setStatus(statusId);
-        room.setDescription(description);
-        room.setIsActive(isActive);
-        room.setHotel(new Hotel(hotelId)); // Assuming Hotel class has a constructor to set id
-        room.setTypeRoom(new TypeRoom(typeId)); // Assuming TypeRoom class has a constructor to set id
+      response.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html; charset=UTF-8");
+
+    HttpSession session = request.getSession();
+    model.Account acc = (model.Account) session.getAttribute("acc");
+
+    if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) { // Ensure admin role
+       
+    try {
+        int roomId = Integer.parseInt(request.getParameter("id"));
+        int statusId = Integer.parseInt(request.getParameter("status_id"));
 
         RoomDAO roomDAO = new RoomDAO();
-        boolean result = roomDAO.editRoomById(room);
-       
-        if (result) {
-            response.sendRedirect("roommanagement"); // Redirect to the room list if successful
+        boolean success = roomDAO.updateRoomStatus(roomId, statusId);
+
+        if (success) {
+            // Redirect or notify of success
+            response.sendRedirect("roommanagement"); // Redirect to the list showing the update
         } else {
-            request.setAttribute("errorMessage", "Error updating room");
-            request.getRequestDispatcher("/errorPage.jsp").forward(request, response); // Forward to error page if not successful
+            // Handle failure
+            request.setAttribute("errorMessage", "Unable to update room status.");
+            request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
         }
-    
-    
+    } catch (NumberFormatException e) {
+        // Handle parsing errors
+        request.setAttribute("errorMessage", "Invalid room ID or status.");
+        request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
+    } catch (Exception e) {
+        // General error handling
+        request.setAttribute("errorMessage", "An error occurred: " + e.getMessage());
+        request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
+    }
+    } else {
+        response.sendRedirect("login");
+    }
+
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,23 +89,12 @@ public class roomEdit extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
-         processRequest(request, response);
-    
+        processRequest(request, response);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
