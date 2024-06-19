@@ -46,6 +46,7 @@
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
                                         <a class="dropdown-item" href="dashboard">Admin Management</a>
                                         <a class="dropdown-item" href="accountmanagement">Account Management</a>
+                                         <a class="dropdown-item" href="roommanagement">Room Management</a>
                                     </c:if>
                     
                                 </div>

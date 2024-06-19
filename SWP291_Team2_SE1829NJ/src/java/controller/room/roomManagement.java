@@ -5,12 +5,18 @@
 
 package controller.room;
 
+import dao.AccountDAO;
+import dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Account;
+import model.Room;
 
 /**
  *
@@ -27,10 +33,55 @@ public class roomManagement extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-             request.getRequestDispatcher("/admin/roomSwit.jsp").forward(request, response);
-    } 
+      response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
+        try {
+            HttpSession session = request.getSession(); 
+            model.Account acc = (Account) session.getAttribute("acc");
+            if (acc.getRole_id().equalsIgnoreCase("1")) {
+
+//             
+               RoomDAO rdao = new RoomDAO();
+
+                // Retrieve counts
+                List<Room> Rooms = rdao.getAll();
+
+                // Retrieve booking details
+                request.setAttribute("rooms", Rooms);
+
+                
+//                     UserAccountDAO udao = new UserAccountDAO();
+//
+//                // Retrieve counts
+//                List<UserAccount> Accounts = udao.getAllUserAccount();
+//
+//                // Retrieve booking details
+//                request.setAttribute("accountusers", Accounts);
+//                
+                // Forward the request to the admin JSP page
+                request.getRequestDispatcher("/admin/roomManager.jsp").forward(request, response);
+
+            } else {
+                response.sendRedirect("login");
+            }
+        } catch (ServletException | IOException e) {
+            response.sendRedirect("404.jsp");
+        }
+
+    } 
+    
+      public static void main(String[] args) {
+RoomDAO roomDAO = new RoomDAO();
+        List<Room> rooms = roomDAO.getAll();
+
+        for (Room room : rooms) {
+            System.out.println("Room: " + room);
+          
+  
+            System.out.println("---------------------------");
+        }
+      }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
