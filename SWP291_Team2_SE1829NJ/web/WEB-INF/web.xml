@@ -38,19 +38,19 @@
     </servlet>
     <servlet>
         <servlet-name>roomManage</servlet-name>
-        <servlet-class>controller.manager.roomManage</servlet-class>
+        <servlet-class>controller.room.roomManage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>roomDelete</servlet-name>
-        <servlet-class>controller.manager.roomDelete</servlet-class>
+        <servlet-class>controller.room.roomDelete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>roomCreate</servlet-name>
-        <servlet-class>controller.manager.roomCreate</servlet-class>
+        <servlet-class>controller.room.roomCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>roomEdit</servlet-name>
-        <servlet-class>controller.manager.roomEdit</servlet-class>
+        <servlet-class>controller.room.roomEdit</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Dashboard</servlet-name>
