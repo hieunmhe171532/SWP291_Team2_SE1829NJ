@@ -255,22 +255,16 @@
             return i;
             }
                                     }
-            </script            >
+            </script   >
 
-//
-//$(document)            .re             ady(function() {
-//    $('.delete            ').click(function() {
-//        var ta            rget = $(this).data('target');
-//        $(targ            et).modal('show');
-//    });
-//});
+
 
                     </body>
 
 
 
                     <script>
-                                    function redir e ctToAccDetails(username) {
+                                    function redirectToAccDetails(username) {
                     // Construct the URL with the username pa r ameter 
                     var url = "accdetail?username=" + encodeURIComponent(username);
             // Redirect to the URL

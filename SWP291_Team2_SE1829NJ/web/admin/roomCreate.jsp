@@ -60,90 +60,94 @@
                             class="app-menu__label">Management room</span></a></li>
                 <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Creat room</span></a></li>   
-                            
-                            
-                 <li><a class="app-menu__item" href="acccreate"><i
+
+
+                <li><a class="app-menu__item" href="acccreate"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
                 </li>
 
             </ul>
         </aside>
         <main class="app-content">
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="container mt-5">
-    <h2>Create Room</h2>
-    <form action="roomcreate" method="post"> <!-- Make sure to provide the correct action -->
-              <div class="form-group">
-            <label for="name">Room ID:</label>
-            <input type="text" class="form-control" id="id" name="id" required>
-        </div>
-        <div class="form-group">
-            <label for="name">Room Name:</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="room_floor">Room Floor:</label>
-            <input type="text" class="form-control" id="room_floor" name="room_floor" required>
-        </div>
-        <div class="form-group">
-            <label for="image">Image URL:</label>
-            <input type="text" class="form-control" id="image" name="image" required>
-        </div>
-        <div class="form-group">
-            <label for="userQuantity">User Quantity:</label>
-            <input type="number" class="form-control" id="userQuantity" name="userQuantity" required>
-        </div>
-        <div class="form-group">
-            <label for="area">Area:</label>
-            <input type="number" class="form-control" id="area" name="area" step="0.01" required>
-        </div>
-        <div class="form-group">
-            <label for="price">Price:</Label>
-            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
-        </div>
-        <div class="form-group">
-            <label for="status_id">Status:</label>
-            <select class="form-control" id="status_id" name="status_id">
-                     <option value="1">Empty</option>
-                <option value="2">Using</option>
-                  <option value="3">Booking</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="hotel_id">Hotel:</label>
-            <select class="form-control" id="hotel_id" name="hotel_id">
-                         <option value="1">Bac </option>
-                           <option value="2">Trung</option>
-                             <option value="3">Nam</option>
- 
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="type_id">Room Type:</label>
-            <select class="form-control" id="type_id" name="type_id">
-                           <option value="1">Normal</option>
-                <option value="2">Vip</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="isActive">Active:</label>
-            <select class="form-control" id="isActive" name="isActive">
-           
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Create Room</button>
-    </form>
-</div>
-            </div>
-        </siv>
-    </div>
-</main>
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            
+                           <div class="card-header">
+                            <h2>Create Room</h2>
+                            </div>
+                                 <div class="card-body">
+                            <form action="roomcreate" method="post"> <!-- Make sure to provide the correct action -->
+                                <div class="form-group">
+                                    <label for="name">Room ID:</label>
+                                    <input type="text" class="form-control" id="id" name="id" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Room Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_floor">Room Floor:</label>
+                                    <input type="text" class="form-control" id="room_floor" name="room_floor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Image URL:</label>
+                                    <input type="text" class="form-control" id="image" name="image" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="userQuantity">User Quantity:</label>
+                                    <input type="number" class="form-control" id="userQuantity" name="userQuantity" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="area">Area:</label>
+                                    <input type="number" class="form-control" id="area" name="area" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Price:</Label>
+                                    <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status_id">Status:</label>
+                                    <select class="form-control" id="status_id" name="status_id">
+                                        <option value="1">Empty</option>
+                                        <option value="2">Using</option>
+                                        <option value="3">Booking</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hotel_id">Hotel:</label>
+                                    <select class="form-control" id="hotel_id" name="hotel_id">
+                                        <option value="1">Bac </option>
+                                        <option value="2">Trung</option>
+                                        <option value="3">Nam</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="type_id">Room Type:</label>
+                                    <select class="form-control" id="type_id" name="type_id">
+                                        <option value="1">Normal</option>
+                                        <option value="2">Vip</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="isActive">Active:</label>
+                                    <select class="form-control" id="isActive" name="isActive">
+
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create Room</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        </main>
 
 
 
@@ -156,7 +160,7 @@
 
 
 
-     
+
 
 
         <!-- Essential javascripts for application to work-->
@@ -199,7 +203,7 @@
             //Thời Gian
 
             <script type="text/javascript">
-            var data = {
+           var data = {
                     labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
                     datasets: [{
                     ill: "rgb(255, 212, 59)",
@@ -216,64 +220,81 @@
                             pointHighlightStroke: "rgb(9, 109, 239)",
                             data: [48, 48, 49, 39, 86, 10]
                     }
-                    ]
-                };
-            var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+            ]
+            };                 var ctxl = $("#lineChartDemo").get(0).getContext("2d");
             var lineChart = new Chart(ctxl).Line(data);
+                
             var ctxb = $("#barChartDemo").get(0).getContext("2d");
-            var barChart = new Chart(ctxb).Bar(data);
+               var barChart = new Chart(ctxb).Bar(data);
+        </script>
+         <script type="text/javascript">                             //Thời Gian
+                function time() {
+                     var today = new Date();
+             var weekday = new Array(7);
+             weekday[0] = "Chủ Nhật";
+             weekday[1] = "Thứ Hai";
+             weekday[2] = "Thứ Ba";
+             weekday[3] = "Thứ Tư";
+             weekday[4] = "Thứ Năm";
+             weekday[5] = "Thứ Sáu";
+             weekday[6] = "Thứ Bảy";
+             var day = weekday[today.getDay()];
+             var dd = today.getDate();
+             var mm = today.getMonth() + 1;
+             var yyyy = today.getFullYear();
+             var h = today.getHours();
+             var m = today.getMinutes();
+             m = checkTime(m);
+             nowTime = h + ":" + m + "";
+             if (dd < 10) {
+             dd = '0' + dd;
+             }
+             if (mm < 10) {
+             mm = '0' + mm;
+             }
+             today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+             tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                     '</span>';
+             document.getElementById("clock").innerHTML = tmp;
+             clocktime = setTimeout("time()", "1000", "Javascript");
+             function checkTime(i) {
+             if (i < 10) {
+                                i = "0"  + i;
+             }
+             return i ; 
+             }
+         } 
+                                        </script   >
+
+
+
+                     </body>
+
+
+
+                     <script>
+            function redirectToAccDetails(username) {
+                     // Construct the URL with the username pa r ameter 
+                     var url = "accdetail?username=" + encodeURIComponent(username);
+             // Redirect to the URL
+             window.location.href = url;
+            }
 </script>
-                            <script type="text/javascript">                             //Thời Gian
-                                function time() {
-                    var today = new Date();
-            var weekday = new Array(7);
-            weekday[0] = "Chủ Nhật";
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
-            var day = weekday[today.getDay()];
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            m = checkTime(m);
-            nowTime = h + ":" + m + "";
-            if (dd < 10) {
-            dd = '0' + dd;
-            }
-            if (mm < 10) {
-            mm = '0' + mm;
-            }
-            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                    '</span>';
-            document.getElementById("clock").innerHTML = tmp;
-            clocktime = setTimeout("time()", "1000", "Javascript");
-            function checkTime(i) {
-            if (i < 10) {
-            i = "0" + i;
-            }
-            return i;
-            }
-                                        }
-                                </script            >
 
-//
-//$(document)            .re             ady(function() {
-//    $('.delete            ').click(function() {
-//        var ta            rget = $(this).data('target');
-//        $(targ            et).modal('show');
-//    });
-//});
+<script>
+            $(document).ready(function () {
+                     $('#togglePassword').click(function () {
+             var passwordField = $('#password');
+             var passwordFieldType = passwordField.attr('type');
+             if (passwordFieldType === 'password') {
+             passwordField.attr('type', 'text');
+             $('#eyeIcon').removeClass('fa-eye').addClass('fa-eye-slash');
+             } else {
+             passwordField.attr('type', 'password');
+             $('#eyeIcon').removeClass('fa-eye-slash').addClass('fa-eye');
+             }
+             });
+                     };);
+</script>
 
-                    </body>
-
-
-
-             
-
-                    </html>
+</html>

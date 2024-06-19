@@ -10,6 +10,9 @@
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/roomSwit.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/dashboard/Dashboard.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Blog.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Bill.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/DBContext.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/HotelDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/acc/accountManagement.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/accountDetail.jsp</file>
@@ -24,21 +27,25 @@
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/aboutus.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/acc/accCreate.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Room.java</file>
-            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/FeedbackDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/homepage.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/marketer/EditBlogServlet.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/BlogDAO.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RoomDetailController.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/acc/accEdit.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/room/roomEdit.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/marketer/ViewCustomerServlet.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/roomManager.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Role.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/BillDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/accountManager.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/staff.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Booking.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/nvarbar-admin.jsp</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/TypeRoomDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/MenuDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/layout/navbarmenu.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/accountCreate.jsp</file>
@@ -49,6 +56,7 @@
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/UserAccountDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/rooms.jsp</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/marketer/AddBlogServlet.java</file>
+            <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Feedback.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/FeedbackusDAO.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/marketer/ListManageBlogServlet.java</file>
             <file>file:/E:/codeDaybyDay/day1806/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/admin.jsp</file>

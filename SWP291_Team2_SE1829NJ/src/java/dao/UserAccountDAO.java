@@ -4,7 +4,6 @@
  */
 package dao;
 
-import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,14 +20,8 @@ import model.UserAccount;
  *
  * @author HUNG
  */
-public class UserAccountDAO {
-        private final DBContext dbContext;
-    private final Connection connection;
+public class UserAccountDAO extends DBContext{
 
-    public UserAccountDAO() {
-         dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
-    }
 
  public UserAccount getUserAccountByUsername(String username) {
         String sql = "SELECT u.id, u.name AS fullname, u.dob, u.gender, u.address, " +

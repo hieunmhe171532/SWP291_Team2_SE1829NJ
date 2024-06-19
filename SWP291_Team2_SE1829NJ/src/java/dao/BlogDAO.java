@@ -4,7 +4,6 @@
  */
 package dao;
 
-import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +23,8 @@ import model.Blog;
  */
 public class BlogDAO {
 
-    private final DBContext dbContext;
-    private final Connection connection;
+     DBContext dbContext;
+    Connection connection;
 
     public BlogDAO() {
          dbContext = DBContext.getInstance();
