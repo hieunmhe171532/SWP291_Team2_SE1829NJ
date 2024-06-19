@@ -10,7 +10,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
 
         <link rel="stylesheet" type="text/css" href="bootstrap/css/newcss.css">
 
@@ -18,7 +18,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        
+
 
 
         <style>
@@ -46,68 +46,124 @@
                 outline: none;
                 box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
             }
-            .InputContainer {
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: rgb(255, 255, 255);
-                border-radius: 10px;
-                overflow: hidden;
-                cursor: pointer;
-                padding-left: 15px;
-                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+            .search {
+                --input-line: #cccccc;
+                --input-text-color: #808080;
+                --input-text-hover-color: transparent;
+                --input-border-color: #808080;
+                --input-border-hover-color: #999999;
+                --input-bg-color: #333333;
+                --search-max-width: 250px;
+                --search-min-width: 150px;
+                --border-radius: 5px;
+                --transition-cubic-bezier: 150ms cubic-bezier(0.4,0,0.2,1);
+            }
+
+            .search-box {
+                max-width: var(--search-max-width);
+                min-width: var(--search-min-width);
+                height: 44px;
+                border: 1px solid var(--input-border-color);
+                border-radius: var(--border-radius);
+                padding: 5px 15px;
+                background: var(--input-bg-color);
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                transition: var(--transition-cubic-bezier);
+            }
+
+            .search-box:hover {
+                border-color: var(--input-border-hover-color);
+            }
+
+            /*Section input*/
+            .search-field {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                left: -5px;
+                border: 0;
             }
 
             .input {
-                width: 170px;
+                width: calc(100% - 29px);
                 height: 100%;
-                border: none;
+                border: 0;
+                border-color: transparent;
+                font-size: 1rem;
+                padding-right: 0px;
+                color: var(--input-line);
+                background: var(--input-bg-color);
+                border-right: 2px solid var(--input-border-color);
                 outline: none;
-                font-size: 0.9em;
-                caret-color: rgb(255, 81, 0);
             }
 
-            .labelforsearch {
-                cursor: text;
-                padding: 0px 15px;
+            .input::-webkit-input-placeholder {
+                color: var(--input-text-color);
             }
 
-            .searchIcon {
-                width: 13px;
+            .input::-moz-input-placeholder {
+                color: var(--input-text-color);
             }
 
-            .border {
-                height: 40%;
-                width: 1.3px;
-                background-color: rgb(223, 223, 223);
+            .input::-ms-input-placeholder {
+                color: var(--input-text-color);
             }
 
-            .micIcon {
-                width: 12px;
+            .input:focus::-webkit-input-placeholder {
+                color: var(--input-text-hover-color);
             }
 
-            .micButton {
-                padding: 0px 15px 0px 12px;
+            .input:focus::-moz-input-placeholder {
+                color: var(--input-text-hover-color);
+            }
+
+            .input:focus::-ms-input-placeholder {
+                color: var(--input-text-hover-color);
+            }
+
+            /*Search button*/
+            .search-box-icon {
+                width: 52px;
+                height: 44px;
+                position: absolute;
+                top: -2px;
+                right: -21px;
+                background: transparent;
+                border-bottom-right-radius: var(--border-radius);
+                border-top-right-radius: var(--border-radius);
+                transition: var(--transition-cubic-bezier);
+            }
+
+            .search-box-icon:hover {
+                background: var(--input-border-color);
+            }
+
+            .btn-icon-content {
+                width: 52px;
+                height: 35px;
+                top: -6px;
+                right: -21px;
+                background: transparent;
                 border: none;
-                background-color: transparent;
-                height: 40px;
                 cursor: pointer;
-                transition-duration: .3s;
+                border-bottom-right-radius: var(--border-radius);
+                border-top-right-radius: var(--border-radius);
+                transition: var(--transition-cubic-bezier);
+                opacity: .4;
             }
 
-            .searchIcon path {
-                fill: #011431;
+            .btn-icon-content:hover {
+                opacity: .8;
             }
 
-            .micIcon path {
-                fill: rgb(255, 81, 0);
+            .search-icon {
+                width: 21px;
+                height: 21px;
+                position: absolute;
+                top: 7px;
+                right: 15px;
             }
 
-            .micButton:hover {
-                background-color: rgb(255, 230, 230);
-                transition-duration: .3s;
-            }
             .card{
                 display: flex;
                 justify-content: center;
@@ -128,33 +184,46 @@
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="container mt-5">
+
                             <div class="d-flex">
                                 <h4 class="card-title col-8" style="font-size: 30px">Feedback List</h4>
-                                <button class="custom-button " data-bs-toggle="collapse" data-bs-target="#filter" style="border: 1px solid #011431;" >Collapsible</button>
+                                <button class="custom-button " data-bs-toggle="collapse" data-bs-target="#filter" style="border: 1px solid #011431;" >Sorting list</button>
                                 <form action="action">
-                                    <div class="InputContainer col-3" style="padding: 0px 0px;width: 250px;height: 44px">
-                                        <input type="text" name="text" class="input" id="input" placeholder="Search">
-                                        <div class="border"></div>
-
-                                        <button type="submit" class="micButton"><svg viewBox="0 0 512 512" class="searchIcon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
-                                        </button>
-
+                                    <div class="search">
+                                        <div class="search-box">
+                                            <div class="search-field">
+                                                <input placeholder="Search..." class="input" type="text">
+                                                <div class="search-box-icon">
+                                                    <button class="btn-icon-content">
+                                                        <i class="search-icon">
+                                                            <svg xmlns="://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" fill="#fff"></path></svg>
+                                                        </i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
-                                
-                            </div>
-                            <div id="filter" class="collapse">
-                                <div class="card card-body">
-                                    <div>
-                                        
-                                    </div>
-                                    <div>
-                                        
-                                    </div>
-                                    <div>
-                                        
-                                    </div>
 
+                            </div>
+
+                            <div id="filter" class="collapse">
+                                <div class="card card-body d-flex">
+                                    <div class="filterid">
+                                        <h5>Sort by id</h5>
+                                        <input type="radio" name="sort" value="1">Ascending<br>
+                                        <input type="radio" name="sort" value="2">descending
+                                    </div>
+                                    <div class="filterroomid">
+
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
