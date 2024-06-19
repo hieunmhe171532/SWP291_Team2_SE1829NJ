@@ -4,7 +4,6 @@
  */
 package dao;
 
-import dal.DBContext;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,21 +29,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
 
-public class UserDAO {
+public class UserDAO extends DBContext{
 
-    private final DBContext dbContext;
-    private final Connection connection;
 
-    public UserDAO() {
-        dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
-    }
 
     public void createUser(User user) {
         String name, gender, address;
         Date dob;
         String sql = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (
+                Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getUsername().getUsername());
             pstmt.setString(2, user.getName());

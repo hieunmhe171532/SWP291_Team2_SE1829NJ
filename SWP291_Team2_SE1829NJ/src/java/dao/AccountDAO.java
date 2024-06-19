@@ -1,8 +1,6 @@
 package dao;
 
 
-import dal.DBContext;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,18 +12,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 
-public class AccountDAO {  
-    private final DBContext dbContext;
-    private final Connection connection;
+public class AccountDAO extends DBContext{  
+ 
 
-    public AccountDAO() {
-         dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
-    }
 
     public void createAccount(String username, String password, String phone, String email, String role, boolean isActive) {
         String sql = "INSERT INTO Account (username, password, phone, email, role, isActive) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (
+//                Connection conn = dbContext.getConnection(); 
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             pstmt.setString(3, phone);
@@ -42,8 +37,8 @@ public class AccountDAO {
     public Account getAccountByUsername(Account acc) {
         try {
             String sql = "SELECT * FROM Account WHERE username = ?";
-            Connection conn = dbContext.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
+           ;
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, acc.getUsername());
 
             ResultSet result = stm.executeQuery();
@@ -68,8 +63,8 @@ public class AccountDAO {
     public Account getAnAccountByUsername(String username) {
         try {
             String sql = "SELECT * FROM Account WHERE username = ?";
-            Connection conn = dbContext.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
+//            Connection conn = dbContext.getConnection();
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
 
             ResultSet result = stm.executeQuery();
@@ -93,7 +88,8 @@ public class AccountDAO {
  public Account checkAcc(String account_username, String account_pass) {
         String checkUserquery = "SELECT * FROM Account WHERE username = ? AND password = ?";
         try {
-            PreparedStatement ps = connection.prepareStatement(checkUserquery);
+             
+              PreparedStatement ps = connection.prepareStatement(checkUserquery);
             ps.setString(1, account_username);
             ps.setString(2, account_pass);
             ResultSet rs = ps.executeQuery();
@@ -143,13 +139,16 @@ public List<Account> getAllAcc() {
 
  
  public List<Account> getAllAccWithUser() {
+             
+
     List<Account> accounts = new ArrayList<>();
     String query = "SELECT a.username, a.password, a.phone, a.email, a.role_id, a.isActive, " +
                    "u.name AS fullname, u.dob, u.gender, u.address " +
                    "FROM Account as a " +
                    "JOIN [User] as u ON a.username = u.username";
 
-    try (PreparedStatement ps = connection.prepareStatement(query);
+    try (
+            PreparedStatement ps = connection.prepareStatement(query);
          ResultSet rs = ps.executeQuery()) {
 
         while (rs.next()) {

@@ -1,6 +1,5 @@
 package dao;
 
-import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,14 +8,14 @@ import model.Hotel;
 
 public class HotelDAO  {
     
- 
-    private final DBContext dbContext;
-    private final Connection conn;
-
-    public HotelDAO() {
-        dbContext = DBContext.getInstance();
-        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
-    }
+// 
+//    private final DBContext dbContext;
+//    private final Connection conn;
+//
+//    public HotelDAO() {
+//        dbContext = DBContext.getInstance();
+//        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+//    }
 
     public Hotel getHotelByID(int id) {
         Hotel hotel = null;

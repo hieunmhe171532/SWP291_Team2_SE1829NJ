@@ -1,6 +1,5 @@
 package dao;
 
-import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,20 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import model.TypeRoom;
 
-public class TypeRoomDAO  {
-      private final DBContext dbContext;
-    private final Connection conn;
-
-    public TypeRoomDAO() {
-        dbContext = DBContext.getInstance();
-        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
-    }
-    
+public class TypeRoomDAO  extends DBContext{
+//      private final DBContext dbContext;
+//    private final Connection conn;
+//
+//    public TypeRoomDAO() {
+//        dbContext = DBContext.getInstance();
+//        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+//    }
+//    
     // Get TypeRoom by ID
     public TypeRoom getTypeRoomByID(int id) {
         TypeRoom typeRoom = new TypeRoom();
         String query = "SELECT * FROM TypeRoom WHERE id = ?";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {

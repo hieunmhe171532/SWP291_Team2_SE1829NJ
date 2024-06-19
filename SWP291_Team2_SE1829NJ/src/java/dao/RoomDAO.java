@@ -4,21 +4,13 @@
  */
 package dao;
 
-import dal.DBContext;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-public class RoomDAO {
+public class RoomDAO extends DBContext{
 
-    private final DBContext dbContext;
-    private final Connection connection;
-
-    public RoomDAO() {
-        dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
-    }
 
     public void mapParams(PreparedStatement ps, List<Object> args) throws SQLException {
         int i = 1;
@@ -238,8 +230,13 @@ public class RoomDAO {
                      "JOIN Hotel h ON r.hotel_id = h.id " +
                      "JOIN TypeRoom t ON r.type_id = t.id";
 
-        try (Connection connection = DBContext.getInstance().getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql);
+        try (
+                        
+
+            
+              
+                PreparedStatement ps = connection.prepareStatement(sql);
+            
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
@@ -248,7 +245,6 @@ public class RoomDAO {
             }
         } catch (SQLException e) {
             System.err.println("SQL Exception in RoomDAO.getAll: " + e.getMessage());
-            e.printStackTrace();
         }
         return rooms;
     }
