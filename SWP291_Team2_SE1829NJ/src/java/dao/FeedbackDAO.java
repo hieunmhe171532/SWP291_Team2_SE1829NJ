@@ -17,6 +17,8 @@ import java.util.List;
 import model.Account;
 import model.Blog;
 import model.Feedback;
+import model.Room;
+import model.User;
 
 /**
  *
@@ -41,10 +43,16 @@ public class FeedbackDAO {
 
             while (result.next()) {
                 Feedback f = new Feedback();
+                User u=new User();
+                Room r=new Room();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
                 f.setCreateAt(result.getString(4));
+                u.setId(result.getInt(5));
+                f.setUser(u);
+                r.setId(result.getInt(6));
+                f.setRoom(r);
                 t.add(f);
             }
         } catch (SQLException ex) {
@@ -91,10 +99,10 @@ public class FeedbackDAO {
     }
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-//        List<Feedback> list=dao.getAllFeedback();
-//        for (Feedback f : list) {
-//            System.out.println(f);
-//        }
+        List<Feedback> list=dao.getAllFeedback();
+        for (Feedback f : list) {
+            System.out.println(f);
+        }
 //        dao.editFeedback("https://vcdn1-dulich.vnecdn.net/2021/12/24/An-Giang-0-jpeg-1470-1640315739.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=wDAONDRSgio6Yca5G1sQ7Q", "1234567890", "1");
     }
 }
