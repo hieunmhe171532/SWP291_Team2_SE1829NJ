@@ -23,20 +23,20 @@ import model.User;
  *
  * @author admin
  */
-public class FeedbackDAO {
-    DBContext dbContext;
-
-    public FeedbackDAO() {
-        dbContext = DBContext.getInstance();
-    }
-    
+public class FeedbackDAO extends DBContext{
+//    DBContext dbContext;
+//
+//    public FeedbackDAO() {
+//        dbContext = DBContext.getInstance();
+//    }
+//    
     public List<Feedback> getAllFeedback() {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
 
         try {
             String sql = "select * from Feedback";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -62,7 +62,7 @@ public class FeedbackDAO {
     }
     
     public void editFeedback(String img, String des, String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -72,7 +72,7 @@ public class FeedbackDAO {
                 + "    [description] = ?,\n"
                 + "    [createAt]=?\n"
                 + "WHERE id=?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
             pstmt.setString(3, date);
@@ -84,10 +84,10 @@ public class FeedbackDAO {
         }
     }
     public void deleteFeedback(String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         String sql = "DELETE FROM [dbo].[Feedback]\n"
                 + "WHERE id=?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, id);
 
             pstmt.executeUpdate();

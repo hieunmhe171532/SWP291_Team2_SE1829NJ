@@ -16,14 +16,14 @@ import model.User;
  * 
  * Author: HUNG
  */
-public class BillDAO{
-    private final DBContext dbContext;
-    private final Connection connection;
-
-    public BillDAO() {
-        dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
-    }
+public class BillDAO extends DBContext{
+//    private final DBContext dbContext;
+//    private final Connection connection;
+//
+//    public BillDAO() {
+//        dbContext = DBContext.getInstance();
+//        connection = dbContext.getConnection();
+//    }
 
     // Method to count the number of bills
     public int countBill() {
