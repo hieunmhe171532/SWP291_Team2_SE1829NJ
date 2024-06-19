@@ -230,53 +230,55 @@ public class RoomDAO {
     }
 
   public List<Room> getAll() {
-        List<Room> rooms = new ArrayList<>();
-        String sql = "SELECT r.id as rId, r.name as rName, r.image as rImage, r.deleteAt as RdeleteAt, " +
-                     "r.updateAt as RupdateAt, r.createAt as RcreateAt, r.area, r.userQuantity, r.price, " +
-                     "r.status_id as rStatus, r.description, h.id as hId, h.name as hName, " +
-                     "t.id as tId, t.name as tName " +
-                     "FROM Room r " +
-                     "JOIN Hotel h ON h.id = r.hotel_id " +
-                     "JOIN TypeRoom t ON t.id = r.type_id";
+    List<Room> rooms = new ArrayList<>();
+    // Updated SQL query to include the room_floor field
+    String sql = "SELECT r.id as rId, r.name as rName, r.image as rImage, r.room_floor as rRoomFloor, " +
+                 "r.deleteAt as RdeleteAt, r.updateAt as RupdateAt, r.createAt as RcreateAt, " +
+                 "r.area, r.userQuantity, r.price, r.status_id as rStatus, r.description, " +
+                 "h.id as hId, h.name as hName, t.id as tId, t.name as tName " +
+                 "FROM Room r " +
+                 "JOIN Hotel h ON h.id = r.hotel_id " +
+                 "JOIN TypeRoom t ON t.id = r.type_id";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-            
-             ResultSet rs = ps.executeQuery()) {
+    try (PreparedStatement ps = connection.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            while (rs.next()) {
-                Room room = new Room();
-                room.setId(rs.getInt("rId"));
-                room.setName(rs.getString("rName"));
-                room.setImage(rs.getString("rImage"));
-                room.setDeleteAt(rs.getDate("RdeleteAt"));
-                room.setUpdateAt(rs.getDate("RupdateAt"));
-                room.setCreateAt(rs.getDate("RcreateAt"));
-                room.setArea(rs.getFloat("area"));
-                room.setUserQuantity(rs.getInt("userQuantity"));
-                room.setPrice(rs.getFloat("price"));
-                room.setStatus(rs.getInt("rStatus"));
-                room.setDescription(rs.getString("description"));
+        while (rs.next()) {
+            Room room = new Room();
+            room.setId(rs.getInt("rId"));
+            room.setName(rs.getString("rName"));
+            room.setImage(rs.getString("rImage"));
+            room.setRoom_floor(rs.getString("rRoomFloor")); // Set room_floor
+            room.setDeleteAt(rs.getDate("RdeleteAt"));
+            room.setUpdateAt(rs.getDate("RupdateAt"));
+            room.setCreateAt(rs.getDate("RcreateAt"));
+            room.setArea(rs.getFloat("area"));
+            room.setUserQuantity(rs.getInt("userQuantity"));
+            room.setPrice(rs.getFloat("price"));
+            room.setStatus(rs.getInt("rStatus"));
+            room.setDescription(rs.getString("description"));
 
-                Hotel hotel = new Hotel();
-                hotel.setId(rs.getInt("hId"));
-                hotel.setName(rs.getString("hName"));
-                // Set other hotel fields if needed
+            Hotel hotel = new Hotel();
+            hotel.setId(rs.getInt("hId"));
+            hotel.setName(rs.getString("hName"));
+            // Set other hotel fields if needed
 
-                room.setHotel(hotel);
+            room.setHotel(hotel);
 
-                TypeRoom typeRoom = new TypeRoom();
-                typeRoom.setId(rs.getInt("tId"));
-                typeRoom.setName(rs.getString("tName"));
+            TypeRoom typeRoom = new TypeRoom();
+            typeRoom.setId(rs.getInt("tId"));
+            typeRoom.setName(rs.getString("tName"));
 
-                room.setTypeRoom(typeRoom);
+            room.setTypeRoom(typeRoom);
 
-                rooms.add(room);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            rooms.add(room);
         }
-        return rooms;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return rooms;
+}
+
 
     
   public static void main(String[] args) {
