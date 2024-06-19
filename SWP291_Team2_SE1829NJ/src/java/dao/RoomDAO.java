@@ -134,7 +134,6 @@ public class RoomDAO {
                 count = rs.getInt("countRoom");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return count;
     }
@@ -160,7 +159,6 @@ public class RoomDAO {
                 count = rs.getInt("countRoom");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return count;
     }
@@ -229,56 +227,59 @@ public class RoomDAO {
         return room;
     }
 
-  public List<Room> getAll() {
-    List<Room> rooms = new ArrayList<>();
-    // Updated SQL query to include the room_floor field
-    String sql = "SELECT r.id as rId, r.name as rName, r.image as rImage, r.room_floor as rRoomFloor, " +
-                 "r.deleteAt as RdeleteAt, r.updateAt as RupdateAt, r.createAt as RcreateAt, " +
-                 "r.area, r.userQuantity, r.price, r.status_id as rStatus, r.description, " +
-                 "h.id as hId, h.name as hName, t.id as tId, t.name as tName " +
-                 "FROM Room r " +
-                 "JOIN Hotel h ON h.id = r.hotel_id " +
-                 "JOIN TypeRoom t ON t.id = r.type_id";
+   public List<Room> getAll() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT r.id AS rId, r.name AS rName, r.image AS rImage, r.room_floor AS rRoomFloor, " +
+                     "r.deleteAt AS RdeleteAt, r.updateAt AS RupdateAt, r.createAt AS RcreateAt, " +
+                     "r.area, r.userQuantity, r.price, r.status_id AS rStatus, r.description, " +
+                     "h.id AS hId, h.name AS hName, " +
+                     "t.id AS tId, t.name AS tName " +
+                     "FROM Room r " +
+                     "JOIN Hotel h ON r.hotel_id = h.id " +
+                     "JOIN TypeRoom t ON r.type_id = t.id";
 
-    try (PreparedStatement ps = connection.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
+        try (Connection connection = DBContext.getInstance().getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-        while (rs.next()) {
-            Room room = new Room();
-            room.setId(rs.getInt("rId"));
-            room.setName(rs.getString("rName"));
-            room.setImage(rs.getString("rImage"));
-            room.setRoom_floor(rs.getString("rRoomFloor")); // Set room_floor
-            room.setDeleteAt(rs.getDate("RdeleteAt"));
-            room.setUpdateAt(rs.getDate("RupdateAt"));
-            room.setCreateAt(rs.getDate("RcreateAt"));
-            room.setArea(rs.getFloat("area"));
-            room.setUserQuantity(rs.getInt("userQuantity"));
-            room.setPrice(rs.getFloat("price"));
-            room.setStatus(rs.getInt("rStatus"));
-            room.setDescription(rs.getString("description"));
-
-            Hotel hotel = new Hotel();
-            hotel.setId(rs.getInt("hId"));
-            hotel.setName(rs.getString("hName"));
-            // Set other hotel fields if needed
-
-            room.setHotel(hotel);
-
-            TypeRoom typeRoom = new TypeRoom();
-            typeRoom.setId(rs.getInt("tId"));
-            typeRoom.setName(rs.getString("tName"));
-
-            room.setTypeRoom(typeRoom);
-
-            rooms.add(room);
+            while (rs.next()) {
+                Room room = mapRoom(rs);
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Exception in RoomDAO.getAll: " + e.getMessage());
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return rooms;
     }
-    return rooms;
-}
 
+    private Room mapRoom(ResultSet rs) throws SQLException {
+        Room room = new Room();
+        room.setId(rs.getInt("rId"));
+        room.setName(rs.getString("rName"));
+        room.setImage(rs.getString("rImage"));
+        room.setRoom_floor(rs.getString("rRoomFloor"));
+            room.setDeleteAt(rs.getDate("RdeleteAt"));
+                room.setUpdateAt(rs.getDate("RupdateAt"));
+                room.setCreateAt(rs.getDate("RcreateAt"));
+        room.setArea(rs.getFloat("area"));
+        room.setUserQuantity(rs.getInt("userQuantity"));
+        room.setPrice(rs.getFloat("price"));
+        room.setStatus(rs.getInt("rStatus"));
+        room.setDescription(rs.getString("description"));
+
+        Hotel hotel = new Hotel();
+        hotel.setId(rs.getInt("hId"));
+        hotel.setName(rs.getString("hName"));
+        room.setHotel(hotel);
+
+        TypeRoom typeRoom = new TypeRoom();
+        typeRoom.setId(rs.getInt("tId"));
+        typeRoom.setName(rs.getString("tName"));
+        room.setTypeRoom(typeRoom);
+
+        return room;
+    }
 
     
   public static void main(String[] args) {

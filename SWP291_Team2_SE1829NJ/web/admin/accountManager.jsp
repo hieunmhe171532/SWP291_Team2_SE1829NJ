@@ -57,11 +57,15 @@
                 <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
                 <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Quản lý Account</span></a></li>
-                 <li><a class="app-menu__item" href="acccreate"><i
+                            class="app-menu__label">Manage Account</span></a></li>
+                <li><a class="app-menu__item" href="acccreate"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
                 </li>
-
+    <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Manage Room</span></a></li>
+                <li><a class="app-menu__item" href="roomcreate"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Room</span></a>
+                </li>
             </ul>
         </aside>
         <main class="app-content">
@@ -111,7 +115,7 @@
                                             <td>${u.role_id}</td> <!-- Assuming 'role' is the role of the user -->
                                             <td>${u.isActive ? 'Active' : 'Inactive'}</td>
                                             <td>${u.fullname}</td>
-                                          <td><fmt:formatDate value="${u.dob}" pattern="dd-MM-yyyy"/></td>
+                                            <td><fmt:formatDate value="${u.dob}" pattern="dd-MM-yyyy"/></td>
                                             <td>${u.gender ? 'Male' : 'Female'}</td>
                                             <td>${u.address}</td>
                                             <td>
@@ -124,13 +128,13 @@
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </td>
-<!--                                            <td>
-                                                <button class="btn btn-info btn-sm more-details" type="button" title="Moredetails"
-                                                        onclick="redirectToAccDetails('${u.username}')">
-                                                    <i class="fas fa-info-circle"></i>
-                                                </button>
-
-                                            </td>-->
+                                            <!--                                            <td>
+                                                                                            <button class="btn btn-info btn-sm more-details" type="button" title="Moredetails"
+                                                                                                    onclick="redirectToAccDetails('${u.username}')">
+                                                                                                <i class="fas fa-info-circle"></i>
+                                                                                            </button>
+                                            
+                                                                                        </td>-->
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -155,74 +159,74 @@
 
         <!-- Delete modal window -->
         <c:forEach items="${accountusers}" var="u">
-    <c:forEach items="${accountusers}" var="u">
-    <div class="modal fade" id="ModalUP${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-         data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <form method="POST" action="accedit">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Account and User</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+
+            <div class="modal fade" id="ModalUP${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                 data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="POST" action="accedit">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Account and User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="username" value="${u.username}"> <!-- Hidden field for username -->
+                                <div class="form-group">
+                                    <label for="password${u.username}">Password:</label>
+                                    <input type="text" class="form-control" id="password${u.username}" name="password" value="${u.password}" placeholder="Enter new password">
+                                    <small class="form-text text-muted">Leave blank to keep the current password.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone${u.username}">Phone Number:</label>
+                                    <input type="text" class="form-control" id="phone${u.username}" name="phone" value="${u.phone}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email${u.username}">Email:</label>
+                                    <input type="email" class="form-control" id="email${u.username}" name="email" value="${u.email}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="role${u.username}">Role:</label>
+                                    <select class="form-control" id="role${u.username}" name="role">
+                                        <option value="1" ${u.role_id == 1 ? 'selected' : ''}>Admin</option>
+                                        <option value="2" ${u.role_id == 2 ? 'selected' : ''}>Manager</option>
+                                        <option value="3" ${u.role_id == 3 ? 'selected' : ''}>Marketer</option>
+                                        <option value="4" ${u.role_id == 4 ? 'selected' : ''}>Staff</option>
+                                        <option value="5" ${u.role_id == 5 ? 'selected' : ''}>Customer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fullname${u.username}">Fullname:</label>
+                                    <input type="text" class="form-control" id="fullname${u.username}" name="fullname" value="${u.fullname}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dob${u.username}">Date of Birth:</label>
+                                    <input type="date" class="form-control" id="dob${u.username}" name="dob" value="${u.dob}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender${u.username}">Gender:</label>
+                                    <select class="form-control" id="gender${u.username}" name="gender">
+                                        <option value="true" ${u.gender ? 'selected' : ''}>Male</option>
+                                        <option value="false" ${!u.gender ? 'selected' : ''}>Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address${u.username}">Address:</label>
+                                    <input type="text" class="form-control" id="address${u.username}" name="address" value="${u.address}" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="username" value="${u.username}"> <!-- Hidden field for username -->
-                        <div class="form-group">
-                            <label for="password${u.username}">Password:</label>
-                            <input type="text" class="form-control" id="password${u.username}" name="password" value="${u.password}" placeholder="Enter new password">
-                            <small class="form-text text-muted">Leave blank to keep the current password.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone${u.username}">Phone Number:</label>
-                            <input type="text" class="form-control" id="phone${u.username}" name="phone" value="${u.phone}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email${u.username}">Email:</label>
-                            <input type="email" class="form-control" id="email${u.username}" name="email" value="${u.email}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="role${u.username}">Role:</label>
-                            <select class="form-control" id="role${u.username}" name="role">
-                                <option value="1" ${u.role_id == 1 ? 'selected' : ''}>Admin</option>
-                                <option value="2" ${u.role_id == 2 ? 'selected' : ''}>Manager</option>
-                                <option value="3" ${u.role_id == 3 ? 'selected' : ''}>Marketer</option>
-                                <option value="4" ${u.role_id == 4 ? 'selected' : ''}>Staff</option>
-                                <option value="5" ${u.role_id == 5 ? 'selected' : ''}>Customer</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="fullname${u.username}">Fullname:</label>
-                            <input type="text" class="form-control" id="fullname${u.username}" name="fullname" value="${u.fullname}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dob${u.username}">Date of Birth:</label>
-                            <input type="date" class="form-control" id="dob${u.username}" name="dob" value="${u.dob}">
-                        </div>
-                        <div class="form-group">
-                            <label for="gender${u.username}">Gender:</label>
-                            <select class="form-control" id="gender${u.username}" name="gender">
-                                <option value="true" ${u.gender ? 'selected' : ''}>Male</option>
-                                <option value="false" ${!u.gender ? 'selected' : ''}>Female</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="address${u.username}">Address:</label>
-                            <input type="text" class="form-control" id="address${u.username}" name="address" value="${u.address}" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</c:forEach>
-   
- 
+
+
+
             <div class="modal fade" id="ModalDEL${u.username}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -316,10 +320,10 @@
             var ctxl = $("#lineChartDemo").get(0).getContext("2d");
             var lineChart = new Chart(ctxl).Line(data);
             var ctxb = $("#barChartDemo").get(0).getContext("2d");
-            var barChart = new Chart(ctxb).Bar(data);
+                var barChart = new Chart(ctxb).Bar(data);
 </script>
-                            <script type="text/javascript">                             //Thời Gian
-                                function time() {
+            <script type="text/javascript">                             //Thời Gian
+                function time() {
                     var today = new Date();
             var weekday = new Array(7);
             weekday[0] = "Chủ Nhật";
@@ -354,8 +358,8 @@
             }
             return i;
             }
-                                        }
-                                </script            >
+            }
+                                    </script            >
 
 //
 //$(document)            .re             ady(function() {
@@ -365,17 +369,17 @@
 //    });
 //});
 
-                    </body>
+                      </body>
 
 
 
                     <script>
-                                        function redir e ctToAccDetails(username) {
+                                        function redirectToAccDetails(username) {
                     // Construct the URL with the username pa r ameter 
-                                        var url = "accdetail?username=" + encodeURIComponent(username);
+                    var url = "accdetail?username=" + encodeURIComponent(username);
             // Redirect to the URL
             window.location.href = url;
-                                    }
+                                        }
 </script>
 
                     </html>
