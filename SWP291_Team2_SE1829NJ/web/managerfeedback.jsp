@@ -10,49 +10,111 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/open-iconic-bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/open-iconic-bootstrap.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="css/animate.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.carousel.min.css">
-        <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.theme.default.min.css">
-        <link rel="stylesheet" type="text/css" href="css/owl.theme.default.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/magnific-popup.css">
-        <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="css/aos.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/ionicons.min.css">
-        <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-datepicker.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.timepicker.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
-
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/flaticon.css">
-        <link rel="stylesheet" type="text/css" href="css/flaticon.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/icomoon.css">
-        <link rel="stylesheet" type="text/css" href="css/icomoon.css">
+        
 
         <link rel="stylesheet" type="text/css" href="bootstrap/css/newcss.css">
-        <link rel="stylesheet" type="text/css" href="css/newcss.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+
 
         <style>
-            
+            a {
+                text-decoration: none;
+            }
+            .custom-button {
+                border: 1px solid #007bff;
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #fff;
+                color: black;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            .custom-button:hover {
+                background-color: #011431;
+                color: white;
+            }
+
+            .custom-button:focus {
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+            }
+            .InputContainer {
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(255, 255, 255);
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                padding-left: 15px;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+            }
+
+            .input {
+                width: 170px;
+                height: 100%;
+                border: none;
+                outline: none;
+                font-size: 0.9em;
+                caret-color: rgb(255, 81, 0);
+            }
+
+            .labelforsearch {
+                cursor: text;
+                padding: 0px 15px;
+            }
+
+            .searchIcon {
+                width: 13px;
+            }
+
+            .border {
+                height: 40%;
+                width: 1.3px;
+                background-color: rgb(223, 223, 223);
+            }
+
+            .micIcon {
+                width: 12px;
+            }
+
+            .micButton {
+                padding: 0px 15px 0px 12px;
+                border: none;
+                background-color: transparent;
+                height: 40px;
+                cursor: pointer;
+                transition-duration: .3s;
+            }
+
+            .searchIcon path {
+                fill: #011431;
+            }
+
+            .micIcon path {
+                fill: rgb(255, 81, 0);
+            }
+
+            .micButton:hover {
+                background-color: rgb(255, 230, 230);
+                transition-duration: .3s;
+            }
+            .card{
+                display: flex;
+                justify-content: center;
+                margin: 20px auto;
+                width: 85%;
+
+            }
         </style>
 
 
@@ -65,77 +127,98 @@
             <main class="app-content">
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <h4 class="card-title col-9" style="font-size: 30px">Feedback List</h4>
+                        <div class="container mt-5">
+                            <div class="d-flex">
+                                <h4 class="card-title col-8" style="font-size: 30px">Feedback List</h4>
+                                <button class="custom-button " data-bs-toggle="collapse" data-bs-target="#filter" style="border: 1px solid #011431;" >Collapsible</button>
+                                <div class="InputContainer col-3" style="padding: 0px 0px;width: 250px;height: 44px">
+                                    <input type="text" name="text" class="input" id="input" placeholder="Search">
+                                    <div class="border"></div>
+
+                                    <button class="micButton"><svg viewBox="0 0 512 512" class="searchIcon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+                                    </button>
+
                                 </div>
-                                <div class="table-responsive-lg mt-5">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th class="col-1">
-                                                    Id
-                                                </th>
-                                                <th class="col-3">
-                                                    Comment
-                                                </th>
-                                                <th class="col-2">
-                                                    Image
-                                                </th>
-                                                <th class="col-1">
-                                                    Commentator
-                                                </th>
-                                                <th class="col-1">
-                                                    Room Id
-                                                </th>
-                                                <th class="col-1">
-                                                    CreatedAt
-                                                </th>
-                                                <th class="col-1">
-                                                </th>
+                            </div>
+                            <div id="filter" class="collapse">
+                                <div class="card card-body">
+                                    <div>
+                                        
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${listb}" var="b">
-                                            <tr>
-                                                <td>
-                                                    ${b.getId()}
-                                                </td>
-                                                <td>
-                                                    ${b.title}
-                                                </td>
-                                                <td>
-                                                    ${b.briefinfo}
-                                                </td>
-                                                <td>
-                                                    ${b.detail}
-                                                </td>
-                                                <td>
-                                                    ${b.createAt}
-                                                </td>
-                                                <td>
-                                                    <img src="${b.image}" width="50%" height="50%" alt="loi"/>
-
-                                                </td>
-                                                <td>
-                                                    ${b.flag}
-                                                </td>
-                                                <td class="d-flex">
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp" data-toggle="modal"
-                                                            data-target="#ModalUP${b.id}" ><i class="fa-solid fa-edit"></i></button>
-                                                    <button class="btn btn-danger btn-sm delete" type="button" title="Delete" id="show-emp" data-toggle="modal"
-                                                            data-target="#ModalDEL${b.id}"><i class="fas fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-
+                                </div>
                             </div>
                         </div>
+
+                        <div class="table-responsive-lg mt-5">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-1">
+                                            Id
+                                        </th>
+                                        <th class="col-3">
+                                            Comment
+                                        </th>
+                                        <th class="col-2">
+                                            Image
+                                        </th>
+                                        <th class="col-1">
+                                            Commentator
+                                        </th>
+                                        <th class="col-1">
+                                            Room Id
+                                        </th>
+                                        <th class="col-1">
+                                            CreatedAt
+                                        </th>
+                                        <th class="col-1">
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${listb}" var="b">
+                                    <tr>
+                                        <td>
+                                            ${b.getId()}
+                                        </td>
+                                        <td>
+                                            ${b.title}
+                                        </td>
+                                        <td>
+                                            ${b.briefinfo}
+                                        </td>
+                                        <td>
+                                            ${b.detail}
+                                        </td>
+                                        <td>
+                                            ${b.createAt}
+                                        </td>
+                                        <td>
+                                            <img src="${b.image}" width="50%" height="50%" alt="loi"/>
+
+                                        </td>
+                                        <td>
+                                            ${b.flag}
+                                        </td>
+                                        <td class="d-flex">
+                                            <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp" data-toggle="modal"
+                                                    data-target="#ModalUP${b.id}" ><i class="fa-solid fa-edit"></i></button>
+                                            <button class="btn btn-danger btn-sm delete" type="button" title="Delete" id="show-emp" data-toggle="modal"
+                                                    data-target="#ModalDEL${b.id}"><i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -152,7 +235,7 @@
                                 <div class="modal-body">
                                     <div class="modal-header">						
                                         <h2 class="modal-title" style="color: black">Edit Blog</h2>
-                                        
+
                                     </div>
                                     <div class="form-group">
                                         <label><b>Id</b></label>
@@ -245,12 +328,13 @@
         <script src="bootstrap/js/jquery.animateNumber.min.js"></script>
         <script src="bootstrap/js/bootstrap-datepicker.js"></script>
         <script src="bootstrap/js/scrollax.min.js"></script>
+        <script src="bootstrap/js/"></script>
+
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="bootstrap/js/google-map.js"></script>
         <script src="bootstrap/js/main.js"></script>
         <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-        
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 
 </html>
