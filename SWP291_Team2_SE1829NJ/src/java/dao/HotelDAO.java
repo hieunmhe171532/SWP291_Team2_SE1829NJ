@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Hotel;
 
-public class HotelDAO  {
+public class HotelDAO extends DBContext{
     
 // 
 //    private final DBContext dbContext;
@@ -21,7 +21,7 @@ public class HotelDAO  {
         Hotel hotel = null;
         String query = "SELECT * FROM Hotel WHERE id = ?";
         
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

@@ -42,7 +42,7 @@ public class TypeRoomDAO  extends DBContext{
     // Add new TypeRoom
     public void addTypeRoom(TypeRoom typeRoom) {
         String query = "INSERT INTO TypeRoom (name, isDelete, createAt, updateAt, deleteAt) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, typeRoom.getName());
             preparedStatement.setBoolean(2, typeRoom.isIsDelete());
             preparedStatement.setDate(3, new java.sql.Date(typeRoom.getCreateAt().getTime()));
@@ -57,7 +57,7 @@ public class TypeRoomDAO  extends DBContext{
     // Update existing TypeRoom
     public void updateTypeRoom(TypeRoom typeRoom) {
         String query = "UPDATE TypeRoom SET name = ?, isDelete = ?, createAt = ?, updateAt = ?, deleteAt = ? WHERE id = ?";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, typeRoom.getName());
             preparedStatement.setBoolean(2, typeRoom.isIsDelete());
             preparedStatement.setDate(3, new java.sql.Date(typeRoom.getCreateAt().getTime()));
@@ -74,7 +74,7 @@ public class TypeRoomDAO  extends DBContext{
     public List<TypeRoom> listAllTypeRooms() {
         List<TypeRoom> typeRooms = new ArrayList<>();
         String query = "SELECT * FROM TypeRoom";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 TypeRoom typeRoom = new TypeRoom();

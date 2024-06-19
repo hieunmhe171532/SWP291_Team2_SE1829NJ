@@ -72,8 +72,8 @@ public List<UserAccount> getAllUserAccount() {
                  "JOIN [Account] a ON u.username = a.username";
 
     List<UserAccount> userAccounts = new ArrayList<>();
-    try (Connection conn = dbContext.getConnection();
-         PreparedStatement stm = conn.prepareStatement(sql)) {
+    try (
+         PreparedStatement stm = connection.prepareStatement(sql)) {
 
         ResultSet result = stm.executeQuery();
 
@@ -104,7 +104,7 @@ public List<UserAccount> getAllUserAccount() {
     return userAccounts;
 }
 
-public static void main(String[] args) {
+public static void main(String[] args)  {
     UserAccountDAO dao = new UserAccountDAO();
     
     // Fetch and print a single account
