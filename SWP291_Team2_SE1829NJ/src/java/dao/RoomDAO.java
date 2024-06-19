@@ -4,13 +4,20 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-public class RoomDAO extends DBContext{
+public class RoomDAO{
+     DBContext dbContext;
+     Connection connection;
 
+    public RoomDAO() {
+        dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+    }
 
     public void mapParams(PreparedStatement ps, List<Object> args) throws SQLException {
         int i = 1;
@@ -221,6 +228,7 @@ public class RoomDAO extends DBContext{
 
    public List<Room> getAll() {
         List<Room> rooms = new ArrayList<>();
+                Connection conn = dbContext.getConnection();
         String sql = "SELECT r.id AS rId, r.name AS rName, r.image AS rImage, r.room_floor AS rRoomFloor, " +
                      "r.deleteAt AS RdeleteAt, r.updateAt AS RupdateAt, r.createAt AS RcreateAt, " +
                      "r.area, r.userQuantity, r.price, r.status_id AS rStatus, r.description, " +
@@ -235,7 +243,7 @@ public class RoomDAO extends DBContext{
 
             
               
-                PreparedStatement ps = connection.prepareStatement(sql);
+                PreparedStatement ps = conn.prepareStatement(sql);
             
              ResultSet rs = ps.executeQuery()) {
 

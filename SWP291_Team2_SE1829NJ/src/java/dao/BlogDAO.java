@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,16 +22,16 @@ import model.Blog;
  *
  * @author admin
  */
-public class BlogDAO extends DBContext{
+public class BlogDAO {
 
-//     DBContext dbContext;
-//    Connection connection;
-//
-//    public BlogDAO() {
-//         dbContext = DBContext.getInstance();
-//        connection = dbContext.getConnection();
-//    }
-//    
+     DBContext dbContext;
+    Connection connection;
+
+    public BlogDAO() {
+         dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
+    }
+    
     
 
     public void insertBlog(String title, String detail, String briefinfo, String image, int flag, String username) {

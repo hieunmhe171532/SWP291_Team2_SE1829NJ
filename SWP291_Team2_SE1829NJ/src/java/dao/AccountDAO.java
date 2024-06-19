@@ -1,6 +1,7 @@
 package dao;
 
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,15 +13,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 
-public class AccountDAO extends DBContext{  
+public class AccountDAO {  
  
+   DBContext dbContext;
+    Connection connection;
 
+    public AccountDAO() {
+         dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
+    }
 
     public void createAccount(String username, String password, String phone, String email, String role, boolean isActive) {
+       
+     
+        
         String sql = "INSERT INTO Account (username, password, phone, email, role, isActive) VALUES (?, ?, ?, ?, ?, ?)";
         try (
-//                Connection conn = dbContext.getConnection(); 
-                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                Connection conn = dbContext.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             pstmt.setString(3, phone);
@@ -35,9 +45,10 @@ public class AccountDAO extends DBContext{
     }
 
     public Account getAccountByUsername(Account acc) {
+    
         try {
             String sql = "SELECT * FROM Account WHERE username = ?";
-           ;
+           
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, acc.getUsername());
 
@@ -86,6 +97,9 @@ public class AccountDAO extends DBContext{
     }
     
  public Account checkAcc(String account_username, String account_pass) {
+     
+     
+     
         String checkUserquery = "SELECT * FROM Account WHERE username = ? AND password = ?";
         try {
              

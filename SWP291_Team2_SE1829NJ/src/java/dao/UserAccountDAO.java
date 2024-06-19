@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import model.UserAccount;
  *
  * @author HUNG
  */
-public class UserAccountDAO extends DBContext{
+public class UserAccountDAO {
 
 
  public UserAccount getUserAccountByUsername(String username) {

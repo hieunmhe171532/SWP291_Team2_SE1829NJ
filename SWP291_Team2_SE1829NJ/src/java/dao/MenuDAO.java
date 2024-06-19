@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,14 +14,14 @@ import java.sql.SQLException;
  *
  * @author HUNG
  */
-public class MenuDAO extends DBContext{
-//     private final DBContext dbContext;
-//    private final Connection connection;
-//
-//    public MenuDAO() {
-//        dbContext = DBContext.getInstance();
-//        connection = dbContext.getConnection();
-//    }
+public class MenuDAO {
+     private final DBContext dbContext;
+    private final Connection connection;
+
+    public MenuDAO() {
+        dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
+    }
                     public int countFood() {
     int count = 0;
     String sql = "SELECT COUNT(*) AS countFood FROM Restaurant";

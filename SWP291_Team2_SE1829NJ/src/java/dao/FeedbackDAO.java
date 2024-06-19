@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,20 +24,20 @@ import model.User;
  *
  * @author admin
  */
-public class FeedbackDAO extends DBContext{
-//    DBContext dbContext;
-//
-//    public FeedbackDAO() {
-//        dbContext = DBContext.getInstance();
-//    }
-//    
+public class FeedbackDAO {
+    DBContext dbContext;
+
+    public FeedbackDAO() {
+        dbContext = DBContext.getInstance();
+    }
+    
     public List<Feedback> getAllFeedback() {
-//        Connection conn = dbContext.getConnection();
+        Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
 
         try {
             String sql = "select * from Feedback";
-            PreparedStatement stm = connection.prepareStatement(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -62,17 +63,18 @@ public class FeedbackDAO extends DBContext{
     }
     
     public void editFeedback(String img, String des, String id) {
-//        Connection conn = dbContext.getConnection();
+        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
-        String sql = "UPDATE [dbo].[Feedback]\n"
-                + "SET\n"
-                + "    [img] = ?,\n"
-                + "    [description] = ?,\n"
-                + "    [createAt]=?\n"
-                + "WHERE id=?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        String sql = """
+                     UPDATE [dbo].[Feedback]
+                     SET
+                         [img] = ?,
+                         [description] = ?,
+                         [createAt]=?
+                     WHERE id=?""";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
             pstmt.setString(3, date);
@@ -84,10 +86,11 @@ public class FeedbackDAO extends DBContext{
         }
     }
     public void deleteFeedback(String id) {
-//        Connection conn = dbContext.getConnection();
-        String sql = "DELETE FROM [dbo].[Feedback]\n"
-                + "WHERE id=?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        Connection conn = dbContext.getConnection();
+        String sql = """
+                     DELETE FROM [dbo].[Feedback]
+                     WHERE id=?""";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
 
             pstmt.executeUpdate();
