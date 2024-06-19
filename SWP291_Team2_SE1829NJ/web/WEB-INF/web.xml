@@ -37,10 +37,6 @@
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>roomManage</servlet-name>
-        <servlet-class>controller.room.roomManage</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>roomDelete</servlet-name>
         <servlet-class>controller.room.roomDelete</servlet-class>
     </servlet>
@@ -71,6 +67,10 @@
     <servlet>
         <servlet-name>accountManagement</servlet-name>
         <servlet-class>controller.acc.accountManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roommanagement</servlet-name>
+        <servlet-class>controller.room.roomManagement</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -105,10 +105,6 @@
         <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>roomManage</servlet-name>
-        <url-pattern>/roommanagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>roomDelete</servlet-name>
         <url-pattern>/roomdelete</url-pattern>
     </servlet-mapping>
@@ -139,5 +135,9 @@
     <servlet-mapping>
         <servlet-name>accountManagement</servlet-name>
         <url-pattern>/accountmanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roommanagement</servlet-name>
+        <url-pattern>/roommanagement</url-pattern>
     </servlet-mapping>
 </web-app>
