@@ -52,90 +52,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <style>
-            /* From uiverse.io by @satyamchaudharydev */
-            /* removing default style of button */
-
-            .form button {
-                margin-bottom: 6px;
-                border: none;
-                background: none;
-                color: #8b8ba7;
-            }
-            /* styling of whole input container */
-            .form {
-                --timing: 0.3s;
-                --width-of-input: 220px;
-                --height-of-input: 50px;
-                --border-height: 2px;
-                --input-bg: #fff;
-                --border-color: #2f2ee9;
-                --border-radius: 30px;
-                --after-border-radius: 1px;
-                position: relative;
-                width: var(--width-of-input);
-                height: var(--height-of-input);
-                display: flex;
-                align-items: center;
-                padding-inline: 0.8em;
-                border-radius: var(--border-radius);
-                transition: border-radius 0.5s ease;
-                background: gainsboro;
-            }
-            /* styling of Input */
-            .input {
-                font-size: 0.9rem;
-                background-color: transparent;
-                width: 100%;
-                height: 100%;
-                padding-inline: 0.5em;
-                padding-block: 0.7em;
-                border: none;
-            }
-            /* styling of animated border */
-            .form:before {
-                content: "";
-                position: absolute;
-                background: var(--border-color);
-                transform: scaleX(0);
-                transform-origin: center;
-                width: 100%;
-                height: var(--border-height);
-                left: 0;
-                bottom: 0;
-                border-radius: 1px;
-                transition: transform var(--timing) ease;
-            }
-            /* Hover on Input */
-            .form:focus-within {
-                border-radius: var(--after-border-radius);
-            }
-
-            input:focus {
-                outline: none;
-            }
-            /* here is code of animated border */
-            .form:focus-within:before {
-                transform: scale(1);
-            }
-            /* styling of close button */
-            /* == you can click the close button to remove text == */
-            .reset {
-                border: none;
-                background: none;
-                opacity: 0;
-                visibility: hidden;
-            }
-            /* close button shown when typing */
-            input:not(:placeholder-shown) ~ .reset {
-                opacity: 1;
-                visibility: visible;
-            }
-            /* sizing svg icons */
-            .form svg {
-                width: 17px;
-                margin-top: 3px;
-            }
+            
         </style>
+
 
 
     </head>
@@ -156,66 +75,62 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-1">
-                                                    ID
-                                                </th>
-                                                <th class="col-1">
-                                                    Title
-                                                </th>
-                                                <th class="col-2">
-                                                    Brief Information
+                                                    Id
                                                 </th>
                                                 <th class="col-3">
-                                                    Detail
-                                                </th>
-                                                <th class="col-2">
-                                                    CreatedAt
+                                                    Comment
                                                 </th>
                                                 <th class="col-2">
                                                     Image
                                                 </th>
                                                 <th class="col-1">
-                                                    flag
+                                                    Commentator
                                                 </th>
                                                 <th class="col-1">
-                                                    Action
+                                                    Room Id
+                                                </th>
+                                                <th class="col-1">
+                                                    CreatedAt
+                                                </th>
+                                                <th class="col-1">
                                                 </th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${listb}" var="b">
-                                        <tr>
-                                            <td>
-                                                ${b.getId()}
-                                            </td>
-                                            <td>
-                                                ${b.title}
-                                            </td>
-                                            <td>
-                                                ${b.briefinfo}
-                                            </td>
-                                            <td>
-                                                ${b.detail}
-                                            </td>
-                                            <td>
-                                                ${b.createAt}
-                                            </td>
-                                            <td>
-                                                <img src="${b.image}" width="50%" height="50%" alt="loi"/>
+                                            <tr>
+                                                <td>
+                                                    ${b.getId()}
+                                                </td>
+                                                <td>
+                                                    ${b.title}
+                                                </td>
+                                                <td>
+                                                    ${b.briefinfo}
+                                                </td>
+                                                <td>
+                                                    ${b.detail}
+                                                </td>
+                                                <td>
+                                                    ${b.createAt}
+                                                </td>
+                                                <td>
+                                                    <img src="${b.image}" width="50%" height="50%" alt="loi"/>
 
-                                            </td>
-                                            <td>
-                                                ${b.flag}
-                                            </td>
-                                            <td class="d-flex">
-                                                <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${b.id}" ><i class="fa-solid fa-edit"></i></button>
-                                                <button class="btn btn-danger btn-sm delete" type="button" title="Delete" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalDEL${b.id}"><i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    ${b.flag}
+                                                </td>
+                                                <td class="d-flex">
+                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp" data-toggle="modal"
+                                                            data-target="#ModalUP${b.id}" ><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="btn btn-danger btn-sm delete" type="button" title="Delete" id="show-emp" data-toggle="modal"
+                                                            data-target="#ModalDEL${b.id}"><i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
 
@@ -237,6 +152,7 @@
                                 <div class="modal-body">
                                     <div class="modal-header">						
                                         <h2 class="modal-title" style="color: black">Edit Blog</h2>
+                                        
                                     </div>
                                     <div class="form-group">
                                         <label><b>Id</b></label>
@@ -333,6 +249,7 @@
         <script src="bootstrap/js/google-map.js"></script>
         <script src="bootstrap/js/main.js"></script>
         <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        
 
     </body>
 
