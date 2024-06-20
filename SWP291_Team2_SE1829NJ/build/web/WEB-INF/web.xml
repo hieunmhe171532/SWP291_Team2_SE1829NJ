@@ -5,31 +5,55 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>controller.RegisterController</servlet-class>
+        <servlet-name>AddBlogServlet</servlet-name>
+        <servlet-class>controller.marketer.AddBlogServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BlogManage</servlet-name>
-        <servlet-class>controller.admin.BlogManage</servlet-class>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <servlet-class>controller.marketer.DeleteBlogServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListBlogManage</servlet-name>
-        <servlet-class>controller.admin.ListBlogManage</servlet-class>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <servlet-class>controller.marketer.EditBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListManageBlogServlet</servlet-name>
+        <servlet-class>controller.marketer.ListManageBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListManageCustomerServlet</servlet-name>
+        <servlet-class>controller.marketer.ListManageCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListManageFeedback</servlet-name>
+        <servlet-class>controller.marketer.ListManageFeedback</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <servlet-name>AddBlogServlet</servlet-name>
+        <url-pattern>/addblog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BlogManage</servlet-name>
-        <url-pattern>/client/admin/blogmanage</url-pattern>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <url-pattern>/deleteblog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListBlogManage</servlet-name>
-        <url-pattern>/client/admin/listblogmanage</url-pattern>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <url-pattern>/editblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListManageBlogServlet</servlet-name>
+        <url-pattern>/listmanageblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListManageCustomerServlet</servlet-name>
+        <url-pattern>/listmanagecustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListManageFeedback</servlet-name>
+        <url-pattern>/listmanagefeedback</url-pattern>
     </servlet-mapping>
 </web-app>

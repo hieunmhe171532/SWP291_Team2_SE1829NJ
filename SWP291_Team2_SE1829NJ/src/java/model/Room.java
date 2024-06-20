@@ -5,51 +5,68 @@
 package model;
 
 import java.security.Timestamp;
+import java.sql.Date;
 
 /**
  *
- * @author hieum
+ * @author ADMIN
  */
 public class Room {
     private int id;
     private String name;
     private String image;
+       private String room_floor;
     private int userQuantity;
     private float area;
-    private int quantity;
+
     private float price;
-    private boolean status;
+    private int status;
+     private boolean isActive;
     private String description;
-    private int hotel_id;
-    private int type_id;
-    private Timestamp createAt;
-    private Timestamp updateAt;
-    private Timestamp delateAt;
-    private boolean isDelete;
+    private Hotel hotel;
+    private TypeRoom typeRoom;
+     private boolean isDelete;
+
 
     public Room() {
     }
 
-    public Room(int id, String name, String image, int userQuantity, float area, int quantity, float price, boolean status, String description, int hotel_id, int type_id, Timestamp createAt, Timestamp updateAt, Timestamp delateAt, boolean isDelete) {
+
+
+
+
+    public Room(int id, String name, String image, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.room_floor = room_floor;
         this.userQuantity = userQuantity;
         this.area = area;
-        this.quantity = quantity;
         this.price = price;
         this.status = status;
+        this.isActive = isActive;
         this.description = description;
-        this.hotel_id = hotel_id;
-        this.type_id = type_id;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.delateAt = delateAt;
-        this.isDelete = isDelete;
+        this.hotel = hotel;
+        this.typeRoom = typeRoom;
+
+    
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", isActive=" + isActive + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + '}';
     }
 
     public void setId(int id) {
@@ -72,6 +89,14 @@ public class Room {
         this.image = image;
     }
 
+    public String getRoom_floor() {
+        return room_floor;
+    }
+
+    public void setRoom_floor(String room_floor) {
+        this.room_floor = room_floor;
+    }
+
     public int getUserQuantity() {
         return userQuantity;
     }
@@ -88,14 +113,6 @@ public class Room {
         this.area = area;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public float getPrice() {
         return price;
     }
@@ -104,11 +121,11 @@ public class Room {
         this.price = price;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -120,44 +137,20 @@ public class Room {
         this.description = description;
     }
 
-    public int getHotel_id() {
-        return hotel_id;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setHotel_id(int hotel_id) {
-        this.hotel_id = hotel_id;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
-    public int getType_id() {
-        return type_id;
+    public TypeRoom getTypeRoom() {
+        return typeRoom;
     }
 
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
-
-    public Timestamp getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public Timestamp getDelateAt() {
-        return delateAt;
-    }
-
-    public void setDelateAt(Timestamp delateAt) {
-        this.delateAt = delateAt;
+    public void setTypeRoom(TypeRoom typeRoom) {
+        this.typeRoom = typeRoom;
     }
 
     public boolean isIsDelete() {
@@ -168,13 +161,6 @@ public class Room {
         this.isDelete = isDelete;
     }
 
-    @Override
-    public String toString() {
-        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", userQuantity=" + userQuantity + ", area=" + area + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", description=" + description + ", hotel_id=" + hotel_id + ", type_id=" + type_id + ", createAt=" + createAt + ", updateAt=" + updateAt + ", delateAt=" + delateAt + ", isDelete=" + isDelete + '}';
-    }
 
-    
-
-    
-    
+ 
 }
