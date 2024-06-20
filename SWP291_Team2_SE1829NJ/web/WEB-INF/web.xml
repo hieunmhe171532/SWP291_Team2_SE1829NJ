@@ -9,16 +9,8 @@
         <servlet-class>controller.RegisterController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Dashboard</servlet-name>
-        <servlet-class>controller.admin.Dashboard</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>roomManagement</servlet-name>
         <servlet-class>controller.admin.roomManagement</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>accountManagement</servlet-name>
-        <servlet-class>controller.admin.accountManagement</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListManageBlogServlet</servlet-name>
@@ -40,13 +32,12 @@
         <servlet-name>ViewCustomerServlet</servlet-name>
         <servlet-class>controller.marketer.ViewCustomerServlet</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>ListFeedbackServlet</servlet-name>
         <servlet-class>controller.marketer.ListFeedbackServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListFeedbackServlet</servlet-name>
-        <servlet-class>controller.marketer.ListFeedbackServlet</servlet-class>
         <servlet-name>homepage</servlet-name>
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
@@ -107,14 +98,6 @@
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>roomManagement</servlet-name>
-        <url-pattern>/roommanagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>accountManagement</servlet-name>
-        <url-pattern>/accountmanagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ListManageBlogServlet</servlet-name>
         <url-pattern>/listmanageblog</url-pattern>
     </servlet-mapping>
@@ -133,10 +116,6 @@
     <servlet-mapping>
         <servlet-name>ViewCustomerServlet</servlet-name>
         <url-pattern>/viewcustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListFeedbackServlet</servlet-name>
-        <url-pattern>/listfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListFeedbackServlet</servlet-name>

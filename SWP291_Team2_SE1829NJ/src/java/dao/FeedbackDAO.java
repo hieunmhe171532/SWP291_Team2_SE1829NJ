@@ -67,12 +67,13 @@ public class FeedbackDAO {
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
-        String sql = "UPDATE [dbo].[Feedback]\n"
-                + "SET\n"
-                + "    [img] = ?,\n"
-                + "    [description] = ?,\n"
-                + "    [createAt]=?\n"
-                + "WHERE id=?";
+        String sql = """
+                     UPDATE [dbo].[Feedback]
+                     SET
+                         [img] = ?,
+                         [description] = ?,
+                         [createAt]=?
+                     WHERE id=?""";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
@@ -86,8 +87,9 @@ public class FeedbackDAO {
     }
     public void deleteFeedback(String id) {
         Connection conn = dbContext.getConnection();
-        String sql = "DELETE FROM [dbo].[Feedback]\n"
-                + "WHERE id=?";
+        String sql = """
+                     DELETE FROM [dbo].[Feedback]
+                     WHERE id=?""";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
 

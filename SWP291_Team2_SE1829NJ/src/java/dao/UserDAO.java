@@ -31,20 +31,23 @@ import java.util.logging.Logger;
 import model.Blog;
 
 public class UserDAO {
-
-    private final DBContext dbContext;
-    private final Connection connection;
+      DBContext dbContext;
+     Connection connection;
 
     public UserDAO() {
         dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();
+        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
     }
+    
+
 
     public void createUser(User user) {
         String name, gender, address;
         Date dob;
         String sql = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (
+
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getUsername().getUsername());
             pstmt.setString(2, user.getName());
@@ -78,7 +81,7 @@ public class UserDAO {
 //    return count;
 //}
     public List<User> getAllUser() {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -87,7 +90,7 @@ public class UserDAO {
         try {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -98,7 +101,7 @@ public class UserDAO {
                 a.setPassword(result.getString(2));
                 a.setPhone(result.getString(3));
                 a.setEmail(result.getString(4));
-                a.setRole(result.getString(5));
+                a.setRole_id(result.getString(5));
                 a.setIsActive(result.getBoolean(6));
                 u.setId(result.getInt(7));
                 u.setName(result.getString(8));
@@ -120,7 +123,7 @@ public class UserDAO {
         return t;
     }
     public List<User> getUserByName(String name) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         List<User> t = new ArrayList<>();
 
@@ -128,7 +131,7 @@ public class UserDAO {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username\n"
                     + "WHERE name like ? ";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + name + "%");
 
             ResultSet result = stm.executeQuery();
@@ -140,7 +143,7 @@ public class UserDAO {
                 a.setPassword(result.getString(2));
                 a.setPhone(result.getString(3));
                 a.setEmail(result.getString(4));
-                a.setRole(result.getString(5));
+                a.setRole_id(result.getString(5));
                 a.setIsActive(result.getBoolean(6));
                 u.setId(result.getInt(7));
                 u.setName(result.getString(8));
@@ -159,14 +162,14 @@ public class UserDAO {
 
         return t;
     }
-    public User getUserById(String id) {
-        Connection conn = dbContext.getConnection();
+    public User getUserById(String id){
+//        Connection conn = dbContext.getConnection();
 
         try {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username\n"
                     + "WHERE id = ? ";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
 
             ResultSet result = stm.executeQuery();
@@ -178,7 +181,7 @@ public class UserDAO {
                 a.setPassword(result.getString(2));
                 a.setPhone(result.getString(3));
                 a.setEmail(result.getString(4));
-                a.setRole(result.getString(5));
+                a.setRole_id(result.getString(5));
                 a.setIsActive(result.getBoolean(6));
                 u.setId(result.getInt(7));
                 u.setName(result.getString(8));

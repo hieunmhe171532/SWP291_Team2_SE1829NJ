@@ -19,7 +19,7 @@ import model.Room;
  *
  * @author ADMIN
  */
-@WebServlet(name = "RoomDetailController", urlPatterns = {"/client/room-detail"})
+@WebServlet(name = "RoomDetailController", urlPatterns = {"/room-detail"})
 public class RoomDetailController extends HttpServlet {
 
     @Override

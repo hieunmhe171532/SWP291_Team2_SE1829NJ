@@ -24,16 +24,18 @@ import model.Blog;
  */
 public class BlogDAO {
 
-    DBContext dbContext;
+     DBContext dbContext;
+    Connection connection;
 
     public BlogDAO() {
-        dbContext = DBContext.getInstance();
+         dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
     }
     
     
 
     public void insertBlog(String title, String detail, String briefinfo, String image, int flag, String username) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -43,7 +45,7 @@ public class BlogDAO {
                 + "( \n"
                 + " ?, ?, ?,?,?,?,?\n"
                 + ")";
-        try ( PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
@@ -59,7 +61,7 @@ public class BlogDAO {
     }
 
     public void editBlog(String title, String detail, String briefinfo, String image, String flag, String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -71,7 +73,7 @@ public class BlogDAO {
                 + "    [Image] = ?,\n"
                 + "    [flag] = ?\n"
                 + "WHERE id=?";
-        try ( PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
@@ -86,14 +88,14 @@ public class BlogDAO {
     }
 
     public void deleteBlog(String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
         String sql = "DELETE FROM [dbo].[Blog]\n"
                 + "WHERE id=?";
-        try ( PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, id);
 
             pstmt.executeUpdate();
@@ -104,14 +106,14 @@ public class BlogDAO {
     }
 
     public Blog getBlogById(String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "SELECT * from Blog\n"
                     + "where id=?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
 
             ResultSet result = stm.executeQuery();
@@ -139,12 +141,12 @@ public class BlogDAO {
     }
 
     public List<Blog> getAllBlog() {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "select * from Blog";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -170,14 +172,14 @@ public class BlogDAO {
     }
 
     public List<Blog> getBlogByTitle(String title) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "SELECT * FROM Blog\n"
                     + "WHERE title LIKE ?;";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + title + "%");
 
             ResultSet result = stm.executeQuery();
@@ -203,18 +205,51 @@ public class BlogDAO {
         return t;
     }
 
-    public static void main(String[] args) {
-        BlogDAO dao = new BlogDAO();
-//       dao.insertBlog("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
-//        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
-//        List<Blog> b=dao.searchByTitle("k");
-        List<Blog> b = dao.getAllBlog();
-//        b.stream().forEach(c -> {
-//            System.out.println(c);
-//        });
-        for (Blog blog : b) {
-            System.out.println(blog);
+//    public static void main(String[] args) {
+//        BlogDAO dao = new BlogDAO();
+////       dao.insertBlog("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
+////        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
+////        List<Blog> b=dao.searchByTitle("k");
+//        List<Blog> b = dao.getAllBlog();
+////        b.stream().forEach(c -> {
+////            System.out.println(c);
+////        });
+//        for (Blog blog : b) {
+//            System.out.println(blog);
+//        }
+////        dao.deleteBlog("6005");
+//    }
+    
+    public int countBlog() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS countBlog FROM Blog";
+
+        try (
+                 PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery()
+                ) {
+
+            if (rs.next()) {
+                count = rs.getInt("countBlog");
+            }
+
+        } catch (SQLException e) {
+            // Handle exception (e.g., log error, notify user, etc.)
+            e.printStackTrace();
         }
-//        dao.deleteBlog("6005");
+
+        return count;
     }
+
+    /**
+     * Main method to test countBlog() functionality.
+     * 
+     * @param args The command line arguments (not used).
+     */
+    public static void main(String[] args) {
+        BlogDAO blogDAO = new BlogDAO();
+        int count = blogDAO.countBlog();
+        System.out.println("Number of Blogs: " + count);
+    }
+    
 }
