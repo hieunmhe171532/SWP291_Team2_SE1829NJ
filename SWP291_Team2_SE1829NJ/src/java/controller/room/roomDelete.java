@@ -6,12 +6,15 @@
 package controller.room;
 
 
+import dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -64,11 +67,32 @@ public class roomDelete extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+    
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html; charset=UTF-8");
+
+    HttpSession session = request.getSession();
+    model.Account acc = (model.Account) session.getAttribute("acc");
+
+    if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) { // Ensure admin role
+        int roomId = Integer.parseInt(request.getParameter("id"));
+        RoomDAO dao = new RoomDAO();
+        boolean deleteSuccessful = dao.deleteRoom(roomId);
+
+        if (deleteSuccessful) {
+            request.setAttribute("message", "Room deleted successfully!");
+            request.getRequestDispatcher("roommanagement").forward(request, response);
+        } else {
+            request.setAttribute("error", "Failed to delete room.");
+            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+        }
+    } else {
+        response.sendRedirect("login");
     }
+}
+
 
     /** 
      * Returns a short description of the servlet.

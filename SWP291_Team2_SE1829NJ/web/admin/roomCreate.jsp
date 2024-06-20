@@ -81,7 +81,7 @@
                             <form action="roomcreate" method="post"> <!-- Make sure to provide the correct action -->
                                 <div class="form-group">
                                     <label for="name">Room ID:</label>
-                                    <input type="text" class="form-control" id="id" name="id" required>
+                                    <input type="number" class="form-control" id="id" name="id" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Room Name:</label>
@@ -138,7 +138,8 @@
                                 <div class="form-group">
                                     <label for="isActive">Active:</label>
                                     <select class="form-control" id="isActive" name="isActive">
-
+  <option value="true">Active</option>
+                                            <option value="false">Inactive</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create Room</button>
@@ -203,7 +204,7 @@
             //Thời Gian
 
             <script type="text/javascript">
-           var data = {
+            var data = {
                     labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
                     datasets: [{
                     ill: "rgb(255, 212, 59)",
@@ -220,81 +221,82 @@
                             pointHighlightStroke: "rgb(9, 109, 239)",
                             data: [48, 48, 49, 39, 86, 10]
                     }
-            ]
+                    ]
+     
             };                 var ctxl = $("#lineChartDemo").get(0).getContext("2d");
             var lineChart = new Chart(ctxl).Line(data);
                 
             var ctxb = $("#barChartDemo").get(0).getContext("2d");
-               var barChart = new Chart(ctxb).Bar(data);
-        </script>
-         <script type="text/javascript">                             //Thời Gian
+                var barChart = new Chart(ctxb).Bar(data);
+            </script>
+            <script type="text/javascript">                             //Thời Gian
                 function time() {
-                     var today = new Date();
-             var weekday = new Array(7);
-             weekday[0] = "Chủ Nhật";
-             weekday[1] = "Thứ Hai";
-             weekday[2] = "Thứ Ba";
-             weekday[3] = "Thứ Tư";
-             weekday[4] = "Thứ Năm";
-             weekday[5] = "Thứ Sáu";
-             weekday[6] = "Thứ Bảy";
-             var day = weekday[today.getDay()];
-             var dd = today.getDate();
-             var mm = today.getMonth() + 1;
-             var yyyy = today.getFullYear();
-             var h = today.getHours();
-             var m = today.getMinutes();
-             m = checkTime(m);
-             nowTime = h + ":" + m + "";
-             if (dd < 10) {
-             dd = '0' + dd;
-             }
-             if (mm < 10) {
-             mm = '0' + mm;
-             }
-             today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-             tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                     '</span>';
-             document.getElementById("clock").innerHTML = tmp;
-             clocktime = setTimeout("time()", "1000", "Javascript");
-             function checkTime(i) {
-             if (i < 10) {
-                                i = "0"  + i;
-             }
-             return i ; 
-             }
-         } 
-                                        </script   >
-
-
-
-                     </body>
-
-
-
-                     <script>
-            function redirectToAccDetails(username) {
-                     // Construct the URL with the username pa r ameter 
-                     var url = "accdetail?username=" + encodeURIComponent(username);
-             // Redirect to the URL
-             window.location.href = url;
+                    var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            m = checkTime(m);
+            nowTime = h + ":" + m + "";
+            if (dd < 10) {
+            dd = '0' + dd;
             }
+            if (mm < 10) {
+            mm = '0' + mm;
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                    '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+            function checkTime(i) {
+            if (i < 10) {
+            i = "0" + i;
+            }
+            return i;
+                                }
+                                } 
+                                 </script    > 
+
+
+
+                    < / body>
+ 
+
+                                        
+                    <script>
+                                    function redirectToAccDetails(username) {
+                    // Construct the URL with the username pa r ameter 
+                    var url = "accdetail?username=" + encodeURIComponent(username);
+            // Redirect to the URL
+                                window.location.href = url;
+                                    }
 </script>
 
-<script>
-            $(document).ready(function () {
-                     $('#togglePassword').click(function () {
-             var passwordField = $('#password');
-             var passwordFieldType = passwordField.attr('type');
-             if (passwordFieldType === 'password') {
-             passwordField.attr('type', 'text');
-             $('#eyeIcon').removeClass('fa-eye').addClass('fa-eye-slash');
-             } else {
-             passwordField.attr('type', 'password');
+                                    <script>
+                                    $(document).ready(function () {
+                    $('#togglePassword').click(function () {
+            var passwordField = $('#password');
+            var passwordFieldType = passwordField.attr('type');
+            if (passwordFieldType === 'password') {
+            passwordField.attr('type', 'text');
+            $('#eyeIcon').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+            passwordField.attr('type', 'password');
              $('#eyeIcon').removeClass('fa-eye-slash').addClass('fa-eye');
-             }
-             });
-                     };);
+            }
+            });
+                                };);
 </script>
 
 </html>

@@ -1,5 +1,6 @@
 package dao;
 
+import dal.DBContext;
 import model.Booking;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +17,7 @@ import model.User;
  * 
  * Author: HUNG
  */
-public class BillDAO{
+public class BillDAO {
     private final DBContext dbContext;
     private final Connection connection;
 

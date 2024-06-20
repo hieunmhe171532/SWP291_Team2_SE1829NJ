@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,8 +30,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
 
-public class UserDAO extends DBContext{
+public class UserDAO {
+      DBContext dbContext;
+     Connection connection;
 
+    public UserDAO() {
+        dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+    }
+    
 
 
     public void createUser(User user) {
@@ -38,7 +46,8 @@ public class UserDAO extends DBContext{
         Date dob;
         String sql = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
         try (
-                Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getUsername().getUsername());
             pstmt.setString(2, user.getName());
@@ -72,7 +81,7 @@ public class UserDAO extends DBContext{
 //    return count;
 //}
     public List<User> getAllUser() {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -81,7 +90,7 @@ public class UserDAO extends DBContext{
         try {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -114,7 +123,7 @@ public class UserDAO extends DBContext{
         return t;
     }
     public List<User> getUserByName(String name) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         List<User> t = new ArrayList<>();
 
@@ -122,7 +131,7 @@ public class UserDAO extends DBContext{
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username\n"
                     + "WHERE name like ? ";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + name + "%");
 
             ResultSet result = stm.executeQuery();
@@ -154,13 +163,13 @@ public class UserDAO extends DBContext{
         return t;
     }
     public User getUserById(String id){
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         try {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username\n"
                     + "WHERE id = ? ";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
 
             ResultSet result = stm.executeQuery();

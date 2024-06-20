@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import model.UserAccount;
  *
  * @author HUNG
  */
-public class UserAccountDAO extends DBContext{
+public class UserAccountDAO {
 
 
  public UserAccount getUserAccountByUsername(String username) {
@@ -72,8 +73,8 @@ public List<UserAccount> getAllUserAccount() {
                  "JOIN [Account] a ON u.username = a.username";
 
     List<UserAccount> userAccounts = new ArrayList<>();
-    try (Connection conn = dbContext.getConnection();
-         PreparedStatement stm = conn.prepareStatement(sql)) {
+    try (
+         PreparedStatement stm = connection.prepareStatement(sql)) {
 
         ResultSet result = stm.executeQuery();
 
@@ -104,7 +105,7 @@ public List<UserAccount> getAllUserAccount() {
     return userAccounts;
 }
 
-public static void main(String[] args) {
+public static void main(String[] args)  {
     UserAccountDAO dao = new UserAccountDAO();
     
     // Fetch and print a single account

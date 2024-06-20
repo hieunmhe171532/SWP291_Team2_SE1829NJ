@@ -1,27 +1,28 @@
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Hotel;
 
-public class HotelDAO  {
+public class HotelDAO{
     
 // 
-//    private final DBContext dbContext;
-//    private final Connection conn;
-//
-//    public HotelDAO() {
-//        dbContext = DBContext.getInstance();
-//        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
-//    }
+    private final DBContext dbContext;
+    private final Connection connection ;
+
+    public HotelDAO() {
+        dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+    }
 
     public Hotel getHotelByID(int id) {
         Hotel hotel = null;
         String query = "SELECT * FROM Hotel WHERE id = ?";
         
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

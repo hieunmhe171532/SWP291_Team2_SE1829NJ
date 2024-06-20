@@ -14,6 +14,18 @@ public class Feedback {
     private String description;
     private String createAt;
 
+    private User user;
+    private Room room;
+
+    public Feedback(int id, String img, String description, String createAt, User user, Room room) {
+        this.id = id;
+        this.img = img;
+        this.description = description;
+        this.createAt = createAt;
+        this.user = user;
+        this.room = room;
+    }
+    
     public Feedback() {
     }
 
@@ -22,6 +34,22 @@ public class Feedback {
         this.img = img;
         this.description = description;
         this.createAt = createAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public int getId() {

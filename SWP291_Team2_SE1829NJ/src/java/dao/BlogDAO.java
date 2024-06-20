@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class BlogDAO {
     
 
     public void insertBlog(String title, String detail, String briefinfo, String image, int flag, String username) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -44,7 +45,7 @@ public class BlogDAO {
                 + "( \n"
                 + " ?, ?, ?,?,?,?,?\n"
                 + ")";
-        try ( PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
@@ -60,7 +61,7 @@ public class BlogDAO {
     }
 
     public void editBlog(String title, String detail, String briefinfo, String image, String flag, String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -72,7 +73,7 @@ public class BlogDAO {
                 + "    [Image] = ?,\n"
                 + "    [flag] = ?\n"
                 + "WHERE id=?";
-        try ( PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
@@ -87,14 +88,14 @@ public class BlogDAO {
     }
 
     public void deleteBlog(String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
         String sql = "DELETE FROM [dbo].[Blog]\n"
                 + "WHERE id=?";
-        try ( PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, id);
 
             pstmt.executeUpdate();
@@ -105,14 +106,14 @@ public class BlogDAO {
     }
 
     public Blog getBlogById(String id) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "SELECT * from Blog\n"
                     + "where id=?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
 
             ResultSet result = stm.executeQuery();
@@ -140,12 +141,12 @@ public class BlogDAO {
     }
 
     public List<Blog> getAllBlog() {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "select * from Blog";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -171,14 +172,14 @@ public class BlogDAO {
     }
 
     public List<Blog> getBlogByTitle(String title) {
-        Connection conn = dbContext.getConnection();
+//        Connection conn = dbContext.getConnection();
 
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "SELECT * FROM Blog\n"
                     + "WHERE title LIKE ?;";
-            PreparedStatement stm = conn.prepareStatement(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + title + "%");
 
             ResultSet result = stm.executeQuery();
