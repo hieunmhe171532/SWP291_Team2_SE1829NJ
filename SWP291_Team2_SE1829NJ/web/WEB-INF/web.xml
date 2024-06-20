@@ -32,6 +32,11 @@
         <servlet-name>ViewCustomerServlet</servlet-name>
         <servlet-class>controller.marketer.ViewCustomerServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>ListFeedbackServlet</servlet-name>
+        <servlet-class>controller.marketer.ListFeedbackServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>homepage</servlet-name>
         <servlet-class>controller.homepage</servlet-class>
@@ -89,6 +94,10 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ListManageBlogServlet</servlet-name>
         <url-pattern>/listmanageblog</url-pattern>
     </servlet-mapping>
@@ -109,6 +118,10 @@
         <url-pattern>/viewcustomer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ListFeedbackServlet</servlet-name>
+        <url-pattern>/listmanagerfeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>homepage</servlet-name>
         <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
@@ -123,10 +136,6 @@
     <servlet-mapping>
         <servlet-name>roomEdit</servlet-name>
         <url-pattern>/roomedit</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Dashboard</servlet-name>
-        <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>accCreate</servlet-name>

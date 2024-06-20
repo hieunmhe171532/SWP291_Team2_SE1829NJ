@@ -62,7 +62,7 @@
             .search-box {
                 max-width: var(--search-max-width);
                 min-width: var(--search-min-width);
-                height: 44px;
+                height: 50px;
                 border: 1px solid var(--input-border-color);
                 border-radius: var(--border-radius);
                 padding: 5px 15px;
@@ -123,10 +123,10 @@
 
             /*Search button*/
             .search-box-icon {
-                width: 52px;
+                width: 50px;
                 height: 44px;
                 position: absolute;
-                top: -2px;
+                top: 1px;
                 right: -21px;
                 background: transparent;
                 border-bottom-right-radius: var(--border-radius);
@@ -153,7 +153,7 @@
             }
 
             .btn-icon-content:hover {
-                opacity: .8;
+                opacity: .10;
             }
 
             .search-icon {
@@ -184,15 +184,16 @@
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="container mt-5">
-
-                            <div class="d-flex">
-                                <h4 class="card-title col-8" style="font-size: 30px">Feedback List</h4>
-                                <button class="custom-button " data-bs-toggle="collapse" data-bs-target="#filter" style="border: 1px solid #011431;" >Sorting list</button>
-                                <form action="action">
+                            <form action="action">
+                                <div class="d-flex">
+                                    <h4 class="card-title col-8" style="font-size: 30px">Feedback List</h4>
+                                    <a class="custom-button" data-bs-toggle="collapse" href="#filter" role="button" style="border: 1px solid #011431;" aria-expanded="false" aria-controls="collapseFilter">
+                                        Search By
+                                    </a>
                                     <div class="search">
                                         <div class="search-box">
                                             <div class="search-field">
-                                                <input placeholder="Search..." class="input" type="text">
+                                                <input placeholder="Search..." class="input" type="text" name="search">
                                                 <div class="search-box-icon">
                                                     <button class="btn-icon-content">
                                                         <i class="search-icon">
@@ -203,29 +204,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
 
-                            </div>
-
-                            <div id="filter" class="collapse">
-                                <div class="card card-body d-flex">
-                                    <div class="filterid">
-                                        <h5>Sort by id</h5>
-                                        <input type="radio" name="sort" value="1">Ascending<br>
-                                        <input type="radio" name="sort" value="2">descending
-                                    </div>
-                                    <div class="filterroomid">
-
-                                    </div>
-                                    <div>
-
-                                    </div>
-                                    <div>
-                                        
-                                    </div>
-                                   
                                 </div>
-                            </div>
+
+                                <div id="filter" class="collapse">
+                                    <div class="card card-body">
+                                        <input type="radio" name="name" value="sid">Search by id
+                                        <input type="radio" name="name" value="sid">Search by comment
+                                        <input type="radio" name="name" value="sid">Search by Commentator
+                                        <input type="radio" name="name" value="sid">Search by Commentator
+                                        <input type="radio" name="name" value="sid">Search by Commentator
+                                        <input type="radio" name="name" value="sid">Search by Room Id
+                                        <input type="radio" name="name" value="sid">Search by CreatedAt
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
                         <div class="table-responsive-lg mt-5">
