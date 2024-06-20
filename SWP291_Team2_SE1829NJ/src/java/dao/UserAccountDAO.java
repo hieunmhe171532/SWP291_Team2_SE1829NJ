@@ -22,7 +22,8 @@ import model.UserAccount;
  * @author HUNG
  */
 public class UserAccountDAO {
-
+    DBContext dbContext;
+    Connection connection;
 
  public UserAccount getUserAccountByUsername(String username) {
         String sql = "SELECT u.id, u.name AS fullname, u.dob, u.gender, u.address, " +
