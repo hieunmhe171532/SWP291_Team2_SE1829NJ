@@ -96,4 +96,12 @@
         <servlet-name>SubmitFeedback</servlet-name>
         <url-pattern>/submitfeedback</url-pattern>
     </servlet-mapping>
+<servlet>
+    <servlet-name>SubmitFeedbackus</servlet-name>
+    <servlet-class>controller.SubmitFeedbackus</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>SubmitFeedbackus</servlet-name>
+    <url-pattern>/submitFeedback</url-pattern>
+</servlet-mapping>
 </web-app>

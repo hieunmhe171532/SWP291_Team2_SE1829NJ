@@ -1,85 +1,73 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
+import dao.FeedbackusDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Feedbackus;
 
-/**
- *
- * @author Linh Linh
- */
-public class SubmitFeedback extends HttpServlet {
+@WebServlet(name = "SubmitFeedbackus", urlPatterns = {"/submitFeedback"})
+public class SubmitFeedbackus extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        // Lấy tham số từ form
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String feedbackContent = request.getParameter("feedback");
+        
+        // Tạo đối tượng Feedbackus
+        Feedbackus feedback = new Feedbackus(name, email, feedbackContent);
+        
+        // Tạo thể hiện của FeedbackusDAO
+        FeedbackusDAO feedbackDAO = new FeedbackusDAO();
+        
+        // Gửi phản hồi vào cơ sở dữ liệu
+        boolean feedbackSubmitted = feedbackDAO.submitFeedback(feedback);
+        
+        // Chuẩn bị phản hồi
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SubmitFeedback</title>");            
+            out.println("<title>Feedback Submitted</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SubmitFeedback at " + request.getContextPath() + "</h1>");
+            if (feedbackSubmitted) {
+                out.println("<h1>Cảm ơn bạn đã gửi phản hồi!</h1>");
+                // Hiển thị dữ liệu feedback đã gửi ở đây nếu cần
+                out.println("<p>Tên: " + feedback.getName() + "</p>");
+                out.println("<p>Email: " + feedback.getEmail() + "</p>");
+                out.println("<p>Nội dung phản hồi: " + feedback.getMessage() + "</p>");
+            } else {
+                out.println("<h1>Cảm ơn bạn phản hồi cho chúng tôi.</h1>");
+            }
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Handles feedback submission";
+    }
 }
