@@ -32,7 +32,7 @@ public class ListFeedbackServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         FeedbackDAO daof=new FeedbackDAO();
-        List<Feedback> listf=daof.getAllFeedback()
+        List<Feedback> listf=daof.getAllFeedback();
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
