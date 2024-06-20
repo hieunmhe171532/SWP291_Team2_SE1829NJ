@@ -57,45 +57,6 @@
         .section-content {
             margin-bottom: 2rem;
         }
-        .feedback-section {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .feedback-section h3 {
-            margin-bottom: 1rem;
-        }
-        .feedback-section form {
-            display: flex;
-            flex-direction: column;
-        }
-        .feedback-section form .form-group {
-            margin-bottom: 1rem;
-        }
-        .feedback-section form .form-group label {
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-        .feedback-section form .form-group input,
-        .feedback-section form .form-group textarea {
-            padding: 0.75rem;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-            width: 100%;
-        }
-        .feedback-section form .form-group textarea {
-            resize: vertical;
-        }
-        .feedback-section form button {
-            padding: 0.75rem 1.5rem;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 0.25rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -146,26 +107,6 @@
                         
                     </p>
                 </div>
-                <!-- Feedback Section -->
-                <div class="section-content feedback-section">
-                    <h3 class="section-heading">Feedback</h3>
-                    <form action="submitFeedback" method="post">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="feedback">Feedback:</label>
-                            <textarea id="feedback" name="feedback" rows="5" required></textarea>
-                        </div>
-                        <button type="submit">Submit Feedback</button>
-                    </form>
-                </div>
-                <!-- End of Feedback Section -->
             </div>
         </div>
     </div>

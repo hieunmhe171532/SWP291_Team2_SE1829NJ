@@ -22,7 +22,13 @@ import model.UserAccount;
  * @author HUNG
  */
 public class UserAccountDAO {
+        private final DBContext dbContext;
+    private final Connection connection;
 
+    public UserAccountDAO() {
+         dbContext = DBContext.getInstance();
+        connection = dbContext.getConnection();
+    }
 
  public UserAccount getUserAccountByUsername(String username) {
         String sql = "SELECT u.id, u.name AS fullname, u.dob, u.gender, u.address, " +
@@ -73,8 +79,8 @@ public List<UserAccount> getAllUserAccount() {
                  "JOIN [Account] a ON u.username = a.username";
 
     List<UserAccount> userAccounts = new ArrayList<>();
-    try (
-         PreparedStatement stm = connection.prepareStatement(sql)) {
+    try (Connection conn = dbContext.getConnection();
+         PreparedStatement stm = conn.prepareStatement(sql)) {
 
         ResultSet result = stm.executeQuery();
 
@@ -105,7 +111,7 @@ public List<UserAccount> getAllUserAccount() {
     return userAccounts;
 }
 
-public static void main(String[] args)  {
+public static void main(String[] args) {
     UserAccountDAO dao = new UserAccountDAO();
     
     // Fetch and print a single account

@@ -10,7 +10,39 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/open-iconic-bootstrap.min.css">
         
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="css/animate.css">
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.carousel.min.css">
+        <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.theme.default.min.css">
+        <link rel="stylesheet" type="text/css" href="css/owl.theme.default.min.css">
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/aos.css">
+        <link rel="stylesheet" type="text/css" href="css/aos.css">
+
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/ionicons.min.css">
+        <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
+
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.timepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
+
+
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/flaticon.css">
+        <link rel="stylesheet" type="text/css" href="css/flaticon.css">
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/icomoon.css">
+        <link rel="stylesheet" type="text/css" href="css/icomoon.css">
         
         <link rel="stylesheet" type="text/css" href="bootstrap/css/newcss.css">
         <link rel="stylesheet" type="text/css" href="css/newcss.css">
@@ -223,39 +255,39 @@
 
                 <div class="modal fade" id="ModalUP${b.id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                      data-keyboard="false">
-                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <form action="editblog" method="post">
                                 <div class="modal-body">
                                     <div class="modal-header">						
-                                        <h2 class="modal-title" style="color: black">Edit Blog</h2>
+                                        <h4 class="modal-title" style="color: black">Edit Product</h4>
                                     </div>
                                     <div class="form-group">
-                                        <label><b>Id</b></label>
+                                        <label>Id</label>
                                         <input name="id" type="text" class="form-control" value="${b.getId()}" readonly="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label><b>Title</b></label>
+                                        <label>Title</label>
                                         <input name="title" type="text" value="${b.title}" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label><b>Brief Infomation</b></label>
+                                        <label>Brief Infomation</label>
                                         <input name="brief" type="text" value="${b.briefinfo}" class="form-control" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <label><b>Detail</b></label>
+                                        <label>Detail</label>
                                         <input name="detail" type="text" value="${b.detail}" class="form-control" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <label><b>Image</b></label>
+                                        <label>Image</label>
                                         <input name="image" type="url" value="${b.image}" class="form-control" required>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <div><label><b>Flag</b></label>
+                                        <div><label>Flag</label>
                                             <c:if test="${b.flag==1}">
                                             <input type="checkbox" checked="" value="${b.flag}" name="flag">
                                             </c:if>
@@ -279,14 +311,14 @@
                 <!-- Delete modal window -->
                 <div class="modal fade" id="ModalDEL${b.getId()}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                      data-keyboard="false">
-                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <form method="POST" action="deleteblog">
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <span class="thong-tin-thanh-toan">
-                                                <h5>Are you sure you want to delete this Blog?</h5>
+                                                <h5>Bạn có chắc chắn muốn xóa Blog này?.</h5>
                                             </span>
                                         </div>
                                     </div>

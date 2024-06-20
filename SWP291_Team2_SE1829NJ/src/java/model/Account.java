@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
-
-
 
 /**
  *
@@ -150,9 +148,6 @@ public class Account {
     public String toString() {
         return "Account{" + "username=" + username + ", password=" + password + ", phone=" + phone + ", email=" + email + ", role=" + role + ", isActive=" + isActive + ", fullname=" + fullname + ", dob=" + dob + ", gender=" + gender + ", address=" + address + '}';
     }
-        public String getFormattedDob() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return sdf.format(this.dob);
-    }
+    
     
 }

@@ -7,22 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Hotel;
 
-public class HotelDAO{
+public class HotelDAO  {
     
-// 
+ 
     private final DBContext dbContext;
-    private final Connection connection ;
+    private final Connection conn;
 
     public HotelDAO() {
         dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+        conn = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
     }
 
     public Hotel getHotelByID(int id) {
         Hotel hotel = null;
         String query = "SELECT * FROM Hotel WHERE id = ?";
         
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

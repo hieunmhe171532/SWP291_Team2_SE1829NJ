@@ -31,23 +31,20 @@ import java.util.logging.Logger;
 import model.Blog;
 
 public class UserDAO {
-      DBContext dbContext;
-     Connection connection;
+
+    private final DBContext dbContext;
+    private final Connection connection;
 
     public UserDAO() {
         dbContext = DBContext.getInstance();
-        connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
+        connection = dbContext.getConnection();
     }
-    
-
 
     public void createUser(User user) {
         String name, gender, address;
         Date dob;
         String sql = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
-        try (
-
-                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (Connection conn = dbContext.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getUsername().getUsername());
             pstmt.setString(2, user.getName());
@@ -61,27 +58,8 @@ public class UserDAO {
         }
     }
 
-//                      public int countUser() {
-//    int count = 0;
-//    String sql = " SELECT COUNT(*) AS TotalUsers FROM [dbo].[User]";
-//    
-//    try (Connection conn = dbContext.getConnection();
-//         PreparedStatement stm = conn.prepareStatement(sql);
-//         ResultSet rs = stm.executeQuery()) {
-//        
-//        if (rs.next()) {
-//            count = rs.getInt(1);
-//        }
-//        
-//    } catch (SQLException e) {
-//        // Xử lý ngoại lệ (ví dụ: log lỗi, thông báo cho người dùng, etc.)
-//
-//    }
-//    
-//    return count;
-//}
     public List<User> getAllUser() {
-//        Connection conn = dbContext.getConnection();
+        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
@@ -90,7 +68,7 @@ public class UserDAO {
         try {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username";
-            PreparedStatement stm = connection.prepareStatement(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
 
             ResultSet result = stm.executeQuery();
 
@@ -123,15 +101,16 @@ public class UserDAO {
         return t;
     }
     public List<User> getUserByName(String name) {
-//        Connection conn = dbContext.getConnection();
+        Connection conn = dbContext.getConnection();
 
         List<User> t = new ArrayList<>();
 
         try {
-            String sql = "SELECT * from Account a JOIN [User] u \n"
-                    + "on a.username=u.username\n"
-                    + "WHERE name like ? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
+            String sql = """
+                         SELECT * from Account a JOIN [User] u 
+                         on a.username=u.username
+                         WHERE name like ? """;
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + name + "%");
 
             ResultSet result = stm.executeQuery();
@@ -163,13 +142,13 @@ public class UserDAO {
         return t;
     }
     public User getUserById(String id){
-//        Connection conn = dbContext.getConnection();
+        Connection conn = dbContext.getConnection();
 
         try {
             String sql = "SELECT * from Account a JOIN [User] u \n"
                     + "on a.username=u.username\n"
                     + "WHERE id = ? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, id);
 
             ResultSet result = stm.executeQuery();

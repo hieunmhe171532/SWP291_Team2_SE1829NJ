@@ -76,55 +76,45 @@
                                        name="AccountId" hidden="">
                             </div>
                             <div class="col-md-12"><label class="labels">Account Name</label>
-                                <input type="text" class="form-control" placeholder="account name" value="${Account.getUsername()}" 
-                                       name="username" readonly="">
+                                <input type="text" class="form-control" placeholder="fullname" value="${Account.getAccountName()}" 
+                                       name="account_name">
                             </div>
                             <div class="col-md-12"><label class="labels">Customer Name</label>
-                                <input type="text" class="form-control" placeholder="customer name" value="${User.getName()}" 
-                                       name="name">
+                                <input type="text" class="form-control" placeholder="fullname" value="${Account.getCustomer_name()}" 
+                                       name="customer_name">
                             </div>
                             <div class="col-md-12"><label class="labels">Phone</label>
-                                <input type="text" class="form-control" placeholder="phone" value="${Account.getPhone()}" 
+                                <input type="text" class="form-control" placeholder="fullname" value="${Account.getPhone()}" 
                                        name="phone">
                             </div>
                             <div class="col-md-12"><label class="labels">Address</label>
-                                <input type="text" class="form-control" placeholder="address" value="${User.getAddress()}" 
+                                <input type="text" class="form-control" placeholder="fullname" value="${Account.getAddress()}" 
                                        name="address">
                             </div>
                             <div class="col-md-12"><label class="labels">Email</label>
-                                <input type="text" class="form-control" placeholder="email" value="${Account.getEmail()}" 
+                                <input type="text" class="form-control" placeholder="fullname" value="${Account.email}" 
                                        name="email" readonly="">
                             </div>
-                            <!-- Adding the new fields if they are not already present -->
-                            <div class="col-md-12"><label class="labels">Date of Birth</label>
-                                <input type="date" class="form-control" value="${User.getDob()}" name="dob">
-                            </div>
-                            <div class="col-md-12"><label class="labels">Gender</label>
-                                <select class="form-control" name="gender">
-                                    <option value="true" ${User.isGender() ? 'selected' : ''}>Male</option>
-                                    <option value="false" ${!User.isGender() ? 'selected' : ''}>Female</option>
-                                </select>
-                            </div>
+
 
                     </div>
+                                       <div class="mt-5 text-center" style="padding-bottom: 20px"><button class="btn btn-primary profile-button" type="submit">Save
+                            Profile</button>
+                    </div>
+                    </form>
                 </div>
-                <div class="mt-5 text-center" style="padding-bottom: 20px"><button class="btn btn-primary profile-button" type="submit">Save
-                        Profile</button>
-                </div>
-                </form>
             </div>
+
         </div>
-
     </div>
-</div>
-<!-- Section: Design Block -->
+    <!-- Section: Design Block -->
 
-<!--Footer-->
-<%@include file="Component/footer.jsp" %>
-<!--Footer-->
+    <!--Footer->
+    <%@include file="Component/footer.jsp" %>
+    <!--Footer-->
 
-<!--Script-->
-<!--Script-->
+    <!--Script-->
+    <!--Script-->
 
 </body>
 </html>

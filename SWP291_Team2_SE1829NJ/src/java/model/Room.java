@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.security.Timestamp;
 import java.sql.Date;
 
 /**
@@ -26,16 +25,14 @@ public class Room {
     private Hotel hotel;
     private TypeRoom typeRoom;
      private boolean isDelete;
-
+    private Date createAt;
+    private Date deleteAt;
+    private Date updateAt;
 
     public Room() {
     }
 
-
-
-
-
-    public Room(int id, String name, String image, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom) {
+    public Room(int id, String name, String image, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom, boolean isDelete, Date createAt, Date deleteAt, Date updateAt) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -48,8 +45,10 @@ public class Room {
         this.description = description;
         this.hotel = hotel;
         this.typeRoom = typeRoom;
-
-    
+        this.isDelete = isDelete;
+        this.createAt = createAt;
+        this.deleteAt = deleteAt;
+        this.updateAt = updateAt;
     }
 
     public boolean isIsActive() {
@@ -60,13 +59,15 @@ public class Room {
         this.isActive = isActive;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", isActive=" + isActive + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + '}';
+        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + ", createAt=" + createAt + ", deleteAt=" + deleteAt + ", updateAt=" + updateAt + '}';
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -161,6 +162,29 @@ public class Room {
         this.isDelete = isDelete;
     }
 
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getDeleteAt() {
+        return deleteAt;
+    }
+
+    public void setDeleteAt(Date deleteAt) {
+        this.deleteAt = deleteAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
 
  
 }
