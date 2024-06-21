@@ -42,6 +42,7 @@
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>roomDelete</servlet-name>
         <servlet-class>controller.room.roomDelete</servlet-class>
     </servlet>
@@ -84,6 +85,10 @@
     <servlet>
         <servlet-name>roomEditStatus</servlet-name>
         <servlet-class>controller.room.roomEditStatus</servlet-class>
+
+        <servlet-name>SubmitFeedback</servlet-name>
+        <servlet-class>controller.SubmitFeedback</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -126,6 +131,7 @@
         <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>roomDelete</servlet-name>
         <url-pattern>/roomdelete</url-pattern>
     </servlet-mapping>
@@ -164,5 +170,17 @@
     <servlet-mapping>
         <servlet-name>roomEditStatus</servlet-name>
         <url-pattern>/roomeditstatus</url-pattern>
+
+        <servlet-name>SubmitFeedback</servlet-name>
+        <url-pattern>/submitfeedback</url-pattern>
+
     </servlet-mapping>
+<servlet>
+    <servlet-name>SubmitFeedbackus</servlet-name>
+    <servlet-class>controller.SubmitFeedbackus</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>SubmitFeedbackus</servlet-name>
+    <url-pattern>/submitFeedback</url-pattern>
+</servlet-mapping>
 </web-app>
