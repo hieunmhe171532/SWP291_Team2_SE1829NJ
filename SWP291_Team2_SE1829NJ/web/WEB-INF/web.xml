@@ -9,16 +9,8 @@
         <servlet-class>controller.RegisterController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Dashboard</servlet-name>
-        <servlet-class>controller.admin.Dashboard</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>roomManagement</servlet-name>
         <servlet-class>controller.admin.roomManagement</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>accountManagement</servlet-name>
-        <servlet-class>controller.admin.accountManagement</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListManageBlogServlet</servlet-name>
@@ -40,25 +32,58 @@
         <servlet-name>ViewCustomerServlet</servlet-name>
         <servlet-class>controller.marketer.ViewCustomerServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>ListFeedbackServlet</servlet-name>
+        <servlet-class>controller.marketer.ListFeedbackServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>homepage</servlet-name>
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>accDetail</servlet-name>
-        <servlet-class>controller.admin.accDetail</servlet-class>
+        <servlet-name>roomDelete</servlet-name>
+        <servlet-class>controller.room.roomDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roomCreate</servlet-name>
+        <servlet-class>controller.room.roomCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roomEdit</servlet-name>
+        <servlet-class>controller.room.roomEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>controller.dashboard.Dashboard</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>accCreate</servlet-name>
-        <servlet-class>controller.admin.accCreate</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>accEdit</servlet-name>
-        <servlet-class>controller.admin.accEdit</servlet-class>
+        <servlet-class>controller.acc.accCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>accDelete</servlet-name>
-        <servlet-class>controller.admin.accDelete</servlet-class>
+        <servlet-class>controller.acc.accDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accEdit</servlet-name>
+        <servlet-class>controller.acc.accEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accountManagement</servlet-name>
+        <servlet-class>controller.acc.accountManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roommanagement</servlet-name>
+        <servlet-class>controller.room.roomManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roomDetail</servlet-name>
+        <servlet-class>controller.room.roomDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>roomEditStatus</servlet-name>
+        <servlet-class>controller.room.roomEditStatus</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -71,14 +96,6 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>roomManagement</servlet-name>
-        <url-pattern>/roommanagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>accountManagement</servlet-name>
-        <url-pattern>/accountmanagement</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListManageBlogServlet</servlet-name>
@@ -101,23 +118,51 @@
         <url-pattern>/viewcustomer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ListFeedbackServlet</servlet-name>
+        <url-pattern>/listmanagerfeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>homepage</servlet-name>
         <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>accDetail</servlet-name>
-        <url-pattern>/accdetail</url-pattern>
+        <servlet-name>roomDelete</servlet-name>
+        <url-pattern>/roomdelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roomCreate</servlet-name>
+        <url-pattern>/roomcreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roomEdit</servlet-name>
+        <url-pattern>/roomedit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>accCreate</servlet-name>
         <url-pattern>/acccreate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>accDelete</servlet-name>
+        <url-pattern>/accdelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>accEdit</servlet-name>
         <url-pattern>/accedit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>accDelete</servlet-name>
-        <url-pattern>/accdelete</url-pattern>
+        <servlet-name>accountManagement</servlet-name>
+        <url-pattern>/accountmanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roommanagement</servlet-name>
+        <url-pattern>/roommanagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roomDetail</servlet-name>
+        <url-pattern>/roomdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>roomEditStatus</servlet-name>
+        <url-pattern>/roomeditstatus</url-pattern>
     </servlet-mapping>
 </web-app>
