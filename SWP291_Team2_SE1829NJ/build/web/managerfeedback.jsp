@@ -12,10 +12,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/newcss.css">
+        <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -171,6 +173,96 @@
                 width: 85%;
 
             }
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0 -15px;
+            }
+
+            .col-sm-6, .col-md-3 {
+                padding: 15px;
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+
+            @media (min-width: 768px) {
+                .col-md-3 {
+                    flex: 0 0 25%;
+                    max-width: 25%;
+                }
+            }
+
+            .card {
+                background-color: #fff;
+                border: none;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .card-stats .row {
+                align-items: center;
+            }
+
+            .col-icon {
+                flex: 0 0 auto;
+                margin-right: 15px;
+            }
+
+            .icon-big {
+                font-size: 3rem;
+            }
+
+            .bubble-shadow-small {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                padding: 20px;
+            }
+
+            .icon-primary {
+                color: #007bff;
+                background-color: rgba(0, 123, 255, 0.1);
+            }
+
+            .icon-info {
+                color: #17a2b8;
+                background-color: rgba(23, 162, 184, 0.1);
+            }
+
+            .icon-success {
+                color: #28a745;
+                background-color: rgba(40, 167, 69, 0.1);
+            }
+
+            .icon-secondary {
+                color: #6c757d;
+                background-color: rgba(108, 117, 125, 0.1);
+            }
+
+            .numbers {
+                text-align: left;
+            }
+
+            .card-category {
+                font-size: 0.9rem;
+                color: #6c757d;
+                margin: 0;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 5px 0 0;
+            }
+
         </style>
 
 
@@ -181,15 +273,139 @@
         <jsp:include page="nvarbar-admin.jsp"></jsp:include>
 
             <main class="app-content">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon ">
+                                        <div
+                                            class="icon-big text-center icon-primary bubble-shadow-small"
+                                            >
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Total Of Users</p>
+                                            <h4 class="card-title">1,294</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div
+                                            class="icon-big text-center bubble-shadow-small"
+                                            >
+                                            <i class="fa-solid fa-user-pen"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category"> Users Commenting</p>
+                                            <h4 class="card-title">1303</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div
+                                            class="icon-big text-center icon-secondary bubble-shadow-small"
+                                            >
+                                            <i class="far fa-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Order</p>
+                                            <h4 class="card-title">576</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-round">
+                            <div class="card-header">
+                                <div class="card-head-row card-tools-still-right">
+                                    <h4 class="card-title">Users Geolocation</h4>
+                                </div>
+                                <p class="card-category">
+                                    Map of the distribution of users around the world
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="table-responsive table-hover table-sales">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Ha Noi</td>
+                                                    <td>1000</td>
+                                                    <td>60%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-round">
+                            <div class="card-header">
+                                <div class="card-head-row card-tools-still-right">
+                                    <h4 class="card-title">Top Users</h4>
+                                </div>
+                                <p class="card-category">
+                                    Here are the users with the most comments in the system
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="table-responsive table-hover table-sales">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Indonesia</td>
+                                                    <td class="text-end">2.320</td>
+                                                    <td class="text-end">42.18%</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="container mt-5">
                             <form action="action">
                                 <div class="d-flex">
-                                    <h4 class="card-title col-8" style="font-size: 30px">Feedback List</h4>
-                                    <a class="custom-button" data-bs-toggle="collapse" href="#filter" role="button" style="border: 1px solid #011431;" aria-expanded="false" aria-controls="collapseFilter">
+                                    <h4 class="card-title col-9" style="font-size: 30px">Feedback List</h4>
+<!--                                    <a class="custom-button" data-bs-toggle="collapse" href="#filter" role="button" style="border: 1px solid #011431;" aria-expanded="false" aria-controls="collapseFilter">
                                         Search By
-                                    </a>
+                                    </a>-->
                                     <div class="search">
                                         <div class="search-box">
                                             <div class="search-field">
@@ -207,7 +423,7 @@
 
                                 </div>
 
-                                <div id="filter" class="collapse">
+<!--                                <div id="filter" class="collapse">
                                     <div class="card card-body">
                                         <input type="radio" name="name" value="sid">Search by id
                                         <input type="radio" name="name" value="sid">Search by comment
@@ -217,7 +433,7 @@
                                         <input type="radio" name="name" value="sid">Search by Room Id
                                         <input type="radio" name="name" value="sid">Search by CreatedAt
                                     </div>
-                                </div>
+                                </div>-->
                             </form>
                         </div>
 
@@ -400,6 +616,7 @@
         <script src="bootstrap/js/main.js"></script>
         <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     </body>
 
 </html>

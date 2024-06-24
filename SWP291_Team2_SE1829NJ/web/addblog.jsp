@@ -14,42 +14,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/open-iconic-bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
 
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="css/animate.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.carousel.min.css">
-        <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/owl.theme.default.min.css">
-        <link rel="stylesheet" type="text/css" href="css/owl.theme.default.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/magnific-popup.css">
-        <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="css/aos.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/ionicons.min.css">
-        <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-datepicker.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.timepicker.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
-
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/flaticon.css">
-        <link rel="stylesheet" type="text/css" href="css/flaticon.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/icomoon.css">
-        <link rel="stylesheet" type="text/css" href="css/icomoon.css">
-
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/newcss.css">
-        <link rel="stylesheet" type="text/css" href="css/newcss.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

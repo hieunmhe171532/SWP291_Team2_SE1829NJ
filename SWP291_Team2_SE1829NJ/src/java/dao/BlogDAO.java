@@ -11,10 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Account;
 import model.Blog;
 
@@ -24,47 +23,35 @@ import model.Blog;
  */
 public class BlogDAO {
 
-     DBContext dbContext;
+    DBContext dbContext;
     Connection connection;
 
     public BlogDAO() {
-         dbContext = DBContext.getInstance();
+        dbContext = DBContext.getInstance();
         connection = dbContext.getConnection();
     }
-    
-    
 
     public void insertBlog(String title, String detail, String briefinfo, String image, int flag, String username) {
-//        Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
-        String sql = "INSERT INTO [dbo].[Blog]\n"
-                + "(title,detail,briefinfo,[Image],createAt,flag,username)\n"
-                + "VALUES\n"
-                + "( \n"
-                + " ?, ?, ?,?,?,?,?\n"
-                + ")";
-        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        Timestamp timestamp = Timestamp.valueOf(curDate);
+        String sql = "INSERT INTO [dbo].[Blog] (title, detail, briefinfo, image, createAt, flag, username) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
             pstmt.setString(4, image);
-            pstmt.setString(5, date);
+            pstmt.setTimestamp(5, timestamp);
             pstmt.setInt(6, flag);
             pstmt.setString(7, username);
             pstmt.executeUpdate();
-            System.out.println("Account created successfully!");
+            System.out.println("Blog created successfully!");
         } catch (SQLException ex) {
-//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error inserting blog: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
     public void editBlog(String title, String detail, String briefinfo, String image, String flag, String id) {
-//        Connection conn = dbContext.getConnection();
-        LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
         String sql = "UPDATE [dbo].[Blog]\n"
                 + "SET\n"
                 + "    [title] = ?,\n"
@@ -73,7 +60,7 @@ public class BlogDAO {
                 + "    [Image] = ?,\n"
                 + "    [flag] = ?\n"
                 + "WHERE id=?";
-        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, detail);
             pstmt.setString(3, briefinfo);
@@ -83,31 +70,23 @@ public class BlogDAO {
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
-//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void deleteBlog(String id) {
-//        Connection conn = dbContext.getConnection();
 
-        LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
         String sql = "DELETE FROM [dbo].[Blog]\n"
                 + "WHERE id=?";
-        try ( PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, id);
 
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
-//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public Blog getBlogById(String id) {
-//        Connection conn = dbContext.getConnection();
-
         List<Blog> t = new ArrayList<>();
 
         try {
@@ -134,14 +113,12 @@ public class BlogDAO {
                 return b;
             }
         } catch (SQLException ex) {
-//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
     }
 
     public List<Blog> getAllBlog() {
-//        Connection conn = dbContext.getConnection();
         List<Blog> t = new ArrayList<>();
 
         try {
@@ -165,14 +142,12 @@ public class BlogDAO {
                 t.add(b);
             }
         } catch (SQLException ex) {
-//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return t;
     }
 
     public List<Blog> getBlogByTitle(String title) {
-//        Connection conn = dbContext.getConnection();
 
         List<Blog> t = new ArrayList<>();
 
@@ -199,35 +174,16 @@ public class BlogDAO {
                 t.add(b);
             }
         } catch (SQLException ex) {
-//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return t;
     }
-
-//    public static void main(String[] args) {
-//        BlogDAO dao = new BlogDAO();
-////       dao.insertBlog("", "", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", 0, "hieplh");
-////        dao.editBlog("aaaaaaaaaaaa", "vdfvdfbfb", "psfaklfsf", "https://product.hstatic.net/200000642007/product/07ivs_3ashcrb3n_1_4d2076ec43ee4588a7900e5f9f2f08ee_0a04685a3fc44c93aa755447465fd67c_master.jpg", "0", "4007");
-////        List<Blog> b=dao.searchByTitle("k");
-//        List<Blog> b = dao.getAllBlog();
-////        b.stream().forEach(c -> {
-////            System.out.println(c);
-////        });
-//        for (Blog blog : b) {
-//            System.out.println(blog);
-//        }
-////        dao.deleteBlog("6005");
-//    }
-    
     public int countBlog() {
         int count = 0;
         String sql = "SELECT COUNT(*) AS countBlog FROM Blog";
 
         try (
-                 PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery()
-                ) {
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
 
             if (rs.next()) {
                 count = rs.getInt("countBlog");
@@ -241,19 +197,10 @@ public class BlogDAO {
         return count;
     }
 
-    /**
-     * Main method to test countBlog() functionality.
-     * 
-     * @param args The command line arguments (not used).
-     */
     public static void main(String[] args) {
         BlogDAO dao = new BlogDAO();
 //        int count = blogDAO.countBlog();
 //        System.out.println("Number of Blogs: " + count);
-List<Blog> list=dao.getAllBlog();
-        for (Blog blog : list) {
-            System.out.println(blog);
-        }
+        dao.insertBlog("safasgfas", "cdsvdsfgbfb", "qwjhdgvwqjhd", "https://images2.thanhnien.vn/528068263637045248/2024/1/25/e093e9cfc9027d6a142358d24d2ee350-65a11ac2af785880-17061562929701875684912.jpg", 0, "hieplh");
     }
-    
 }
