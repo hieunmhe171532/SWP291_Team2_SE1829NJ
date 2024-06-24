@@ -3,7 +3,29 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+<!--   <style>
+.nav-item .nav-link {
+    display: inline-block;
+    padding: 5px 15px; /* Thêm padding */
+    border: 1px solid #ccc; /* Viền màu xám nhạt */
+    border-radius: 20px; /* Bo cong viền */
+    background-color: #fff; /* Màu nền trắng */
+    color: #333; /* Màu chữ */
+    transition: background-color 0.3s; /* Hiệu ứng khi hover */
+}
+
+.nav-item .nav-link:hover {
+    background-color: #f8f9fa; /* Thay đổi màu nền khi hover */
+    color: #000; /* Thay đổi màu chữ khi hover */
+}
+
+.nav-item .nav-link i {
+    margin-right: 5px; /* Khoảng cách giữa icon và chữ */
+}
+</style>-->
+
 
 <div class="offcanvas_menu">
     <div class="canvas_open">
@@ -65,6 +87,12 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                            <li class="nav-item">
+    <a href="cart?action=showcart" class="nav-link">
+        <i class="fa fa-shopping-basket"></i> ${sessionScope.size} Basket
+    </a>
+</li>
+
                 </ul>
             </div>
         </div>
