@@ -3,54 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Booking.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Hotel.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/accDelete.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/BlogDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/FeedbackDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RegisterController.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/roomSwit.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/accountDetail.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/UserAccount.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/accountManager.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/accountManagement.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/Dashboard.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/roomCrAndEdit.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/layout/navbarmenu.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RoomSearchServlet.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/homepage.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/feedbackManager.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/WEB-INF/web.xml</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/aboutus.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/BillDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/accCreate.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/RoomDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/UserAccountDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/HotelDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/TypeRoomDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Status.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Bill.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Room.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/nvarbar-admin.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/META-INF/context.xml</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/User.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/accDetail.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/roomManagement.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/MenuDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/marketer.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/admin/accEdit.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/single_room.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RoomDetailController.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/TypeRoom.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/rooms.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/manager.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Blog.java</file>
-            <file>file:/E:/codeDaybyDay/day1706/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/admin/admin.jsp</file>
+            <file>file:/E:/codeDaybyDay/day2406/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/homepage.jsp</file>
+            <file>file:/E:/codeDaybyDay/day2406/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/rooms.jsp</file>
+            <file>file:/E:/codeDaybyDay/day2406/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
+            <file>file:/E:/codeDaybyDay/day2406/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/layout/navbarmenu.jsp</file>
         </group>
     </open-files>
 </project-private>
