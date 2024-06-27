@@ -383,44 +383,124 @@ public boolean editRoomById(Room room) {
         return false;
     }
 }
-
-    
- public static void main(String[] args) {
-        RoomDAO roomDAO = new RoomDAO();
-
-        // Tạo một đối tượng Room mới để cập nhật
-        Room room = new Room();
-        room.setId(9); // Giả sử đây là ID của phòng cần chỉnh sửa
-        room.setName("Phòng Deluxe");
-        room.setImage("deluxe.jpg");
-        room.setRoom_floor("2");
-        room.setUserQuantity(2);
-        room.setArea(30.0f);
-        room.setPrice(1500.0f);
-        room.setStatus(1); // Giả sử 1 là trạng thái "available"
-        room.setDescription("Phòng với view biển");
-        Hotel hotel = new Hotel();
-        hotel.setId(1); // Giả sử Hotel có ID là 1
-        room.setHotel(hotel);
-        TypeRoom typeRoom = new TypeRoom();
-        typeRoom.setId(1); // Giả sử TypeRoom có ID là 1
-        room.setTypeRoom(typeRoom);
-        room.setIsActive(true);
-
-        // Thực hiện cập nhật
-        if(roomDAO.editRoomById(room)){
-            System.out.println("Cập nhật phòng thành công");
-        } else {
-            System.out.println("Cập nhật phòng thất bại");
-        }
-    }
+//
+//    
+// public static void main(String[] args) {
+//        RoomDAO roomDAO = new RoomDAO();
+//
+//        // Tạo một đối tượng Room mới để cập nhật
+//        Room room = new Room();
+//        room.setId(9); // Giả sử đây là ID của phòng cần chỉnh sửa
+//        room.setName("Phòng Deluxe");
+//        room.setImage("deluxe.jpg");
+//        room.setRoom_floor("2");
+//        room.setUserQuantity(2);
+//        room.setArea(30.0f);
+//        room.setPrice(1500.0f);
+//        room.setStatus(1); // Giả sử 1 là trạng thái "available"
+//        room.setDescription("Phòng với view biển");
+//        Hotel hotel = new Hotel();
+//        hotel.setId(1); // Giả sử Hotel có ID là 1
+//        room.setHotel(hotel);
+//        TypeRoom typeRoom = new TypeRoom();
+//        typeRoom.setId(1); // Giả sử TypeRoom có ID là 1
+//        room.setTypeRoom(typeRoom);
+//        room.setIsActive(true);
+//
+//        // Thực hiện cập nhật
+//        if(roomDAO.editRoomById(room)){
+//            System.out.println("Cập nhật phòng thành công");
+//        } else {
+//            System.out.println("Cập nhật phòng thất bại");
+//        }
+//    }
 
 // Room s1 = roomDAO.getById(2);
 // 
 //      System.out.println(s1.getId());
 //        System.out.println(s1.getStatus());
+public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfRooms, int numberOfHumans) {
+    List<Room> rooms = new ArrayList<>();
+    String sql = "WITH RoomWithRowNum AS ("
+               + "    SELECT r.id, r.name, r.userQuantity, r.price, r.status_id, r.description, "
+               + "           h.id AS hotelId, h.name AS hotelName, "
+               + "           t.id AS typeRoomId, t.name AS typeRoomName, "
+               + "           ROW_NUMBER() OVER (ORDER BY r.userQuantity DESC) AS rn "
+               + "    FROM Room r "
+               + "    JOIN Hotel h ON h.id = r.hotel_id "
+               + "    JOIN TypeRoom t ON t.id = r.type_id "
+               + "    WHERE r.status_id = 1 "
+               + ") "
+               + "SELECT id, name, userQuantity, price, status_id, description, hotelId, hotelName, typeRoomId, typeRoomName "
+               + "FROM RoomWithRowNum "
+               + "WHERE rn <= ? "
+               + "AND ("
+               + "    SELECT SUM(userQuantity) "
+               + "    FROM RoomWithRowNum "
+               + "    WHERE rn <= ? "
+               + ") >= ? "
+               + "ORDER BY rn";
+
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        ps.setInt(1, numberOfRooms);
+        ps.setInt(2, numberOfRooms);
+        ps.setInt(3, numberOfHumans);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Room room = new Room();
+                room.setId(rs.getInt("id"));
+                room.setName(rs.getString("name"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("status_id"));
+                room.setDescription(rs.getString("description"));
+
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("hotelId"));
+                hotel.setName(rs.getString("hotelName"));
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt("typeRoomId"));
+                typeRoom.setName(rs.getString("typeRoomName"));
+                room.setTypeRoom(typeRoom);
+
+                rooms.add(room);
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println("Error finding rooms: " + e.getMessage());
+    }
+    return rooms;
+}
 
 
+  public static void main(String[] args) {
+        RoomDAO roomDAO = new RoomDAO();
+
+        int numberOfRooms = 3;
+        int numberOfHumans = 6;
+
+        List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfRooms, numberOfHumans);
+
+        // In ra kết quả
+        if (rooms.isEmpty()) {
+            System.out.println("No rooms found matching the criteria.");
+        } else {
+            for (Room room : rooms) {
+                System.out.println("Room ID: " + room.getId());
+                System.out.println("Room Name: " + room.getName());
+                System.out.println("User Quantity: " + room.getUserQuantity());
+                System.out.println("Price: " + room.getPrice());
+                System.out.println("Status ID: " + room.getStatus());
+                System.out.println("Description: " + room.getDescription());
+                System.out.println("-----------------------");
+            }
+        }
+    }
+ 
+ 
     }
     
     
