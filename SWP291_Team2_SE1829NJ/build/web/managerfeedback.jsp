@@ -1,5 +1,3 @@
->
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -13,7 +11,6 @@
 
 
         <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -288,183 +285,170 @@
                                     <div class="col col-stats ms-3 ms-sm-0">
                                         <div class="numbers">
                                             <p class="card-category">Total Of Users</p>
-                                            <h4 class="card-title">1,294</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="card card-stats card-round">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-icon">
-                                        <div
-                                            class="icon-big text-center bubble-shadow-small"
-                                            >
-                                            <i class="fa-solid fa-user-pen"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col col-stats ms-3 ms-sm-0">
-                                        <div class="numbers">
-                                            <p class="card-category"> Users Commenting</p>
-                                            <h4 class="card-title">1303</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="card card-stats card-round">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-icon">
-                                        <div
-                                            class="icon-big text-center icon-secondary bubble-shadow-small"
-                                            >
-                                            <i class="far fa-check-circle"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col col-stats ms-3 ms-sm-0">
-                                        <div class="numbers">
-                                            <p class="card-category">Order</p>
-                                            <h4 class="card-title">576</h4>
-                                        </div>
+                                            <h4 class="card-title">${totalUser}</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-round">
-                            <div class="card-header">
-                                <div class="card-head-row card-tools-still-right">
-                                    <h4 class="card-title">Users Geolocation</h4>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-round">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center bubble-shadow-small"
+                                        >
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </div>
                                 </div>
-                                <p class="card-category">
-                                    Map of the distribution of users around the world
-                                </p>
+                                <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category"> Users Commenting</p>
+                                        <h4 class="card-title">${totalUserComment}</h4>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="table-responsive table-hover table-sales">
-                                        <table class="table">
-                                            <tbody>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-round">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-secondary bubble-shadow-small"
+                                        >
+                                        <i class="far fa-check-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Total Comment</p>
+                                        <h4 class="card-title">${totalComment}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-round">
+                        <div class="card-header">
+                            <div class="card-head-row card-tools-still-right">
+                                <h4 class="card-title">Geography of User feedback</h4>
+                            </div>
+                            <p class="card-category">
+                                Map of the distribution of users around the Viet Nam
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive table-hover table-sales">
+                                    <table class="table">
+                                        <tbody>
+                                            <c:forEach items="${listca}" var="ca">
                                                 <tr>
-                                                    <td>Ha Noi</td>
-                                                    <td>1000</td>
+                                                    <td>${ca.address}</td>
+                                                    <td>${ca.count}</td>
                                                     <td>60%</td>
                                                 </tr>
-                                            </tbody>
-                                        </table>
+                                            </c:forEach>
+                                        </tbody>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card card-round">
-                            <div class="card-header">
-                                <div class="card-head-row card-tools-still-right">
-                                    <h4 class="card-title">Top Users</h4>
-                                </div>
-                                <p class="card-category">
-                                    Here are the users with the most comments in the system
-                                </p>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="table-responsive table-hover table-sales">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Indonesia</td>
-                                                    <td class="text-end">2.320</td>
-                                                    <td class="text-end">42.18%</td>
-                                                </tr>
+                                    </table>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="container mt-5">
-                            <form action="action">
-                                <div class="d-flex">
-                                    <h4 class="card-title col-9" style="font-size: 30px">Feedback List</h4>
-<!--                                    <a class="custom-button" data-bs-toggle="collapse" href="#filter" role="button" style="border: 1px solid #011431;" aria-expanded="false" aria-controls="collapseFilter">
-                                        Search By
-                                    </a>-->
-                                    <div class="search">
-                                        <div class="search-box">
-                                            <div class="search-field">
-                                                <input placeholder="Search..." class="input" type="text" name="search">
-                                                <div class="search-box-icon">
-                                                    <button class="btn-icon-content">
-                                                        <i class="search-icon">
-                                                            <svg xmlns="://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" fill="#fff"></path></svg>
-                                                        </i>
-                                                    </button>
-                                                </div>
+                <div class="col-md-6">
+                    <div class="card card-round">
+                        <div class="card-header">
+                            <div class="card-head-row card-tools-still-right">
+                                <h4 class="card-title">Top Users</h4>
+                            </div>
+                            <p class="card-category">
+                                Here are the users with the most comments in the system
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive table-hover table-sales">
+                                    <table class="table">
+                                        <tbody>
+                                            <c:forEach items="${listop}" var="top">
+                                                <tr>
+                                                    <td>${top.user.getName()}</td>
+                                                    <td class="text-end">${top.count}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="container mt-5">
+                        <form action="action">
+                            <div class="d-flex">
+                                <h4 class="card-title col-9" style="font-size: 30px">Feedback List</h4>
+                                <div class="search">
+                                    <div class="search-box">
+                                        <div class="search-field">
+                                            <input placeholder="Search..." class="input" type="text" name="search">
+                                            <div class="search-box-icon">
+                                                <button class="btn-icon-content">
+                                                    <i class="search-icon">
+                                                        <svg xmlns="://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" fill="#fff"></path></svg>
+                                                    </i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
-<!--                                <div id="filter" class="collapse">
-                                    <div class="card card-body">
-                                        <input type="radio" name="name" value="sid">Search by id
-                                        <input type="radio" name="name" value="sid">Search by comment
-                                        <input type="radio" name="name" value="sid">Search by Commentator
-                                        <input type="radio" name="name" value="sid">Search by Commentator
-                                        <input type="radio" name="name" value="sid">Search by Commentator
-                                        <input type="radio" name="name" value="sid">Search by Room Id
-                                        <input type="radio" name="name" value="sid">Search by CreatedAt
-                                    </div>
-                                </div>-->
-                            </form>
-                        </div>
+                            </div>
+                        </form>
+                    </div>
 
-                        <div class="table-responsive-lg mt-5">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th class="col-1">
-                                            Id
-                                        </th>
-                                        <th class="col-3">
-                                            Comment
-                                        </th>
-                                        <th class="col-2">
-                                            Image
-                                        </th>
-                                        <th class="col-1">
-                                            Commentator
-                                        </th>
-                                        <th class="col-1">
-                                            Room Id
-                                        </th>
-                                        <th class="col-1">
-                                            CreatedAt
-                                        </th>
-                                        <th class="col-1">
-                                        </th>
+                    <div class="table-responsive-lg mt-5">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-1">
+                                        Id
+                                    </th>
+                                    <th class="col-3">
+                                        Comment
+                                    </th>
+                                    <th class="col-2">
+                                        Image
+                                    </th>
+                                    <th class="col-1">
+                                        Commentator
+                                    </th>
+                                    <th class="col-1">
+                                        Room Id
+                                    </th>
+                                    <th class="col-1">
+                                        CreatedAt
+                                    </th>
+                                    <th class="col-1">
+                                    </th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <c:forEach items="${listb}" var="b">
                                     <tr>
                                         <td>

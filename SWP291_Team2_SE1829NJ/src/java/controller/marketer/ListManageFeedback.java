@@ -5,6 +5,7 @@
 package controller.marketer;
 
 import dao.FeedbackDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Count;
 import model.Feedback;
 
 /**
@@ -33,7 +35,24 @@ public class ListManageFeedback extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         FeedbackDAO daof = new FeedbackDAO();
+        UserDAO daou=new UserDAO();
         List<Feedback> listf = daof.getAllFeedback();
+        int totalUser=daou.countUsers();
+        int totalUserComment=daof.totalUserComment();
+        int totalComment=daof.totalComment();
+        List<Count> listop=daof.topUserFeedback();
+        List<Count> listca=daou.countAddress();
+        request.setAttribute("listf", listf);
+        request.setAttribute("totalUser", totalUser);
+        request.setAttribute("totalUserComment", totalUserComment);
+        request.setAttribute("totalComment", totalComment);
+        request.setAttribute("listop", listop);
+        request.setAttribute("listca", listca);
+        request.getRequestDispatcher("managerfeedback.jsp").forward(request, response);
+
+
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

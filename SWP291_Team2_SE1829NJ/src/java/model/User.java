@@ -22,7 +22,6 @@ public class User {
     private String createAt;
     private String updateAt;
     private boolean isDelete;
-
     public User() {
     }
 
@@ -37,6 +36,11 @@ public class User {
         this.updateAt = updateAt;
         this.isDelete = isDelete;
     }
+
+
+  
+    
+    
 
     public int getId() {
         return id;
