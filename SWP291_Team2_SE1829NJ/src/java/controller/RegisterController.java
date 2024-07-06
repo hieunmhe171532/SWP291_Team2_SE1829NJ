@@ -1,108 +1,76 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import dao.AccountDAO;
-import dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import model.Account;
-import model.User;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- *
- * @author hieum
- */
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
+        // Retrieve form data
+        String action = request.getParameter("action");
         
-        Account acc = new Account(username, password, phone, email, phone, true);
-        User user = new User();
-        
-        user.setUsername(username);
-        AccountDAO accDB = new AccountDAO();
-        if(accDB.getAccountByUsername(acc) != null){
-            response.sendRedirect("register");
-        }else{
-            accDB.createAccount(username, password, phone, email, phone, true);
-            UserDAO uDB = new UserDAO();
-            uDB.createUser(user);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        if (action == null || action.isEmpty()) {
+            action = "default";
+        }
+
+        if ("register".equals(action)) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String fullname = request.getParameter("fullname");
+            String dobString = request.getParameter("dob");
+            boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+            String address = request.getParameter("address");
+
+            // Convert dobString to Date
+            Date dob = null;
+            try {
+                dob = new SimpleDateFormat("yyyy-MM-dd").parse(dobString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            // Validate form data (example, you can add more validations)
+            if (username == null || password == null || phone == null || email == null || fullname == null || dob == null || address == null) {
+                request.setAttribute("registrationError", "Please fill in all the required fields.");
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                return;
+            }
+
+            // Create the AccountDAO object
+            AccountDAO accountDAO = new AccountDAO();
+
+            // Call the register method
+            accountDAO.register(username, password, phone, email, 5, true, fullname, dob, gender, address);
+
+            // Redirect to a success page or login page
+            response.sendRedirect("login");
+        } else {
+            request.setAttribute("registrationError", "Invalid action.");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "RegisterController handles user registration";
+    }
 }

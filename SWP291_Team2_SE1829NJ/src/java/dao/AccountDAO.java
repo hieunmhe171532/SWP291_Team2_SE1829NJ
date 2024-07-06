@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -367,37 +369,79 @@ public void updateAccountAndUser(String username,String password, String newPhon
         
 //    }
     
-    
-    
-    
-  public static void main(String[] args) {
-   AccountDAO dao = new AccountDAO(); // Tạo đối tượng DAO
 
-        // Thông tin tài khoản và người dùng để tạo mới
-        String username = "bipca69";
-        String password = "csgo";
-        String phone = "1234567890";
-        String email = "newuser2024@example.com";
-        int role = 5; // Giả sử 1 là ID cho role người dùng bình thường
-        boolean isActive = true;
+    public void register(String username, String password, String phone, String email, int role, boolean isActive, String fullname, Date dob, boolean gender, String address) {
+        String sqlAccount = "INSERT INTO Account (username, password, phone, email, role_id, isActive) VALUES (?, ?, ?, ?, ?, ?)";
+        String sqlUser = "INSERT INTO [User] (username, name, dob, gender, address) VALUES (?, ?, ?, ?, ?)";
 
-        // Thông tin người dùng liên quan
-        String fullName = "New User Fullname";
-        Date dob = new Date(); // Sử dụng ngày hiện tại
-        boolean gender = true; // true cho Male, false cho Female, giả sử theo định dạng này
-        String address = "123 New Street, New City";
-
-        // Gọi phương thức để tạo tài khoản và thông tin người dùng
         try {
-            dao.updateAccountAndUser(username, password, phone, email, role, isActive, username, dob, gender, address, gender);
-            System.out.println("cập nhật  người dùng thành công hehe: " + username);
-        } catch (Exception e) {
-            System.out.println("Có lỗi xảy ra trong quá trình tạo tài khoản và thông tin người dùng: " + e.getMessage());
-            e.printStackTrace();
+            connection.setAutoCommit(false);  // Begin transaction
+
+            // Insert into Account
+            try (PreparedStatement pstmtAccount = connection.prepareStatement(sqlAccount)) {
+                pstmtAccount.setString(1, username);
+                pstmtAccount.setString(2, password);
+                pstmtAccount.setString(3, phone);
+                pstmtAccount.setString(4, email);
+                pstmtAccount.setInt(5, role);
+                pstmtAccount.setBoolean(6, isActive);
+                pstmtAccount.executeUpdate();
+            }
+
+            // Insert into User
+            try (PreparedStatement pstmtUser = connection.prepareStatement(sqlUser)) {
+                pstmtUser.setString(1, username);
+                pstmtUser.setString(2, fullname);
+                pstmtUser.setDate(3, new java.sql.Date(dob.getTime()));  // Convert java.util.Date to java.sql.Date
+                pstmtUser.setBoolean(4, gender);
+                pstmtUser.setString(5, address);
+                pstmtUser.executeUpdate();
+            }
+
+            connection.commit();  // Commit transaction
+            System.out.println("Registration successful!");
+        } catch (SQLException ex) {
+            try {
+                if (connection != null) {
+                    connection.rollback();  // Rollback transaction on error
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.setAutoCommit(true);  // Reset auto-commit to true
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
-  
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO();
+
+        // Test data for registration
+        String username = "newuser";
+        String password = "password123";
+        String phone = "1234567890";
+        String email = "newuser@example.com";
+        int role = 1;  // Assuming 1 is the role ID for a regular user
+        boolean isActive = true;
+        String fullname = "New User";
+        Date dob = null;
+        try {
+            dob = new SimpleDateFormat("dd-MM-yyyy").parse("31-10-2003");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        boolean gender = true;  // True for male, false for female
+        String address = "123 Main St, Cityville";
+
+        dao.register(username, password, phone, email, role, isActive, fullname, dob, gender, address);
+    }
     
     
     
