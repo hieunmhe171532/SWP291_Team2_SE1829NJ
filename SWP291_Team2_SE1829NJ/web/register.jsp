@@ -1,95 +1,124 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<style>
-    
-    .bg-image-vertical {
-position: relative;
-overflow: hidden;
-background-repeat: no-repeat;
-background-position: right center;
-background-size: auto 100%;
-}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Edit Profile</title>
+        <%@include file="Component/setupCss.jsp" %>
+        <style>
+            .form-control:focus {
+                box-shadow: none;
+                border-color: #003d99;
+            }
 
-@media (min-width: 1025px) {
-.h-custom-2 {
-height: 100%;
-}
-}
-</style>
-<body>
-   <section class="vh-100">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6 text-black">
+            .profile-button {
+                background: rgb(0, 102, 255);
+                box-shadow: none;
+                border: none;
+            }
 
-        <div class="px-5 ms-xl-4">
-          <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
-          <span class="h1 fw-bold mb-0"></span>
+            .profile-button:hover {
+                background: #003d99;
+                padding: 8px 12px;
+            }
+
+            .profile-button:focus {
+                background: #003d99;
+                box-shadow: none;
+            }
+
+            .profile-button:active {
+                background: #003d99;
+                box-shadow: none;
+            }
+
+            .back:hover {
+                color: #003d99;
+                cursor: pointer;
+            }
+
+            .labels {
+                font-size: 18px;
+            }
+
+            .form-control {
+                margin-bottom: 10px;
+                margin-top: -5px;
+            }
+
+            .add-experience:hover {
+                background: #003d99;
+                color: #fff;
+                cursor: pointer;
+                border: solid 1px #003d99;
+            }
+
+            .container {
+                margin-top: 50px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Section: Design Block -->
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 border">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+                        <form action="Profile" method="post">
+                            <div class="row mt-3">
+                                <input type="hidden" class="form-control" name="AccountId" value="${Account.getAccountId()}">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Account Name</label>
+                                <input type="text" class="form-control" name="username" value="${Account.getUsername()}" readonly>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Customer Name</label>
+                                <input type="text" class="form-control" name="fullname" value="${User.getName()}" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Phone</label>
+                                <input type="text" class="form-control" name="phone" value="${Account.getPhone()}" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Address</label>
+                                <input type="text" class="form-control" name="address" value="${User.getAddress()}" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Email</label>
+                                <input type="email" class="form-control" name="email" value="${Account.getEmail()}" readonly>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Date of Birth</label>
+                                <input type="date" class="form-control" name="dob" value="${User.getDob()}" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Gender</label>
+                                <select class="form-control" name="gender" required>
+                                    <option value="true" ${User.isGender() ? 'selected' : ''}>Male</option>
+                                    <option value="false" ${!User.isGender() ? 'selected' : ''}>Female</option>
+                                </select>
+                            </div>
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Section: Design Block -->
 
-        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+        <!-- Footer -->
+        <%@include file="Component/footer.jsp" %>
+        <!-- Footer -->
 
-            <form action="/SWP291_Team2_SE1829NJ/register" method="post" style="width: 23rem;">
+        <!-- Script -->
+        <!-- Script -->
 
-            <h3 class="fw-normal mb-3 pb-3 mt-5" style="letter-spacing: 1px;">Register</h3>
-
-            <div class="form-outline mb-4">
-                <input type="text" name="username" id="form2Example18" value="${param.username}" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example18">Username</label>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="password" name="password" id="form2Example28" value="${param.password}" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Password</label>
-            </div>
-              
-             
-              
-              <div class="form-outline mb-4">
-                <input type="text" name="phone" id="form2Example18" value="${param.phone}" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example18">Phone</label>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="email" name="email" id="form2Example28" value="${param.email}" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">E-mail</label>
-            </div>
-            
-            <p style="color: red">${requestScope.registrationError}</p>
-
-            <div class="pt-1 mb-4">
-                <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
-            </div>
-            
-       
-
-            <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-            <p> <a href="login" class="link-info">Login</a></p>
-
-          </form>
-
-        </div>
-
-      </div>
-      <div class="col-sm-6 px-0 d-none d-sm-block">
-        <img src="https://nhaphonet.vn/wp-content/uploads/2022/09/hypat-1659069584-1659081355.jpg"
-          alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- Include Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    </body>
 </html>

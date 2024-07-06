@@ -37,6 +37,7 @@ public class LoginController extends HttpServlet {
         String action = request.getParameter("action");
        if (action.equals("login")) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
+            
         }
         if (action.equals("checkLogin")) {
             String username = request.getParameter("username");
@@ -104,7 +105,9 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//         request.getRequestDispatcher("login.jsp").forward(request, response);
+
+
     }
 
     /**
@@ -118,7 +121,9 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      
+           processRequest(request, response);
+        
     }
 
     /**
