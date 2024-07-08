@@ -2,23 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.marketer;
+package controller;
 
-import dao.BlogDAO;
+import dao.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Account;
+import jakarta.servlet.http.Part;
+import java.io.*;
+import java.nio.file.*;
+import java.util.List;
+import model.Feedback;
 
+@MultipartConfig()
 /**
  *
  * @author admin
  */
-public class AddBlogServlet extends HttpServlet {
+
+public class AddFeedbackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +44,10 @@ public class AddBlogServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBlogServlet</title>");
+            out.println("<title>Servlet AddFeedbackServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBlogServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddFeedbackServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +65,7 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("addblog.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -72,32 +79,55 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-        response.setContentType("text/html;charset=UTF-8");
-        
-        
-               HttpSession session = request.getSession();
-            model.Account acc = (Account) session.getAttribute("acc");
-            
-            
-        BlogDAO daob = new BlogDAO();
-        String title = request.getParameter("title");
-        String brief = request.getParameter("brief");
-        String detail = request.getParameter("detail");
-        String image = request.getParameter("image");
-        String flag = request.getParameter("flag");
-        if (flag == null) {
-            flag = "0";
-        }else{
-            flag="1";
+        PrintWriter out = response.getWriter();
+        FeedbackDAO daof = new FeedbackDAO();
+//        HttpSession session = request.getSession();
+//        session.setAttribute("acc", acc);
+        try {
+            String id = request.getParameter("id");
+            int rid = Integer.parseInt(id);
+            String c = request.getParameter("comment");
+            Part part = request.getPart("img");
+            String filename = part.getSubmittedFileName();
+            String path = "/Users/admin/web/Git/clon2/SWP391-Project/SWP291_Team2_SE1829NJ/web/bootstrap/images/" + filename;
+            String datapath = "bootstrap/images/" + filename;
+
+            int count = daof.totalComment();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+
+            InputStream is = part.getInputStream();
+            boolean succs = uploadFile(is, path);
+            if (succs) {
+                daof.insertFeedback(datapath, c, 8, rid);
+
+            } else {
+                daof.insertFeedback(null, c, 8, rid);
+
+            }
+            request.getRequestDispatcher("viewroom?rid=" + rid).forward(request, response);
+
+        } catch (Exception e) {
         }
-        int f=Integer.parseInt(flag);
+    }
 
-        daob.insertBlog(title, detail, brief, image, f, acc.getUsername());
-        response.sendRedirect("listmanageblog");
+    public boolean uploadFile(InputStream is, String path) {
+        boolean test = false;
+        try {
+            byte[] byt = new byte[is.available()];
+            is.read();
+            FileOutputStream fops = new FileOutputStream(path);
+            fops.write(byt);
+            fops.flush();
+            fops.close();
 
+            test = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return test;
     }
 
     /**

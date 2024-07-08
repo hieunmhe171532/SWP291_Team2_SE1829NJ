@@ -4,21 +4,19 @@
  */
 package controller.marketer;
 
-import dao.BlogDAO;
+import dao.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Account;
 
 /**
  *
  * @author admin
  */
-public class AddBlogServlet extends HttpServlet {
+public class DeleteFeedbackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class AddBlogServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBlogServlet</title>");
+            out.println("<title>Servlet DeleteFeedbackServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBlogServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteFeedbackServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +56,7 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("addblog.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -72,38 +70,17 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-        response.setContentType("text/html;charset=UTF-8");
-        
-        
-               HttpSession session = request.getSession();
-            model.Account acc = (Account) session.getAttribute("acc");
-            
-            
-        BlogDAO daob = new BlogDAO();
-        String title = request.getParameter("title");
-        String brief = request.getParameter("brief");
-        String detail = request.getParameter("detail");
-        String image = request.getParameter("image");
-        String flag = request.getParameter("flag");
-        if (flag == null) {
-            flag = "0";
-        }else{
-            flag="1";
-        }
-        int f=Integer.parseInt(flag);
-
-        daob.insertBlog(title, detail, brief, image, f, acc.getUsername());
-        response.sendRedirect("listmanageblog");
-
+//        processRequest(request, response);
+        String id = request.getParameter("id");
+        FeedbackDAO daof=new FeedbackDAO();
+        daof.deleteFeedback(id);
+        response.sendRedirect("listmanagefeedback");
     }
 
     /**
      * Returns a short description of the servlet.
      *
-     * @return a String containing servlet description
+* @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {

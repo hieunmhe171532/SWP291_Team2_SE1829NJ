@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
+import model.Count;
 
 public class UserDAO {
 
@@ -58,6 +59,33 @@ public class UserDAO {
         }
     }
 
+    public List<Count> countAddress() {
+        List<Count> t = new ArrayList<>();
+        int count = 0;
+        String sql = "SELECT  u.address,COUNT( u.address) as countAddress from Feedback f JOIN [User] u\n"
+                + "on f.user_id=u.id\n"
+                + "GROUP BY u.address";
+        
+
+        try (
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+
+            while (rs.next()) {
+                Count c = new Count();
+                c.setAddress(rs.getString(1));
+                c.setCount(rs.getInt(2));
+                t.add(c);
+                
+            }
+
+        } catch (SQLException e) {
+            // Handle exception appropriately (log, notify user, etc.)
+            e.printStackTrace();
+        }
+
+        return t;
+    }
+    
     public List<User> getAllUser() {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
