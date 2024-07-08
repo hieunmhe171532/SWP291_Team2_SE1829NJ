@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import dal.DBContext;
@@ -10,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-public class RoomDAO{
-     DBContext dbContext;
-     Connection connection;
+public class RoomDAO {
+
+    DBContext dbContext;
+    Connection connection;
 
     public RoomDAO() {
         dbContext = DBContext.getInstance();
@@ -76,7 +73,7 @@ public class RoomDAO{
         }
 
         if (typeRoomId != null) {
-            query.append("AND r.type_id = ? ");
+query.append("AND r.type_id = ? ");
             params.add(typeRoomId);
         }
 
@@ -93,7 +90,7 @@ public class RoomDAO{
                     room.setImage(resultSet.getString("rImage"));
                     room.setUserQuantity(resultSet.getInt("userQuantity"));
                     room.setArea(resultSet.getFloat("area"));
-       
+
                     room.setPrice(resultSet.getFloat("price"));
                     room.setStatus(resultSet.getInt("rStatus"));
                     room.setDescription(resultSet.getString("description"));
@@ -155,7 +152,7 @@ public class RoomDAO{
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
             if (rs.next()) {
-                count = rs.getInt("countRoom");
+count = rs.getInt("countRoom");
             }
         } catch (SQLException e) {
         }
@@ -181,10 +178,7 @@ public class RoomDAO{
 
     public Room getById(int roomId) {
         Room room = null;
-        String query = "SELECT r.id as rId, r.name as rName, r.image as rImage,r.room_floor AS rRoomFloor, r.deleteAt as RdeleteAt, "
-                + "r.updateAt as RupdateAt, r.createAt as RcreateAt,"
-                + "r.userQuantity, r.area, r.price, r.status_id as rStatus, r.description, "
-                + "h.id as hId, h.name as hName, t.id as tId, t.name as tName "
+        String query = "SELECT * "
                 + "FROM Room r "
                 + "JOIN Hotel h ON h.id = r.hotel_id "
                 + "JOIN TypeRoom t ON t.id = r.type_id "
@@ -194,32 +188,32 @@ public class RoomDAO{
             ps.setInt(1, roomId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    room = new Room();    
+                    room = new Room();
                     room.setId(rs.getInt("rId"));
-                room.setName(rs.getString("rName"));
-                room.setImage(rs.getString("rImage"));
-                  room.setRoom_floor(rs.getString("rRoomFloor"));
+                    room.setName(rs.getString("rName"));
+                    room.setImage(rs.getString("rImage"));
+                    room.setRoom_floor(rs.getString("rRoomFloor"));
 //                room.setDeleteAt(rs.getDate("RdeleteAt"));
 //                room.setUpdateAt(rs.getDate("RupdateAt"));
 //                room.setCreateAt(rs.getDate("RcreateAt"));
-                room.setArea(rs.getFloat("area"));
-                room.setUserQuantity(rs.getInt("userQuantity"));
-                room.setPrice(rs.getFloat("price"));
-                room.setStatus(rs.getInt("rStatus"));
-                room.setDescription(rs.getString("description"));
+                    room.setArea(rs.getFloat("area"));
+                    room.setUserQuantity(rs.getInt("userQuantity"));
+                    room.setPrice(rs.getFloat("price"));
+                    room.setStatus(rs.getInt("rStatus"));
+                    room.setDescription(rs.getString("description"));
 
-                Hotel hotel = new Hotel();
-                hotel.setId(rs.getInt("hId"));
-                hotel.setName(rs.getString("hName"));
-                // Set other hotel fields if needed
+                    Hotel hotel = new Hotel();
+                    hotel.setId(rs.getInt("hId"));
+                    hotel.setName(rs.getString("hName"));
+                    // Set other hotel fields if needed
 
-                room.setHotel(hotel);
+                    room.setHotel(hotel);
 
-                TypeRoom typeRoom = new TypeRoom();
-                typeRoom.setId(rs.getInt("tId"));
-                typeRoom.setName(rs.getString("tName"));
+                    TypeRoom typeRoom = new TypeRoom();
+                    typeRoom.setId(rs.getInt("tId"));
+                    typeRoom.setName(rs.getString("tName"));
 
-                room.setTypeRoom(typeRoom);
+                    room.setTypeRoom(typeRoom);
                 }
             }
         } catch (SQLException e) {
@@ -228,26 +222,66 @@ public class RoomDAO{
         return room;
     }
 
-   public List<Room> getAll() {
+    public Room getRoomByRid(int rId) {
+        Room room = null;
+        String query = "SELECT * "
+                + "FROM Room r "
+                + "JOIN Hotel h ON h.id = r.hotel_id "
+                + "JOIN TypeRoom t ON t.id = r.type_id "
+                + "WHERE r.id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, rId);
+            try (ResultSet rs = ps.executeQuery()) {
+if (rs.next()) {
+                    room = new Room();
+                    room.setId(rs.getInt(1));
+                    room.setName(rs.getString(2));
+                    room.setImage(rs.getString(4));
+                    room.setRoom_floor(rs.getString(3));
+//                room.setDeleteAt(rs.getDate("RdeleteAt"));
+//                room.setUpdateAt(rs.getDate("RupdateAt"));
+//                room.setCreateAt(rs.getDate("RcreateAt"));
+                    room.setArea(rs.getFloat(6));
+                    room.setUserQuantity(rs.getInt(5));
+                    room.setPrice(rs.getFloat(7));
+                    room.setStatus(rs.getInt(8));
+                    room.setDescription(rs.getString(9));
+
+                    Hotel hotel = new Hotel();
+                    hotel.setId(rs.getInt(10));
+                    hotel.setName(rs.getString(18));
+                    // Set other hotel fields if needed
+
+                    room.setHotel(hotel);
+
+                    TypeRoom typeRoom = new TypeRoom();
+                    typeRoom.setId(rs.getInt(11));
+                    typeRoom.setName(rs.getString(30));
+
+                    room.setTypeRoom(typeRoom);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return room;
+    }
+
+    public List<Room> getAll() {
         List<Room> rooms = new ArrayList<>();
-                Connection conn = dbContext.getConnection();
-        String sql = "SELECT r.id AS rId, r.name AS rName, r.image AS rImage, r.room_floor AS rRoomFloor, " +
-                     "r.deleteAt AS RdeleteAt, r.updateAt AS RupdateAt, r.createAt AS RcreateAt, " +
-                     "r.area, r.userQuantity, r.price, r.status_id AS rStatus, r.description, " +
-                     "h.id AS hId, h.name AS hName, " +
-                     "t.id AS tId, t.name AS tName " +
-                     "FROM Room r " +
-                     "JOIN Hotel h ON r.hotel_id = h.id " +
-                     "JOIN TypeRoom t ON r.type_id = t.id";
+        Connection conn = dbContext.getConnection();
+        String sql = "SELECT r.id AS rId, r.name AS rName, r.image AS rImage, r.room_floor AS rRoomFloor, "
+                + "r.deleteAt AS RdeleteAt, r.updateAt AS RupdateAt, r.createAt AS RcreateAt, "
+                + "r.area, r.userQuantity, r.price, r.status_id AS rStatus, r.description, "
+                + "h.id AS hId, h.name AS hName, "
+                + "t.id AS tId, t.name AS tName "
+                + "FROM Room r "
+                + "JOIN Hotel h ON r.hotel_id = h.id "
+                + "JOIN TypeRoom t ON r.type_id = t.id";
 
         try (
-                        
-
-            
-              
-                PreparedStatement ps = conn.prepareStatement(sql);
-            
-             ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Room room = mapRoom(rs);
@@ -259,16 +293,13 @@ public class RoomDAO{
         return rooms;
     }
 
-
-
-   
     private Room mapRoom(ResultSet rs) throws SQLException {
         Room room = new Room();
         room.setId(rs.getInt("rId"));
         room.setName(rs.getString("rName"));
         room.setImage(rs.getString("rImage"));
         room.setRoom_floor(rs.getString("rRoomFloor"));
-;
+        ;
         room.setArea(rs.getFloat("area"));
         room.setUserQuantity(rs.getInt("userQuantity"));
         room.setPrice(rs.getFloat("price"));
@@ -276,7 +307,7 @@ public class RoomDAO{
         room.setDescription(rs.getString("description"));
 
         Hotel hotel = new Hotel();
-        hotel.setId(rs.getInt("hId"));
+hotel.setId(rs.getInt("hId"));
         hotel.setName(rs.getString("hName"));
         room.setHotel(hotel);
 
@@ -287,139 +318,146 @@ public class RoomDAO{
 
         return room;
     }
+
+    public boolean insertRoom(Room room) {
+        String sql = "SET IDENTITY_INSERT Room ON;"
+                + "INSERT INTO Room (id, name, image, room_floor, userQuantity, area, price, status_id, description, hotel_id, type_id, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                + "SET IDENTITY_INSERT Room OFF;";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, room.getId()); // Only include this if you're sure you want to manually set the ID
+            ps.setString(2, room.getName());
+            ps.setString(3, room.getImage());
+            ps.setString(4, room.getRoom_floor());
+            ps.setInt(5, room.getUserQuantity());
+            ps.setFloat(6, room.getArea());
+            ps.setFloat(7, room.getPrice());
+            ps.setInt(8, room.getStatus());
+            ps.setString(9, room.getDescription());
+            ps.setInt(10, room.getHotel().getId()); // Ensure Hotel and TypeRoom are not null
+            ps.setInt(11, room.getTypeRoom().getId());
+            ps.setBoolean(12, room.isIsActive());
+
+            int result = ps.executeUpdate(); // Execute the insert SQL statement
+            return result > 0; // Return true if the insert was successful
+        } catch (SQLException e) {
+            System.out.println("Insert Room Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateRoomStatus(int roomId, int status) {
+        String sql = "UPDATE Room SET status_id = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql
+        )) {
+            ps.setInt(1, status);
+            ps.setInt(2, roomId);
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean deleteRoom(int roomId) {
+        // SQL statement to delete a room based on its ID
+        String sql = "DELETE FROM Room WHERE id = ?";
+
+        try (
+                // Assume getConnection() is a method that sets up your database connection
+                PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, roomId); // Set the ID of the room to delete
+
+            int result = ps.executeUpdate(); // Execute the delete statement
+            return result > 0; // Return true if the deletion was successful (i.e., one or more rows were deleted)
+        } catch (SQLException e) {
+            System.out.println("Delete Room Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean editRoomById(Room room) {
+String sql = "UPDATE Room SET "
+                + "name = ?, "
+                + "image = ?, "
+                + "room_floor = ?, "
+                + "userQuantity = ?, "
+                + "area = ?, "
+                + "price = ?, "
+                + "status_id = ?, "
+                + "description = ?, "
+                + "hotel_id = ?, "
+                + "type_id = ?, "
+                + "isActive = ? "
+                + "WHERE id = ?;";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, room.getName());
+            ps.setString(2, room.getImage());
+            ps.setString(3, room.getRoom_floor());
+            ps.setInt(4, room.getUserQuantity());
+            ps.setFloat(5, room.getArea());
+            ps.setFloat(6, room.getPrice());
+            ps.setInt(7, room.getStatus());
+            ps.setString(8, room.getDescription());
+            ps.setInt(9, room.getHotel().getId()); // Ensures that the Hotel object is not null
+            ps.setInt(10, room.getTypeRoom().getId()); // Ensures that the TypeRoom object is not null
+            ps.setBoolean(11, room.isIsActive());
+            ps.setInt(12, room.getId());
+
+            int result = ps.executeUpdate();
+            return result > 0; // Return true if the update was successful
+        } catch (SQLException e) {
+            System.out.println("Update Room Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public List<Room> getSimilarRooms(int uquan,float area,int rid) {
+        List<Room> t = new ArrayList<>();
+
+        try {
+            String sql = "SELECT top(5) * from room r \n"
+                    + "where r.userQuantity=? and r.area=?\n"
+                    + "and id <> ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, uquan);
+            stm.setFloat(2, area);
+            stm.setInt(3, rid);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Room room=new Room();
+                room.setId(rs.getInt(1));
+                room.setName(rs.getString(2));
+                room.setImage(rs.getString(4));
+                room.setRoom_floor(rs.getString(3));
+                room.setArea(rs.getFloat(6));
+                room.setUserQuantity(rs.getInt(5));
+                room.setPrice(rs.getFloat(7));
+                room.setStatus(rs.getInt(8));
+                room.setDescription(rs.getString(9));
+
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt(10));
+                // Set other hotel fields if needed
+
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt(11));
+
+                room.setTypeRoom(typeRoom);
+                t.add(room);
+            }
+        } catch (SQLException ex) {
+        }
+
+        return t;
+    }
     
-public boolean insertRoom(Room room) {
-    String sql = "SET IDENTITY_INSERT Room ON;"
-            + "INSERT INTO Room (id, name, image, room_floor, userQuantity, area, price, status_id, description, hotel_id, type_id, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-            +"SET IDENTITY_INSERT Room OFF;";
-    try (PreparedStatement ps = connection.prepareStatement(sql)) {
-        ps.setInt(1, room.getId()); // Only include this if you're sure you want to manually set the ID
-        ps.setString(2, room.getName());
-        ps.setString(3, room.getImage());
-        ps.setString(4, room.getRoom_floor());
-        ps.setInt(5, room.getUserQuantity());
-        ps.setFloat(6, room.getArea());
-        ps.setFloat(7, room.getPrice());
-        ps.setInt(8, room.getStatus());
-        ps.setString(9, room.getDescription());
-        ps.setInt(10, room.getHotel().getId()); // Ensure Hotel and TypeRoom are not null
-        ps.setInt(11, room.getTypeRoom().getId());
-        ps.setBoolean(12, room.isIsActive());
-
-        int result = ps.executeUpdate(); // Execute the insert SQL statement
-        return result > 0; // Return true if the insert was successful
-    } catch (SQLException e) {
-        System.out.println("Insert Room Error: " + e.getMessage());
-        return false;
-    }
-}
-
-
-public boolean updateRoomStatus(int roomId, int status) {
-    String sql = "UPDATE Room SET status_id = ? WHERE id = ?";
-    try (PreparedStatement ps = connection.prepareStatement(sql
-         )) {
-        ps.setInt(1, status);
-        ps.setInt(2, roomId);
-        int affectedRows = ps.executeUpdate();
-        return affectedRows > 0;
-    } catch (SQLException e) {
-        return false;
-    }
-}
-
-
-public boolean deleteRoom(int roomId) {
-    // SQL statement to delete a room based on its ID
-    String sql = "DELETE FROM Room WHERE id = ?";
-    
-    try (
-            // Assume getConnection() is a method that sets up your database connection
-         PreparedStatement ps = connection.prepareStatement(sql)) {
-        
-        ps.setInt(1, roomId); // Set the ID of the room to delete
-
-        int result = ps.executeUpdate(); // Execute the delete statement
-        return result > 0; // Return true if the deletion was successful (i.e., one or more rows were deleted)
-    } catch (SQLException e) {
-        System.out.println("Delete Room Error: " + e.getMessage());
-        return false;
-    }
-}
-
-public boolean editRoomById(Room room) {
-    String sql = "UPDATE Room SET "
-               + "name = ?, "
-               + "image = ?, "
-               + "room_floor = ?, "
-               + "userQuantity = ?, "
-               + "area = ?, "
-               + "price = ?, "
-               + "status_id = ?, "
-               + "description = ?, "
-               + "hotel_id = ?, "
-               + "type_id = ?, "
-               + "isActive = ? "
-               + "WHERE id = ?;";
-
-    try (PreparedStatement ps = connection.prepareStatement(sql)) {
-        ps.setString(1, room.getName());
-        ps.setString(2, room.getImage());
-        ps.setString(3, room.getRoom_floor());
-        ps.setInt(4, room.getUserQuantity());
-        ps.setFloat(5, room.getArea());
-        ps.setFloat(6, room.getPrice());
-        ps.setInt(7, room.getStatus());
-        ps.setString(8, room.getDescription());
-        ps.setInt(9, room.getHotel().getId()); // Ensures that the Hotel object is not null
-        ps.setInt(10, room.getTypeRoom().getId()); // Ensures that the TypeRoom object is not null
-        ps.setBoolean(11, room.isIsActive());
-        ps.setInt(12, room.getId());
-
-        int result = ps.executeUpdate();
-        return result > 0; // Return true if the update was successful
-    } catch (SQLException e) {
-        System.out.println("Update Room Error: " + e.getMessage());
-        return false;
-    }
-}
-//
-//    
-// public static void main(String[] args) {
-//        RoomDAO roomDAO = new RoomDAO();
-//
-//        // Tạo một đối tượng Room mới để cập nhật
-//        Room room = new Room();
-//        room.setId(9); // Giả sử đây là ID của phòng cần chỉnh sửa
-//        room.setName("Phòng Deluxe");
-//        room.setImage("deluxe.jpg");
-//        room.setRoom_floor("2");
-//        room.setUserQuantity(2);
-//        room.setArea(30.0f);
-//        room.setPrice(1500.0f);
-//        room.setStatus(1); // Giả sử 1 là trạng thái "available"
-//        room.setDescription("Phòng với view biển");
-//        Hotel hotel = new Hotel();
-//        hotel.setId(1); // Giả sử Hotel có ID là 1
-//        room.setHotel(hotel);
-//        TypeRoom typeRoom = new TypeRoom();
-//        typeRoom.setId(1); // Giả sử TypeRoom có ID là 1
-//        room.setTypeRoom(typeRoom);
-//        room.setIsActive(true);
-//
-//        // Thực hiện cập nhật
-//        if(roomDAO.editRoomById(room)){
-//            System.out.println("Cập nhật phòng thành công");
-//        } else {
-//            System.out.println("Cập nhật phòng thất bại");
-//        }
-//    }
-
-// Room s1 = roomDAO.getById(2);
-// 
-//      System.out.println(s1.getId());
-//        System.out.println(s1.getStatus());
-public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfRooms, int numberOfHumans) {
+    public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfRooms, int numberOfHumans) {
     List<Room> rooms = new ArrayList<>();
     String sql = "WITH RoomWithRowNum AS ("
                + "    SELECT r.id, r.name, r.userQuantity, r.price, r.status_id, r.description, "
@@ -474,44 +512,34 @@ public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfRooms, int nu
     }
     return rooms;
 }
-
-
-  public static void main(String[] args) {
+    
+public static void main(String[] args) {
         RoomDAO roomDAO = new RoomDAO();
 
-        int numberOfRooms = 3;
-        int numberOfHumans = 6;
-
-        List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfRooms, numberOfHumans);
-
-        // In ra kết quả
-        if (rooms.isEmpty()) {
-            System.out.println("No rooms found matching the criteria.");
-        } else {
-            for (Room room : rooms) {
-                System.out.println("Room ID: " + room.getId());
-                System.out.println("Room Name: " + room.getName());
-                System.out.println("User Quantity: " + room.getUserQuantity());
-                System.out.println("Price: " + room.getPrice());
-                System.out.println("Status ID: " + room.getStatus());
-                System.out.println("Description: " + room.getDescription());
-                System.out.println("-----------------------");
-            }
-        }
+        // Tạo một đối tượng Room mới để cập nhật
+//        room.setId(9); // Giả sử đây là ID của phòng cần chỉnh sửa
+//        room.setName("Phòng Deluxe");
+//        room.setImage("deluxe.jpg");
+//        room.setRoom_floor("2");
+//        room.setUserQuantity(2);
+//        room.setArea(30.0f);
+//        room.setPrice(1500.0f);
+//        room.setStatus(1); // Giả sử 1 là trạng thái "available"
+//        room.setDescription("Phòng với view biển");
+//        Hotel hotel = new Hotel();
+//        hotel.setId(1); // Giả sử Hotel có ID là 1
+//        room.setHotel(hotel);
+//        TypeRoom typeRoom = new TypeRoom();
+//        typeRoom.setId(1); // Giả sử TypeRoom có ID là 1
+//        room.setTypeRoom(typeRoom);
+//        room.setIsActive(true);
+//
+//        // Thực hiện cập nhật
+//        if(roomDAO.editRoomById(room)){
+//            System.out.println("Cập nhật phòng thành công");
+//        } else {
+//            System.out.println("Cập nhật phòng thất bại");
+//        }
+        
     }
- 
- 
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
+}

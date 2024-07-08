@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.security.Timestamp;
 import java.sql.Date;
 
 /**
@@ -11,28 +12,26 @@ import java.sql.Date;
  * @author ADMIN
  */
 public class Room {
+
     private int id;
     private String name;
     private String image;
-       private String room_floor;
+    private String room_floor;
     private int userQuantity;
     private float area;
 
     private float price;
     private int status;
-     private boolean isActive;
+    private boolean isActive;
     private String description;
     private Hotel hotel;
     private TypeRoom typeRoom;
-     private boolean isDelete;
-    private Date createAt;
-    private Date deleteAt;
-    private Date updateAt;
+    private boolean isDelete;
 
     public Room() {
     }
 
-    public Room(int id, String name, String image, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom, boolean isDelete, Date createAt, Date deleteAt, Date updateAt) {
+    public Room(int id, String name, String image, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -45,10 +44,7 @@ public class Room {
         this.description = description;
         this.hotel = hotel;
         this.typeRoom = typeRoom;
-        this.isDelete = isDelete;
-        this.createAt = createAt;
-        this.deleteAt = deleteAt;
-        this.updateAt = updateAt;
+
     }
 
     public boolean isIsActive() {
@@ -59,15 +55,13 @@ public class Room {
         this.isActive = isActive;
     }
 
-
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + ", createAt=" + createAt + ", deleteAt=" + deleteAt + ", updateAt=" + updateAt + '}';
-    }
-
-    public int getId() {
-        return id;
+        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", isActive=" + isActive + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + '}';
     }
 
     public void setId(int id) {
@@ -131,7 +125,7 @@ public class Room {
     }
 
     public String getDescription() {
-        return description;
+return description;
     }
 
     public void setDescription(String description) {
@@ -162,29 +156,4 @@ public class Room {
         this.isDelete = isDelete;
     }
 
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    public Date getDeleteAt() {
-        return deleteAt;
-    }
-
-    public void setDeleteAt(Date deleteAt) {
-        this.deleteAt = deleteAt;
-    }
-
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
-
- 
 }

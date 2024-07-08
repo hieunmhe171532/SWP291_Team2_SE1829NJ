@@ -148,7 +148,7 @@
                                             <p class="mb-0"><span class="price mr-1">${room.area}</span> <span class="per">m</span></p>
                                             <p class="mb-0"><span class="price mr-1">${room.price}</span> <span class="per">per night</span></p>
                                             <h3 class="mb-3"><a href="room-detail?id=${room.image}">${room.name}</a></h3>
-                                            <p class="pt-1"><a href="room-detail?id=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
+                                            <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
                                         </div>
                                     </div>
                                 </div>

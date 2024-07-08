@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-=======
+
 /**
  *
  * @author ADMIN
@@ -66,7 +66,7 @@ import java.util.logging.Logger;
 //
 //   
 //}
->>>>>>> 9c0891cafa1249f751bd01011efd1040815c95b8
+
 @WebServlet(name = "RoomSearchServlet", urlPatterns = {"/searchRooms"})
 public class RoomSearchServlet extends HttpServlet {
 
