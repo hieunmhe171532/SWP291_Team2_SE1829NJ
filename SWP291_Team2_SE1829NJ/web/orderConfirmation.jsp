@@ -26,6 +26,21 @@
         <link rel="stylesheet" href="bootstrap/css/icomoon.css">
         <link rel="stylesheet" href="bootstrap/css/style.css">
         <link rel="stylesheet" href="bootstrap/css/custom.css"> <!-- Di chuyển CSS tùy chỉnh vào file custom.css -->
+           <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
+        <link rel="stylesheet" type="text/css" href="maincss/newcss.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <!-- or -->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
         <style>
             body {
@@ -87,92 +102,16 @@
         </style>
  
           <jsp:include page="layout/navbarmenu.jsp"/>
-<div class="container">
-    <h1 class="mb-4">Checkout</h1>
-    <div class="Checkout_section" id="accordion">
-        <div class="container">
-            <div class="checkout_form">
-                <form action="checkout" method="POST">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5">
-                            <h3>Chi tiết đơn hàng</h3>
-                            <div class="row">
-                                <div class="col-lg-12 mb-20">
-                                    <label>Tên khách hàng<span>*</span></label>
-                                    <input readonly="" value="${sessionScope.user.user_name}" type="text">
-                                </div>
-                                <div class="col-lg-12 mb-20">
-                                    <label>Email <span>*</span></label>
-                                    <input readonly="" value="${sessionScope.user.user_email}" type="text">
-                                </div>
-                                <div class="col-lg-12 mb-20">
-                                    <label>Địa chỉ<span>*</span></label>
-                                    <input required name="address" type="text">
-                                </div>
-                                <div class="col-lg-12 mb-20">
-                                    <label>Số điện thoại<span>*</span></label>
-                                    <input required name="phone" type="number">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <h3>Sản phẩm</h3>
-                            <div class="order_table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Room</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:set var="o" value="${sessionScope.cart}"/>
-                                        <c:forEach items="${o.items}" var="i">
-                                            <tr>
-                                                <td>${i.room.name}</td>
-                                                <td>${i.quantity}</td>
-                                                <td>${i.calculateCost()}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                    <c:if test="${sessionScope.cart != null}">
-                                        <tfoot>
-                                            <tr>
-                                                <th>Tổng giá</th>
-                                                <td>${sessionScope.total}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Phí ship</th>
-                                                <td><strong>30000</strong></td>
-                                            </tr>
-                                            <tr class="order_total">
-                                                <th>Tổng đơn</th>
-                                                <td><strong>${sessionScope.total + 30000}</strong></td>
-                                            </tr>
-                                        </tfoot>
-                                    </c:if>
-                                </table>
-                            </div>
-                            <div class="payment_method">
-                                <div class="panel-default">
-                                    <input id="payment_defult" value="cod" name="payment_method" type="radio" data-target="createp_account" />
-                                    <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult" aria-controls="collapsedefult">
-                                        Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png" alt="">
-                                    </label>
-                                </div>
-                                <div class="order_button">
-                                    <button type="submit">Đặt hàng</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
+        
+    <div class="container">
+    <h1 class="mb-4">Order Confirmation</h1>
+    <p>Thank you for your booking! Your order has been successfully placed.</p>
+    <a href="rooms.jsp" class="btn btn-primary">Back to Rooms</a>
+</div>
+          
+          
+          
         <footer class="ftco-footer ftco-section img" style="background-image: url(images/bg_4.jpg);">
             <div class="overlay"></div>
             <div class="container">
@@ -235,7 +174,8 @@
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script>

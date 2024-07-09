@@ -116,6 +116,7 @@
                                             <td>${u.isActive ? 'Active' : 'Inactive'}</td>
                                             <td>${u.fullname}</td>
                                             <td><fmt:formatDate value="${u.dob}" pattern="dd-MM-yyyy"/></td>
+                                            
                                             <td>${u.gender ? 'Male' : 'Female'}</td>
                                             <td>${u.address}</td>
                                             <td>

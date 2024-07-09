@@ -26,6 +26,21 @@
         <link rel="stylesheet" href="bootstrap/css/icomoon.css">
         <link rel="stylesheet" href="bootstrap/css/style.css">
         <link rel="stylesheet" href="bootstrap/css/custom.css"> <!-- Di chuyển CSS tùy chỉnh vào file custom.css -->
+           <link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
+        <link rel="stylesheet" type="text/css" href="maincss/newcss.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <!-- or -->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
         <style>
             body {
@@ -86,7 +101,8 @@
             }
         </style>
  
-        
+          <jsp:include page="layout/navbarmenu.jsp"/>
+
         
         <div class="container">
     <h1 class="mb-4">Your Booking Cart</h1>
@@ -106,8 +122,8 @@
             <c:forEach var="item" items="${cart.items}">
                 <tr>
                     <td>${item.room.name}</td>
-                    <td>${item.startDate}</td>
-                    <td>${item.endDate}</td>
+                    <td>${item.formattedStartDate}</td>
+                    <td>${item.formattedEndDate}</td>
                     <td>${item.quantity}</td>
                     <td>${item.calculateCost()}</td>
                     <td>
@@ -118,14 +134,12 @@
             </tbody>
         </table>
         <h3>Total Cost: ${cart.totalCost}</h3>
-        <a href="checkout.jsp" class="btn btn-primary">Proceed to Checkout</a>
+        <a href="checkout" class="btn btn-primary">Proceed to Checkout</a>
     </c:if>
     <c:if test="${empty cart.items}">
         <p>Your cart is empty. <a href="rooms.jsp">Browse rooms</a></p>
     </c:if>
 </div>
-
-
         <footer class="ftco-footer ftco-section img" style="background-image: url(images/bg_4.jpg);">
             <div class="overlay"></div>
             <div class="container">
@@ -188,7 +202,8 @@
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script>

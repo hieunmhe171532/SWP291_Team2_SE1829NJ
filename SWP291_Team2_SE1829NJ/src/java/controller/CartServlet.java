@@ -12,7 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Account;
 import model.Room;
+import utils.DateUtil;
 
 /**
  *
@@ -22,6 +24,9 @@ public class CartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+//             HttpSession session = request.getSession();
+//            model.Account acc = (Account) session.getAttribute("acc");
         HttpSession session = request.getSession(true);
         String action = request.getParameter("action");
 
@@ -46,22 +51,20 @@ public class CartServlet extends HttpServlet {
                 Room room = roomDAO.getRoomByRid(roomId);
 
                 BookingItem bookingItem = new BookingItem(room, startDate, endDate, quantity);
+                bookingItem.setFormattedStartDate(DateUtil.formatDate(startDate, "dd-MM-yyyy"));
+                bookingItem.setFormattedEndDate(DateUtil.formatDate(endDate, "dd-MM-yyyy"));
                 cart.addBookingItem(bookingItem);
 
                 session.setAttribute("cart", cart);
                 session.setAttribute("total", cart.getTotalCost());
                 session.setAttribute("size", cart.getItems().size());
-                response.sendRedirect("viewroom?rid=" + roomId);
+              response.sendRedirect("viewroom?rid=" + roomId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-
-        if (action.equalsIgnoreCase("showcart")) {
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
-        }
-
-        if (action.equalsIgnoreCase("delete")) {
+        } else if (action.equalsIgnoreCase("showcart")) {
+            request.getRequestDispatcher("showcart.jsp").forward(request, response);
+        } else if (action.equalsIgnoreCase("delete")) {
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new Cart();
@@ -81,7 +84,7 @@ public class CartServlet extends HttpServlet {
                 session.setAttribute("cart", cart);
                 session.setAttribute("total", cart.getTotalCost());
                 session.setAttribute("size", cart.getItems().size());
-                response.sendRedirect("cart.jsp");
+                response.sendRedirect("showcart.jsp");
             } catch (Exception e) {
                 e.printStackTrace();
             }
