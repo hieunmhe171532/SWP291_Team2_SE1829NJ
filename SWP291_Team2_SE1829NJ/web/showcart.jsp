@@ -85,163 +85,45 @@
                 cursor: pointer;
             }
         </style>
-         <script>
-        function increment(id) {
-            const input = document.getElementById(id);
-            let value = parseInt(input.value);
-            if (isNaN(value)) value = 0;
-            input.value = value + 1;
-        }
-
-        function decrement(id) {
-            const input = document.getElementById(id);
-            let value = parseInt(input.value);
-            if (isNaN(value)) value = 0;
-            if (value > 0) input.value = value - 1;
-        }
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const peopleValue = document.getElementById('people').value;
-            localStorage.setItem('peopleValue', peopleValue);
-            event.target.submit();
-        }
-
-        function restoreFormValue() {
-            const peopleValue = localStorage.getItem('peopleValue');
-            if (peopleValue !== null) {
-                document.getElementById('people').value = peopleValue;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', restoreFormValue);
-    </script>
-    </head>
-    <body>
-        <jsp:include page="layout/navbarmenu.jsp"/>
-
-        <section class="ftco-section ftco-no-pb ftco-room">
-<!--         <div class="d-flex justify-content-center">
-    <div class="container-fluid px-0">
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section text-center ftco-animate">
-                <span class="subheading">Harbor Lights Rooms</span>
-                <h2 class="mb-4">Hotel Master's Rooms</h2>
-                <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
-            </div>
-        </div>
-
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="sidebar-box" style="">
-                <form action="roomsearch" class="search-form">
-                    <div class="form-group row booking-container justify-content-center align-items-center">
-                        <label for="people" class="col-form-label mr-3">Số Người</label>
-                        <div class="input-group col-auto  text-center">
-                            <div class="input-group-prepend ">
-                                <button type="button" class="btn btn-outline-secondary" onclick="decrement('people')">-</button>
-                            </div>
-                            <input type="text" id="people" name="people" value="0" readonly class="form-control text-center center">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" onclick="increment('people')">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>-->
-
-
-<!--<div class="container-fluid px-0">
-    <div class="row no-gutters justify-content-center mb-5 pb-3">
-        <div class="col-md-7 heading-section text-center ftco-animate">
-            <span class="subheading">Harbor Lights Rooms</span>
-            <h2 class="mb-4">Hotel Master's Rooms</h2>
-            <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
-        </div>
-    </div>
-
-    <div class="row no-gutters justify-content-center mb-5 pb-3">
-        <div class="sidebar-box">
-            <form action="roomsearch" class="search-form">
-                <div class="form-group row booking-container justify-content-center align-items-center">
-                    <label for="people" class="col-form-label mr-3">Số Người</label>
-                    <div class="input-group col-auto text-center">
-                        <div class="input-group-prepend">
-                            <button type="button" class="btn btn-outline-secondary" onclick="decrement('people')">-</button>
-                        </div>
-                        <input type="text" id="people" name="people" value="0" readonly class="form-control text-center">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="increment('people')">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row justify-content-center">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>-->
- <div class="container-fluid px-0">
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section text-center ftco-animate">
-                <span class="subheading">Harbor Lights Rooms</span>
-                <h2 class="mb-4">Hotel Master's Rooms</h2>
-                <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
-            </div>
-        </div>
-
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="sidebar-box">
-                <form action="roomsearch" class="search-form" onsubmit="handleFormSubmit(event)">
-                    <div class="form-group row booking-container justify-content-center align-items-center">
-                        <label for="people" class="col-form-label mr-3">Số Người</label>
-                        <div class="input-group col-auto text-center">
-                            <div class="input-group-prepend">
-                                <button type="button" class="btn btn-outline-secondary" onclick="decrement('people')">-</button>
-                            </div>
-                            <input type="text" id="people" name="people" value="0" readonly class="form-control text-center" style="padding: 12px 16px;">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" onclick="increment('people')">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-                    <c:if test="${not empty rooms}">
-                        <div class="row no-gutters">
-                            <c:forEach var="room" items="${rooms}">
-                                <div class="col-lg-6">
-                                    <div class="room-wrap d-md-flex ftco-animate">
-                                        <a href="room-detail?id=${room.id}" class="img" style="background-image: url(bootstrap/images/${room.image});"></a>
-                                        <div class="half left-arrow d-flex align-items-center">
-                                            <div class="text p-4 text-center">
-                                                <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
-                                                <p class="mb-0"><span class="price mr-1">${room.area}</span> <span class="per">m</span></p>
-                                                <p class="mb-0"><span class="price mr-1">${room.price}</span> <span class="per">per night</span></p>
-                                                <h3 class="mb-3"><a href="room-detail?id=${room.image}">${room.name}</a></h3>
-                                                <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </c:if>
-                </div>
-            </div>
-        </section>
+ 
+        
+        
+        <div class="container">
+    <h1 class="mb-4">Your Booking Cart</h1>
+    <c:if test="${not empty cart.items}">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Room</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Quantity</th>
+                <th>Total Cost</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="item" items="${cart.items}">
+                <tr>
+                    <td>${item.room.name}</td>
+                    <td>${item.startDate}</td>
+                    <td>${item.endDate}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.calculateCost()}</td>
+                    <td>
+                        <a href="cart?action=delete&room_id=${item.room.id}&start_date=${item.startDate}&end_date=${item.endDate}" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        <h3>Total Cost: ${cart.totalCost}</h3>
+        <a href="checkout.jsp" class="btn btn-primary">Proceed to Checkout</a>
+    </c:if>
+    <c:if test="${empty cart.items}">
+        <p>Your cart is empty. <a href="rooms.jsp">Browse rooms</a></p>
+    </c:if>
+</div>
 
 
         <footer class="ftco-footer ftco-section img" style="background-image: url(images/bg_4.jpg);">

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    List<BookingItem> items;
+    private List<BookingItem> items;
 
     public Cart() {
         items = new ArrayList<>();
@@ -24,7 +24,8 @@ public class Cart {
     }
 
     public int getQuantityByRoomId(int roomId) {
-        return getBookingItemByRoomId(roomId).getQuantity();
+        BookingItem item = getBookingItemByRoomId(roomId);
+        return item != null ? item.getQuantity() : 0;
     }
 
     private BookingItem getBookingItemByRoomId(int roomId) {
@@ -46,8 +47,8 @@ public class Cart {
     }
 
     public void addBookingItem(BookingItem newItem) {
-        if (getBookingItemByRoomId(newItem.getRoom().getId()) != null && checkBookingItem(newItem.getRoom().getId(), newItem.getStartDate(), newItem.getEndDate()) != null) {
-            BookingItem existingItem = getBookingItemByRoomId(newItem.getRoom().getId());
+        BookingItem existingItem = checkBookingItem(newItem.getRoom().getId(), newItem.getStartDate(), newItem.getEndDate());
+        if (existingItem != null) {
             existingItem.setQuantity(existingItem.getQuantity() + newItem.getQuantity());
         } else {
             items.add(newItem);
@@ -64,7 +65,7 @@ public class Cart {
     public double getTotalCost() {
         double totalCost = 0;
         for (BookingItem item : items) {
-            totalCost += (item.getQuantity() * item.getRoom().getPrice());
+            totalCost += item.calculateCost();
         }
         return totalCost;
     }
