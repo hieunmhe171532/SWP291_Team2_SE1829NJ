@@ -48,6 +48,7 @@
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/BlogDAO.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Booking.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/ListBlogServlet.java</file>
+            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/acc/accDelete.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/room/roomCreate.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Feedback.java</file>
@@ -58,13 +59,13 @@
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/marketer/DeleteFeedbackServlet.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Count.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/BookingItem.java</file>
+            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/CheckoutServlet.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/FeedbackDAO.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/admin/accountManager.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Status.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/managerbooking.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/CartServlet.java</file>
-            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/Checkout.java</file>
         </group>
     </open-files>
 </project-private>

@@ -88,89 +88,83 @@
  
           <jsp:include page="layout/navbarmenu.jsp"/>
 <div class="container">
-    <h1 class="mb-4">Checkout</h1>
-    <div class="Checkout_section" id="accordion">
-        <div class="container">
-            <div class="checkout_form">
-                <form action="checkout" method="POST">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5">
-                            <h3>Chi tiết đơn hàng</h3>
-                            <div class="row">
-                                <div class="col-lg-12 mb-20">
-                                    <label>Tên khách hàng<span>*</span></label>
-                                    <input readonly="" value="${sessionScope.user.user_name}" type="text">
-                                </div>
-                                <div class="col-lg-12 mb-20">
-                                    <label>Email <span>*</span></label>
-                                    <input readonly="" value="${sessionScope.user.user_email}" type="text">
-                                </div>
-                                <div class="col-lg-12 mb-20">
-                                    <label>Địa chỉ<span>*</span></label>
-                                    <input required name="address" type="text">
-                                </div>
-                                <div class="col-lg-12 mb-20">
-                                    <label>Số điện thoại<span>*</span></label>
-                                    <input required name="phone" type="number">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <h3>Sản phẩm</h3>
-                            <div class="order_table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Room</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:set var="o" value="${sessionScope.cart}"/>
-                                        <c:forEach items="${o.items}" var="i">
-                                            <tr>
-                                                <td>${i.room.name}</td>
-                                                <td>${i.quantity}</td>
-                                                <td>${i.calculateCost()}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                    <c:if test="${sessionScope.cart != null}">
-                                        <tfoot>
-                                            <tr>
-                                                <th>Tổng giá</th>
-                                                <td>${sessionScope.total}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Phí ship</th>
-                                                <td><strong>30000</strong></td>
-                                            </tr>
-                                            <tr class="order_total">
-                                                <th>Tổng đơn</th>
-                                                <td><strong>${sessionScope.total + 30000}</strong></td>
-                                            </tr>
-                                        </tfoot>
-                                    </c:if>
-                                </table>
-                            </div>
-                            <div class="payment_method">
-                                <div class="panel-default">
-                                    <input id="payment_defult" value="cod" name="payment_method" type="radio" data-target="createp_account" />
-                                    <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult" aria-controls="collapsedefult">
-                                        Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png" alt="">
-                                    </label>
-                                </div>
-                                <div class="order_button">
-                                    <button type="submit">Đặt hàng</button>
-                                </div>
-                            </div>
-                        </div>
+    <h1>Checkout</h1>
+    <form action="checkout" method="POST">
+        <input type="hidden" name="action" value="placeOrder">
+        <div class="row">
+            <div class="col-lg-5 col-md-5">
+                <h3>Chi tiết đơn hàng</h3>
+                <div class="row">
+                    <div class="col-lg-12 mb-20">
+                        <label>Tên khách hàng<span>*</span></label>
+                        <input readonly="" value="${acc.username}" type="text">
                     </div>
-                </form>
+                    <div class="col-lg-12 mb-20">
+                        <label>Email <span>*</span></label>
+                        <input readonly="" value="${acc.email}" type="text">
+                    </div>
+                    <div class="col-lg-12 mb-20">
+                        <label>Địa chỉ<span>*</span></label>
+                        <input required name="address"  value="${acc.address}" type="text">
+                    </div>
+                    <div class="col-lg-12 mb-20">
+                        <label>Số điện thoại<span>*</span></label>
+                        <input required name="phone"  value="${acc.phone}" type="number">
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <h3>Sản phẩm</h3>
+                <div class="order_table table-responsive">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Room</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${cart.items}" var="item">
+                            <tr>
+                                <td>${item.room.name}</td>
+                                <td>${item.quantity}</td>
+                                <td>${item.calculateCost()}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Tổng giá</th>
+                            <td>${cart.totalCost}</td>
+                        </tr>
+                        <tr>
+                            <th>Phí ship</th>
+                            <td><strong>30000</strong></td>
+                        </tr>
+                        <tr class="order_total">
+                            <th>Tổng đơn</th>
+                            <td><strong>${cart.totalCost + 30000}</strong></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="payment_method">
+                    <div class="panel-default">
+                        <input id="payment_defult" value="cod" name="payment_method" type="radio" checked />
+                        <label for="payment_defult">
+                            Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png" alt="">
+                        </label>
+                    </div>
+                    <div class="order_button">
+                        <button type="submit">Đặt hàng</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
         <footer class="ftco-footer ftco-section img" style="background-image: url(images/bg_4.jpg);">

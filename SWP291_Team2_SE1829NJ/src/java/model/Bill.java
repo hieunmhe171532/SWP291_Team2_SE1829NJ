@@ -15,13 +15,62 @@ public class Bill {
      private int id;
     private float discount;
     private Date paymentDate;
+      private String phone;
+    private String email;
+    private String address;
+        private Date updateAt;
+    private Date deleteAt;
+    private boolean isDelete;
     private boolean paymentMode;
     private float total;
     private int booking_id;
     private Date createAt;
-    private Date updateAt;
-    private Date deleteAt;
-    private boolean isDelete;
+    
+    
+    
+    
+    
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    public Bill(int id, float discount, Date paymentDate, String phone, String email, String address, boolean paymentMode, float total, int booking_id, Date createAt, Date updateAt, Date deleteAt, boolean isDelete) {
+        this.id = id;
+        this.discount = discount;
+        this.paymentDate = paymentDate;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.paymentMode = paymentMode;
+        this.total = total;
+        this.booking_id = booking_id;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.deleteAt = deleteAt;
+        this.isDelete = isDelete;
+    }
+
 
     public Bill() {
     }
