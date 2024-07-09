@@ -12,21 +12,21 @@ import java.util.Date;
  * @author hieum
  */
 public class Bill {
-    private int id;
+     private int id;
     private float discount;
     private Date paymentDate;
     private boolean paymentMode;
     private float total;
     private int booking_id;
-    private Timestamp createAt;
-    private Timestamp updateAt;
-    private Timestamp delateAt;
+    private Date createAt;
+    private Date updateAt;
+    private Date deleteAt;
     private boolean isDelete;
 
     public Bill() {
     }
 
-    public Bill(int id, float discount, Date paymentDate, boolean paymentMode, float total, int booking_id, Timestamp createAt, Timestamp updateAt, Timestamp delateAt, boolean isDelete) {
+    public Bill(int id, float discount, Date paymentDate, boolean paymentMode, float total, int booking_id, Date createAt, Date updateAt, Date deleteAt, boolean isDelete) {
         this.id = id;
         this.discount = discount;
         this.paymentDate = paymentDate;
@@ -35,10 +35,9 @@ public class Bill {
         this.booking_id = booking_id;
         this.createAt = createAt;
         this.updateAt = updateAt;
-        this.delateAt = delateAt;
+        this.deleteAt = deleteAt;
         this.isDelete = isDelete;
     }
-
     public int getId() {
         return id;
     }
@@ -87,28 +86,28 @@ public class Bill {
         this.booking_id = booking_id;
     }
 
-    public Timestamp getCreateAt() {
+    public Date getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Timestamp createAt) {
+    public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 
-    public Timestamp getUpdateAt() {
+    public Date getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
+    public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
 
-    public Timestamp getDelateAt() {
-        return delateAt;
+    public Date getDeleteAt() {
+        return deleteAt;
     }
 
-    public void setDelateAt(Timestamp delateAt) {
-        this.delateAt = delateAt;
+    public void setDeleteAt(Date deleteAt) {
+        this.deleteAt = deleteAt;
     }
 
     public boolean isIsDelete() {
@@ -121,7 +120,7 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "Bill{" + "id=" + id + ", discount=" + discount + ", paymentDate=" + paymentDate + ", paymentMode=" + paymentMode + ", total=" + total + ", booking_id=" + booking_id + ", createAt=" + createAt + ", updateAt=" + updateAt + ", delateAt=" + delateAt + ", isDelete=" + isDelete + '}';
+        return "Bill{" + "id=" + id + ", discount=" + discount + ", paymentDate=" + paymentDate + ", paymentMode=" + paymentMode + ", total=" + total + ", booking_id=" + booking_id + ", createAt=" + createAt + ", updateAt=" + updateAt + ", deleteAt=" + deleteAt + ", isDelete=" + isDelete + '}';
     }
 
     

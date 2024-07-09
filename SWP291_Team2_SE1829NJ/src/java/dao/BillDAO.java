@@ -197,8 +197,77 @@ public class BillDAO {
     }
     return bookingsByDay;
 }
-    
-    
+ 
+ 
+     public int getUserIdByAccountUsername(String username) {
+        String sql = "SELECT id FROM [User] WHERE username = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, username);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Return -1 if user_id not found
+    }
+
+    // Method to add a new Bill
+    public void addBill(Bill bill) {
+        String sql = "INSERT INTO Bill (user_id, discount, paymentDate, paymentMode, total, booking_id, createAt, updateAt, deleteAt, isDelete) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, bill.getBooking_id()); // Assuming user_id is same as booking_id
+            st.setFloat(2, bill.getDiscount());
+            st.setDate(3, new java.sql.Date(bill.getPaymentDate().getTime()));
+            st.setBoolean(4, bill.isPaymentMode());
+            st.setFloat(5, bill.getTotal());
+            st.setInt(6, bill.getBooking_id());
+            st.setTimestamp(7, new java.sql.Timestamp(bill.getCreateAt().getTime()));
+            st.setTimestamp(8, new java.sql.Timestamp(bill.getUpdateAt().getTime()));
+            st.setTimestamp(9, new java.sql.Timestamp(bill.getDeleteAt().getTime()));
+            st.setBoolean(10, bill.isIsDelete());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to get a Bill by ID
+    public Bill getBillById(int id) {
+        String sql = "SELECT * FROM Bill WHERE id = ?";
+        Bill bill = null;
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                bill = new Bill(
+                    rs.getInt("id"),
+                    rs.getFloat("discount"),
+                    rs.getDate("paymentDate"),
+                    rs.getBoolean("paymentMode"),
+                    rs.getFloat("total"),
+                    rs.getInt("booking_id"),
+                    rs.getTimestamp("createAt"),
+                    rs.getTimestamp("updateAt"),
+                    rs.getTimestamp("deleteAt"),
+                    rs.getBoolean("isDelete")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bill;
+    }
+
+
 public static void main(String[] args) {
     BillDAO billDAO = new BillDAO();
     int count = billDAO.countBill();
