@@ -2,6 +2,7 @@ package controller;
 
 import dao.AccountDAO;
 import dao.BillDAO;
+import dao.RoomDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,10 @@ import model.Account;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import model.Booking;
+import model.BookingItem;
+import model.Room;
 
 public class CheckoutServlet extends HttpServlet {
 
@@ -48,8 +53,16 @@ public class CheckoutServlet extends HttpServlet {
             }
 
             Bill bill = createBill(userId, acc.getEmail(), phone, address, cart, payment);
-            dao.addBill(bill);
+           dao.addBill(bill);
+//            
+  
+int bill_id = dao.getLastBillId();
 
+
+       dao.addBooking(cart, userId, bill_id);
+
+  
+  
             session.removeAttribute("cart");
             session.setAttribute("size", 0);
 
@@ -60,6 +73,17 @@ public class CheckoutServlet extends HttpServlet {
         }
     }
 
+    
+    
+    public static void main(String[] args) {
+        // Database connection parameters
+ 
+     
+         
+        
+    }
+
+    
     private static Bill createBill(int userId, String email, String phone, String address, Cart cart, String payment) {
         Bill bill = new Bill();
         bill.setDiscount(0); // Add logic for discount if needed

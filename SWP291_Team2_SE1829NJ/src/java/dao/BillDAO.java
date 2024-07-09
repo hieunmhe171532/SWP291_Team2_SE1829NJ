@@ -8,8 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import model.Account;
 import model.Bill;
+import model.BookingItem;
+import model.Cart;
 import model.User;
 
 /**
@@ -45,8 +49,8 @@ public class BillDAO {
         return count;
     }
     
-     public List<Booking> getAllBookings() {
-        List<Booking> bookings = new ArrayList<>();
+     public List<Bill> getAllBills() {
+        List<Bill> bills = new ArrayList<>();
         String sql = "SELECT " +
                      "b.id AS BookingID, " +
                      "r.name AS RoomName, " +
@@ -69,23 +73,23 @@ public class BillDAO {
         try (PreparedStatement st = connection.prepareStatement(sql);
              ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
-                Booking booking = new Booking(
-                        rs.getInt("BookingID"),
-                        rs.getString("RoomName"),
-                        rs.getString("CustomerName"),
-                        rs.getString("PhoneNumber"),
-                        rs.getString("Address"),
-                        rs.getDate("startDate"),
-                        rs.getDate("endDate"),
-                        rs.getFloat("Fees"),
-                        rs.getString("PaymentMode")
-                );
-                bookings.add(booking);
+                int bookingId = rs.getInt("BookingID");
+                String roomName = rs.getString("RoomName");
+                String customerName = rs.getString("CustomerName");
+                String phoneNumber = rs.getString("PhoneNumber");
+                String address = rs.getString("Address");
+                Date startDate = rs.getDate("startDate");
+                Date endDate = rs.getDate("endDate");
+                float fees = rs.getFloat("Fees");
+                String paymentMode = rs.getString("PaymentMode");
+
+                Bill bill = new Bill(bookingId, roomName, customerName, phoneNumber, address, startDate, endDate, fees, paymentMode);
+                bills.add(bill);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return bookings;
+        return bills;
     }
 
     // Method to fetch detailed booking information
@@ -152,51 +156,90 @@ public class BillDAO {
 //        }
 //    }
     
-    
- public List<Booking> getBookingsByDay(LocalDate day) {
-    List<Booking> bookingsByDay = new ArrayList<>();
-    String sql = "SELECT " +
-                 "b.id AS BookingID, " +
-                 "r.name AS RoomName, " +
-                 "u.name AS CustomerName, " +
-                 "a.phone AS PhoneNumber, " +
-                 "u.address AS Address, " +
-                 "b.startDate, " +
-                 "b.endDate, " +
-                 "bl.total AS Fees, " +
-                 "CASE " +
-                 "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
-                 "    ELSE 'Other' " +
-                 "END AS PaymentMode " +
-                 "FROM Booking b " +
-                 "JOIN [User] u ON b.user_id = u.id " +
-                 "JOIN Account a ON u.username = a.username " +
-                 "JOIN Room r ON b.room_id = r.id " +
-                 "JOIN Bill bl ON b.id = bl.booking_id " +
-                 "WHERE b.startDate = ?"; // Use placeholder for parameter
+   public void addBooking(Cart cart, int userId, int billId) throws SQLException {
+        String sqlBooking = "INSERT INTO Booking (room_id, user_id, bill_id, startDate, endDate, cost, createAt) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        for (BookingItem item : cart.getItems()) {
+            try (PreparedStatement psBooking = connection.prepareStatement(sqlBooking)) {
+                psBooking.setInt(1, item.getRoom().getId()); // room_id
+                psBooking.setInt(2, userId); // user_id
+                psBooking.setInt(3, billId); // bill_id
+                psBooking.setDate(4, java.sql.Date.valueOf(item.getStartDate())); // startDate
+                psBooking.setDate(5, java.sql.Date.valueOf(item.getEndDate())); // endDate
 
-    try (PreparedStatement st = connection.prepareStatement(sql)) {
-        st.setObject(1, day); // Set the parameter for the placeholder
-        ResultSet rs = st.executeQuery();
-        while (rs.next()) {
-            Booking booking = new Booking(
-                    rs.getInt("BookingID"),
-                    rs.getString("RoomName"),
-                    rs.getString("CustomerName"),
-                    rs.getString("PhoneNumber"),
-                    rs.getString("Address"),
-                    rs.getDate("startDate"),
-                    rs.getDate("endDate"),
-                    rs.getFloat("Fees"),
-                    rs.getString("PaymentMode")
-            );
-            bookingsByDay.add(booking);
+                // Tính toán cost dựa trên giá phòng và số ngày lưu trú
+                double roomPrice = item.getRoom().getPrice(); // Lấy giá phòng từ Room
+                long days = java.time.temporal.ChronoUnit.DAYS.between(item.getStartDate(), item.getEndDate());
+                double cost = roomPrice * days;
+
+                psBooking.setFloat(6, (float) cost); // Chuyển đổi cost thành float và thiết lập giá trị
+                psBooking.setTimestamp(7, new java.sql.Timestamp(System.currentTimeMillis())); // createAt
+
+                psBooking.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle the exception or log it
+            }
+        }
+    }
+// public List<Booking> getBookingsByDay(LocalDate day) {
+//    List<Booking> bookingsByDay = new ArrayList<>();
+//    String sql = "SELECT " +
+//                 "b.id AS BookingID, " +
+//                 "r.name AS RoomName, " +
+//                 "u.name AS CustomerName, " +
+//                 "a.phone AS PhoneNumber, " +
+//                 "u.address AS Address, " +
+//                 "b.startDate, " +
+//                 "b.endDate, " +
+//                 "bl.total AS Fees, " +
+//                 "CASE " +
+//                 "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
+//                 "    ELSE 'Other' " +
+//                 "END AS PaymentMode " +
+//                 "FROM Booking b " +
+//                 "JOIN [User] u ON b.user_id = u.id " +
+//                 "JOIN Account a ON u.username = a.username " +
+//                 "JOIN Room r ON b.room_id = r.id " +
+//                 "JOIN Bill bl ON b.id = bl.booking_id " +
+//                 "WHERE b.startDate = ?"; // Use placeholder for parameter
+//
+//    try (PreparedStatement st = connection.prepareStatement(sql)) {
+//        st.setObject(1, day); // Set the parameter for the placeholder
+//        ResultSet rs = st.executeQuery();
+//        while (rs.next()) {
+//            Booking booking = new Booking(
+//                    rs.getInt("BookingID"),
+//                    rs.getString("RoomName"),
+//                    rs.getString("CustomerName"),
+//                    rs.getString("PhoneNumber"),
+//                    rs.getString("Address"),
+//                    rs.getDate("startDate"),
+//                    rs.getDate("endDate"),
+//                    rs.getFloat("Fees"),
+//                    rs.getString("PaymentMode")
+//            );
+//            bookingsByDay.add(booking);
+//        }
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    }
+//    return bookingsByDay;
+//}
+// 
+// 
+ public int getLastBillId() {
+    String sql = "SELECT TOP 1 id FROM [Bill] ORDER BY id DESC";
+    try (PreparedStatement ps = connection.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        if (rs.next()) {
+            return rs.getInt("id");
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return bookingsByDay;
+    return -1; // Return -1 if no bill found or in case of an error
 }
+
  
  
      public int getUserIdByAccountUsername(String username) {
@@ -215,6 +258,7 @@ public class BillDAO {
     }
 
     // Method to add a new Bill
+     
    public void addBill(Bill bill) {
     String sql = "INSERT INTO Bill (used_id, phone, email, address, discount, paymentDate, paymentMode, total, createAt, updateAt, deleteAt, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement st = connection.prepareStatement(sql)) {
@@ -239,8 +283,10 @@ public class BillDAO {
         e.printStackTrace();
     }
 }
+   
+   
 
-
+   
     // Method to get a Bill by ID
     public Bill getBillById(int id) {
         String sql = "SELECT * FROM Bill WHERE id = ?";
@@ -272,16 +318,16 @@ public class BillDAO {
     }
 
 
-public static void main(String[] args) {
-    BillDAO billDAO = new BillDAO();
-    int count = billDAO.countBill();
-    System.out.println("Number of Bills: " + count);
-
-    // Fetch and print booking details for the current day
-    List<Booking> bookings = billDAO.getBookingsByDay(LocalDate.now());
-    for (Booking booking : bookings) {
-        System.out.println(booking);
-    }
-}
+//public static void main(String[] args) {
+//    BillDAO billDAO = new BillDAO();
+//    int count = billDAO.countBill();
+//    System.out.println("Number of Bills: " + count);
+//
+//    // Fetch and print booking details for the current day
+//    List<Booking> bookings = billDAO.getBookingsByDay(LocalDate.now());
+//    for (Booking booking : bookings) {
+//        System.out.println(booking);
+//    }
+//}
 
 }

@@ -418,9 +418,10 @@ String sql = "UPDATE Room SET "
         List<Room> t = new ArrayList<>();
 
         try {
-            String sql = "SELECT top(5) * from room r \n"
-                    + "where r.userQuantity=? and r.area=?\n"
-                    + "and id <> ?";
+            String sql = """
+                         SELECT top(5) * from room r 
+                         where r.userQuantity=? and r.area=?
+                         and id <> ?""";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, uquan);
             stm.setFloat(2, area);
