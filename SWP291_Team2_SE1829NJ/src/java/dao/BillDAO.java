@@ -215,27 +215,31 @@ public class BillDAO {
     }
 
     // Method to add a new Bill
-    public void addBill(Bill bill) {
-        String sql = "INSERT INTO Bill (user_id, discount, paymentDate, paymentMode, total, booking_id, createAt, updateAt, deleteAt, isDelete) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setInt(1, bill.getBooking_id()); // Assuming user_id is same as booking_id
-            st.setFloat(2, bill.getDiscount());
-            st.setDate(3, new java.sql.Date(bill.getPaymentDate().getTime()));
-            st.setBoolean(4, bill.isPaymentMode());
-            st.setFloat(5, bill.getTotal());
-            st.setInt(6, bill.getBooking_id());
-            st.setTimestamp(7, new java.sql.Timestamp(bill.getCreateAt().getTime()));
-            st.setTimestamp(8, new java.sql.Timestamp(bill.getUpdateAt().getTime()));
-            st.setTimestamp(9, new java.sql.Timestamp(bill.getDeleteAt().getTime()));
-            st.setBoolean(10, bill.isIsDelete());
-
-            st.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+   public void addBill(Bill bill) {
+    String sql = "INSERT INTO Bill (used_id, phone, email, address, discount, paymentDate, paymentMode, total, createAt, updateAt, deleteAt, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try (PreparedStatement st = connection.prepareStatement(sql)) {
+        st.setInt(1, bill.getBooking_id());
+        st.setString(2, bill.getPhone());
+        st.setString(3, bill.getEmail());
+        st.setString(4, bill.getAddress());
+        st.setFloat(5, bill.getDiscount());
+        st.setDate(6, new java.sql.Date(bill.getPaymentDate().getTime()));
+        st.setBoolean(7, bill.isPaymentMode());
+        st.setFloat(8, bill.getTotal());
+        st.setTimestamp(9, new java.sql.Timestamp(bill.getCreateAt().getTime()));
+        st.setTimestamp(10, new java.sql.Timestamp(bill.getUpdateAt().getTime()));
+        if (bill.getDeleteAt() != null) {
+            st.setTimestamp(11, new java.sql.Timestamp(bill.getDeleteAt().getTime()));
+        } else {
+            st.setNull(11, java.sql.Types.TIMESTAMP);
         }
+        st.setBoolean(12, bill.isIsDelete());
+        st.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
+
 
     // Method to get a Bill by ID
     public Bill getBillById(int id) {

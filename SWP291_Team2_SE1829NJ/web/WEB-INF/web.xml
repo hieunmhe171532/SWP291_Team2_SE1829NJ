@@ -133,8 +133,8 @@
         <servlet-class>controller.CartServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Checkout</servlet-name>
-        <servlet-class>controller.Checkout</servlet-class>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>controller.CheckoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -265,7 +265,7 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Checkout</servlet-name>
+        <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
 </web-app>

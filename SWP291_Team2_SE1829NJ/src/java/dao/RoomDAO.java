@@ -508,116 +508,116 @@ String sql = "UPDATE Room SET "
 //        return rooms;
 //    }
 //
-//    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
-//    List<Room> selectedRooms = new ArrayList<>();
-//    int remainingHumans = numberOfHumans;
-//
-//    // Separate rooms that accommodate 4 and 2 people
-//    List<Room> roomsForFour = new ArrayList<>();
-//    List<Room> roomsForTwo = new ArrayList<>();
-//    for (Room room : availableRooms) {
-//        if (room.getUserQuantity() == 4) {
-//            roomsForFour.add(room);
-//        } else if (room.getUserQuantity() == 2) {
-//            roomsForTwo.add(room);
-//        }
-//    }
-//
-//    // Handle cases where the number of humans is divisible by 4 or remainder is 3
-//    if (remainingHumans % 4 == 0 || remainingHumans % 4 == 3) {
-//        while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
-//            selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
-//            remainingHumans -= 4;
-//        }
-//        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
-//        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
-//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
-//            remainingHumans -= 2;
-//        }
-//        return selectedRooms;
-//    }
-//
-//    // Handle case where the remainder is 2
-//    if (remainingHumans % 4 == 2) {
-//        if (!roomsForTwo.isEmpty()) {
-//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
-//            remainingHumans -= 2;
-//        }
-//
-//        while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
-//            selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
-//            remainingHumans -= 4;
-//        }
-//        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
-//        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
-//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
-//            remainingHumans -= 2;
-//        }
-//        return selectedRooms;
-//    }
-//
-//    // Handle case where the remainder is 1
-//    if (remainingHumans % 4 == 1) {
-//        if (remainingHumans < 4) {
-//            // If less than 4, use one room for 2 people
-//            if (!roomsForTwo.isEmpty()) {
-//                selectedRooms.add(roomsForTwo.remove(0));
-//                remainingHumans -= 2;
-//            }
-//        } else {
-//            // If greater than 4, handle remainder by using rooms for 4 people and one room for 2 people
-//            while (remainingHumans > 5 && !roomsForFour.isEmpty()) {
-//                selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
-//                remainingHumans -= 4;
-//            }
-//            if (remainingHumans == 5) {
-//                if (!roomsForFour.isEmpty() && !roomsForTwo.isEmpty()) {
-//                    selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
-//                    selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
-//                    remainingHumans -= 6; // Should be 5
-//                } else if (!roomsForFour.isEmpty()) {
-//                    selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
-//                    remainingHumans -= 4;
-//                } else if (!roomsForTwo.isEmpty()) {
-//                    selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
-//                    remainingHumans -= 2;
-//                }
-//            }
-//        }
-//        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
-//        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
-//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
-//            remainingHumans -= 2;
-//        }
-//        return selectedRooms;
-//    }
-//
-//    // Regular logic for other cases
-//    for (Room room : availableRooms) {
-//        while (room.getUserQuantity() <= remainingHumans) {
-//            selectedRooms.add(room);
-//            remainingHumans -= room.getUserQuantity();
-//
-//            // Ensure no one is left alone
-//            if (remainingHumans == 1) {
-//                // Adjust by finding an additional room to prevent one person being left alone
-//                if (!selectedRooms.isEmpty()) {
-//                    Room lastRoom = selectedRooms.get(selectedRooms.size() - 1);
-//                    selectedRooms.remove(selectedRooms.size() - 1);
-//                    remainingHumans += lastRoom.getUserQuantity();
-//                }
-//            }
-//        }
-//    }
-//
-//    // If there's an issue finding an exact match, adjust logic here
-//    if (remainingHumans > 0 && remainingHumans != 1) {
-//        selectedRooms.add(availableRooms.get(availableRooms.size() - 1)); // Add the smallest room
-//    }
-//
-//    return selectedRooms;
-//}
-//
+    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
+    List<Room> selectedRooms = new ArrayList<>();
+    int remainingHumans = numberOfHumans;
+
+    // Separate rooms that accommodate 4 and 2 people
+    List<Room> roomsForFour = new ArrayList<>();
+    List<Room> roomsForTwo = new ArrayList<>();
+    for (Room room : availableRooms) {
+        if (room.getUserQuantity() == 4) {
+            roomsForFour.add(room);
+        } else if (room.getUserQuantity() == 2) {
+            roomsForTwo.add(room);
+        }
+    }
+
+    // Handle cases where the number of humans is divisible by 4 or remainder is 3
+    if (remainingHumans % 4 == 0 || remainingHumans % 4 == 3) {
+        while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+            selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+            remainingHumans -= 4;
+        }
+        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
+        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+            remainingHumans -= 2;
+        }
+        return selectedRooms;
+    }
+
+    // Handle case where the remainder is 2
+    if (remainingHumans % 4 == 2) {
+        if (!roomsForTwo.isEmpty()) {
+            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+            remainingHumans -= 2;
+        }
+
+        while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+            selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+            remainingHumans -= 4;
+        }
+        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
+        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+            remainingHumans -= 2;
+        }
+        return selectedRooms;
+    }
+
+    // Handle case where the remainder is 1
+    if (remainingHumans % 4 == 1) {
+        if (remainingHumans < 4) {
+            // If less than 4, use one room for 2 people
+            if (!roomsForTwo.isEmpty()) {
+                selectedRooms.add(roomsForTwo.remove(0));
+                remainingHumans -= 2;
+            }
+        } else {
+            // If greater than 4, handle remainder by using rooms for 4 people and one room for 2 people
+            while (remainingHumans > 5 && !roomsForFour.isEmpty()) {
+                selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+                remainingHumans -= 4;
+            }
+            if (remainingHumans == 5) {
+                if (!roomsForFour.isEmpty() && !roomsForTwo.isEmpty()) {
+                    selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+                    selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+                    remainingHumans -= 6; // Should be 5
+                } else if (!roomsForFour.isEmpty()) {
+                    selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+                    remainingHumans -= 4;
+                } else if (!roomsForTwo.isEmpty()) {
+                    selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+                    remainingHumans -= 2;
+                }
+            }
+        }
+        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
+        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+            remainingHumans -= 2;
+        }
+        return selectedRooms;
+    }
+
+    // Regular logic for other cases
+    for (Room room : availableRooms) {
+        while (room.getUserQuantity() <= remainingHumans) {
+            selectedRooms.add(room);
+            remainingHumans -= room.getUserQuantity();
+
+            // Ensure no one is left alone
+            if (remainingHumans == 1) {
+                // Adjust by finding an additional room to prevent one person being left alone
+                if (!selectedRooms.isEmpty()) {
+                    Room lastRoom = selectedRooms.get(selectedRooms.size() - 1);
+                    selectedRooms.remove(selectedRooms.size() - 1);
+                    remainingHumans += lastRoom.getUserQuantity();
+                }
+            }
+        }
+    }
+
+    // If there's an issue finding an exact match, adjust logic here
+    if (remainingHumans > 0 && remainingHumans != 1) {
+        selectedRooms.add(availableRooms.get(availableRooms.size() - 1)); // Add the smallest room
+    }
+
+    return selectedRooms;
+}
+
 
        public List<Room> getAllRoomsWithStatusOne() {
         List<Room> rooms = new ArrayList<>();
@@ -723,77 +723,77 @@ String sql = "UPDATE Room SET "
         return rooms;
     }
 
-    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
-        List<Room> selectedRooms = new ArrayList<>();
-        int remainingHumans = numberOfHumans;
-
-        // Separate rooms based on their capacity
-        List<Room> roomsForFour = new ArrayList<>();
-        List<Room> roomsForTwo = new ArrayList<>();
-        for (Room room : availableRooms) {
-            if (room.getUserQuantity() == 4) {
-                roomsForFour.add(room);
-            } else if (room.getUserQuantity() == 2) {
-                roomsForTwo.add(room);
-            }
-        }
-
-        // Handle different remainder cases
-        while (remainingHumans > 0) {
-            if (remainingHumans % 4 == 0 || remainingHumans % 4 == 3) {
-                while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
-                    selectedRooms.add(roomsForFour.remove(0));
-                    remainingHumans -= 4;
-                }
-                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
-                    selectedRooms.add(roomsForTwo.remove(0));
-                    remainingHumans -= 2;
-                }
-            } else if (remainingHumans % 4 == 2) {
-                if (!roomsForTwo.isEmpty()) {
-                    selectedRooms.add(roomsForTwo.remove(0));
-                    remainingHumans -= 2;
-                }
-                while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
-                    selectedRooms.add(roomsForFour.remove(0));
-                    remainingHumans -= 4;
-                }
-                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
-                    selectedRooms.add(roomsForTwo.remove(0));
-                    remainingHumans -= 2;
-                }
-            } else if (remainingHumans % 4 == 1) {
-                if (remainingHumans < 4) {
-                    if (!roomsForTwo.isEmpty()) {
-                        selectedRooms.add(roomsForTwo.remove(0));
-                        remainingHumans -= 2;
-                    }
-                } else {
-                    while (remainingHumans > 5 && !roomsForFour.isEmpty()) {
-                        selectedRooms.add(roomsForFour.remove(0));
-                        remainingHumans -= 4;
-                    }
-                    if (remainingHumans == 5 && !roomsForFour.isEmpty() && !roomsForTwo.isEmpty()) {
-                        selectedRooms.add(roomsForFour.remove(0));
-                        selectedRooms.add(roomsForTwo.remove(0));
-                        remainingHumans -= 6;
-                    } else if (!roomsForFour.isEmpty()) {
-                        selectedRooms.add(roomsForFour.remove(0));
-                        remainingHumans -= 4;
-                    } else if (!roomsForTwo.isEmpty()) {
-                        selectedRooms.add(roomsForTwo.remove(0));
-                        remainingHumans -= 2;
-                    }
-                }
-                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
-                    selectedRooms.add(roomsForTwo.remove(0));
-                    remainingHumans -= 2;
-                }
-            }
-        }
-
-        return selectedRooms;
-    }
+//    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
+//        List<Room> selectedRooms = new ArrayList<>();
+//        int remainingHumans = numberOfHumans;
+//
+//        // Separate rooms based on their capacity
+//        List<Room> roomsForFour = new ArrayList<>();
+//        List<Room> roomsForTwo = new ArrayList<>();
+//        for (Room room : availableRooms) {
+//            if (room.getUserQuantity() == 4) {
+//                roomsForFour.add(room);
+//            } else if (room.getUserQuantity() == 2) {
+//                roomsForTwo.add(room);
+//            }
+//        }
+//
+//        // Handle different remainder cases
+//        while (remainingHumans > 0) {
+//            if (remainingHumans % 4 == 0 || remainingHumans % 4 == 3) {
+//                while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+//                    selectedRooms.add(roomsForFour.remove(0));
+//                    remainingHumans -= 4;
+//                }
+//                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+//                    selectedRooms.add(roomsForTwo.remove(0));
+//                    remainingHumans -= 2;
+//                }
+//            } else if (remainingHumans % 4 == 2) {
+//                if (!roomsForTwo.isEmpty()) {
+//                    selectedRooms.add(roomsForTwo.remove(0));
+//                    remainingHumans -= 2;
+//                }
+//                while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+//                    selectedRooms.add(roomsForFour.remove(0));
+//                    remainingHumans -= 4;
+//                }
+//                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+//                    selectedRooms.add(roomsForTwo.remove(0));
+//                    remainingHumans -= 2;
+//                }
+//            } else if (remainingHumans % 4 == 1) {
+//                if (remainingHumans < 4) {
+//                    if (!roomsForTwo.isEmpty()) {
+//                        selectedRooms.add(roomsForTwo.remove(0));
+//                        remainingHumans -= 2;
+//                    }
+//                } else {
+//                    while (remainingHumans > 5 && !roomsForFour.isEmpty()) {
+//                        selectedRooms.add(roomsForFour.remove(0));
+//                        remainingHumans -= 4;
+//                    }
+//                    if (remainingHumans == 5 && !roomsForFour.isEmpty() && !roomsForTwo.isEmpty()) {
+//                        selectedRooms.add(roomsForFour.remove(0));
+//                        selectedRooms.add(roomsForTwo.remove(0));
+//                        remainingHumans -= 6;
+//                    } else if (!roomsForFour.isEmpty()) {
+//                        selectedRooms.add(roomsForFour.remove(0));
+//                        remainingHumans -= 4;
+//                    } else if (!roomsForTwo.isEmpty()) {
+//                        selectedRooms.add(roomsForTwo.remove(0));
+//                        remainingHumans -= 2;
+//                    }
+//                }
+//                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+//                    selectedRooms.add(roomsForTwo.remove(0));
+//                    remainingHumans -= 2;
+//                }
+//            }
+//        }
+//
+//        return selectedRooms;
+//    }
 
         public boolean checkRoomAvailability(List<Room> availableRooms, int numberOfHumans) {
         int totalCapacity = availableRooms.stream().mapToInt(Room::getUserQuantity).sum();
