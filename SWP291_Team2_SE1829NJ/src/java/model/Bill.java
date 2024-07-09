@@ -18,15 +18,26 @@ public class Bill {
       private String phone;
     private String email;
     private String address;
-        private Date updateAt;
+    private Date updateAt;
     private Date deleteAt;
     private boolean isDelete;
     private boolean paymentMode;
     private float total;
+
+    public Bill(String phone, String address, boolean paymentMode, float total, Date createAt, String roomName, String customerName) {
+        this.phone = phone;
+        this.address = address;
+        this.paymentMode = paymentMode;
+        this.total = total;
+        this.createAt = createAt;
+        this.roomName = roomName;
+        this.customerName = customerName;
+    }
     private int booking_id;
     private Date createAt;
-    
-    
+     private String roomName;
+    private String customerName;
+    private int used_id;
     
     
     

@@ -67,7 +67,7 @@ public class BookingItem {
         this.formattedEndDate = formattedEndDate;
     }
 
-    public double calculateCost() {
+    public float calculateCost() {
         long days = java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate);
         return days * room.getPrice() * quantity;
     }
