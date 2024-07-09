@@ -42,7 +42,7 @@ public class SearchRoom extends HttpServlet {
         }
 
         RoomDAO roomDAO = new RoomDAO();
-        List<Room> roomsList = roomDAO.findListRoomByNumbersRoomNumberHuman(rooms, people);
+        List<Room> roomsList = roomDAO.findListRoomByNumbersRoomNumberHuman(people);
 
         request.setAttribute("rooms", roomsList);
         request.getRequestDispatcher("rooms.jsp").forward(request, response);

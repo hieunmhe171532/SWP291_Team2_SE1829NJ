@@ -570,7 +570,7 @@ font-family: inherit;
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+<!--        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="searchRooms">Harbor<span>lights</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -589,41 +589,38 @@ font-family: inherit;
                 </div>
             </div>
         </nav>
-        <div class="hero-wrap" style="background-image: url('bootstrap/images/bg_3.jpg');">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row no-gutters slider-text d-flex align-itemd-center justify-content-center">
-<div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
-                        <div class="text">
-                            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="searchRooms">Home</a></span> <span class="mr-2"><a href="rooms.html">Rooms</a></span> <span>Rooms Single</span></p>
-                            <h1 class="mb-4 bread">Rooms Details</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        -->
+        
+         <jsp:include page="layout/navbarmenu.jsp"/>
+        
+       <div class="center-container">
+        <h1 class="mb-4 bread">Rooms Details</h1>
+    </div>
+      
 
         <!-- Room Details Section Begin -->
         <section class="room-details-section spad"  style="margin-top: 50px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="room-details-item">
-                            <img src="${vr.image}" alt="" style="height: 365px">
-                            <div class="rd-text">
-                                <div class="rd-title">
-                                    <h3>Premium King Room</h3>
-                                    <div class="rdt-right">
-                                        <a href="#">Booking Now</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h2 id="price">${vr.price}</h2><h2><span>/Pernight</span></h2>
-
-                                </div>
-                                <p class="f-para">${vr.description}
-                                </p>
-                            </div>
+                    <div class="room-details-item">
+    <img src="${vr.image}" alt="" style="height: 365px">
+    <div class="rd-text">
+        <div class="rd-title">
+            <h3>Premium King Room</h3>
+            <div class="rdt-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                    Booking Now
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <h2 id="price">${vr.price}</h2><h2><span>/Pernight</span></h2>
+        </div>
+        <p class="f-para">${vr.description}</p>
+    </div>
+</div>
                         </div>
                         <div class="review-add">
                             <h4>Add Review</h4>
@@ -750,7 +747,38 @@ font-family: inherit;
                 </div>
             </div>
         </footer>
-
+<!-- Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Enter Booking Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="bookingForm" method="get" action="cart">
+        <div class="modal-body">
+          <input type="hidden" name="action" value="add">
+          <input type="hidden" name="room_id" value="${vr.id}">
+          <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control" required>
+          </div>
+          <input type="hidden" name="quantity" value="1">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
         <script>
             // Function to format number
             function formatPrice(price) {

@@ -1,6 +1,7 @@
 package dao;
 
 import dal.DBContext;
+import java.lang.System.Logger.Level;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -456,35 +457,233 @@ String sql = "UPDATE Room SET "
 
         return t;
     }
-    
-    public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfRooms, int numberOfHumans) {
-    List<Room> rooms = new ArrayList<>();
-    String sql = "WITH RoomWithRowNum AS ("
-               + "    SELECT r.id, r.name, r.userQuantity, r.price, r.status_id, r.description, "
-               + "           h.id AS hotelId, h.name AS hotelName, "
-               + "           t.id AS typeRoomId, t.name AS typeRoomName, "
-               + "           ROW_NUMBER() OVER (ORDER BY r.userQuantity DESC) AS rn "
-               + "    FROM Room r "
-               + "    JOIN Hotel h ON h.id = r.hotel_id "
-               + "    JOIN TypeRoom t ON t.id = r.type_id "
-               + "    WHERE r.status_id = 1 "
-               + ") "
-               + "SELECT id, name, userQuantity, price, status_id, description, hotelId, hotelName, typeRoomId, typeRoomName "
-               + "FROM RoomWithRowNum "
-               + "WHERE rn <= ? "
-               + "AND ("
-               + "    SELECT SUM(userQuantity) "
-               + "    FROM RoomWithRowNum "
-               + "    WHERE rn <= ? "
-               + ") >= ? "
-               + "ORDER BY rn";
+//   
+//    public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfHumans) {
+//        List<Room> rooms = new ArrayList<>();
+//        String sql = "WITH RoomWithRowNum AS ("
+//                   + "    SELECT r.id, r.name, r.userQuantity, r.price, r.status_id, r.description, "
+//                   + "           h.id AS hotelId, h.name AS hotelName, "
+//                   + "           t.id AS typeRoomId, t.name AS typeRoomName, "
+//                   + "           ROW_NUMBER() OVER (ORDER BY r.userQuantity DESC) AS rn "
+//                   + "    FROM Room r "
+//                   + "    JOIN Hotel h ON h.id = r.hotel_id "
+//                   + "    JOIN TypeRoom t ON t.id = r.type_id "
+//                   + "    WHERE r.status_id = 1 "
+//                   + ") "
+//                   + "SELECT id, name, userQuantity, price, status_id, description, hotelId, hotelName, typeRoomId, typeRoomName "
+//                   + "FROM RoomWithRowNum "
+//                   + "ORDER BY userQuantity DESC";
+//
+//        try (PreparedStatement ps = connection.prepareStatement(sql);
+//             ResultSet rs = ps.executeQuery()) {
+//
+//            List<Room> availableRooms = new ArrayList<>();
+//            while (rs.next()) {
+//                Room room = new Room();
+//                room.setId(rs.getInt("id"));
+//                room.setName(rs.getString("name"));
+//                room.setUserQuantity(rs.getInt("userQuantity"));
+//                room.setPrice(rs.getFloat("price"));
+//                room.setStatus(rs.getInt("status_id"));
+//                room.setDescription(rs.getString("description"));
+//
+//                Hotel hotel = new Hotel();
+//                hotel.setId(rs.getInt("hotelId"));
+//                hotel.setName(rs.getString("hotelName"));
+//                room.setHotel(hotel);
+//
+//                TypeRoom typeRoom = new TypeRoom();
+//                typeRoom.setId(rs.getInt("typeRoomId"));
+//                typeRoom.setName(rs.getString("typeRoomName"));
+//                room.setTypeRoom(typeRoom);
+//
+//                availableRooms.add(room);
+//            }
+//
+//            rooms = findOptimalRoomCombination(availableRooms, numberOfHumans);
+//
+//        } catch (SQLException e) {
+//          
+//        }
+//        return rooms;
+//    }
+//
+//    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
+//    List<Room> selectedRooms = new ArrayList<>();
+//    int remainingHumans = numberOfHumans;
+//
+//    // Separate rooms that accommodate 4 and 2 people
+//    List<Room> roomsForFour = new ArrayList<>();
+//    List<Room> roomsForTwo = new ArrayList<>();
+//    for (Room room : availableRooms) {
+//        if (room.getUserQuantity() == 4) {
+//            roomsForFour.add(room);
+//        } else if (room.getUserQuantity() == 2) {
+//            roomsForTwo.add(room);
+//        }
+//    }
+//
+//    // Handle cases where the number of humans is divisible by 4 or remainder is 3
+//    if (remainingHumans % 4 == 0 || remainingHumans % 4 == 3) {
+//        while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+//            selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+//            remainingHumans -= 4;
+//        }
+//        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
+//        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+//            remainingHumans -= 2;
+//        }
+//        return selectedRooms;
+//    }
+//
+//    // Handle case where the remainder is 2
+//    if (remainingHumans % 4 == 2) {
+//        if (!roomsForTwo.isEmpty()) {
+//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+//            remainingHumans -= 2;
+//        }
+//
+//        while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+//            selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+//            remainingHumans -= 4;
+//        }
+//        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
+//        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+//            remainingHumans -= 2;
+//        }
+//        return selectedRooms;
+//    }
+//
+//    // Handle case where the remainder is 1
+//    if (remainingHumans % 4 == 1) {
+//        if (remainingHumans < 4) {
+//            // If less than 4, use one room for 2 people
+//            if (!roomsForTwo.isEmpty()) {
+//                selectedRooms.add(roomsForTwo.remove(0));
+//                remainingHumans -= 2;
+//            }
+//        } else {
+//            // If greater than 4, handle remainder by using rooms for 4 people and one room for 2 people
+//            while (remainingHumans > 5 && !roomsForFour.isEmpty()) {
+//                selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+//                remainingHumans -= 4;
+//            }
+//            if (remainingHumans == 5) {
+//                if (!roomsForFour.isEmpty() && !roomsForTwo.isEmpty()) {
+//                    selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+//                    selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+//                    remainingHumans -= 6; // Should be 5
+//                } else if (!roomsForFour.isEmpty()) {
+//                    selectedRooms.add(roomsForFour.remove(0)); // Add room for 4 people
+//                    remainingHumans -= 4;
+//                } else if (!roomsForTwo.isEmpty()) {
+//                    selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+//                    remainingHumans -= 2;
+//                }
+//            }
+//        }
+//        // If remaining humans are more than 0 and no rooms for 4 people are left, use rooms for 2 people
+//        while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+//            selectedRooms.add(roomsForTwo.remove(0)); // Add room for 2 people
+//            remainingHumans -= 2;
+//        }
+//        return selectedRooms;
+//    }
+//
+//    // Regular logic for other cases
+//    for (Room room : availableRooms) {
+//        while (room.getUserQuantity() <= remainingHumans) {
+//            selectedRooms.add(room);
+//            remainingHumans -= room.getUserQuantity();
+//
+//            // Ensure no one is left alone
+//            if (remainingHumans == 1) {
+//                // Adjust by finding an additional room to prevent one person being left alone
+//                if (!selectedRooms.isEmpty()) {
+//                    Room lastRoom = selectedRooms.get(selectedRooms.size() - 1);
+//                    selectedRooms.remove(selectedRooms.size() - 1);
+//                    remainingHumans += lastRoom.getUserQuantity();
+//                }
+//            }
+//        }
+//    }
+//
+//    // If there's an issue finding an exact match, adjust logic here
+//    if (remainingHumans > 0 && remainingHumans != 1) {
+//        selectedRooms.add(availableRooms.get(availableRooms.size() - 1)); // Add the smallest room
+//    }
+//
+//    return selectedRooms;
+//}
+//
 
-    try (PreparedStatement ps = connection.prepareStatement(sql)) {
-        ps.setInt(1, numberOfRooms);
-        ps.setInt(2, numberOfRooms);
-        ps.setInt(3, numberOfHumans);
-        
-        try (ResultSet rs = ps.executeQuery()) {
+       public List<Room> getAllRoomsWithStatusOne() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT r.id, r.name, r.image, r.room_floor, r.userQuantity, r.area, r.price, r.status_id, r.description, r.hotel_id, r.type_id, r.createAt, r.deleteAt, r.updateAt, r.isActive, h.name AS hotelName, t.name AS typeRoomName "
+                   + "FROM Room r "
+                   + "JOIN Hotel h ON r.hotel_id = h.id "
+                   + "JOIN TypeRoom t ON r.type_id = t.id "
+                   + "WHERE r.status_id = 1";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Room room = new Room();
+                room.setId(rs.getInt("id"));
+                room.setName(rs.getString("name"));
+                room.setImage(rs.getString("image"));
+                room.setRoom_floor(rs.getString("room_floor"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setArea(rs.getFloat("area"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("status_id"));
+                room.setDescription(rs.getString("description"));
+//                room.setCreateAt(rs.getTimestamp("createAt"));
+//                room.setDeleteAt(rs.getTimestamp("deleteAt"));
+//                room.setUpdateAt(rs.getTimestamp("updateAt"));
+                room.setIsActive(rs.getBoolean("isActive"));
+
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("hotel_id"));
+                hotel.setName(rs.getString("hotelName"));
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt("type_id"));
+                typeRoom.setName(rs.getString("typeRoomName"));
+                room.setTypeRoom(typeRoom);
+
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+    
+    public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfHumans) {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "WITH RoomWithRowNum AS ("
+                   + "    SELECT r.id, r.name, r.userQuantity, r.price, r.status_id, r.description, "
+                   + "           h.id AS hotelId, h.name AS hotelName, "
+                   + "           t.id AS typeRoomId, t.name AS typeRoomName, "
+                   + "           ROW_NUMBER() OVER (ORDER BY r.userQuantity DESC) AS rn "
+                   + "    FROM Room r "
+                   + "    JOIN Hotel h ON h.id = r.hotel_id "
+                   + "    JOIN TypeRoom t ON t.id = r.type_id "
+                   + "    WHERE r.status_id = 1 "
+                   + ") "
+                   + "SELECT id, name, userQuantity, price, status_id, description, hotelId, hotelName, typeRoomId, typeRoomName "
+                   + "FROM RoomWithRowNum "
+                   + "ORDER BY userQuantity DESC";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            List<Room> availableRooms = new ArrayList<>();
             while (rs.next()) {
                 Room room = new Room();
                 room.setId(rs.getInt("id"));
@@ -504,42 +703,136 @@ String sql = "UPDATE Room SET "
                 typeRoom.setName(rs.getString("typeRoomName"));
                 room.setTypeRoom(typeRoom);
 
-                rooms.add(room);
+                availableRooms.add(room);
+            }
+
+            // Check if the total capacity is enough
+            int totalCapacity = availableRooms.stream().mapToInt(Room::getUserQuantity).sum();
+            if (totalCapacity < numberOfHumans) {
+                System.out.println("Not enough room for number of humans");
+                return new ArrayList<>();
+            } else {
+                System.out.println("Having enough room for number of humans");
+            }
+
+            rooms = findOptimalRoomCombination(availableRooms, numberOfHumans);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
+        List<Room> selectedRooms = new ArrayList<>();
+        int remainingHumans = numberOfHumans;
+
+        // Separate rooms based on their capacity
+        List<Room> roomsForFour = new ArrayList<>();
+        List<Room> roomsForTwo = new ArrayList<>();
+        for (Room room : availableRooms) {
+            if (room.getUserQuantity() == 4) {
+                roomsForFour.add(room);
+            } else if (room.getUserQuantity() == 2) {
+                roomsForTwo.add(room);
             }
         }
-    } catch (SQLException e) {
-        System.out.println("Error finding rooms: " + e.getMessage());
-    }
-    return rooms;
-}
-    
-public static void main(String[] args) {
-        RoomDAO roomDAO = new RoomDAO();
 
-        // Tạo một đối tượng Room mới để cập nhật
-//        room.setId(9); // Giả sử đây là ID của phòng cần chỉnh sửa
-//        room.setName("Phòng Deluxe");
-//        room.setImage("deluxe.jpg");
-//        room.setRoom_floor("2");
-//        room.setUserQuantity(2);
-//        room.setArea(30.0f);
-//        room.setPrice(1500.0f);
-//        room.setStatus(1); // Giả sử 1 là trạng thái "available"
-//        room.setDescription("Phòng với view biển");
-//        Hotel hotel = new Hotel();
-//        hotel.setId(1); // Giả sử Hotel có ID là 1
-//        room.setHotel(hotel);
-//        TypeRoom typeRoom = new TypeRoom();
-//        typeRoom.setId(1); // Giả sử TypeRoom có ID là 1
-//        room.setTypeRoom(typeRoom);
-//        room.setIsActive(true);
-//
-//        // Thực hiện cập nhật
-//        if(roomDAO.editRoomById(room)){
-//            System.out.println("Cập nhật phòng thành công");
-//        } else {
-//            System.out.println("Cập nhật phòng thất bại");
-//        }
+        // Handle different remainder cases
+        while (remainingHumans > 0) {
+            if (remainingHumans % 4 == 0 || remainingHumans % 4 == 3) {
+                while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+                    selectedRooms.add(roomsForFour.remove(0));
+                    remainingHumans -= 4;
+                }
+                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+                    selectedRooms.add(roomsForTwo.remove(0));
+                    remainingHumans -= 2;
+                }
+            } else if (remainingHumans % 4 == 2) {
+                if (!roomsForTwo.isEmpty()) {
+                    selectedRooms.add(roomsForTwo.remove(0));
+                    remainingHumans -= 2;
+                }
+                while (remainingHumans >= 4 && !roomsForFour.isEmpty()) {
+                    selectedRooms.add(roomsForFour.remove(0));
+                    remainingHumans -= 4;
+                }
+                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+                    selectedRooms.add(roomsForTwo.remove(0));
+                    remainingHumans -= 2;
+                }
+            } else if (remainingHumans % 4 == 1) {
+                if (remainingHumans < 4) {
+                    if (!roomsForTwo.isEmpty()) {
+                        selectedRooms.add(roomsForTwo.remove(0));
+                        remainingHumans -= 2;
+                    }
+                } else {
+                    while (remainingHumans > 5 && !roomsForFour.isEmpty()) {
+                        selectedRooms.add(roomsForFour.remove(0));
+                        remainingHumans -= 4;
+                    }
+                    if (remainingHumans == 5 && !roomsForFour.isEmpty() && !roomsForTwo.isEmpty()) {
+                        selectedRooms.add(roomsForFour.remove(0));
+                        selectedRooms.add(roomsForTwo.remove(0));
+                        remainingHumans -= 6;
+                    } else if (!roomsForFour.isEmpty()) {
+                        selectedRooms.add(roomsForFour.remove(0));
+                        remainingHumans -= 4;
+                    } else if (!roomsForTwo.isEmpty()) {
+                        selectedRooms.add(roomsForTwo.remove(0));
+                        remainingHumans -= 2;
+                    }
+                }
+                while (remainingHumans > 0 && !roomsForTwo.isEmpty()) {
+                    selectedRooms.add(roomsForTwo.remove(0));
+                    remainingHumans -= 2;
+                }
+            }
+        }
+
+        return selectedRooms;
+    }
+
+        public boolean checkRoomAvailability(List<Room> availableRooms, int numberOfHumans) {
+        int totalCapacity = availableRooms.stream().mapToInt(Room::getUserQuantity).sum();
+        if (totalCapacity < numberOfHumans) {
+            System.out.println("Not enough room for number of humans");
+            return false;
+        } else {
+            System.out.println("Having enough room for number of humans");
+            return true;
+        }
+    }
+
+
+    
+    
+    public static void main(String[] args) {
+        // Database connection parameters
+ 
+     
+            RoomDAO roomDAO = new RoomDAO();
+
+            // Test the findListRoomByNumbersRoomNumberHuman method
+            int numberOfHumans = 4;
+            List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfHumans);
+
+            // Print the results
+            for (Room room : rooms) {
+                System.out.println("Room ID: " + room.getId() +
+                                   ", Name: " + room.getName() +
+                                   ", User Quantity: " + room.getUserQuantity() +
+                                   ", Price: " + room.getPrice() +
+                                   ", Hotel: " + room.getHotel().getName() +
+                                   ", Type Room: " + room.getTypeRoom().getName());
+            }
         
     }
+
 }
+
+
+
+
