@@ -15,10 +15,12 @@
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/UserDAO.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/LOGGER.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/marketer/ListManageFeedback.java</file>
+            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/room/roomDelete.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/TypeRoom.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/checkout.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/rooms.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Help.java</file>
+            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/room/roomDetail.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Feedbackus.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/homepage.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/ViewBlogServlet.java</file>
@@ -48,6 +50,7 @@
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/viewcustomer.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/RoomSearchServlet.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/orderConfirmation.jsp</file>
+            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/admin/roomManager.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/WEB-INF/web.xml</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/BlogDAO.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Booking.java</file>
@@ -68,6 +71,7 @@
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dal/DBContext.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/admin/accountManager.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/controller/dashboard/Dashboard.java</file>
+            <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/admin/roomDetail.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/model/Status.java</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/web/managerbooking.jsp</file>
             <file>file:/E:/codeDaybyDay/day707/SWP291_Team2_SE1829NJ/src/java/dao/FeedbackusDAO.java</file>

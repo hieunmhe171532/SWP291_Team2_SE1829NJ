@@ -46,7 +46,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     int roomId = Integer.parseInt(request.getParameter("id")); // Get the room ID from the request
     RoomDAO roomDAO = new RoomDAO();
-    Room room = roomDAO.getById(roomId); // Fetch the room details from the database
+    Room room = roomDAO.getRoomByRid(roomId); // Fetch the room details from the database
 
     if (room != null) {
         request.setAttribute("room", room); // Set the room in the request scope
