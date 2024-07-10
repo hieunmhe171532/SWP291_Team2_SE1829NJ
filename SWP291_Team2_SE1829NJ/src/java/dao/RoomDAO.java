@@ -35,92 +35,92 @@ public class RoomDAO {
             }
         }
     }
-
-    public List<Room> getAllByParam(String userQuantity, String priceRange, Integer typeRoomId) {
-        List<Room> rooms = new ArrayList<>();
-        List<Object> params = new ArrayList<>();
-
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT r.id as rId, r.name as rName, r.image as rImage, r.deleteAt as RdeleteAt, "
-                + "r.updateAt as RupdateAt, r.createAt as RcreateAt , r.isDelete as rIsDelete,"
-                + "r.userQuantity, r.area, r.quantity, r.price, r.status as rStatus, r.description, "
-                + " h.id as hId, h.name as hName, t.id as tId, t.name as tName FROM Room r ")
-                .append("JOIN Hotel h ON h.id = r.hotel_id ")
-                .append("JOIN TypeRoom t ON t.id = r.type_id ")
-                .append("WHERE r.status = 1 ");
-
-        if (userQuantity != null && !userQuantity.isEmpty()) {
-            switch (userQuantity) {
-                case "1", "2", "3", "4" -> {
-                    query.append("AND r.userQuantity = ? ");
-                    params.add(Integer.valueOf(userQuantity));
-                }
-                case "5+" ->
-                    query.append("AND r.userQuantity >= 5 ");
-            }
-        }
-
-        if (priceRange != null && !priceRange.isEmpty()) {
-            switch (priceRange) {
-                case "0-500.000" ->
-                    query.append("AND r.price BETWEEN 0 AND 500000 ");
-                case "500.000-1.000.000" ->
-                    query.append("AND r.price BETWEEN 500000 AND 1000000 ");
-                case "1.000.000-2.000.000" ->
-                    query.append("AND r.price BETWEEN 1000000 AND 2000000 ");
-                case "2.000.000-5.000.000" ->
-                    query.append("AND r.price BETWEEN 2000000 AND 5000000 ");
-            }
-        }
-
-        if (typeRoomId != null) {
-query.append("AND r.type_id = ? ");
-            params.add(typeRoomId);
-        }
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
-            for (int i = 0; i < params.size(); i++) {
-                preparedStatement.setObject(i + 1, params.get(i));
-            }
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    Room room = new Room();
-                    room.setId(resultSet.getInt("rId"));
-                    room.setName(resultSet.getString("rName"));
-                    room.setImage(resultSet.getString("rImage"));
-                    room.setUserQuantity(resultSet.getInt("userQuantity"));
-                    room.setArea(resultSet.getFloat("area"));
-
-                    room.setPrice(resultSet.getFloat("price"));
-                    room.setStatus(resultSet.getInt("rStatus"));
-                    room.setDescription(resultSet.getString("description"));
-                    room.setIsDelete(resultSet.getBoolean("rIsDelete"));
-//                    room.setCreateAt(resultSet.getDate("RcreateAt"));
-//                    room.setDeleteAt(resultSet.getDate("RdeleteAt"));
-//                    room.setUpdateAt(resultSet.getDate("RupdateAt"));
-
-                    Hotel hotel = new Hotel();
-                    hotel.setId(resultSet.getInt("hId"));
-                    hotel.setName(resultSet.getString("hName"));
-                    // Set other Hotel fields...
-                    room.setHotel(hotel);
-
-                    TypeRoom typeRoom = new TypeRoom();
-                    typeRoom.setId(resultSet.getInt("tId"));
-                    typeRoom.setName(resultSet.getString("tName"));
-                    // Set other TypeRoom fields...
-                    room.setTypeRoom(typeRoom);
-
-                    rooms.add(room);
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("lỗi " + e);
-        }
-
-        return rooms;
-    }
+//
+//    public List<Room> getAllByParam(String userQuantity, String priceRange, Integer typeRoomId) {
+//        List<Room> rooms = new ArrayList<>();
+//        List<Object> params = new ArrayList<>();
+//
+//        StringBuilder query = new StringBuilder();
+//        query.append("SELECT r.id as rId, r.name as rName, r.image as rImage, r.deleteAt as RdeleteAt, "
+//                + "r.updateAt as RupdateAt, r.createAt as RcreateAt , r.isDelete as rIsDelete,"
+//                + "r.userQuantity, r.area, r.quantity, r.price, r.status as rStatus, r.description, "
+//                + " h.id as hId, h.name as hName, t.id as tId, t.name as tName FROM Room r ")
+//                .append("JOIN Hotel h ON h.id = r.hotel_id ")
+//                .append("JOIN TypeRoom t ON t.id = r.type_id ")
+//                .append("WHERE r.status = 1 ");
+//
+//        if (userQuantity != null && !userQuantity.isEmpty()) {
+//            switch (userQuantity) {
+//                case "1", "2", "3", "4" -> {
+//                    query.append("AND r.userQuantity = ? ");
+//                    params.add(Integer.valueOf(userQuantity));
+//                }
+//                case "5+" ->
+//                    query.append("AND r.userQuantity >= 5 ");
+//            }
+//        }
+//
+//        if (priceRange != null && !priceRange.isEmpty()) {
+//            switch (priceRange) {
+//                case "0-500.000" ->
+//                    query.append("AND r.price BETWEEN 0 AND 500000 ");
+//                case "500.000-1.000.000" ->
+//                    query.append("AND r.price BETWEEN 500000 AND 1000000 ");
+//                case "1.000.000-2.000.000" ->
+//                    query.append("AND r.price BETWEEN 1000000 AND 2000000 ");
+//                case "2.000.000-5.000.000" ->
+//                    query.append("AND r.price BETWEEN 2000000 AND 5000000 ");
+//            }
+//        }
+//
+//        if (typeRoomId != null) {
+//query.append("AND r.type_id = ? ");
+//            params.add(typeRoomId);
+//        }
+//
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+//            for (int i = 0; i < params.size(); i++) {
+//                preparedStatement.setObject(i + 1, params.get(i));
+//            }
+//
+//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                while (resultSet.next()) {
+//                    Room room = new Room();
+//                    room.setId(resultSet.getInt("rId"));
+//                    room.setName(resultSet.getString("rName"));
+//                    room.setImage(resultSet.getString("rImage"));
+//                    room.setUserQuantity(resultSet.getInt("userQuantity"));
+//                    room.setArea(resultSet.getFloat("area"));
+//
+//                    room.setPrice(resultSet.getFloat("price"));
+//                    room.setStatus(resultSet.getInt("rStatus"));
+//                    room.setDescription(resultSet.getString("description"));
+//                    room.setIsDelete(resultSet.getBoolean("rIsDelete"));
+////                    room.setCreateAt(resultSet.getDate("RcreateAt"));
+////                    room.setDeleteAt(resultSet.getDate("RdeleteAt"));
+////                    room.setUpdateAt(resultSet.getDate("RupdateAt"));
+//
+//                    Hotel hotel = new Hotel();
+//                    hotel.setId(resultSet.getInt("hId"));
+//                    hotel.setName(resultSet.getString("hName"));
+//                    // Set other Hotel fields...
+//                    room.setHotel(hotel);
+//
+//                    TypeRoom typeRoom = new TypeRoom();
+//                    typeRoom.setId(resultSet.getInt("tId"));
+//                    typeRoom.setName(resultSet.getString("tName"));
+//                    // Set other TypeRoom fields...
+//                    room.setTypeRoom(typeRoom);
+//
+//                    rooms.add(room);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("lỗi " + e);
+//        }
+//
+//        return rooms;
+//    }
 
     public int countRoom() {
         int count = 0;
@@ -192,7 +192,7 @@ count = rs.getInt("countRoom");
                     room = new Room();
                     room.setId(rs.getInt("rId"));
                     room.setName(rs.getString("rName"));
-                    room.setImage(rs.getString("rImage"));
+           
                     room.setRoom_floor(rs.getString("rRoomFloor"));
 //                room.setDeleteAt(rs.getDate("RdeleteAt"));
 //                room.setUpdateAt(rs.getDate("RupdateAt"));
@@ -238,27 +238,27 @@ if (rs.next()) {
                     room = new Room();
                     room.setId(rs.getInt(1));
                     room.setName(rs.getString(2));
-                    room.setImage(rs.getString(4));
+
                     room.setRoom_floor(rs.getString(3));
 //                room.setDeleteAt(rs.getDate("RdeleteAt"));
 //                room.setUpdateAt(rs.getDate("RupdateAt"));
 //                room.setCreateAt(rs.getDate("RcreateAt"));
-                    room.setArea(rs.getFloat(6));
-                    room.setUserQuantity(rs.getInt(5));
-                    room.setPrice(rs.getFloat(7));
-                    room.setStatus(rs.getInt(8));
-                    room.setDescription(rs.getString(9));
+                    room.setArea(rs.getFloat(5));
+                    room.setUserQuantity(rs.getInt(4));
+                    room.setPrice(rs.getFloat(6));
+                    room.setStatus(rs.getInt(7));
+                    room.setDescription(rs.getString(8));
 
                     Hotel hotel = new Hotel();
-                    hotel.setId(rs.getInt(10));
-                    hotel.setName(rs.getString(18));
+                    hotel.setId(rs.getInt(9));
+                    hotel.setName(rs.getString(17));
                     // Set other hotel fields if needed
 
                     room.setHotel(hotel);
 
                     TypeRoom typeRoom = new TypeRoom();
-                    typeRoom.setId(rs.getInt(11));
-                    typeRoom.setName(rs.getString(30));
+                    typeRoom.setId(rs.getInt(10));
+                    typeRoom.setName(rs.getString(29));
 
                     room.setTypeRoom(typeRoom);
                 }
@@ -272,7 +272,7 @@ if (rs.next()) {
     public List<Room> getAll() {
         List<Room> rooms = new ArrayList<>();
         Connection conn = dbContext.getConnection();
-        String sql = "SELECT r.id AS rId, r.name AS rName, r.image AS rImage, r.room_floor AS rRoomFloor, "
+        String sql = "SELECT r.id AS rId, r.name AS rName, r.room_floor AS rRoomFloor, "
                 + "r.deleteAt AS RdeleteAt, r.updateAt AS RupdateAt, r.createAt AS RcreateAt, "
                 + "r.area, r.userQuantity, r.price, r.status_id AS rStatus, r.description, "
                 + "h.id AS hId, h.name AS hName, "
@@ -298,7 +298,7 @@ if (rs.next()) {
         Room room = new Room();
         room.setId(rs.getInt("rId"));
         room.setName(rs.getString("rName"));
-        room.setImage(rs.getString("rImage"));
+ 
         room.setRoom_floor(rs.getString("rRoomFloor"));
         ;
         room.setArea(rs.getFloat("area"));
@@ -322,21 +322,21 @@ hotel.setId(rs.getInt("hId"));
 
     public boolean insertRoom(Room room) {
         String sql = "SET IDENTITY_INSERT Room ON;"
-                + "INSERT INTO Room (id, name, image, room_floor, userQuantity, area, price, status_id, description, hotel_id, type_id, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                + "INSERT INTO Room (id, name, room_floor, userQuantity, area, price, status_id, description, hotel_id, type_id, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 + "SET IDENTITY_INSERT Room OFF;";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, room.getId()); // Only include this if you're sure you want to manually set the ID
             ps.setString(2, room.getName());
-            ps.setString(3, room.getImage());
-            ps.setString(4, room.getRoom_floor());
-            ps.setInt(5, room.getUserQuantity());
-            ps.setFloat(6, room.getArea());
-            ps.setFloat(7, room.getPrice());
-            ps.setInt(8, room.getStatus());
-            ps.setString(9, room.getDescription());
-            ps.setInt(10, room.getHotel().getId()); // Ensure Hotel and TypeRoom are not null
-            ps.setInt(11, room.getTypeRoom().getId());
-            ps.setBoolean(12, room.isIsActive());
+
+            ps.setString(3, room.getRoom_floor());
+            ps.setInt(4, room.getUserQuantity());
+            ps.setFloat(5, room.getArea());
+            ps.setFloat(6, room.getPrice());
+            ps.setInt(7, room.getStatus());
+            ps.setString(8, room.getDescription());
+            ps.setInt(9, room.getHotel().getId()); // Ensure Hotel and TypeRoom are not null
+            ps.setInt(10, room.getTypeRoom().getId());
+            ps.setBoolean(11, room.isIsActive());
 
             int result = ps.executeUpdate(); // Execute the insert SQL statement
             return result > 0; // Return true if the insert was successful
@@ -380,7 +380,7 @@ hotel.setId(rs.getInt("hId"));
     public boolean editRoomById(Room room) {
 String sql = "UPDATE Room SET "
                 + "name = ?, "
-                + "image = ?, "
+            
                 + "room_floor = ?, "
                 + "userQuantity = ?, "
                 + "area = ?, "
@@ -394,17 +394,17 @@ String sql = "UPDATE Room SET "
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, room.getName());
-            ps.setString(2, room.getImage());
-            ps.setString(3, room.getRoom_floor());
-            ps.setInt(4, room.getUserQuantity());
-            ps.setFloat(5, room.getArea());
-            ps.setFloat(6, room.getPrice());
-            ps.setInt(7, room.getStatus());
-            ps.setString(8, room.getDescription());
-            ps.setInt(9, room.getHotel().getId()); // Ensures that the Hotel object is not null
-            ps.setInt(10, room.getTypeRoom().getId()); // Ensures that the TypeRoom object is not null
-            ps.setBoolean(11, room.isIsActive());
-            ps.setInt(12, room.getId());
+  
+            ps.setString(2, room.getRoom_floor());
+            ps.setInt(3, room.getUserQuantity());
+            ps.setFloat(4, room.getArea());
+            ps.setFloat(5, room.getPrice());
+            ps.setInt(6, room.getStatus());
+            ps.setString(7, room.getDescription());
+            ps.setInt(8, room.getHotel().getId()); // Ensures that the Hotel object is not null
+            ps.setInt(9, room.getTypeRoom().getId()); // Ensures that the TypeRoom object is not null
+            ps.setBoolean(10, room.isIsActive());
+            ps.setInt(11, room.getId());
 
             int result = ps.executeUpdate();
             return result > 0; // Return true if the update was successful
@@ -433,22 +433,22 @@ String sql = "UPDATE Room SET "
                 Room room=new Room();
                 room.setId(rs.getInt(1));
                 room.setName(rs.getString(2));
-                room.setImage(rs.getString(4));
+
                 room.setRoom_floor(rs.getString(3));
-                room.setArea(rs.getFloat(6));
-                room.setUserQuantity(rs.getInt(5));
-                room.setPrice(rs.getFloat(7));
-                room.setStatus(rs.getInt(8));
-                room.setDescription(rs.getString(9));
+                room.setArea(rs.getFloat(5));
+                room.setUserQuantity(rs.getInt(4));
+                room.setPrice(rs.getFloat(6));
+                room.setStatus(rs.getInt(7));
+                room.setDescription(rs.getString(8));
 
                 Hotel hotel = new Hotel();
-                hotel.setId(rs.getInt(10));
+                hotel.setId(rs.getInt(9));
                 // Set other hotel fields if needed
 
                 room.setHotel(hotel);
 
                 TypeRoom typeRoom = new TypeRoom();
-                typeRoom.setId(rs.getInt(11));
+                typeRoom.setId(rs.getInt(10));
 
                 room.setTypeRoom(typeRoom);
                 t.add(room);
@@ -622,7 +622,7 @@ String sql = "UPDATE Room SET "
 
        public List<Room> getAllRoomsWithStatusOne() {
         List<Room> rooms = new ArrayList<>();
-        String sql = "SELECT r.id, r.name, r.image, r.room_floor, r.userQuantity, r.area, r.price, r.status_id, r.description, r.hotel_id, r.type_id, r.createAt, r.deleteAt, r.updateAt, r.isActive, h.name AS hotelName, t.name AS typeRoomName "
+        String sql = "SELECT r.id, r.name,r.room_floor, r.userQuantity, r.area, r.price, r.status_id, r.description, r.hotel_id, r.type_id, r.createAt, r.deleteAt, r.updateAt, r.isActive, h.name AS hotelName, t.name AS typeRoomName "
                    + "FROM Room r "
                    + "JOIN Hotel h ON r.hotel_id = h.id "
                    + "JOIN TypeRoom t ON r.type_id = t.id "
@@ -635,7 +635,7 @@ String sql = "UPDATE Room SET "
                 Room room = new Room();
                 room.setId(rs.getInt("id"));
                 room.setName(rs.getString("name"));
-                room.setImage(rs.getString("image"));
+
                 room.setRoom_floor(rs.getString("room_floor"));
                 room.setUserQuantity(rs.getInt("userQuantity"));
                 room.setArea(rs.getFloat("area"));

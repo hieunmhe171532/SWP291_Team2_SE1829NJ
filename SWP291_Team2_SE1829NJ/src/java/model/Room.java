@@ -15,7 +15,7 @@ public class Room {
 
     private int id;
     private String name;
-    private String image;
+
     private String room_floor;
     private int userQuantity;
     private float area;
@@ -31,10 +31,9 @@ public class Room {
     public Room() {
     }
 
-    public Room(int id, String name, String image, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom) {
+    public Room(int id, String name, String room_floor, int userQuantity, float area, float price, int status, boolean isActive, String description, Hotel hotel, TypeRoom typeRoom) {
         this.id = id;
         this.name = name;
-        this.image = image;
         this.room_floor = room_floor;
         this.userQuantity = userQuantity;
         this.area = area;
@@ -61,7 +60,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", name=" + name + ", image=" + image + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", isActive=" + isActive + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + '}';
+        return "Room{" + "id=" + id + ", name=" + name + ", room_floor=" + room_floor + ", userQuantity=" + userQuantity + ", area=" + area + ", price=" + price + ", status=" + status + ", isActive=" + isActive + ", description=" + description + ", hotel=" + hotel + ", typeRoom=" + typeRoom + ", isDelete=" + isDelete + '}';
     }
 
     public void setId(int id) {
@@ -76,13 +75,6 @@ public class Room {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getRoom_floor() {
         return room_floor;

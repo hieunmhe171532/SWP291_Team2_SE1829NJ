@@ -86,7 +86,7 @@ throws ServletException, IOException {
   int id  = Integer.parseInt(request.getParameter("id"));     
 String name = request.getParameter("name");
 String roomFloor = request.getParameter("room_floor");
-String imageUrl = request.getParameter("image");
+
 int userQuantity = Integer.parseInt(request.getParameter("userQuantity"));
 float area = Float.parseFloat(request.getParameter("area"));
 float price = Float.parseFloat(request.getParameter("price"));
@@ -101,7 +101,7 @@ Room room = new Room(); // Assume constructor and setters are available
  room.setId(id); // Assuming ID is manually set for testing
 room.setName(name);
 room.setRoom_floor(roomFloor);
-room.setImage(imageUrl);
+
 room.setUserQuantity(userQuantity);
 room.setArea(area);
 room.setPrice(price);
@@ -149,7 +149,7 @@ room.setIsActive(isActive);
         room.setId(12); // Assuming ID is manually set for testing
         room.setName("Deluxe Room");
         room.setRoom_floor("1st");
-        room.setImage("http://example.com/image.jpg");
+     
         room.setUserQuantity(2);
         room.setArea(30.5f);
         room.setPrice(150.0f);
