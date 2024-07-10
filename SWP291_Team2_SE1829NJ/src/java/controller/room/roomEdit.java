@@ -39,7 +39,7 @@ public class roomEdit extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String roomFloor = request.getParameter("room_floor");
-        String image = request.getParameter("image");
+    
         int userQuantity = Integer.parseInt(request.getParameter("userQuantity"));
         float area = Float.parseFloat(request.getParameter("area"));
         float price = Float.parseFloat(request.getParameter("price"));
@@ -54,7 +54,7 @@ public class roomEdit extends HttpServlet {
         room.setId(id);
         room.setName(name);
         room.setRoom_floor(roomFloor);
-        room.setImage(image);
+    
         room.setUserQuantity(userQuantity);
         room.setArea(area);
         room.setPrice(price);

@@ -169,10 +169,8 @@
                     <th>Room Floor:</th>
                     <td>${room.room_floor}</td>
                 </tr>
-                <tr>
-                    <th>Image URL:</th>
-                    <td>${room.image}</td>
-                </tr>
+       
+                
                 <tr>
                     <th>User Quantity:</th>
                     <td>${room.userQuantity}</td>
@@ -256,10 +254,7 @@
                         <label for="room_floor${room.id}">Room Floor:</label>
                         <input type="text" class="form-control" id="room_floor${room.id}" name="room_floor" value="${room.room_floor}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="image${room.id}">Image URL:</label>
-                        <input type="text" class="form-control" id="image${room.id}" name="image" value="${room.image}" required>
-                    </div>
+              
                     <div class="form-group">
                         <label for="userQuantity${room.id}">User Quantity:</label>
                         <input type="number" class="form-control" id="userQuantity${room.id}" name="userQuantity" value="${room.userQuantity}" required>
