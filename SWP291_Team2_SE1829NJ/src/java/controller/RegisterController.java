@@ -3,6 +3,7 @@ package controller;
 import dao.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -61,8 +62,20 @@ public class RegisterController extends HttpServlet {
             // Call the register method
             accountDAO.register(username, password, phone, email, 5, true, fullname, dob, gender, address);
 
+            // Create cookies for username and password
+//            Cookie nameCookie = new Cookie("name", username);
+//            Cookie passCookie = new Cookie("pass", password);
+//
+//            // Set cookie expiry times
+//            nameCookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+//            passCookie.setMaxAge(60 * 60 * 24 * 3);  // 3 days
+//
+//            // Add cookies to the response
+//            response.addCookie(nameCookie);
+//            response.addCookie(passCookie);
+
             // Redirect to a success page or login page
-            response.sendRedirect("login");
+            request.getRequestDispatcher("login?action=login").forward(request, response);
         } else {
             request.setAttribute("registrationError", "Invalid action.");
             request.getRequestDispatcher("/register.jsp").forward(request, response);

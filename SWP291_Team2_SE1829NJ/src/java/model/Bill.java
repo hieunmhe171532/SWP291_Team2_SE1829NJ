@@ -18,12 +18,64 @@ public class Bill {
       private String phone;
     private String email;
     private String address;
+      private String note;
     private Date updateAt;
     private Date deleteAt;
     private boolean isDelete;
     private boolean paymentMode;
     private float total;
+    private String paymentMethod;
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public int getUsed_id() {
+        return used_id;
+    }
+
+    public void setUsed_id(int used_id) {
+        this.used_id = used_id;
+    }
+
+    public Bill(float discount, String phone, String email, String address, boolean paymentMode, float total, String paymentMethod, Date createAt, String roomName, String customerName) {
+        this.discount = discount;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.paymentMode = paymentMode;
+        this.total = total;
+        this.paymentMethod = paymentMethod;
+        this.createAt = createAt;
+        this.roomName = roomName;
+        this.customerName = customerName;
+    }
+    
+    
+    
+    
+    
+    
     public Bill(String phone, String address, boolean paymentMode, float total, Date createAt, String roomName, String customerName) {
         this.phone = phone;
         this.address = address;
