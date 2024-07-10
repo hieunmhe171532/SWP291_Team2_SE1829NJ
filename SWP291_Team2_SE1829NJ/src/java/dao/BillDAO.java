@@ -260,7 +260,7 @@ public class BillDAO {
     // Method to add a new Bill
      
    public void addBill(Bill bill) {
-    String sql = "INSERT INTO Bill (used_id, phone, email, address, discount, paymentDate, paymentMode, total, createAt, updateAt, deleteAt, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO Bill (used_id, phone, email, address, discount, paymentDate, paymentMode, paymentMethod, total, createAt, updateAt, deleteAt, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement st = connection.prepareStatement(sql)) {
         st.setInt(1, bill.getBooking_id());
         st.setString(2, bill.getPhone());
@@ -269,15 +269,16 @@ public class BillDAO {
         st.setFloat(5, bill.getDiscount());
         st.setDate(6, new java.sql.Date(bill.getPaymentDate().getTime()));
         st.setBoolean(7, bill.isPaymentMode());
-        st.setFloat(8, bill.getTotal());
-        st.setTimestamp(9, new java.sql.Timestamp(bill.getCreateAt().getTime()));
-        st.setTimestamp(10, new java.sql.Timestamp(bill.getUpdateAt().getTime()));
+        st.setString(8, bill.getPaymentMethod());
+        st.setFloat(9, bill.getTotal());
+        st.setTimestamp(10, new java.sql.Timestamp(bill.getCreateAt().getTime()));
+        st.setTimestamp(11, new java.sql.Timestamp(bill.getUpdateAt().getTime()));
         if (bill.getDeleteAt() != null) {
-            st.setTimestamp(11, new java.sql.Timestamp(bill.getDeleteAt().getTime()));
+            st.setTimestamp(12, new java.sql.Timestamp(bill.getDeleteAt().getTime()));
         } else {
-            st.setNull(11, java.sql.Types.TIMESTAMP);
+            st.setNull(12, java.sql.Types.TIMESTAMP);
         }
-        st.setBoolean(12, bill.isIsDelete());
+        st.setBoolean(13, bill.isIsDelete());
         st.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();

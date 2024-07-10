@@ -88,7 +88,8 @@ int bill_id = dao.getLastBillId();
         Bill bill = new Bill();
         bill.setDiscount(0); // Add logic for discount if needed
         bill.setPaymentDate(new Date());
-        bill.setPaymentMode("COD".equals(payment));
+        bill.setPaymentMode(false);
+        bill.setPaymentMethod(payment);
         bill.setTotal((float) cart.getTotalCost());
         bill.setBooking_id(userId);
         bill.setPhone(phone);

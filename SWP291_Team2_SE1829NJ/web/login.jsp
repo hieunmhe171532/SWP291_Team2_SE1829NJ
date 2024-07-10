@@ -35,21 +35,41 @@
                         </div>
 
                         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                            <c:set var="cookie" value="${pageContext.request.cookies}"/>
+                                
                             <form action="login?action=checkLogin" method="post" style="width: 23rem;">
+                              
+<!--                                       <c:set var="cookies" value="${pageContext.request.cookies}" />
+                            <c:forEach var="cookie" items="${cookies}">
+                                <c:if test="${cookie.name == 'name'}">
+                                    <c:set var="username" value="${cookie.value}" />
+                                </c:if>
+                                <c:if test="${cookie.name == 'pass'}">
+                                    <c:set var="password" value="${cookie.value}" />
+                                </c:if>
+                            </c:forEach>-->
+                                
+                                
+<!--                                   <div class="form-outline mb-4">
+                                <input type="text" name="username" id="form2Example18" value="" class="form-control form-control-lg" />
+                                <label class="form-label" for="form2Example18">Username</label>
+                            </div>
 
-                                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+                            <div class="form-outline mb-4">
+                                <input type="password" name="user_pass" id="form2Example28" value="" class="form-control form-control-lg" />
+                                <label class="form-label" for="form2Example28">Password</label>
+                            </div>-->
 
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="username" id="form2Example18" value="${cookie.username.value}" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form2Example18">Username</label>
-                                </div>
+                                    
+                            <div class="form-outline mb-4">
+                                <input type="text" name="username" id="form2Example18" class="form-control form-control-lg" />
+                                <label class="form-label" for="form2Example18">Username</label>
+                            </div>
 
-                                <div class="form-outline mb-4">
-                                    <input type="password" name="user_pass" id="form2Example28" value="${cookie.pass.value}" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form2Example28">Password</label>
-                                </div>
-
+                            <div class="form-outline mb-4">
+                                <input type="password" name="user_pass" id="form2Example28" class="form-control form-control-lg" />
+                                <label class="form-label" for="form2Example28">Password</label>
+                            </div>
+                                    
                                 <p style="color: red">${requestScope.err}</p>
 
                                 <div class="pt-1 mb-4">
@@ -64,7 +84,7 @@
 
                                 </div>
 
-
+                            
 
 
                                 <p>Don't have an account? <a href="register.jsp" class="link-info">Register here</a></p>
