@@ -605,7 +605,7 @@ font-family: inherit;
                 <div class="row">
                     <div class="col-lg-8">
                     <div class="room-details-item">
-    <img src="${vr.image}" alt="" style="height: 365px">
+ 
     <div class="rd-text">
         <div class="rd-title">
             <h3>Premium King Room</h3>
@@ -671,7 +671,9 @@ font-family: inherit;
                             <h3>Similar rooms</h3>
                             <c:forEach items="${listsr}" var="sr">
                                 <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" href="viewroom?rid=${sr.id}" style="background-image: url(${sr.image});"></a>
+
+                            
+                                    
                                     <div class="text">
                                         <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
                                         <div class="meta">

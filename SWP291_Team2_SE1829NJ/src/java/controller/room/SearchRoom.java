@@ -18,10 +18,10 @@ public class SearchRoom extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String peopleStr = request.getParameter("people");
-        String roomsStr = request.getParameter("rooms");
+//        String roomsStr = request.getParameter("rooms");
 
         int people = 0;
-        int rooms = 0;
+//        int rooms = 0;
 
         if (peopleStr != null && !peopleStr.isEmpty()) {
             try {
@@ -32,14 +32,7 @@ public class SearchRoom extends HttpServlet {
             }
         }
 
-        if (roomsStr != null && !roomsStr.isEmpty()) {
-            try {
-                rooms = Integer.parseInt(roomsStr);
-            } catch (NumberFormatException e) {
-                // Handle the error gracefully, perhaps set a default value or show an error message
-                rooms = 0;
-            }
-        }
+   
 
         RoomDAO roomDAO = new RoomDAO();
         List<Room> roomsList = roomDAO.findListRoomByNumbersRoomNumberHuman(people);
