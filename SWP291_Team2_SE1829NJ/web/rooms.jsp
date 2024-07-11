@@ -224,13 +224,13 @@
                             <c:forEach var="room" items="${rooms}">
                                 <div class="col-lg-6">
                                     <div class="room-wrap d-md-flex ftco-animate">
-                                        <a href="room-detail?id=${room.id}" class="img" style="background-image: url(bootstrap/images/${room.image});"></a>
+                                   
                                         <div class="half left-arrow d-flex align-items-center">
                                             <div class="text p-4 text-center">
                                                 <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
                                                 <p class="mb-0"><span class="price mr-1">${room.area}</span> <span class="per">m</span></p>
                                                 <p class="mb-0"><span class="price mr-1">${room.price}</span> <span class="per">per night</span></p>
-                                                <h3 class="mb-3"><a href="room-detail?id=${room.image}">${room.name}</a></h3>
+                                            
                                                 <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
                                             </div>
                                         </div>
@@ -239,8 +239,7 @@
                             </c:forEach>
                         </div>
                     </c:if>
-                </div>
-            </div>
+            
         </section>
 
 
