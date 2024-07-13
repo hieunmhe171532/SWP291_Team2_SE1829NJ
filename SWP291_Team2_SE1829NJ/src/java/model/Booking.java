@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Booking {
-
+    private int id;
     private int roomId;
     private int userId;
     private int billId;
@@ -13,11 +13,31 @@ public class Booking {
     private float cost;
     private Timestamp createdAt;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public Booking() {
     }
 
     public Booking(int roomId, int userId, int billId, Date startDate, Date endDate, float cost, Timestamp createdAt) {
+        this.roomId = roomId;
+        this.userId = userId;
+        this.billId = billId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cost = cost;
+        this.createdAt = createdAt;
+    }
+
+ 
+    public Booking(int id, int roomId, int userId, int billId, Date startDate, Date endDate, float cost, Timestamp createdAt) {
+        this.id = id;
         this.roomId = roomId;
         this.userId = userId;
         this.billId = billId;
@@ -77,6 +97,11 @@ public class Booking {
 
     public Timestamp getCreatedAt() {
         return createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" + "id=" + id + ", roomId=" + roomId + ", userId=" + userId + ", billId=" + billId + ", startDate=" + startDate + ", endDate=" + endDate + ", cost=" + cost + ", createdAt=" + createdAt + '}';
     }
 
     public void setCreatedAt(Timestamp createdAt) {
