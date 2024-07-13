@@ -6,6 +6,7 @@ package model;
 
 import java.security.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -22,9 +23,12 @@ public class Bill {
     private Date updateAt;
     private Date deleteAt;
     private boolean isDelete;
-    private boolean paymentMode;
+    private boolean paymentMode;a
     private float total;
     private String paymentMethod;
+       private List<Room> room;
+    
+    
 
     public String getPaymentMethod() {
         return paymentMethod;
@@ -73,7 +77,17 @@ public class Bill {
     
     
     
-    
+        public Bill(int bookingId, String roomName, String customerName, String phone, String address, Date startDate, Date endDate, float fees, String paymentMode) {
+        this.booking_id = bookingId;
+        this.roomName = roomName;
+        this.customerName = customerName;
+        this.phone = phone;
+        this.address = address;
+        this.createAt = startDate;
+        this.updateAt = endDate;
+        this.total = fees;
+        this.paymentMethod = paymentMode;
+    }
     
     
     public Bill(String phone, String address, boolean paymentMode, float total, Date createAt, String roomName, String customerName) {

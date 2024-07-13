@@ -136,6 +136,18 @@
         <servlet-name>CheckoutServlet</servlet-name>
         <servlet-class>controller.CheckoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewListOrder</servlet-name>
+        <servlet-class>controller.ViewListOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListDetailBooking</servlet-name>
+        <servlet-class>controller.ListBookingForOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListRoomForCus</servlet-name>
+        <servlet-class>controller.ListRoomForCus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -267,5 +279,17 @@
     <servlet-mapping>
         <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewListOrder</servlet-name>
+        <url-pattern>/viewlistorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListDetailBooking</servlet-name>
+        <url-pattern>/listdetailbooking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListRoomForCus</servlet-name>
+        <url-pattern>/listroomforcus</url-pattern>
     </servlet-mapping>
 </web-app>
