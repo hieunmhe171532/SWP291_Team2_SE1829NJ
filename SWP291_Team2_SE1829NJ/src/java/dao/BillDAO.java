@@ -385,9 +385,9 @@ public class BillDAO {
         try (ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 Map<String, Object> bookingSummary = new HashMap<>();
-                bookingSummary.put("Mã booking", rs.getInt("Mã booking"));
-                bookingSummary.put("Ngày khởi tạo", rs.getTimestamp("Ngày khởi tạo"));
-                bookingSummary.put("Hình thức GD", rs.getString("Hình thức GD"));
+                bookingSummary.put("idbooking", rs.getInt("Mã booking"));
+                bookingSummary.put("daycreate", rs.getTimestamp("Ngày khởi tạo"));
+                bookingSummary.put("formpay", rs.getString("Hình thức GD"));
                 bookingSummary.put("startdate", rs.getDate("startdate"));
                 bookingSummary.put("endate", rs.getDate("endate"));
                 bookingSummary.put("cost", rs.getFloat("cost"));

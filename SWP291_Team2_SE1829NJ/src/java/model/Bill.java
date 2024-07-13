@@ -23,7 +23,7 @@ public class Bill {
     private Date updateAt;
     private Date deleteAt;
     private boolean isDelete;
-    private boolean paymentMode;a
+    private boolean paymentMode;
     private float total;
     private String paymentMethod;
        private List<Room> room;
