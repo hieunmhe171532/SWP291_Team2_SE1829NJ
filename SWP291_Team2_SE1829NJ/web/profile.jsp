@@ -38,6 +38,15 @@
             </div>
         </div>
         <hr>
+        
+            <ul class="app-menu">
+                <li><a class="app-menu__item" href="editprofile"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Edit Profile</span></a></li>
+                <li><a class="app-menu__item" href="vieworder"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">List booking of u here!</span></a></li>
+           
+            </ul>
+        
     </aside>
 
     <main class="app-content">
