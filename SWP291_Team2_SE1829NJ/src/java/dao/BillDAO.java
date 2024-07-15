@@ -32,6 +32,24 @@ public class BillDAO {
         connection = dbContext.getConnection();
     }
 
+    
+    public void updatePaymentModeByUserId(int billId, boolean newPaymentMode) {
+        String sql = "UPDATE [dbo].[Bill] SET [paymentMode] = ? WHERE [id] = ?";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setBoolean(1, newPaymentMode);
+            st.setInt(2, billId);
+            int rowsUpdated = st.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Payment mode updated successfully for user ID: " + billId);
+            } else {
+                System.out.println("No records found for user ID: " + billId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     // Method to count the number of bills
     public int countBill() {
         int count = 0;
