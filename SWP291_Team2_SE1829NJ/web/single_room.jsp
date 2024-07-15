@@ -583,8 +583,7 @@
 
                             <div class="rd-text">
                                 <div class="rd-title">
-                                    <h3>Premium King Room</h3>
-
+                                    <h3>${vr.name}</h3>
                                 </div>
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
@@ -643,47 +642,41 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <div class="review-add">
-                        <h4>Add Review</h4>
-                        <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <h5>New Comment:</h5>
-                                    <input type="type" name="id" value="${vr.id}" hidden="">
-                                    <input type="text" name="img" style="align-content: center">
-                                    <textarea name="comment" placeholder="Your Review"></textarea>
-                                    <button type="submit">Submit Now</button>
+                    <div class="row">
+                        <div class="review-add col-7">
+                            <h4>Add Review</h4>
+                            <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-lg-11">
+                                        <h5>New Comment:</h5>
+                                        <input type="type" name="id" value="${vr.id}" hidden="">
+                                        <input type="text" name="img" placeholder="Your Link Image" style="align-content: center">
+                                        <textarea name="comment" placeholder="Your Review"></textarea>
+                                        <button type="submit">Submit Now</button>
 
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="rd-reviews">
-                        <h4>Reviews</h4>
-                        <c:forEach items="${listf}" var="f">
-                            <div class="review-item">
-                                <div class="ri-pic">
-                                    <img src="../build/web/bootstrap/images/jpeg-3.jpg" alt="">
-                                </div>
-                                <div class="ri-text">
-                                    <span>27 Aug 2019</span>
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
                                     </div>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                        magnam.</p>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </form>
+                        </div>
+                        <div class="rd-reviews col-5">
+                            <h4>Reviews</h4>
+                            <c:forEach items="${listf}" var="f">
+                                <div class="review-item">
+                                    <div class="ri-pic">
+                                        <img src="../build/web/bootstrap/images/jpeg-3.jpg" alt="">
+                                    </div>
+                                    <div class="ri-text">
+                                        <span>27 Aug 2019</span>
+                                        <h5>Brandon Kelley</h5>
+                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                            adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                                            magnam.</p>
+                                    </div>
+                                </div>
+                            </c:forEach>
 
 
+                        </div>
                     </div>
 
                 </div>
