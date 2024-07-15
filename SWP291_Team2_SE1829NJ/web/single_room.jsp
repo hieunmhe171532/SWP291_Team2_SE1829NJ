@@ -35,6 +35,8 @@
         <link rel="stylesheet" href="bootstrap/css/icomoon.css">
         <link rel="stylesheet" href="bootstrap/css/style.css">
 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
         <style>
             /*-----------------------
   Room Details Section
@@ -569,34 +571,8 @@
         </style>
     </head>
     <body>
-
-        <!--        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-                    <div class="container">
-                        <a class="navbar-brand" href="searchRooms">Harbor<span>lights</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="oi oi-menu"></span> Menu
-                        </button>
-        
-                        <div class="collapse navbar-collapse" id="ftco-nav">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item"><a href="searchRooms" class="nav-link">Home</a></li>
-                                <li class="nav-item active"><a href="searchRooms" class="nav-link">Our Rooms</a></li>
-                                <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
-                                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                
-        -->
-
         <jsp:include page="layout/navbarmenu.jsp"/>
 
-
-
-      
 
         <!-- Room Details Section Begin -->
         <section class="room-details-section spad"  style="margin-top: 50px">
@@ -608,24 +584,70 @@
                             <div class="rd-text">
                                 <div class="rd-title">
                                     <h3>Premium King Room</h3>
+
+                                </div>
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <%
+                                            boolean isFirst = true;
+                                        %>
+                                        <c:forEach items="${listri}" var="ri">
+                                            <div class="carousel-item <%= isFirst ? "active" : "" %>">
+                                                <img src="${ri.img}" class="d-block w-100" alt="...">
+                                            </div>
+                                            <% isFirst = false; %>
+                                        </c:forEach>
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8 d-flex">
+                                        <h2 id="price">${vr.price}</h2><h2><span>/Pernight</span></h2>
+                                    </div>
                                     <div class="rdt-right">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                                             Booking Now
                                         </button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <h2 id="price">${vr.price}</h2><h2><span>/Pernight</span></h2>
-                                </div>
                                 <p class="f-para">${vr.description}</p>
+
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="sidebar-box ftco-animate">
+                            <h3>Similar rooms</h3>
+                            <c:forEach items="${listsr}" var="sr">
+                                <div class="block-21 mb-4 d-flex">
+                                    <div class="text">
+                                        <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
+                                        <div class="meta">
+                                            <div id="price">${sr.price}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="review-add">
                         <h4>Add Review</h4>
                         <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-8">
                                     <h5>New Comment:</h5>
                                     <input type="type" name="id" value="${vr.id}" hidden="">
                                     <input type="file" name="img" style="align-content: center">
@@ -665,24 +687,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-4">
-                    <div class="sidebar-box ftco-animate">
-                        <h3>Similar rooms</h3>
-                        <c:forEach items="${listsr}" var="sr">
-                            <div class="block-21 mb-4 d-flex">
 
-
-
-                                <div class="text">
-                                    <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
-                                    <div class="meta">
-                                        <div id="price">${sr.price}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -818,5 +823,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
