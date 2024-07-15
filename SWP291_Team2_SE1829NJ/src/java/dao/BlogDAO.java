@@ -82,7 +82,7 @@ public class BlogDAO {
 
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
-} catch (SQLException ex) {
+        } catch (SQLException ex) {
         }
     }
 
@@ -146,15 +146,16 @@ public class BlogDAO {
 
         return t;
     }
-    public List<Blog> getRecentBlog() {
+
+    public List<Blog> getRecentBlog(int id) {
         List<Blog> t = new ArrayList<>();
 
         try {
             String sql = "SELECT top(5) * from Blog\n"
-                    + "WHERE flag=1\n"
-                    + "ORDER BY createAt DESC";
+                    + "where id <> ?\n"
+                    + "ORDER BY createAt DESC,flag desc";
             PreparedStatement stm = connection.prepareStatement(sql);
-
+            stm.setInt(1, id);
             ResultSet result = stm.executeQuery();
 
             while (result.next()) {
@@ -176,7 +177,8 @@ public class BlogDAO {
 
         return t;
     }
-public List<Blog> getBlogByTitle(String title) {
+
+    public List<Blog> getBlogByTitle(String title) {
 
         List<Blog> t = new ArrayList<>();
 
@@ -217,7 +219,7 @@ public List<Blog> getBlogByTitle(String title) {
                     + "ORDER BY flag DESC\n"
                     + "OFFSET ? rows FETCH NEXT 6 ROWS ONLY;";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, (index-1)*6);
+            stm.setInt(1, (index - 1) * 6);
 
             ResultSet result = stm.executeQuery();
 
@@ -262,7 +264,7 @@ public List<Blog> getBlogByTitle(String title) {
 
     public static void main(String[] args) {
         BlogDAO dao = new BlogDAO();
-        List<Blog> l=dao.getRecentBlog();
+        List<Blog> l = dao.getRecentBlog(2);
         for (Blog b : l) {
             System.out.println(b);
         }
