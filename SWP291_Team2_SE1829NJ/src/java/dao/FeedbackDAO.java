@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.AbstractList;
@@ -153,8 +154,8 @@ public class FeedbackDAO {
                 Feedback f = new Feedback();
                 Account a = new Account();
                 Room r = new Room();
-                Hotel h=new Hotel();
-                TypeRoom tr=new TypeRoom();
+                Hotel h = new Hotel();
+                TypeRoom tr = new TypeRoom();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
@@ -212,8 +213,8 @@ public class FeedbackDAO {
                 Feedback f = new Feedback();
                 Account a = new Account();
                 Room r = new Room();
-                Hotel h=new Hotel();
-                TypeRoom tr=new TypeRoom();
+                Hotel h = new Hotel();
+                TypeRoom tr = new TypeRoom();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
@@ -250,22 +251,19 @@ public class FeedbackDAO {
         return t;
     }
 
-    public void insertFeedback(String img, String des, int uid, int rid) {
+    public void insertFeedback(String img, String des, String username, int rid) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
-        String sql = "INSERT INTO [dbo].[Feedback]\n"
-                + "( [img], [description], [createAt],user_id,room_id)\n"
-                + "VALUES\n"
-                + "( ?, ?, ?,?,?)";
+        Timestamp timestamp = Timestamp.valueOf(curDate);
+        String sql = "insert into Feedback\n"
+                + "(img,description,createAt,roomid,username)\n"
+                + "values(?,?,?,?,?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
-            pstmt.setString(3, date);
-            pstmt.setInt(4, uid);
-            pstmt.setInt(5, rid);
-
+            pstmt.setTimestamp(3, timestamp);
+            pstmt.setString(5, username);
+            pstmt.setInt(4, rid);
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
@@ -372,13 +370,12 @@ public class FeedbackDAO {
         return count;
     }
 
-    public List<Count> topUserFeedback() {
+    public List<Count> topAccountFeedback() {
 
         List<Count> t = new ArrayList<>();
-        String sql = "SELECT TOP(5)  u.name, COUNT(*) AS comment_count\n"
-                + "FROM feedback f JOIN [User] u\n"
-                + "on f.userid=u.id\n"
-                + "GROUP BY u.name\n"
+        String sql = "select top(5) a.username ,count(*) as comment_count  from Feedback f\n"
+                + "join Account a on f.username=a.username\n"
+                + "group by a.username\n"
                 + "order by comment_count desc;";
 
         try (
@@ -386,9 +383,9 @@ public class FeedbackDAO {
 
             while (rs.next()) {
                 Count c = new Count();
-                User u = new User();
-                u.setName(rs.getString(1));
-                c.setUser(u);
+                Account a=new Account();
+                a.setUsername(rs.getString(1));
+                c.setAcc(a);
                 c.setCount(rs.getInt(2));
                 t.add(c);
 
@@ -404,8 +401,8 @@ public class FeedbackDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Count> l = dao.topUserFeedback();
-        for (Count c : l) {
+        List<Count> list=dao.topAccountFeedback();
+        for (Count c : list) {
             System.out.println(c);
         }
     }

@@ -94,7 +94,7 @@ public class AddFeedbackServlet extends HttpServlet {
             if (count % 5 != 0) {
                 endpage++;
             }
-            daof.insertFeedback(img, c, rid, rid);
+            daof.insertFeedback(img, c, acc, rid);
             
             
 

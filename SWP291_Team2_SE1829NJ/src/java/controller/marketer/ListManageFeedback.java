@@ -64,7 +64,7 @@ public class ListManageFeedback extends HttpServlet {
             listp = daof.pagingFeedbackSearch(index, search);
         }
         List<Feedback> listf = daof.getAllFeedback();
-        List<Count> listop = daof.topUserFeedback();
+        List<Count> listop = daof.topAccountFeedback();
         List<Count> listca = daou.countAddress();
 
         request.setAttribute("listp", listp);
