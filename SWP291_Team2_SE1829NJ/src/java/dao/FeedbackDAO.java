@@ -30,26 +30,26 @@ import model.User;
  * @author admin
  */
 public class FeedbackDAO {
-
+    
     DBContext dbContext;
     Connection connection;
-
+    
     public FeedbackDAO() {
         dbContext = DBContext.getInstance();
         connection = dbContext.getConnection();  // Assuming getConnection() method exists in DBContext
 
     }
-
+    
     public List<Feedback> getAllFeedback() {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
-
+        
         try {
             String sql = "select * from Feedback";
             PreparedStatement stm = conn.prepareStatement(sql);
-
+            
             ResultSet result = stm.executeQuery();
-
+            
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
@@ -67,21 +67,21 @@ public class FeedbackDAO {
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return t;
     }
-
+    
     public List<Feedback> getFeedbackByRid(int rid) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
-
+        
         try {
             String sql = "select * from feedback\n"
                     + "WHERE roomid=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, rid);
             ResultSet result = stm.executeQuery();
-
+            
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
@@ -99,21 +99,21 @@ public class FeedbackDAO {
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return t;
     }
-
+    
     public Feedback getFeedbackById(int id) {
         Connection conn = dbContext.getConnection();
-
+        
         try {
             String sql = "select * from Feedback\n"
                     + "where id=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, id);
-
+            
             ResultSet result = stm.executeQuery();
-
+            
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
@@ -131,14 +131,14 @@ public class FeedbackDAO {
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return null;
     }
-
+    
     public List<Feedback> pagingFeedback(int index) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
-
+        
         try {
             String sql = "SELECT * from Feedback f JOIN Account a\n"
                     + "on f.username=a.username JOIN Room r\n"
@@ -147,9 +147,9 @@ public class FeedbackDAO {
                     + "     OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, (index - 1) * 5);
-
+            
             ResultSet result = stm.executeQuery();
-
+            
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
@@ -188,14 +188,14 @@ public class FeedbackDAO {
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return t;
     }
-
+    
     public List<Feedback> pagingFeedbackSearch(int index, String des) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
-
+        
         try {
             String sql = "SELECT * from Feedback f JOIN [User] u\n"
                     + "on f.userid=u.id JOIN Room r\n"
@@ -206,9 +206,9 @@ public class FeedbackDAO {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(2, (index - 1) * 5);
             stm.setString(1, "%" + des + "%");
-
+            
             ResultSet result = stm.executeQuery();
-
+            
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
@@ -247,27 +247,27 @@ public class FeedbackDAO {
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return t;
     }
-
+    
     public List<Feedback> pagingFeedbackByRid(int index, int rid) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
-
+        
         try {
             String sql = "SELECT * from Feedback f JOIN Account a\n"
                     + "on f.username=a.username JOIN Room r\n"
                     + "on f.roomid=r.id\n"
                     + "where f.roomid=?\n"
                     + "ORDER BY f.id\n"
-                    + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
+                    + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY;";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(2, (index - 1) * 5);
+            stm.setInt(2, (index - 1) * 3);
             stm.setInt(1, rid);
-
+            
             ResultSet result = stm.executeQuery();
-
+            
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
@@ -306,10 +306,10 @@ public class FeedbackDAO {
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return t;
     }
-
+    
     public void insertFeedback(String img, String des, String username, int rid) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
@@ -329,7 +329,7 @@ public class FeedbackDAO {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void editFeedback(String img, String des, String id) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
@@ -353,7 +353,7 @@ public class FeedbackDAO {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void deleteFeedback(String id) {
         Connection conn = dbContext.getConnection();
         String sql = """
@@ -361,85 +361,106 @@ public class FeedbackDAO {
                      WHERE id=?""";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
-
+            
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
 //            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public int totalUserComment() {
         int count = 0;
         String sql = "SELECT  COUNT(distinct userid) as commentUser from Feedback ";
-
+        
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
-
+            
             if (rs.next()) {
                 count = rs.getInt("commentUser");
             }
-
+            
         } catch (SQLException e) {
             // Handle exception appropriately (log, notify user, etc.)
             e.printStackTrace();
         }
-
+        
         return count;
     }
-
+    
     public int totalComment() {
         int count = 0;
         String sql = "SELECT  COUNT(*)  as comment from Feedback";
-
+        
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
-
+            
             if (rs.next()) {
                 count = rs.getInt("comment");
             }
-
+            
         } catch (SQLException e) {
             // Handle exception appropriately (log, notify user, etc.)
             e.printStackTrace();
         }
-
+        
         return count;
     }
-
+    
+    public int totalCommentByRid(int rid) {
+        int count = 0;
+        String sql = "SELECT  COUNT(*)  as comment from Feedback\n"
+                + "where roomid=?";
+        
+        try  {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, rid);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("comment");
+            }
+            
+        } catch (SQLException e) {
+            // Handle exception appropriately (log, notify user, etc.)
+            e.printStackTrace();
+        }
+        
+        return count;
+    }
+    
     public int totalCommentSearch(String des) {
         int count = 0;
         String sql = "SELECT COUNT(*) as totalS from [Feedback]\n"
                 + "where [description] LIKE ?";
-
+        
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "%" + des + "%");
             ResultSet rs = st.executeQuery();
-
+            
             if (rs.next()) {
                 count = rs.getInt(1);
             }
-
+            
         } catch (SQLException e) {
             // Handle exception appropriately (log, notify user, etc.)
             e.printStackTrace();
         }
-
+        
         return count;
     }
-
+    
     public List<Count> topAccountFeedback() {
-
+        
         List<Count> t = new ArrayList<>();
         String sql = "select top(5) a.username ,count(*) as comment_count  from Feedback f\n"
                 + "join Account a on f.username=a.username\n"
                 + "group by a.username\n"
                 + "order by comment_count desc;";
-
+        
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
-
+            
             while (rs.next()) {
                 Count c = new Count();
                 Account a = new Account();
@@ -447,23 +468,25 @@ public class FeedbackDAO {
                 c.setAcc(a);
                 c.setCount(rs.getInt(2));
                 t.add(c);
-
+                
             }
-
+            
         } catch (SQLException e) {
             // Handle exception appropriately (log, notify user, etc.)
             e.printStackTrace();
         }
-
+        
         return t;
     }
-
+    
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Feedback> list = dao.pagingFeedbackByRid(1, 604);
-        for (Feedback f : list) {
-            System.out.println(f);
-        }
+//        List<Feedback> list = dao.pagingFeedbackByRid(1, 604);
+//        for (Feedback f : list) {
+//            System.out.println(f);
+//        }
 //dao.insertFeedback("https://www.shutterstock.com/shutterstock/photos/2157520005/display_1500/stock-photo-empty-interior-room-d-illustration-2157520005.jpg", "asvsabvsab", "admin", 602);
+int c=dao.totalCommentByRid(604);
+        System.out.println(c);
     }
 }
