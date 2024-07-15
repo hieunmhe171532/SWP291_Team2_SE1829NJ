@@ -63,9 +63,9 @@ public class UserDAO {
         List<Count> t = new ArrayList<>();
         int count = 0;
         String sql = "SELECT  u.address,COUNT( u.address) as countAddress from Feedback f JOIN [User] u\n"
-                + "on f.user_id=u.id\n"
-                + "GROUP BY u.address";
-        
+                + "on f.userid=u.id\n"
+                + "GROUP BY u.address\n"
+                + "order by countAddress desc";
 
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
@@ -75,7 +75,7 @@ public class UserDAO {
                 c.setAddress(rs.getString(1));
                 c.setCount(rs.getInt(2));
                 t.add(c);
-                
+
             }
 
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class UserDAO {
 
         return t;
     }
-    
+
     public List<User> getAllUser() {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
@@ -101,7 +101,7 @@ public class UserDAO {
             ResultSet result = stm.executeQuery();
 
             while (result.next()) {
-                User u=new User();
+                User u = new User();
                 Account a = new Account();
                 a.setUsername(result.getString(1));
                 a.setPassword(result.getString(2));
@@ -118,8 +118,7 @@ public class UserDAO {
                 u.setCreateAt(result.getString(13));
                 u.setUpdateAt(result.getString(14));
                 u.setIsDelete(result.getBoolean(15));
-                
-                
+
                 t.add(u);
             }
         } catch (SQLException ex) {
@@ -128,6 +127,7 @@ public class UserDAO {
 
         return t;
     }
+
     public List<User> getUserByName(String name) {
         Connection conn = dbContext.getConnection();
 
@@ -169,7 +169,8 @@ public class UserDAO {
 
         return t;
     }
-    public User getUserById(String id){
+
+    public User getUserById(String id) {
         Connection conn = dbContext.getConnection();
 
         try {
@@ -206,7 +207,6 @@ public class UserDAO {
         }
         return null;
 
-        
     }
 
     public int countUsers() {
@@ -234,8 +234,8 @@ public class UserDAO {
 //        for (User user : list) {
 //            System.out.println(user);
 //        }
-User u=udao.getUserById("8");
-        System.out.println(u);
+        int d = udao.countUsers();
+        System.out.println(d);
     }
 
 }

@@ -69,6 +69,7 @@ public class FeedbackDAO {
 
         return t;
     }
+
     public List<Feedback> getFeedbackByRid(int rid) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
@@ -139,8 +140,8 @@ public class FeedbackDAO {
 
         try {
             String sql = "SELECT * from Feedback f JOIN [User] u\n"
-                    + "on f.user_id=u.id JOIN Room r\n"
-                    + "on f.room_id=r.id\n"
+                    + "on f.userid=u.id JOIN Room r\n"
+                    + "on f.roomid=r.id\n"
                     + "ORDER BY f.id\n"
                     + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -173,10 +174,9 @@ public class FeedbackDAO {
                 r.setId(result.getInt(16));
                 r.setName(result.getString(17));
                 r.setRoom_floor(result.getString(18));
-                r.setImage(result.getString(19));
-r.setUserQuantity(result.getInt(20));
-                r.setArea(result.getFloat(21));
-                r.setPrice(result.getFloat(22));
+                r.setUserQuantity(result.getInt(19));
+                r.setArea(result.getFloat(20));
+                r.setPrice(result.getFloat(21));
                 f.setRoom(r);
                 t.add(f);
             }
@@ -193,8 +193,8 @@ r.setUserQuantity(result.getInt(20));
 
         try {
             String sql = "SELECT * from Feedback f JOIN [User] u\n"
-                    + "on f.user_id=u.id JOIN Room r\n"
-                    + "on f.room_id=r.id\n"
+                    + "on f.userid=u.id JOIN Room r\n"
+                    + "on f.roomid=r.id\n"
                     + "where f.[description] LIKE ?\n"
                     + "ORDER BY f.id\n"
                     + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
@@ -229,10 +229,9 @@ r.setUserQuantity(result.getInt(20));
                 r.setId(result.getInt(16));
                 r.setName(result.getString(17));
                 r.setRoom_floor(result.getString(18));
-                r.setImage(result.getString(19));
-                r.setUserQuantity(result.getInt(20));
-                r.setArea(result.getFloat(21));
-                r.setPrice(result.getFloat(22));
+                r.setUserQuantity(result.getInt(19));
+                r.setArea(result.getFloat(20));
+                r.setPrice(result.getFloat(21));
                 f.setRoom(r);
                 t.add(f);
             }
@@ -248,7 +247,7 @@ r.setUserQuantity(result.getInt(20));
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
-String sql = "INSERT INTO [dbo].[Feedback]\n"
+        String sql = "INSERT INTO [dbo].[Feedback]\n"
                 + "( [img], [description], [createAt],user_id,room_id)\n"
                 + "VALUES\n"
                 + "( ?, ?, ?,?,?)";
@@ -307,7 +306,7 @@ String sql = "INSERT INTO [dbo].[Feedback]\n"
 
     public int totalUserComment() {
         int count = 0;
-        String sql = "SELECT  COUNT(distinct user_id) as commentUser from Feedback ";
+        String sql = "SELECT  COUNT(distinct userid) as commentUser from Feedback ";
 
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
@@ -329,7 +328,7 @@ String sql = "INSERT INTO [dbo].[Feedback]\n"
         String sql = "SELECT  COUNT(*)  as comment from Feedback";
 
         try (
-PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
 
             if (rs.next()) {
                 count = rs.getInt("comment");
@@ -366,19 +365,20 @@ PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.execu
     }
 
     public List<Count> topUserFeedback() {
+    
         List<Count> t = new ArrayList<>();
         String sql = "SELECT TOP(5)  u.name, COUNT(*) AS comment_count\n"
                 + "FROM feedback f JOIN [User] u\n"
-                + "    on f.user_id=u.id\n"
+                + "on f.userid=u.id\n"
                 + "GROUP BY u.name\n"
-                + "ORDER BY comment_count DESC";
+                + "order by comment_count desc;";
 
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
 
             while (rs.next()) {
-                Count c = new Count();
-                User u = new User();
+                Count c=new Count();
+                User u=new User();
                 u.setName(rs.getString(1));
                 c.setUser(u);
                 c.setCount(rs.getInt(2));
@@ -396,9 +396,9 @@ PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.execu
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Feedback> l = dao.getFeedbackByRid(2);
-        for (Feedback f : l) {
-            System.out.println(f);
+        List<Count> l = dao.topUserFeedback();
+        for (Count c : l) {
+            System.out.println(c);
         }
     }
 }
