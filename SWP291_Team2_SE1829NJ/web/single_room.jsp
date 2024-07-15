@@ -634,9 +634,12 @@
                                 <div class="block-21 mb-4 d-flex">
                                     <div class="text">
                                         <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
+
                                         <div class="meta">
-                                            <div id="price">${sr.price}</div>
+                                            <div>${sr.description} </div>
+
                                         </div>
+                                        <div style="display: flex ;justify-content: end" ><h6 id="price">${sr.price}</h6><h6>đ</h6></div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -645,7 +648,7 @@
                     <div class="row">
                         <div class="review-add col-7">
                             <h4>Add Review</h4>
-                            <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
+                            <form action="addfeedback" class="ra-form" method="post" >
                                 <div class="row">
                                     <div class="col-lg-11">
                                         <h5>New Comment:</h5>
@@ -663,18 +666,19 @@
                             <c:forEach items="${listf}" var="f">
                                 <div class="review-item">
                                     <div class="ri-pic">
-                                        <img src="../build/web/bootstrap/images/jpeg-3.jpg" alt="">
+
                                     </div>
                                     <div class="ri-text">
-                                        <span>27 Aug 2019</span>
-                                        <h5>Brandon Kelley</h5>
-                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                            adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                            magnam.</p>
+                                        <span>${f.createAt}</span>
+                                        <h5>${f.acc.getUsername()}</h5>
+                                        <img src="${f.img}" width="80%" height="80%" alt="">
+                                        <p>${f.description}</p>
                                     </div>
                                 </div>
                             </c:forEach>
-
+                            <c:forEach begin="1" end="${endP}" var="i">                                          
+                                <li><a class="pagination-link"  href="viewroom?index=${i}&rid=${vr.id}">${i}</a></li>
+                                </c:forEach>
 
                         </div>
                     </div>
