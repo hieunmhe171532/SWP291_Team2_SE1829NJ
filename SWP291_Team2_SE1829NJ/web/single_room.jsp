@@ -75,7 +75,7 @@
                 color: #ffffff;
                 font-size: 13px;
                 text-transform: uppercase;
-font-weight: 700;
+                font-weight: 700;
                 background: #dfa974;
                 padding: 14px 28px 13px;
             }
@@ -167,7 +167,7 @@ font-weight: 700;
                 color: #707079;
                 margin-bottom: 0;
             }
-.review-add h4 {
+            .review-add h4 {
                 color: #19191a;
                 letter-spacing: 1px;
                 margin-bottom: 45px;
@@ -256,7 +256,7 @@ font-weight: 700;
                 margin-bottom: 30px;
             }
             .room-booking form .check-date {
-position: relative;
+                position: relative;
                 margin-bottom: 15px;
             }
             .room-booking form .check-date label {
@@ -343,7 +343,7 @@ position: relative;
                 cursor: pointer;
                 display: block;
                 float: left;
-font-family: inherit;
+                font-family: inherit;
                 font-size: 14px;
                 font-weight: normal;
                 height: 42px;
@@ -428,7 +428,7 @@ font-family: inherit;
                 height: 36px;
                 line-height: 34px;
             }
-.nice-select.small:after {
+            .nice-select.small:after {
                 height: 4px;
                 width: 4px;
             }
@@ -513,7 +513,7 @@ font-family: inherit;
             .check-date,
             .select-option {
                 margin-bottom: 20px;
-}
+            }
 
             .check-date label,
             .select-option label {
@@ -570,33 +570,32 @@ font-family: inherit;
     </head>
     <body>
 
-<!--        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="searchRooms">Harbor<span>lights</span></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
-
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="searchRooms" class="nav-link">Home</a></li>
-                        <li class="nav-item active"><a href="searchRooms" class="nav-link">Our Rooms</a></li>
-                        <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <!--        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+                    <div class="container">
+                        <a class="navbar-brand" href="searchRooms">Harbor<span>lights</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="oi oi-menu"></span> Menu
+                        </button>
         
+                        <div class="collapse navbar-collapse" id="ftco-nav">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"><a href="searchRooms" class="nav-link">Home</a></li>
+                                <li class="nav-item active"><a href="searchRooms" class="nav-link">Our Rooms</a></li>
+                                <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
+                                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                
         -->
-        
-         <jsp:include page="layout/navbarmenu.jsp"/>
-        
-       <div class="center-container">
-        <h1 class="mb-4 bread">Rooms Details</h1>
-    </div>
+
+        <jsp:include page="layout/navbarmenu.jsp"/>
+
+
+
       
 
         <!-- Room Details Section Begin -->
@@ -604,220 +603,220 @@ font-family: inherit;
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                    <div class="room-details-item">
- 
-    <div class="rd-text">
-        <div class="rd-title">
-            <h3>Premium King Room</h3>
-            <div class="rdt-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
-                    Booking Now
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <h2 id="price">${vr.price}</h2><h2><span>/Pernight</span></h2>
-        </div>
-        <p class="f-para">${vr.description}</p>
-    </div>
-</div>
-                        </div>
-                        <div class="review-add">
-                            <h4>Add Review</h4>
-                            <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
+                        <div class="room-details-item">
+
+                            <div class="rd-text">
+                                <div class="rd-title">
+                                    <h3>Premium King Room</h3>
+                                    <div class="rdt-right">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                                            Booking Now
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="row">
-                                    <div class="col-lg-12">
-                                        <h5>New Comment:</h5>
-                                        <input type="type" name="id" value="${vr.id}" hidden="">
-                                        <input type="file" name="img" style="align-content: center">
-                                        <textarea name="comment" placeholder="Your Review"></textarea>
-                                        <button type="submit">Submit Now</button>
-
-                                    </div>
+                                    <h2 id="price">${vr.price}</h2><h2><span>/Pernight</span></h2>
                                 </div>
-                            </form>
-                        </div>
-
-                        <div class="rd-reviews">
-                            <h4>Reviews</h4>
-                            <c:forEach items="${listf}" var="f">
-                                <div class="review-item">
-                                    <div class="ri-pic">
-                                        <img src="../build/web/bootstrap/images/jpeg-3.jpg" alt="">
-                                    </div>
-<div class="ri-text">
-                                        <span>27 Aug 2019</span>
-                                        <div class="rating">
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star-half_alt"></i>
-                                        </div>
-                                        <h5>Brandon Kelley</h5>
-                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                            adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                            magnam.</p>
-                                    </div>
-                                </div>
-                            </c:forEach>
-
-
-                        </div>
-
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="sidebar-box ftco-animate">
-                            <h3>Similar rooms</h3>
-                            <c:forEach items="${listsr}" var="sr">
-                                <div class="block-21 mb-4 d-flex">
-
-                            
-                                    
-                                    <div class="text">
-                                        <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
-                                        <div class="meta">
-                                            <div id="price">${sr.price}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Room Details Section End -->
-
-        <footer class="ftco-footer ftco-section img" style="background-image: url(bootstrap/images/bg_4.jpg);">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Harbor Lights</h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4 ml-md-5">
-                            <h2 class="ftco-heading-2">Useful Links</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Blog</a></li>
-                                <li><a href="#" class="py-2 d-block">Rooms</a></li>
-                                <li><a href="#" class="py-2 d-block">Amenities</a></li>
-                                <li><a href="#" class="py-2 d-block">Gift Card</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Privacy</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Career</a></li>
-                                <li><a href="#" class="py-2 d-block">About Us</a></li>
-                                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                                <li><a href="#" class="py-2 d-block">Services</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Have a Questions?</h2>
-                            <div class="block-23 mb-3">
-                                <ul>
-                                    <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                                </ul>
+                                <p class="f-para">${vr.description}</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
+                    <div class="review-add">
+                        <h4>Add Review</h4>
+                        <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h5>New Comment:</h5>
+                                    <input type="type" name="id" value="${vr.id}" hidden="">
+                                    <input type="file" name="img" style="align-content: center">
+                                    <textarea name="comment" placeholder="Your Review"></textarea>
+                                    <button type="submit">Submit Now</button>
 
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="rd-reviews">
+                        <h4>Reviews</h4>
+                        <c:forEach items="${listf}" var="f">
+                            <div class="review-item">
+                                <div class="ri-pic">
+                                    <img src="../build/web/bootstrap/images/jpeg-3.jpg" alt="">
+                                </div>
+                                <div class="ri-text">
+                                    <span>27 Aug 2019</span>
+                                    <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
+                                    </div>
+                                    <h5>Brandon Kelley</h5>
+                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                                        magnam.</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar-box ftco-animate">
+                        <h3>Similar rooms</h3>
+                        <c:forEach items="${listsr}" var="sr">
+                            <div class="block-21 mb-4 d-flex">
+
+
+
+                                <div class="text">
+                                    <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
+                                    <div class="meta">
+                                        <div id="price">${sr.price}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
-        </footer>
-<!-- Modal -->
-<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="bookingModalLabel">Enter Booking Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="bookingForm" method="get" action="cart">
-        <div class="modal-body">
-          <input type="hidden" name="action" value="add">
-          <input type="hidden" name="room_id" value="${vr.id}">
-          <div class="form-group">
-            <label for="start_date">Start Date:</label>
-            <input type="date" id="start_date" name="start_date" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="end_date">End Date:</label>
-            <input type="date" id="end_date" name="end_date" class="form-control" required>
-          </div>
-          <input type="hidden" name="quantity" value="1">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+    </section>
+    <!-- Room Details Section End -->
+
+    <footer class="ftco-footer ftco-section img" style="background-image: url(bootstrap/images/bg_4.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Harbor Lights</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Useful Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Blog</a></li>
+                            <li><a href="#" class="py-2 d-block">Rooms</a></li>
+                            <li><a href="#" class="py-2 d-block">Amenities</a></li>
+                            <li><a href="#" class="py-2 d-block">Gift Card</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Privacy</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Career</a></li>
+                            <li><a href="#" class="py-2 d-block">About Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
         </div>
-      </form>
+    </footer>
+    <!-- Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Enter Booking Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="bookingForm" method="get" action="cart">
+                    <div class="modal-body">
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="room_id" value="${vr.id}">
+                        <div class="form-group">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control" required>
+                        </div>
+                        <input type="hidden" name="quantity" value="1">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-        <script>
-            // Function to format number
-            function formatPrice(price) {
-                return parseFloat(price).toLocaleString('en-US', {
-                    maximumFractionDigits: 2
-                });
-            }
-
-            // Select all elements with id 'price'
-            const priceElements = document.querySelectorAll('#price');
-
-            // Loop through each element and format its content
-            priceElements.forEach(element => {
-                let price = element.textContent;
-                element.textContent = formatPrice(price);
+    <script>
+        // Function to format number
+        function formatPrice(price) {
+            return parseFloat(price).toLocaleString('en-US', {
+                maximumFractionDigits: 2
             });
-        </script>
+        }
 
-        <script src="bootstrap/js/jquery.min.js"></script>
-        <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="bootstrap/js/popper.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="bootstrap/js/jquery.easing.1.3.js"></script>
-        <script src="bootstrap/js/jquery.waypoints.min.js"></script>
-        <script src="bootstrap/js/jquery.stellar.min.js"></script>
-        <script src="bootstrap/js/owl.carousel.min.js"></script>
-        <script src="bootstrap/js/jquery.magnific-popup.min.js"></script>
-        <script src="bootstrap/js/aos.js"></script>
-        <script src="bootstrap/js/jquery.animateNumber.min.js"></script>
-        <script src="bootstrap/js/bootstrap-datepicker.js"></script>
-        <script src="bootstrap/js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="bootstrap/js/google-map.js"></script>
-        <script src="bootstrap/js/main.js"></script>
+        // Select all elements with id 'price'
+        const priceElements = document.querySelectorAll('#price');
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
+        // Loop through each element and format its content
+        priceElements.forEach(element => {
+            let price = element.textContent;
+            element.textContent = formatPrice(price);
+        });
+    </script>
+
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.easing.1.3.js"></script>
+    <script src="bootstrap/js/jquery.waypoints.min.js"></script>
+    <script src="bootstrap/js/jquery.stellar.min.js"></script>
+    <script src="bootstrap/js/owl.carousel.min.js"></script>
+    <script src="bootstrap/js/jquery.magnific-popup.min.js"></script>
+    <script src="bootstrap/js/aos.js"></script>
+    <script src="bootstrap/js/jquery.animateNumber.min.js"></script>
+    <script src="bootstrap/js/bootstrap-datepicker.js"></script>
+    <script src="bootstrap/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="bootstrap/js/google-map.js"></script>
+    <script src="bootstrap/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
