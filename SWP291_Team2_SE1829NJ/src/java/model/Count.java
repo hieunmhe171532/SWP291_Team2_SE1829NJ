@@ -14,26 +14,18 @@ public class Count {
     private String address;
     private int count;
     private User user;
+    private Account acc;
     
 
     public Count() {
     }
 
-    public Count(String address, int count, User user) {
+    public Count(String address, int count, User user, Account acc) {
         this.address = address;
         this.count = count;
         this.user = user;
+        this.acc = acc;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    
 
     public String getAddress() {
         return address;
@@ -51,9 +43,25 @@ public class Count {
         this.count = count;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Account getAcc() {
+        return acc;
+    }
+
+    public void setAcc(Account acc) {
+        this.acc = acc;
+    }
+
     @Override
     public String toString() {
-        return "Count{" + "address=" + address + ", count=" + count + ", user=" + user + '}';
+        return "Count{" + "address=" + address + ", count=" + count + ", user=" + user + ", acc=" + acc + '}';
     }
 
     

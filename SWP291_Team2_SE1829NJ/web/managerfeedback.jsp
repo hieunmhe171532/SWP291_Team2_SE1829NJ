@@ -410,7 +410,7 @@
                                         <tbody>
                                             <c:forEach items="${listop}" var="top">
                                                 <tr>
-                                                    <td>${top.user.getName()}</td>
+                                                    <td>${top.acc.getUsername()}</td>
                                                     <td class="text-end">${top.count}</td>
                                                 </tr>
                                             </c:forEach>
