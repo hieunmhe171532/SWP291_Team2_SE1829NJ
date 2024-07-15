@@ -51,48 +51,6 @@ public class BillDAO {
         return count;
     }
     
-     public List<Bill> getAllBills() {
-    List<Bill> bills = new ArrayList<>();
-    String sql = "SELECT " +
-                 "b.id AS BookingID, " +
-                 "r.name AS RoomName, " +
-                 "u.name AS CustomerName, " +
-                 "a.phone AS PhoneNumber, " +
-                 "u.address AS Address, " +
-                 "b.startDate, " +
-                 "b.endDate, " +
-                 "bl.total AS Fees, " +
-                 "CASE " +
-                 "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
-                 "    ELSE 'Other' " +
-                 "END AS PaymentMode " +
-                 "FROM Booking b " +
-                 "JOIN [User] u ON b.user_id = u.id " +
-                 "JOIN Account a ON u.username = a.username " +
-                 "JOIN Room r ON b.room_id = r.id " +
-                 "JOIN Bill bl ON b.id = bl.booking_id";
-
-    try (PreparedStatement st = connection.prepareStatement(sql);
-         ResultSet rs = st.executeQuery()) {
-        while (rs.next()) {
-            int bookingId = rs.getInt("BookingID");
-            String roomName = rs.getString("RoomName");
-            String customerName = rs.getString("CustomerName");
-            String phoneNumber = rs.getString("PhoneNumber");
-            String address = rs.getString("Address");
-            Date startDate = rs.getDate("startDate");
-            Date endDate = rs.getDate("endDate");
-            float fees = rs.getFloat("Fees");
-            String paymentMode = rs.getString("PaymentMode");
-
-            Bill bill = new Bill(bookingId, roomName, customerName, phoneNumber, address, startDate, endDate, fees, paymentMode);
-            bills.add(bill);
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return bills;
-}
 
     // Method to fetch detailed booking information
 //    public List<Booking> getBookingByDay() {
@@ -404,15 +362,258 @@ public class BillDAO {
 }
 
     
-    public static void main(String[] args) {
-    BillDAO billDAO = new BillDAO();
     
-    // Fetch and print booking summaries for a specific user ID
-    int userId = 1; // Replace with a valid user ID
-    List<Map<String, Object>> bookingSummaries = billDAO.getBookingSummaryByUserId(userId);
-    System.out.println("Booking Summaries for user_id " + userId + ":");
-    for (Map<String, Object> summary : bookingSummaries) {
-        System.out.println(summary);
+//
+//    public List<Map<String, Object>> getAllBills() {
+//        List<Map<String, Object>> bills = new ArrayList<>();
+//        String sql = "SELECT " +
+//                     "bl.id AS BillID, " +
+//                     "u.name AS CustomerName, " +
+//                     "a.phone AS PhoneNumber, " +
+//                     "bl.createAt AS CreationDate, " +
+//                     "MIN(b.startDate) AS startDate, " +
+//                     "MAX(b.endDate) AS endDate, " +
+//                     "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS RoomList, " +
+//                     "bl.total AS TotalAmount, " +
+//                     "CASE " +
+//                     "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+//                     "    ELSE 'Unpaid' " +
+//                     "END AS PaymentStatus, " +
+//                     "bl.paymentMethod AS PaymentMethod " +
+//                     "FROM Bill bl " +
+//                     "JOIN Booking b ON bl.id = b.bill_id " +
+//                     "JOIN Room r ON b.room_id = r.id " +
+//                     "JOIN [User] u ON b.user_id = u.id " +
+//                     "JOIN Account a ON u.username = a.username " +
+//                     "GROUP BY bl.id, u.name, a.phone, bl.createAt, bl.total, bl.paymentMode, bl.paymentMethod";
+//
+//        try (PreparedStatement st = connection.prepareStatement(sql);
+//             ResultSet rs = st.executeQuery()) {
+//            while (rs.next()) {
+//                Map<String, Object> bill = new HashMap<>();
+//                bill.put("BillID", rs.getInt("BillID"));
+//                bill.put("CustomerName", rs.getString("CustomerName"));
+//                bill.put("PhoneNumber", rs.getString("PhoneNumber"));
+//                bill.put("CreationDate", rs.getTimestamp("CreationDate"));
+//                bill.put("StartDate", rs.getDate("startDate"));
+//                bill.put("EndDate", rs.getDate("endDate"));
+//                bill.put("RoomList", rs.getString("RoomList"));
+//                bill.put("TotalAmount", rs.getFloat("TotalAmount"));
+//                bill.put("PaymentStatus", rs.getString("PaymentStatus"));
+//                bill.put("PaymentMethod", rs.getString("PaymentMethod"));
+//                bills.add(bill);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return bills;
+//    }
+//
+   public List<Map<String, Object>> getAllBillsTodayGroup() {
+    List<Map<String, Object>> orderSummaries = new ArrayList<>();
+    String sql = "SELECT " +
+                 "bl.id AS BillID, " +
+                 "u.name AS CustomerName, " +
+                 "a.phone AS PhoneNumber, " +
+                 "CONVERT(varchar, bl.createAt, 105) AS CreationDate, " +
+                 "MIN(b.startDate) AS startDate, " +
+                 "MAX(b.endDate) AS endDate, " +
+                 "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS RoomList, " +
+                 "bl.total AS TotalAmount, " +
+                 "CASE " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+                 "    ELSE 'Unpaid' " +
+                 "END AS PaymentStatus, " +
+                 "bl.paymentMethod AS PaymentMethod " +
+                 "FROM Bill bl " +
+                 "JOIN Booking b ON bl.id = b.bill_id " +
+                 "JOIN Room r ON b.room_id = r.id " +
+                 "JOIN [User] u ON b.user_id = u.id " +
+                 "JOIN Account a ON u.username = a.username " +
+                 "WHERE CONVERT(DATE, bl.createAt) = CONVERT(DATE, GETDATE()) " +
+                 "GROUP BY bl.id, u.name, a.phone, bl.createAt, bl.total, bl.paymentMode, bl.paymentMethod";
+
+    try (PreparedStatement st = connection.prepareStatement(sql);
+         ResultSet rs = st.executeQuery()) {
+        while (rs.next()) {
+            Map<String, Object> orderSummary = new HashMap<>();
+            orderSummary.put("BillID", rs.getInt("BillID"));
+            orderSummary.put("CustomerName", rs.getString("CustomerName"));
+            orderSummary.put("PhoneNumber", rs.getString("PhoneNumber"));
+            orderSummary.put("CreationDate", rs.getString("CreationDate"));
+            orderSummary.put("StartDate", rs.getString("startDate"));
+            orderSummary.put("EndDate", rs.getString("endDate"));
+            orderSummary.put("RoomList", rs.getString("RoomList"));
+            orderSummary.put("TotalAmount", rs.getFloat("TotalAmount"));
+            orderSummary.put("PaymentStatus", rs.getString("PaymentStatus"));
+            orderSummary.put("PaymentMethod", rs.getString("PaymentMethod"));
+            orderSummaries.add(orderSummary);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return orderSummaries;
 }
+
+    
+        public List<Map<String, Object>> getAllBillsGroup() {
+    List<Map<String, Object>> bills = new ArrayList<>();
+    String sql = "SELECT " +
+                 "bl.id AS BillID, " +
+                 "u.name AS CustomerName, " +
+                 "a.phone AS PhoneNumber, " +
+                 "bl.createAt AS CreationDate, " +
+                 "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS RoomList, " +
+                 "bl.total AS TotalAmount, " +
+                 "CASE " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+                 "    ELSE 'Unpaid' " +
+                 "END AS PaymentStatus, " +
+                 "bl.paymentMethod AS PaymentMethod " +
+                 "FROM Bill bl " +
+                 "JOIN Booking b ON bl.id = b.bill_id " +
+                 "JOIN Room r ON b.room_id = r.id " +
+                 "JOIN [User] u ON b.user_id = u.id " +
+                 "JOIN Account a ON u.username = a.username " +
+                 "GROUP BY bl.id, u.name, a.phone, bl.createAt, bl.total, bl.paymentMode, bl.paymentMethod";
+
+    try (PreparedStatement st = connection.prepareStatement(sql);
+         ResultSet rs = st.executeQuery()) {
+        while (rs.next()) {
+            Map<String, Object> bill = new HashMap<>();
+            bill.put("BillID", rs.getInt("BillID"));
+            bill.put("CustomerName", rs.getString("CustomerName"));
+            bill.put("PhoneNumber", rs.getString("PhoneNumber"));
+            bill.put("CreationDate", rs.getTimestamp("CreationDate"));
+            bill.put("RoomList", rs.getString("RoomList"));
+            bill.put("TotalAmount", rs.getFloat("TotalAmount"));
+            bill.put("PaymentStatus", rs.getString("PaymentStatus"));
+            bill.put("PaymentMethod", rs.getString("PaymentMethod"));
+            bills.add(bill);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return bills;
+}
+    
+    
+    
+    
+    
+
+    public List<Map<String, Object>> getAllBills() {
+        List<Map<String, Object>> bills = new ArrayList<>();
+        String sql = "SELECT " +
+                     "bk.bill_id AS billId, " +
+                     "u.name AS customerName, " +
+                     "a.phone AS phoneNumber, " +
+                     "CONVERT(varchar, bk.createAt, 105) AS creationDate, " +
+                     "CONVERT(varchar, bk.startDate, 105) AS startDate, " +
+                     "CONVERT(varchar, bk.endDate, 105) AS endDate, " +
+                     "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS roomList, " +
+                     "bk.cost AS totalAmount, " +
+                     "CASE " +
+                     "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+                     "    ELSE 'Unpaid' " +
+                     "END AS paymentStatus, " +
+                     "bl.paymentMethod AS paymentMethod " +
+                     "FROM Booking bk " +
+                     "JOIN Bill bl ON bk.bill_id = bl.id " +
+                     "JOIN Room r ON bk.room_id = r.id " +
+                     "JOIN [User] u ON bk.user_id = u.id " +
+                     "JOIN Account a ON u.username = a.username " +
+                     "GROUP BY  bk.bill_id, u.name, a.phone, bk.createAt, bk.startDate, bk.endDate, bk.cost, bl.paymentMode, bl.paymentMethod";
+
+        try (PreparedStatement st = connection.prepareStatement(sql);
+             ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                Map<String, Object> bill = new HashMap<>();
+                bill.put("billId", rs.getInt("billId"));
+                bill.put("customerName", rs.getString("customerName"));
+                bill.put("phoneNumber", rs.getString("phoneNumber"));
+                bill.put("creationDate", rs.getString("creationDate"));
+                bill.put("startDate", rs.getString("startDate"));
+                bill.put("endDate", rs.getString("endDate"));
+                bill.put("roomList", rs.getString("roomList"));
+                bill.put("totalAmount", rs.getFloat("totalAmount"));
+                bill.put("paymentStatus", rs.getString("paymentStatus"));
+                bill.put("paymentMethod", rs.getString("paymentMethod"));
+                bills.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bills;
+    }
+
+    public List<Map<String, Object>> getAllBillsToday() {
+        List<Map<String, Object>> bills = new ArrayList<>();
+        String sql = "SELECT " +
+                     "bk.bill_id AS billId, " +
+                     "u.name AS customerName, " +
+                     "a.phone AS phoneNumber, " +
+                     "CONVERT(varchar, bk.createAt, 105) AS creationDate, " +
+                     "CONVERT(varchar, bk.startDate, 105) AS startDate, " +
+                     "CONVERT(varchar, bk.endDate, 105) AS endDate, " +
+                     "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS roomList, " +
+                     "bk.cost AS totalAmount, " +
+                     "CASE " +
+                     "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+                     "    ELSE 'Unpaid' " +
+                     "END AS paymentStatus, " +
+                     "bl.paymentMethod AS paymentMethod " +
+                     "FROM Booking bk " +
+                     "JOIN Bill bl ON bk.bill_id = bl.id " +
+                     "JOIN Room r ON bk.room_id = r.id " +
+                     "JOIN [User] u ON bk.user_id = u.id " +
+                     "JOIN Account a ON u.username = a.username " +
+                     "WHERE CONVERT(DATE, bk.createAt) = CONVERT(DATE, GETDATE()) " +
+                     "GROUP BY  bk.bill_id, u.name, a.phone, bk.createAt, bk.startDate, bk.endDate, bk.cost, bl.paymentMode, bl.paymentMethod";
+
+        try (PreparedStatement st = connection.prepareStatement(sql);
+             ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                Map<String, Object> bill = new HashMap<>();
+                bill.put("billId", rs.getInt("billId"));
+                bill.put("customerName", rs.getString("customerName"));
+                bill.put("phoneNumber", rs.getString("phoneNumber"));
+                bill.put("creationDate", rs.getString("creationDate"));
+                bill.put("startDate", rs.getString("startDate"));
+                bill.put("endDate", rs.getString("endDate"));
+                bill.put("roomList", rs.getString("roomList"));
+                bill.put("totalAmount", rs.getFloat("totalAmount"));
+                bill.put("paymentStatus", rs.getString("paymentStatus"));
+                bill.put("paymentMethod", rs.getString("paymentMethod"));
+                bills.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bills;
+    }
+
+
+
+
+    
+  
+    public static void main(String[] args) {
+        BillDAO billDAO = new BillDAO();
+        
+        // Fetch and print all bills
+        List<Map<String, Object>> allBills = billDAO.getAllBillsGroup();
+        System.out.println("All Bills:");
+        for (Map<String, Object> bill : allBills) {
+            System.out.println(bill);
+        }
+
+       
+ 
+    }
+    
 }
