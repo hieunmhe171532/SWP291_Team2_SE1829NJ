@@ -251,6 +251,65 @@ public class FeedbackDAO {
         return t;
     }
 
+    public List<Feedback> pagingFeedbackByRid(int index, int rid) {
+        Connection conn = dbContext.getConnection();
+        List<Feedback> t = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * from Feedback f JOIN Account a\n"
+                    + "on f.username=a.username JOIN Room r\n"
+                    + "on f.roomid=r.id\n"
+                    + "where f.roomid=?\n"
+                    + "ORDER BY f.id\n"
+                    + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(2, (index - 1) * 5);
+            stm.setInt(1, rid);
+
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                Feedback f = new Feedback();
+                Account a = new Account();
+                Room r = new Room();
+                Hotel h = new Hotel();
+                TypeRoom tr = new TypeRoom();
+                f.setId(result.getInt(1));
+                f.setImg(result.getString(2));
+                f.setDescription(result.getString(3));
+                f.setCreateAt(result.getString(4));
+                r.setId(result.getInt(5));
+                a.setUsername(result.getString(6));
+                a.setUsername(result.getString(7));
+                a.setPassword(result.getString(8));
+                a.setPhone(result.getString(9));
+                a.setEmail(result.getString(10));
+                a.setRole_id(result.getString(11));
+                a.setIsActive(result.getBoolean(12));
+                r.setId(result.getInt(13));
+                r.setName(result.getString(14));
+                r.setRoom_floor(result.getString(15));
+                r.setUserQuantity(result.getInt(16));
+                r.setArea(result.getFloat(17));
+                r.setPrice(result.getFloat(18));
+                r.setStatus(result.getInt(19));
+                r.setDescription(result.getString(20));
+                h.setId(result.getInt(21));
+                r.setHotel(h);
+                tr.setId(result.getInt(22));
+                r.setTypeRoom(tr);
+                r.setIsActive(result.getBoolean(26));
+                f.setAcc(a);
+                f.setRoom(r);
+                t.add(f);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return t;
+    }
+
     public void insertFeedback(String img, String des, String username, int rid) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
@@ -383,7 +442,7 @@ public class FeedbackDAO {
 
             while (rs.next()) {
                 Count c = new Count();
-                Account a=new Account();
+                Account a = new Account();
                 a.setUsername(rs.getString(1));
                 c.setAcc(a);
                 c.setCount(rs.getInt(2));
@@ -401,9 +460,10 @@ public class FeedbackDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Feedback> list=dao.getFeedbackByRid(603);
+        List<Feedback> list = dao.pagingFeedbackByRid(1, 604);
         for (Feedback f : list) {
             System.out.println(f);
         }
+//dao.insertFeedback("https://www.shutterstock.com/shutterstock/photos/2157520005/display_1500/stock-photo-empty-interior-room-d-illustration-2157520005.jpg", "asvsabvsab", "admin", 602);
     }
 }
