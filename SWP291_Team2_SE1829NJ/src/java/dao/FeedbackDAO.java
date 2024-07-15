@@ -486,7 +486,7 @@ public class FeedbackDAO {
 //            System.out.println(f);
 //        }
 //dao.insertFeedback("https://www.shutterstock.com/shutterstock/photos/2157520005/display_1500/stock-photo-empty-interior-room-d-illustration-2157520005.jpg", "asvsabvsab", "admin", 602);
-int c=dao.totalCommentByRid(604);
+int c=dao.totalCommentByRid(602);
         System.out.println(c);
     }
 }

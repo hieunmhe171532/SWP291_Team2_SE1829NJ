@@ -565,7 +565,7 @@
             }
             .pagination-link {
                 display: inline-block;
-                align-content: center; 
+                align-content: center;
                 padding: 8px 12px;
                 margin: 4px;
                 text-decoration: none;
@@ -823,6 +823,14 @@
         priceElements.forEach(element => {
             let price = element.textContent;
             element.textContent = formatPrice(price);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".pagination-link");
+            links.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add("active");
+                }
+            });
         });
     </script>
 
