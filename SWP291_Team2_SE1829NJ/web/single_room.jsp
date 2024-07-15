@@ -563,10 +563,28 @@
             .room-booking button:hover {
                 background-color: #0056b3;
             }
+            .pagination-link {
+                display: inline-block;
+                align-content: center; 
+                padding: 8px 12px;
+                margin: 4px;
+                text-decoration: none;
+                color: #007bff;
+                border: 1px solid #007bff;
+                border-radius: 4px;
+                transition: background-color 0.3s, color 0.3s;
+            }
 
+            .pagination-link:hover {
+                background-color: #007bff;
+                color: white;
+            }
 
-
-
+            .pagination-link.active {
+                background-color: #0056b3;
+                color: white;
+                border-color: #0056b3;
+            }
 
         </style>
     </head>
@@ -646,7 +664,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="review-add col-7">
+                        <div class="review-add col-6">
                             <h4>Add Review</h4>
                             <form action="addfeedback" class="ra-form" method="post" >
                                 <div class="row">
@@ -661,7 +679,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="rd-reviews col-5">
+                        <div class="rd-reviews col-6">
                             <h4>Reviews</h4>
                             <c:forEach items="${listf}" var="f">
                                 <div class="review-item">
@@ -676,9 +694,17 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                            <c:forEach begin="1" end="${endP}" var="i">                                          
-                                <li><a class="pagination-link"  href="viewroom?index=${i}&rid=${vr.id}">${i}</a></li>
-                                </c:forEach>
+                            <div class="row mt-5">
+                                <div class="col text-center">
+                                    <div class="block-27">
+                                        <ul>
+                                            <c:forEach begin="1" end="${endP}" var="i">                                          
+                                                <li><a class="pagination-link"  href="viewroom?index=${i}&rid=${vr.id}">${i}</a></li>
+                                                </c:forEach>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
