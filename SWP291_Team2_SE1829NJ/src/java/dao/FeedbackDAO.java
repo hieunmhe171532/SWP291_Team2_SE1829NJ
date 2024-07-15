@@ -51,15 +51,15 @@ public class FeedbackDAO {
 
             while (result.next()) {
                 Feedback f = new Feedback();
-                User u = new User();
+                Account a = new Account();
                 Room r = new Room();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
                 f.setCreateAt(result.getString(4));
-                u.setId(result.getInt(5));
-                f.setUser(u);
-                r.setId(result.getInt(6));
+                a.setUsername(result.getString(6));
+                f.setAcc(a);
+                r.setId(result.getInt(5));
                 f.setRoom(r);
                 t.add(f);
             }
@@ -69,6 +69,7 @@ public class FeedbackDAO {
 
         return t;
     }
+
     public List<Feedback> getFeedbackByRid(int rid) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
@@ -82,15 +83,15 @@ public class FeedbackDAO {
 
             while (result.next()) {
                 Feedback f = new Feedback();
-                User u = new User();
+                Account a = new Account();
                 Room r = new Room();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
                 f.setCreateAt(result.getString(4));
-                u.setId(result.getInt(5));
-                f.setUser(u);
-                r.setId(result.getInt(6));
+                a.setUsername(result.getString(6));
+                f.setAcc(a);
+                r.setId(result.getInt(5));
                 f.setRoom(r);
                 t.add(f);
             }
@@ -114,15 +115,15 @@ public class FeedbackDAO {
 
             while (result.next()) {
                 Feedback f = new Feedback();
-                User u = new User();
+                Account a = new Account();
                 Room r = new Room();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
                 f.setCreateAt(result.getString(4));
-                u.setId(result.getInt(5));
-                f.setUser(u);
-                r.setId(result.getInt(6));
+                a.setUsername(result.getString(6));
+                f.setAcc(a);
+                r.setId(result.getInt(5));
                 f.setRoom(r);
                 return f;
             }
@@ -138,11 +139,11 @@ public class FeedbackDAO {
         List<Feedback> t = new ArrayList<>();
 
         try {
-            String sql = "SELECT * from Feedback f JOIN [User] u\n"
-                    + "on f.user_id=u.id JOIN Room r\n"
-                    + "on f.room_id=r.id\n"
-                    + "ORDER BY f.id\n"
-                    + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
+            String sql = "SELECT * from Feedback f JOIN Account a\n"
+                    + "on f.username=a.username JOIN Room r\n"
+                    + "on f.roomid=r.id\n"
+                    + "  ORDER BY f.id\n"
+                    + "     OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, (index - 1) * 5);
 
@@ -151,32 +152,35 @@ public class FeedbackDAO {
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
-                User u = new User();
                 Room r = new Room();
+                Hotel h=new Hotel();
+                TypeRoom tr=new TypeRoom();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
                 f.setCreateAt(result.getString(4));
-                u.setId(result.getInt(5));
-                u.setId(result.getInt(7));
-                u.setName(result.getString(8));
-                u.setDob(result.getDate(9));
-                u.setGender(result.getBoolean(10));
-                u.setAddress(result.getString(11));
-                u.setCreateAt(result.getString(13));
-                u.setUpdateAt(result.getString(14));
-                u.setIsDelete(result.getBoolean(15));
-                a.setUsername(result.getString(12));
-                u.setUsername(a);
-                f.setUser(u);
-                r.setId(result.getInt(6));
-                r.setId(result.getInt(16));
-                r.setName(result.getString(17));
-                r.setRoom_floor(result.getString(18));
-                r.setImage(result.getString(19));
-r.setUserQuantity(result.getInt(20));
-                r.setArea(result.getFloat(21));
-                r.setPrice(result.getFloat(22));
+                r.setId(result.getInt(5));
+                a.setUsername(result.getString(6));
+                a.setUsername(result.getString(7));
+                a.setPassword(result.getString(8));
+                a.setPhone(result.getString(9));
+                a.setEmail(result.getString(10));
+                a.setRole_id(result.getString(11));
+                a.setIsActive(result.getBoolean(12));
+                r.setId(result.getInt(13));
+                r.setName(result.getString(14));
+                r.setRoom_floor(result.getString(15));
+                r.setUserQuantity(result.getInt(16));
+                r.setArea(result.getFloat(17));
+                r.setPrice(result.getFloat(18));
+                r.setStatus(result.getInt(19));
+                r.setDescription(result.getString(20));
+                h.setId(result.getInt(21));
+                r.setHotel(h);
+                tr.setId(result.getInt(22));
+                r.setTypeRoom(tr);
+                r.setIsActive(result.getBoolean(23));
+                f.setAcc(a);
                 f.setRoom(r);
                 t.add(f);
             }
@@ -193,8 +197,8 @@ r.setUserQuantity(result.getInt(20));
 
         try {
             String sql = "SELECT * from Feedback f JOIN [User] u\n"
-                    + "on f.user_id=u.id JOIN Room r\n"
-                    + "on f.room_id=r.id\n"
+                    + "on f.userid=u.id JOIN Room r\n"
+                    + "on f.roomid=r.id\n"
                     + "where f.[description] LIKE ?\n"
                     + "ORDER BY f.id\n"
                     + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
@@ -207,32 +211,35 @@ r.setUserQuantity(result.getInt(20));
             while (result.next()) {
                 Feedback f = new Feedback();
                 Account a = new Account();
-                User u = new User();
                 Room r = new Room();
+                Hotel h=new Hotel();
+                TypeRoom tr=new TypeRoom();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
                 f.setCreateAt(result.getString(4));
-                u.setId(result.getInt(5));
-                u.setId(result.getInt(7));
-                u.setName(result.getString(8));
-                u.setDob(result.getDate(9));
-                u.setGender(result.getBoolean(10));
-                u.setAddress(result.getString(11));
-                u.setCreateAt(result.getString(13));
-                u.setUpdateAt(result.getString(14));
-                u.setIsDelete(result.getBoolean(15));
-                a.setUsername(result.getString(12));
-                u.setUsername(a);
-                f.setUser(u);
-                r.setId(result.getInt(6));
-                r.setId(result.getInt(16));
-                r.setName(result.getString(17));
-                r.setRoom_floor(result.getString(18));
-                r.setImage(result.getString(19));
-                r.setUserQuantity(result.getInt(20));
-                r.setArea(result.getFloat(21));
-                r.setPrice(result.getFloat(22));
+                r.setId(result.getInt(5));
+                a.setUsername(result.getString(6));
+                a.setUsername(result.getString(7));
+                a.setPassword(result.getString(8));
+                a.setPhone(result.getString(9));
+                a.setEmail(result.getString(10));
+                a.setRole_id(result.getString(11));
+                a.setIsActive(result.getBoolean(12));
+                r.setId(result.getInt(13));
+                r.setName(result.getString(14));
+                r.setRoom_floor(result.getString(15));
+                r.setUserQuantity(result.getInt(16));
+                r.setArea(result.getFloat(17));
+                r.setPrice(result.getFloat(18));
+                r.setStatus(result.getInt(19));
+                r.setDescription(result.getString(20));
+                h.setId(result.getInt(21));
+                r.setHotel(h);
+                tr.setId(result.getInt(22));
+                r.setTypeRoom(tr);
+                r.setIsActive(result.getBoolean(23));
+                f.setAcc(a);
                 f.setRoom(r);
                 t.add(f);
             }
@@ -248,7 +255,7 @@ r.setUserQuantity(result.getInt(20));
         LocalDateTime curDate = java.time.LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = curDate.format(formatter);
-String sql = "INSERT INTO [dbo].[Feedback]\n"
+        String sql = "INSERT INTO [dbo].[Feedback]\n"
                 + "( [img], [description], [createAt],user_id,room_id)\n"
                 + "VALUES\n"
                 + "( ?, ?, ?,?,?)";
@@ -307,7 +314,7 @@ String sql = "INSERT INTO [dbo].[Feedback]\n"
 
     public int totalUserComment() {
         int count = 0;
-        String sql = "SELECT  COUNT(distinct user_id) as commentUser from Feedback ";
+        String sql = "SELECT  COUNT(distinct userid) as commentUser from Feedback ";
 
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
@@ -329,7 +336,7 @@ String sql = "INSERT INTO [dbo].[Feedback]\n"
         String sql = "SELECT  COUNT(*)  as comment from Feedback";
 
         try (
-PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
 
             if (rs.next()) {
                 count = rs.getInt("comment");
@@ -366,12 +373,13 @@ PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.execu
     }
 
     public List<Count> topUserFeedback() {
+
         List<Count> t = new ArrayList<>();
         String sql = "SELECT TOP(5)  u.name, COUNT(*) AS comment_count\n"
                 + "FROM feedback f JOIN [User] u\n"
-                + "    on f.user_id=u.id\n"
+                + "on f.userid=u.id\n"
                 + "GROUP BY u.name\n"
-                + "ORDER BY comment_count DESC";
+                + "order by comment_count desc;";
 
         try (
                 PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
@@ -396,9 +404,9 @@ PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.execu
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Feedback> l = dao.getFeedbackByRid(2);
-        for (Feedback f : l) {
-            System.out.println(f);
+        List<Count> l = dao.topUserFeedback();
+        for (Count c : l) {
+            System.out.println(c);
         }
     }
 }

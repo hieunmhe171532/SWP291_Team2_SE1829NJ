@@ -193,7 +193,7 @@
                                                     ${b.createAt}
                                                 </td>
                                                 <td>
-                                                    <img src="${b.image}" width="50%" height="50%" alt="loi"/>
+                                                    <img src="${b.image}" width="100%" height="100%" alt="loi"/>
                                                     
                                                 </td>
                                                 <td>

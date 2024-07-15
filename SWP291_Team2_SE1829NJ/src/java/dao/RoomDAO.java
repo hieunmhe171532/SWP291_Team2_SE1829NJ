@@ -453,18 +453,17 @@ String sql = "UPDATE Room SET "
         }
     }
 
-    public List<Room> getSimilarRooms(int uquan,float area,int rid) {
+    public List<Room> getSimilarRooms(int uquan,int rid) {
         List<Room> t = new ArrayList<>();
 
         try {
             String sql = """
                          SELECT top(5) * from room r 
-                         where r.userQuantity=? and r.area=?
+                         where r.userQuantity=?
                          and id <> ?""";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, uquan);
-            stm.setFloat(2, area);
-            stm.setInt(3, rid);
+            stm.setInt(2, rid);
 
             ResultSet rs = stm.executeQuery();
 
@@ -472,7 +471,6 @@ String sql = "UPDATE Room SET "
                 Room room=new Room();
                 room.setId(rs.getInt(1));
                 room.setName(rs.getString(2));
-
                 room.setRoom_floor(rs.getString(3));
                 room.setArea(rs.getFloat(5));
                 room.setUserQuantity(rs.getInt(4));
@@ -1013,29 +1011,10 @@ String sql = "UPDATE Room SET "
         }
         return rooms;
     }
-    public static void main(String[] args) {
-        // Database connection parameters
- 
-     
-            RoomDAO roomDAO = new RoomDAO();
-
-            // Test the findListRoomByNumbersRoomNumberHuman method
-//            int numberOfHumans = 4;
-            List<Room> rooms = roomDAO.getAllRoomsWithStatusOne();
-
-            // Print the results
-            for (Room room : rooms) {
-                System.out.println("Room ID: " + room.getId() +
-                                   ", Name: " + room.getName() +
-                                   ", User Quantity: " + room.getUserQuantity() +
-                                   ", Price: " + room.getPrice() +
-                                   ", Hotel: " + room.getHotel().getName() +
-                                   ", Type Room: " + room.getTypeRoom().getName());
-            }
-        
+    
     }
 
-}
+
 
 
 

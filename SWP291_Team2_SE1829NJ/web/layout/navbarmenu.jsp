@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 <!--   <style>
 .nav-item .nav-link {
@@ -32,7 +32,7 @@
         <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
     </div>
 
-<!--Offcanvas menu area end-->
+    <!--Offcanvas menu area end-->
 
     <!--header top start-->
 
@@ -52,7 +52,7 @@
                   
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="aboutus.jsp" class="nav-link">About Us</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="blog.jsp" class="nav-link">Blog</a></li>
 
                     <c:choose>
                         <c:when test="${sessionScope.acc != null}">
@@ -68,9 +68,9 @@
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
                                         <a class="dropdown-item" href="dashboard">Admin Management</a>
                                         <a class="dropdown-item" href="accountmanagement">Account Management</a>
-                                         <a class="dropdown-item" href="roommanagement">Room Management</a>
+                                        <a class="dropdown-item" href="roommanagement">Room Management</a>
                                     </c:if>
-                    
+
                                 </div>
                             </li>
                         </c:when>
@@ -82,56 +82,63 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="loginDropdownMenuLink">
                                     <a class="dropdown-item" href="login.jsp">Login</a>
-                      
+
                                 </div>
                             </li>
                         </c:otherwise>
                     </c:choose>
-                            <li class="nav-item">
-    <a href="cart?action=showcart" class="nav-link">
-        <i class="fa fa-shopping-basket"></i> ${sessionScope.size} Basket
-    </a>
-</li>
+                    <li class="nav-item">
+                        <a href="cart?action=showcart" class="nav-link">
+                            <i class="fa fa-shopping-basket"></i> ${sessionScope.size} Basket
+                        </a>
+                    </li>
 
                 </ul>
             </div>
         </div>
     </nav>
 
-   <div class="hero">
-            <section class="home-slider owl-carousel">
-                <div class="slider-item" style="background-image:url(bootstrap/images/bg_1.jpg);">
-                    <div class="overlay"></div>
+    <div class="hero">
+        <section class="home-slider owl-carousel">
+            <div class="slider-item" style="background-image:url(bootstrap/images/bg_1.jpg);">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row no-gutters slider-text align-items-center justify-content-end">
+                        <div class="col-md-6 ftco-animate">
+                            <div class="text">
+                                <h2>More than a hotel... an experience</h2>
+                                <h1 class="mb-3">Hotel for the whole family, all year round.</h1>
+                            </div>
+                        </div>
+                    </div>
                     <div class="container">
-                        <div class="row no-gutters slider-text align-items-center justify-content-end">
-                            <div class="col-md-6 ftco-animate">
-                                <div class="text">
-                                    <h2>More than a hotel... an experience</h2>
-                                    <h1 class="mb-3">Hotel for the whole family, all year round.</h1>
-                                </div>
+                        <div class="row no-gutters slider-text d-flex align-itemd-center justify-content-center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-item" style="background-image:url(bootstrap/images/bg_2.jpg);">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row no-gutters slider-text align-items-center justify-content-end">
+                        <div class="col-md-6 ftco-animate">
+                            <div class="text">
+                                <h2>Harbor Lights Hotel &amp; Resort</h2>
+                                <h1 class="mb-3">It feels like staying in your own home.</h1>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="slider-item" style="background-image:url(bootstrap/images/bg_2.jpg);">
-                    <div class="overlay"></div>
-                    <div class="container">
-                        <div class="row no-gutters slider-text align-items-center justify-content-end">
-                            <div class="col-md-6 ftco-animate">
-                                <div class="text">
-                                    <h2>Harbor Lights Hotel &amp; Resort</h2>
-                                    <h1 class="mb-3">It feels like staying in your own home.</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+    </div>
 
 
-    
+
+
 </header>
 <script>
     var greeting = "${greeting}";
@@ -148,47 +155,47 @@
     typeWriter();
 </script>
 <script type="text/javascript">
-            //Thời Gian
-            function time() {
-                var today = new Date();
-                var weekday = new Array(7);
-                weekday[0] = "Chủ Nhật";
-                weekday[1] = "Thứ Hai";
-                weekday[2] = "Thứ Ba";
-                weekday[3] = "Thứ Tư";
-                weekday[4] = "Thứ Năm";
-                weekday[5] = "Thứ Sáu";
-                weekday[6] = "Thứ Bảy";
-                var day = weekday[today.getDay()];
-                var dd = today.getDate();
-                var mm = today.getMonth() + 1;
-                var yyyy = today.getFullYear();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                m = checkTime(m);
-                nowTime = h + ":" + m + "";
-                if (dd < 10) {
-                    dd = '0' + dd
-                }
-                if (mm < 10) {
-                    mm = '0' + mm
-                }
-                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                        '</span>';
-                document.getElementById("clock").innerHTML = tmp;
-                clocktime = setTimeout("time()", "1000", "Javascript");
+    //Thời Gian
+    function time() {
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Chủ Nhật";
+        weekday[1] = "Thứ Hai";
+        weekday[2] = "Thứ Ba";
+        weekday[3] = "Thứ Tư";
+        weekday[4] = "Thứ Năm";
+        weekday[5] = "Thứ Sáu";
+        weekday[6] = "Thứ Bảy";
+        var day = weekday[today.getDay()];
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        m = checkTime(m);
+        nowTime = h + ":" + m + "";
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                '</span>';
+        document.getElementById("clock").innerHTML = tmp;
+        clocktime = setTimeout("time()", "1000", "Javascript");
 
-                function checkTime(i) {
-                    if (i < 10) {
-                        i = "0" + i;
-                    }
-                    return i;
-                }
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
             }
-        </script>
-        <script type="text/javascript">
-    // Call the getTimeString() function and set the text of the "clock" element to the result
+            return i;
+        }
+    }
+</script>
+<script type="text/javascript">
+// Call the getTimeString() function and set the text of the "clock" element to the result
     document.getElementById("clock").innerText = time();
 </script>
 

@@ -6,25 +6,20 @@ package model;
 
 /**
  *
- * @author hieum
+ * @author dinhl
  */
-public class Feedback {
+public class RoomImage {
     private int id;
-    private String img;
-    private String description;
-    private String createAt;
-    private Account acc;
+    private String img,createAt;
     private Room room;
 
-    public Feedback() {
+    public RoomImage() {
     }
 
-    public Feedback(int id, String img, String description, String createAt, Account acc, Room room) {
+    public RoomImage(int id, String img, String createAt, Room room) {
         this.id = id;
         this.img = img;
-        this.description = description;
         this.createAt = createAt;
-        this.acc = acc;
         this.room = room;
     }
 
@@ -44,28 +39,12 @@ public class Feedback {
         this.img = img;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCreateAt() {
         return createAt;
     }
 
     public void setCreateAt(String createAt) {
         this.createAt = createAt;
-    }
-
-    public Account getAcc() {
-        return acc;
-    }
-
-    public void setAcc(Account acc) {
-        this.acc = acc;
     }
 
     public Room getRoom() {
@@ -78,10 +57,7 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" + "id=" + id + ", img=" + img + ", description=" + description + ", createAt=" + createAt + ", acc=" + acc + ", room=" + room + '}';
+        return "RoomImage{" + "id=" + id + ", img=" + img + ", createAt=" + createAt + ", room=" + room + '}';
     }
-
-    
-
     
 }
