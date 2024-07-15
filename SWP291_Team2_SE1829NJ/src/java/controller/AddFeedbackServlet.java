@@ -17,9 +17,9 @@ import jakarta.servlet.http.Part;
 import java.io.*;
 import java.nio.file.*;
 import java.util.List;
+import model.Account;
 import model.Feedback;
 
-@MultipartConfig()
 /**
  *
  * @author admin
@@ -81,54 +81,31 @@ public class AddFeedbackServlet extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         FeedbackDAO daof = new FeedbackDAO();
-//        HttpSession session = request.getSession();
-//        session.setAttribute("acc", acc);
+        HttpSession session = request.getSession(true);
+        Account acc = (Account) session.getAttribute("acc");
         try {
             String id = request.getParameter("id");
             int rid = Integer.parseInt(id);
             String c = request.getParameter("comment");
-            Part part = request.getPart("img");
-            String filename = part.getSubmittedFileName();
-            String path = "/Users/admin/web/Git/clon2/SWP391-Project/SWP291_Team2_SE1829NJ/web/bootstrap/images/" + filename;
-            String datapath = "bootstrap/images/" + filename;
+            String img = request.getParameter("img");
 
             int count = daof.totalComment();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
+            daof.insertFeedback(img, c, rid, rid);
+            
+            
 
-            InputStream is = part.getInputStream();
-            boolean succs = uploadFile(is, path);
-            if (succs) {
-                daof.insertFeedback(datapath, c, 8, rid);
 
-            } else {
-                daof.insertFeedback(null, c, 8, rid);
-
-            }
             request.getRequestDispatcher("viewroom?rid=" + rid).forward(request, response);
 
         } catch (Exception e) {
         }
     }
 
-    public boolean uploadFile(InputStream is, String path) {
-        boolean test = false;
-        try {
-            byte[] byt = new byte[is.available()];
-            is.read();
-            FileOutputStream fops = new FileOutputStream(path);
-            fops.write(byt);
-            fops.flush();
-            fops.close();
 
-            test = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return test;
-    }
 
     /**
      * Returns a short description of the servlet.

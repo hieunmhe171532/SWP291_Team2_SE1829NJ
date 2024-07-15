@@ -650,7 +650,7 @@
                                 <div class="col-lg-8">
                                     <h5>New Comment:</h5>
                                     <input type="type" name="id" value="${vr.id}" hidden="">
-                                    <input type="file" name="img" style="align-content: center">
+                                    <input type="text" name="img" style="align-content: center">
                                     <textarea name="comment" placeholder="Your Review"></textarea>
                                     <button type="submit">Submit Now</button>
 
