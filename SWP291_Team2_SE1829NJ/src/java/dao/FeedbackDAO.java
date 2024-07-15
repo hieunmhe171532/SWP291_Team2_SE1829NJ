@@ -77,7 +77,7 @@ public class FeedbackDAO {
 
         try {
             String sql = "select * from feedback\n"
-                    + "WHERE room_id=?";
+                    + "WHERE roomid=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, rid);
             ResultSet result = stm.executeQuery();
@@ -180,7 +180,7 @@ public class FeedbackDAO {
                 r.setHotel(h);
                 tr.setId(result.getInt(22));
                 r.setTypeRoom(tr);
-                r.setIsActive(result.getBoolean(23));
+                r.setIsActive(result.getBoolean(26));
                 f.setAcc(a);
                 f.setRoom(r);
                 t.add(f);
@@ -401,9 +401,9 @@ public class FeedbackDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Count> list=dao.topAccountFeedback();
-        for (Count c : list) {
-            System.out.println(c);
+        List<Feedback> list=dao.getFeedbackByRid(603);
+        for (Feedback f : list) {
+            System.out.println(f);
         }
     }
 }

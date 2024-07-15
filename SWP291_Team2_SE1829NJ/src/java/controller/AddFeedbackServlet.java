@@ -94,10 +94,7 @@ public class AddFeedbackServlet extends HttpServlet {
             if (count % 5 != 0) {
                 endpage++;
             }
-            daof.insertFeedback(img, c, acc, rid);
-            
-            
-
+            daof.insertFeedback(img, c, acc.getUsername(), rid);
 
             request.getRequestDispatcher("viewroom?rid=" + rid).forward(request, response);
 
