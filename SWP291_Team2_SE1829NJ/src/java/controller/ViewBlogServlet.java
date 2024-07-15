@@ -32,8 +32,9 @@ public class ViewBlogServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String id=request.getParameter("id");
         BlogDAO daob=new BlogDAO();
+        int i=Integer.parseInt(id);
         
-        List<Blog> listrb=daob.getRecentBlog();
+        List<Blog> listrb=daob.getRecentBlog(i);
         Blog b=daob.getBlogById(id);
         
         request.setAttribute("listrb", listrb);
