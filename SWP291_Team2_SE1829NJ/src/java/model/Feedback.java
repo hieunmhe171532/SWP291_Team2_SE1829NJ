@@ -13,18 +13,18 @@ public class Feedback {
     private String img;
     private String description;
     private String createAt;
-    private User user;
+    private Account acc;
     private Room room;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String img, String description, String createAt, User user, Room room) {
+    public Feedback(int id, String img, String description, String createAt, Account acc, Room room) {
         this.id = id;
         this.img = img;
         this.description = description;
         this.createAt = createAt;
-        this.user = user;
+        this.acc = acc;
         this.room = room;
     }
 
@@ -60,12 +60,12 @@ public class Feedback {
         this.createAt = createAt;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAcc() {
+        return acc;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAcc(Account acc) {
+        this.acc = acc;
     }
 
     public Room getRoom() {
@@ -78,9 +78,10 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" + "id=" + id + ", img=" + img + ", description=" + description + ", createAt=" + createAt + ", user=" + user + ", room=" + room + '}';
+        return "Feedback{" + "id=" + id + ", img=" + img + ", description=" + description + ", createAt=" + createAt + ", acc=" + acc + ", room=" + room + '}';
     }
 
+    
 
     
 }
