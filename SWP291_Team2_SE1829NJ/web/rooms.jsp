@@ -194,6 +194,13 @@
                 <h2 class="mb-4">Hotel Master's Rooms</h2>
                 <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
             </div>
+               <div class="col-md-7 heading-section text-center ftco-animate">
+         
+                                          <span style="font-size: 14px; font-weight: normal;">
+                và Bạn không hài lòng? ấn vào đây dể quay lại
+                <a href="listroomforcus" style="text-decoration: underline; color: #007bff;">link back</a>
+            </span>
+            </div>
         </div>
 
         <div class="row no-gutters justify-content-center mb-5 pb-3">

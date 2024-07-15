@@ -81,7 +81,10 @@ public class LoginController extends HttpServlet {
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
             session.removeAttribute("acc");
-            response.sendRedirect("homepage");
+                    session.removeAttribute("cart");
+            session.setAttribute("size", 0);
+  response.sendRedirect("homepage");
+            
         }
 
         }
