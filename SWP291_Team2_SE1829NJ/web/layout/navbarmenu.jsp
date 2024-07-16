@@ -52,7 +52,7 @@
                     <li class="nav-item"><a href="searchRooms" class="nav-link">Our Weddings</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="aboutus.jsp" class="nav-link">About Us</a></li>
-                    <li class="nav-item"><a href="blog.jsp" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="listblog" class="nav-link">Blog</a></li>
 
                     <c:choose>
                         <c:when test="${sessionScope.acc != null}">
