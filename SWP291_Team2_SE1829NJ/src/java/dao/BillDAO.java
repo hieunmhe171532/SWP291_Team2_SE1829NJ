@@ -337,16 +337,16 @@ public class BillDAO {
 //    }
 //}
 
-    
     public List<Map<String, Object>> getBookingSummaryByUserId(int userId) {
     List<Map<String, Object>> bookingSummaries = new ArrayList<>();
     String sql = "SELECT " +
                  "bk.id AS [Mã booking], " +
                  "bk.createAt AS [Ngày khởi tạo], " +
                  "CASE " +
-                 "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
-                 "    ELSE 'Other' " +
-                 "END AS [Hình thức GD], " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+                 "    ELSE 'Unpaid' " +
+                 "END AS PaymentStatus, " +
+                 "bl.paymentMethod AS PaymentMethod, " +
                  "bk.startDate AS [startdate], " +
                  "bk.endDate AS [endate], " +
                  "bk.cost AS [cost], " +
@@ -364,8 +364,8 @@ public class BillDAO {
 
                 bookingSummary.put("idbooking", rs.getInt("Mã booking"));
                 bookingSummary.put("daycreate", rs.getTimestamp("Ngày khởi tạo"));
-                bookingSummary.put("formpay", rs.getString("Hình thức GD"));
-
+                bookingSummary.put("PaymentStatus", rs.getString("PaymentStatus"));
+                bookingSummary.put("formpay", rs.getString("PaymentMethod"));
                 bookingSummary.put("startdate", rs.getDate("startdate"));
                 bookingSummary.put("endate", rs.getDate("endate"));
                 bookingSummary.put("cost", rs.getFloat("cost"));
