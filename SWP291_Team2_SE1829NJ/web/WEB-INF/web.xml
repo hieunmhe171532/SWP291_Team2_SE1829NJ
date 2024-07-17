@@ -152,6 +152,10 @@
         <servlet-name>ViewOrder</servlet-name>
         <servlet-class>controller.ViewOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgotServlet</servlet-name>
+        <servlet-class>controller.ForgotServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -299,5 +303,9 @@
     <servlet-mapping>
         <servlet-name>ViewOrder</servlet-name>
         <url-pattern>/vieworder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotServlet</servlet-name>
+        <url-pattern>/forgot</url-pattern>
     </servlet-mapping>
 </web-app>
