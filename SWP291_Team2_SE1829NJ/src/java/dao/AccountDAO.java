@@ -461,10 +461,11 @@ public void updateAccountAndUser(String username,String password, String newPhon
     public List<Count> genderFeedback() {
         
         List<Count> t = new ArrayList<>();
-        String sql = "select u.gender,COUNT(DISTINCT a.username) as count"
-                + "from Account a join [dbo].[User] u on a.username=u.username"
-                + "join Feedback f on a.username=f.username"
-                + "group by u.gender;";
+        String sql = "select u.gender,COUNT(DISTINCT Account.username) as count "
+                + " from Account join [dbo].[User] u on Account.username=u.username "
+                + " join feedback  on Account.username=feedback.username"
+                + " group by u.gender"
+                + " order by count desc;";
         
         
         try (
@@ -509,8 +510,11 @@ public void updateAccountAndUser(String username,String password, String newPhon
 //        String address = "123 Main St, Cityville";
 //
 //        dao.register(username, password, phone, email, role, isActive, fullname, dob, gender, address);
-            System.out.println(dao.totalAccComment());
-    }
+List<Count> l=dao.genderFeedback();
+        for (Count c : l) {
+            System.out.println(c);
+        }
+        }
     
     
     

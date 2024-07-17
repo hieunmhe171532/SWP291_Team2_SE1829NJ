@@ -67,11 +67,13 @@ public class ListManageFeedback extends HttpServlet {
         }
         List<Feedback> listf = daof.getAllFeedback();
         List<Count> listaf = daof.topAccountFeedback();
+        List<Count> listgf=daoa.genderFeedback();
 
         request.setAttribute("listp", listp);
         request.setAttribute("endP", endpage);
-//        request.setAttribute("tag", index);
+        request.setAttribute("tag", index);
         request.setAttribute("search", search);
+        request.setAttribute("listgf", listgf);
 
         request.setAttribute("listf", listf);
         request.setAttribute("totalAcc", totalAccount);

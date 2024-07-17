@@ -374,11 +374,16 @@
                                 <div class="table-responsive table-hover table-sales">
                                     <table class="table">
                                         <tbody>
-                                            <c:forEach items="${listca}" var="ca">
+                                            <c:forEach items="${listgf}" var="gf">
                                                 <tr>
-                                                    <td>${ca.address}</td>
-                                                    <td>${ca.count}</td>
-                                                    <td>~${Math.round(ca.count / totalComment * 100)}%</td>
+                                                    <c:if test="${gf.user.isGender()=='false'}">
+                                                        <td>Female</td>
+                                                    </c:if>
+                                                    <c:if test="${gf.user.isGender()=='true'}">
+                                                        <td>Male</td>
+                                                    </c:if>
+                                                    <td>${gf.count}</td>
+                                                    <td>~${Math.round(gf.count / totalComment * 100)}%</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -600,7 +605,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><b>Image</b></label>
-                                        <input name="img" type="url" value="${page.img}" class="form-control" required>
+                                        <input name="img" type="url" value="${page.img}" class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label><b>Comment</b></label>
