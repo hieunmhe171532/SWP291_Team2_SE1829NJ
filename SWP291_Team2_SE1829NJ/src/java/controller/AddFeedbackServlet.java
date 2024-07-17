@@ -8,12 +8,10 @@ import dao.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
 import java.io.*;
 import java.nio.file.*;
 import java.util.List;
@@ -79,27 +77,17 @@ public class AddFeedbackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        FeedbackDAO daof = new FeedbackDAO();
         HttpSession session = request.getSession(true);
         Account acc = (Account) session.getAttribute("acc");
+        FeedbackDAO daof = new FeedbackDAO();
         try {
             String id = request.getParameter("id");
             int rid = Integer.parseInt(id);
             String c = request.getParameter("comment");
             String img = request.getParameter("img");
 
-            int count = daof.totalComment();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            daof.insertFeedback(img, c, rid, rid);
-            
-            
-
-
-            request.getRequestDispatcher("viewroom?rid=" + rid).forward(request, response);
+            daof.insertFeedback(img, c, acc.getUsername(), rid);
+            response.sendRedirect("viewroom?rid="+rid);
 
         } catch (Exception e) {
         }
