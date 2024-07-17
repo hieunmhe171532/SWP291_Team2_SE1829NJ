@@ -75,10 +75,9 @@ public class EditFeedbackServlet extends HttpServlet {
         String id = request.getParameter("id");
         String img = request.getParameter("img");
         String comment = request.getParameter("comment");
-        String cre = request.getParameter("cre");
-        
-        FeedbackDAO daof=new FeedbackDAO();
-daof.editFeedback(img, comment, id);
+
+        FeedbackDAO daof = new FeedbackDAO();
+        daof.editFeedback(img, comment, id);
         response.sendRedirect("listmanagefeedback");
 
     }

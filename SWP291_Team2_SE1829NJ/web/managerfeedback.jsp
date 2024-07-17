@@ -628,18 +628,15 @@
                 <div class="modal" id="ModalDEL${page.id}">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <form method="POST" action="deletefeedback">
+                            <form method="POST" action="deletefb">
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <span class="thong-tin-thanh-toan">
                                                 <h5>Are you sure you want to delete this feedback?</h5>
                                             </span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <input hidden name="id" value="${b.id}">
+                                            <input hidden=""  name="id" value="${page.id}">
+
                                         </div>
                                     </div>
                                     <BR>
@@ -651,10 +648,6 @@
                         </div>
                     </div>
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
 
                 </div>
             </div>
