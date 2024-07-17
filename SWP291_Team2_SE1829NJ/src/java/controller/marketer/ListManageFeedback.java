@@ -70,7 +70,7 @@ public class ListManageFeedback extends HttpServlet {
 
         request.setAttribute("listp", listp);
         request.setAttribute("endP", endpage);
-        request.setAttribute("tag", index);
+//        request.setAttribute("tag", index);
         request.setAttribute("search", search);
 
         request.setAttribute("listf", listf);
