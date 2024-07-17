@@ -74,21 +74,25 @@
                                 <label class="labels">Account Name</label>
                                 <input type="text" class="form-control" name="username" value="${Account.username}" readonly>
                             </div>
+                               <div class="form-group">
+                                <label class="labels">Password</label>
+                                <input type="text" class="form-control" name="password" value="${Account.password}" readonly>
+                            </div>
                             <div class="form-group">
-                                <label class="labels">Customer Name</label>
-                                <input type="text" class="form-control" name="fullname" value="${Account.fullname}" required>
+                                <label class="labels">Full Name</label>
+                                <input type="text" class="form-control" name="fullname" value="${Account.fullname}" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="labels">Date of Birth</label>
-                                <input type="date" class="form-control" name="dob" value="${Account.dob}" required>
+                                <input type="date" class="form-control" name="dob" value="${Account.dob}" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="labels">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="${Account.phone}" required>
+                                <input type="text" class="form-control" name="phone" value="${Account.phone}" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="labels">Address</label>
-                                <input type="text" class="form-control" name="address" value="${Account.address}" required>
+                                <input type="text" class="form-control" name="address" value="${Account.address}" readonly>
                             </div>
                             <div class="form-group">
                                 <label class="labels">Email</label>
@@ -96,7 +100,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="labels">Gender</label>
-                                <select class="form-control" name="gender" required>
+                                <select class="form-control" name="gender" readonly>
                                     <option value="true" ${Account.gender ? 'selected' : ''}>Male</option>
                                     <option value="false" ${!Account.gender ? 'selected' : ''}>Female</option>
                                 </select>
@@ -131,9 +135,22 @@
                                     <input type="text" class="form-control" id="password${Account.username}" name="password" value="${Account.password}" placeholder="Enter new password">
                                     <small class="form-text text-muted">Leave blank to keep the current password.</small>
                                 </div>
+                                      <div class="form-group">
+                            <label for="fullname${Account.username}">Fullname:</label>
+                            <input type="text" class="form-control" id="fullname${Account.username}" name="fullname" value="${Account.fullname}" required>
+                        </div>
+ <div class="form-group">
+                            <label for="dob${Account.username}">Date of Birth:</label>
+                            <input type="date" class="form-control" id="dob${Account.username}" name="dob" value="${Account.dob}">
+                        </div>
                         <div class="form-group">
                             <label for="phone${Account.username}">Phone Number:</label>
                             <input type="text" class="form-control" id="phone${Account.username}" name="phone" value="${Account.phone}" required>
+                        </div>
+                          
+                                                    <div class="form-group">
+                            <label for="address${Account.username}">Address:</label>
+                            <input type="text" class="form-control" id="address${Account.username}" name="address" value="${Account.address}" required>
                         </div>
                         <div class="form-group">
                             <label for="email${Account.username}">Email:</label>
@@ -151,14 +168,8 @@
 </div>
 <input type="hidden" name="role" value="${Account.role_id}">
 
-                        <div class="form-group">
-                            <label for="fullname${Account.username}">Fullname:</label>
-                            <input type="text" class="form-control" id="fullname${Account.username}" name="fullname" value="${Account.fullname}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dob${Account.username}">Date of Birth:</label>
-                            <input type="date" class="form-control" id="dob${Account.username}" name="dob" value="${Account.dob}">
-                        </div>
+                      
+                     
                         <div class="form-group">
                             <label for="gender${Account.username}">Gender:</label>
                             <select class="form-control" id="gender${Account.username}" name="gender">
@@ -166,10 +177,7 @@
                                 <option value="false" ${!Account.gender ? 'selected' : ''}>Female</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="address${Account.username}">Address:</label>
-                            <input type="text" class="form-control" id="address${Account.username}" name="address" value="${Account.address}" required>
-                        </div>
+                    
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save changes</button>
