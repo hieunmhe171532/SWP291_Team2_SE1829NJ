@@ -333,8 +333,7 @@ public class FeedbackDAO {
     public void editFeedback(String img, String des, String id) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
+        Timestamp timestamp = Timestamp.valueOf(curDate);
         String sql = """
                      UPDATE [dbo].[Feedback]
                      SET
@@ -345,7 +344,7 @@ public class FeedbackDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
-            pstmt.setString(3, date);
+            pstmt.setTimestamp(3, timestamp);
             pstmt.setString(4, id);
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
@@ -486,9 +485,6 @@ public class FeedbackDAO {
 //        }
 //dao.insertFeedback("https://www.shutterstock.com/shutterstock/photos/2157520005/display_1500/stock-photo-empty-interior-room-d-illustration-2157520005.jpg", "asvsabvsab", "admin", 602);
 //       
-        List<Feedback> l = dao.pagingFeedback(1);
-        for (Feedback f : l) {
-            System.out.println(f);
-        }
+        dao.deleteFeedback("5");
     }
 }

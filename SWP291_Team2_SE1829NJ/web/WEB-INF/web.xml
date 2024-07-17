@@ -113,10 +113,6 @@
         <servlet-class>controller.ViewBlogServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteFeedbackSerlet</servlet-name>
-        <servlet-class>controller.marketer.DeleteFeedbackSerlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditFeedbackServlet</servlet-name>
         <servlet-class>controller.marketer.EditFeedbackServlet</servlet-class>
     </servlet>
@@ -151,6 +147,10 @@
     <servlet>
         <servlet-name>ViewOrder</servlet-name>
         <servlet-class>controller.ViewOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedbackServlet</servlet-name>
+        <servlet-class>controller.marketer.DeleteFeedbackServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -261,10 +261,6 @@
         <url-pattern>/viewblog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteFeedbackSerlet</servlet-name>
-        <url-pattern>/deletefeedback</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditFeedbackServlet</servlet-name>
         <url-pattern>/editfeedback</url-pattern>
     </servlet-mapping>
@@ -299,5 +295,9 @@
     <servlet-mapping>
         <servlet-name>ViewOrder</servlet-name>
         <url-pattern>/vieworder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedbackServlet</servlet-name>
+        <url-pattern>/deletefb</url-pattern>
     </servlet-mapping>
 </web-app>
