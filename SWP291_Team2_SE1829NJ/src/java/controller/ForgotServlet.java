@@ -5,12 +5,16 @@
 
 package controller;
 
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.Random;
+import model.Email;
 
 /**
  *
@@ -50,10 +54,14 @@ public class ForgotServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+  
+       @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+
+              request.getRequestDispatcher("forgot.jsp").forward(request, response);
+        
+        
     } 
 
     /** 
@@ -66,7 +74,41 @@ public class ForgotServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+ 
+               HttpSession session = request.getSession();
+        String emailInput = request.getParameter("email");
+        AccountDAO accdao = new AccountDAO();
+        Email handleEmail = new Email();
+        String email = accdao.checkEmailExist(emailInput);
+        String message = "";
+        String check = null;
+
+        if (email != null) {
+            Random random = new Random();
+            message = "EXIST - valid email, check your email to have resetcode";
+            check = "true";
+            String userName = accdao.getUserNameByEmail(email);
+            // Tạo số nguyên ngẫu nhiên có 6 chữ số
+            Integer code = 100000 + random.nextInt(900000);
+            String code_str = code.toString();
+            String subject = handleEmail.subjectForgotPass();
+            String msgEmail = handleEmail.messageForgotPass(userName, code);
+            handleEmail.sendEmail(subject, msgEmail, email);
+
+            // 
+            session.setAttribute("code", code_str);
+            request.setAttribute("email", emailInput);
+            request.setAttribute("check", check);
+            request.setAttribute("message", message);
+            
+            request.getRequestDispatcher("forgot.jsp").forward(request, response);
+        } else {
+            message = "NOT EXIST - Invalid email";
+            check = "false";
+            request.setAttribute("message", message);
+            request.setAttribute("check", check);
+            request.getRequestDispatcher("forgot.jsp").forward(request, response);
+        }
     }
 
     /** 
