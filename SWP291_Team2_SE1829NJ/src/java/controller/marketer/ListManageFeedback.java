@@ -4,6 +4,7 @@
  */
 package controller.marketer;
 
+import dao.AccountDAO;
 import dao.FeedbackDAO;
 import dao.UserDAO;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class ListManageFeedback extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         FeedbackDAO daof = new FeedbackDAO();
         UserDAO daou = new UserDAO();
+        AccountDAO daoa=new AccountDAO();
         String indexP = request.getParameter("index");
         String search = request.getParameter("search");
         if (indexP == null) {
@@ -43,8 +45,8 @@ public class ListManageFeedback extends HttpServlet {
         }
         int index = Integer.parseInt(indexP);
 
-        int totalUser = daou.countUsers();
-        int totalUserComment = daof.totalUserComment();
+        int totalAccount = daoa.countAcc();
+        int totalAccComment = daoa.totalAccComment();
         int totalComment = daof.totalComment();
         int totalSearch = daof.totalCommentSearch(search);
         int endpage;
@@ -64,8 +66,7 @@ public class ListManageFeedback extends HttpServlet {
             listp = daof.pagingFeedbackSearch(index, search);
         }
         List<Feedback> listf = daof.getAllFeedback();
-        List<Count> listop = daof.topAccountFeedback();
-        List<Count> listca = daou.countAddress();
+        List<Count> listaf = daof.topAccountFeedback();
 
         request.setAttribute("listp", listp);
         request.setAttribute("endP", endpage);
@@ -73,11 +74,10 @@ public class ListManageFeedback extends HttpServlet {
         request.setAttribute("search", search);
 
         request.setAttribute("listf", listf);
-        request.setAttribute("totalUser", totalUser);
-        request.setAttribute("totalUserComment", totalUserComment);
+        request.setAttribute("totalAcc", totalAccount);
+        request.setAttribute("totalAccComment", totalAccComment);
         request.setAttribute("totalComment", totalComment);
-        request.setAttribute("listop", listop);
-        request.setAttribute("listca", listca);
+        request.setAttribute("listaf", listaf);
         request.getRequestDispatcher("managerfeedback.jsp").forward(request, response);
 
     }

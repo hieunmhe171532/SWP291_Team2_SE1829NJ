@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Count;
+import model.User;
 
 public class AccountDAO {  
  
@@ -419,28 +421,98 @@ public void updateAccountAndUser(String username,String password, String newPhon
             }
         }
     }
+    public int countAcc() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS TotalAcc FROM [dbo].[Account]";
+
+        try (
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+
+            if (rs.next()) {
+                count = rs.getInt("TotalAcc");
+            }
+
+        } catch (SQLException e) {
+            // Handle exception appropriately (log, notify user, etc.)
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+    public int totalAccComment() {
+        int count = 0;
+        String sql = "SELECT  COUNT(distinct f.username) as commentAcc from Feedback f";
+        
+        try (
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+            
+            if (rs.next()) {
+                count = rs.getInt("commentAcc");
+            }
+            
+        } catch (SQLException e) {
+            // Handle exception appropriately (log, notify user, etc.)
+            e.printStackTrace();
+        }
+        
+        return count;
+    }
+    
+    public List<Count> genderFeedback() {
+        
+        List<Count> t = new ArrayList<>();
+        String sql = "select u.gender,COUNT(DISTINCT a.username) as count"
+                + "from Account a join [dbo].[User] u on a.username=u.username"
+                + "join Feedback f on a.username=f.username"
+                + "group by u.gender;";
+        
+        
+        try (
+                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+            
+            while (rs.next()) {
+                Count c = new Count();
+                User u=new User();
+                u.setGender(rs.getBoolean(1));
+                c.setUser(u);
+                c.setCount(rs.getInt(2));
+                t.add(c);
+                
+            }
+            
+        } catch (SQLException e) {
+            // Handle exception appropriately (log, notify user, etc.)
+            e.printStackTrace();
+        }
+        
+        return t;
+    }
 
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
 
         // Test data for registration
-        String username = "newuser";
-        String password = "password123";
-        String phone = "1234567890";
-        String email = "newuser@example.com";
-        int role = 1;  // Assuming 1 is the role ID for a regular user
-        boolean isActive = true;
-        String fullname = "New User";
-        Date dob = null;
-        try {
-            dob = new SimpleDateFormat("dd-MM-yyyy").parse("31-10-2003");
-        } catch (ParseException e) {
-            e.printStackTrace();
+//        String username = "newuser";
+//        String password = "password123";
+//        String phone = "1234567890";
+//        String email = "newuser@example.com";
+//        int role = 1;  // Assuming 1 is the role ID for a regular user
+//        boolean isActive = true;
+//        String fullname = "New User";
+//        Date dob = null;
+//        try {
+//            dob = new SimpleDateFormat("dd-MM-yyyy").parse("31-10-2003");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        boolean gender = true;  // True for male, false for female
+//        String address = "123 Main St, Cityville";
+//
+//        dao.register(username, password, phone, email, role, isActive, fullname, dob, gender, address);
+List<Count> l=dao.genderFeedback();
+        for (Count c : l) {
+            System.out.println(c);
         }
-        boolean gender = true;  // True for male, false for female
-        String address = "123 Main St, Cityville";
-
-        dao.register(username, password, phone, email, role, isActive, fullname, dob, gender, address);
     }
     
     

@@ -311,7 +311,7 @@
                                     <div class="col col-stats ms-3 ms-sm-0">
                                         <div class="numbers">
                                             <p class="card-category">Total Of Users</p>
-                                            <h4 class="card-title">${totalUser}</h4>
+                                            <h4 class="card-title">${totalAcc}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +332,7 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category"> Users Commenting</p>
-                                        <h4 class="card-title">${totalUserComment}</h4>
+                                        <h4 class="card-title">${totalAccComment}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -408,10 +408,10 @@
                                 <div class="table-responsive table-hover table-sales">
                                     <table class="table">
                                         <tbody>
-                                            <c:forEach items="${listop}" var="top">
+                                            <c:forEach items="${listaf}" var="af">
                                                 <tr>
-                                                    <td>${top.acc.getUsername()}</td>
-                                                    <td class="text-end">${top.count}</td>
+                                                    <td>${af.username}</td>
+                                                    <td class="text-end">${af.count}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
