@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.AbstractList;
@@ -76,7 +77,7 @@ public class FeedbackDAO {
 
         try {
             String sql = "select * from feedback\n"
-                    + "WHERE room_id=?";
+                    + "WHERE roomid=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, rid);
             ResultSet result = stm.executeQuery();
@@ -153,8 +154,8 @@ public class FeedbackDAO {
                 Feedback f = new Feedback();
                 Account a = new Account();
                 Room r = new Room();
-                Hotel h=new Hotel();
-                TypeRoom tr=new TypeRoom();
+                Hotel h = new Hotel();
+                TypeRoom tr = new TypeRoom();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
@@ -179,7 +180,7 @@ public class FeedbackDAO {
                 r.setHotel(h);
                 tr.setId(result.getInt(22));
                 r.setTypeRoom(tr);
-                r.setIsActive(result.getBoolean(23));
+                r.setIsActive(result.getBoolean(26));
                 f.setAcc(a);
                 f.setRoom(r);
                 t.add(f);
@@ -196,12 +197,12 @@ public class FeedbackDAO {
         List<Feedback> t = new ArrayList<>();
 
         try {
-            String sql = "SELECT * from Feedback f JOIN [User] u\n"
-                    + "on f.userid=u.id JOIN Room r\n"
-                    + "on f.roomid=r.id\n"
-                    + "where f.[description] LIKE ?\n"
-                    + "ORDER BY f.id\n"
-                    + "OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
+            String sql = "SELECT * from Feedback f JOIN Account a\n"
+                    + "            on f.username=a.username JOIN Room r\n"
+                    + "                  on f.roomid=r.id\n"
+                    + "               where f.description like ?\n"
+                    + "            ORDER BY f.id\n"
+                    + "                 OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY;";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(2, (index - 1) * 5);
             stm.setString(1, "%" + des + "%");
@@ -212,8 +213,8 @@ public class FeedbackDAO {
                 Feedback f = new Feedback();
                 Account a = new Account();
                 Room r = new Room();
-                Hotel h=new Hotel();
-                TypeRoom tr=new TypeRoom();
+                Hotel h = new Hotel();
+                TypeRoom tr = new TypeRoom();
                 f.setId(result.getInt(1));
                 f.setImg(result.getString(2));
                 f.setDescription(result.getString(3));
@@ -238,7 +239,7 @@ public class FeedbackDAO {
                 r.setHotel(h);
                 tr.setId(result.getInt(22));
                 r.setTypeRoom(tr);
-                r.setIsActive(result.getBoolean(23));
+                r.setIsActive(result.getBoolean(26));
                 f.setAcc(a);
                 f.setRoom(r);
                 t.add(f);
@@ -250,22 +251,78 @@ public class FeedbackDAO {
         return t;
     }
 
-    public void insertFeedback(String img, String des, int uid, int rid) {
+    public List<Feedback> pagingFeedbackByRid(int index, int rid) {
+        Connection conn = dbContext.getConnection();
+        List<Feedback> t = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * from Feedback f JOIN Account a\n"
+                    + "on f.username=a.username JOIN Room r\n"
+                    + "on f.roomid=r.id\n"
+                    + "where f.roomid=?\n"
+                    + "ORDER BY f.id\n"
+                    + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(2, (index - 1) * 3);
+            stm.setInt(1, rid);
+
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                Feedback f = new Feedback();
+                Account a = new Account();
+                Room r = new Room();
+                Hotel h = new Hotel();
+                TypeRoom tr = new TypeRoom();
+                f.setId(result.getInt(1));
+                f.setImg(result.getString(2));
+                f.setDescription(result.getString(3));
+                f.setCreateAt(result.getString(4));
+                r.setId(result.getInt(5));
+                a.setUsername(result.getString(6));
+                a.setUsername(result.getString(7));
+                a.setPassword(result.getString(8));
+                a.setPhone(result.getString(9));
+                a.setEmail(result.getString(10));
+                a.setRole_id(result.getString(11));
+                a.setIsActive(result.getBoolean(12));
+                r.setId(result.getInt(13));
+                r.setName(result.getString(14));
+                r.setRoom_floor(result.getString(15));
+                r.setUserQuantity(result.getInt(16));
+                r.setArea(result.getFloat(17));
+                r.setPrice(result.getFloat(18));
+                r.setStatus(result.getInt(19));
+                r.setDescription(result.getString(20));
+                h.setId(result.getInt(21));
+                r.setHotel(h);
+                tr.setId(result.getInt(22));
+                r.setTypeRoom(tr);
+                r.setIsActive(result.getBoolean(26));
+                f.setAcc(a);
+                f.setRoom(r);
+                t.add(f);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return t;
+    }
+
+    public void insertFeedback(String img, String des, String username, int rid) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
-        String sql = "INSERT INTO [dbo].[Feedback]\n"
-                + "( [img], [description], [createAt],user_id,room_id)\n"
-                + "VALUES\n"
-                + "( ?, ?, ?,?,?)";
+        Timestamp timestamp = Timestamp.valueOf(curDate);
+        String sql = "insert into Feedback\n"
+                + "(img,description,createAt,roomid,username)\n"
+                + "values(?,?,?,?,?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
-            pstmt.setString(3, date);
-            pstmt.setInt(4, uid);
-            pstmt.setInt(5, rid);
-
+            pstmt.setTimestamp(3, timestamp);
+            pstmt.setString(5, username);
+            pstmt.setInt(4, rid);
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
         } catch (SQLException ex) {
@@ -276,8 +333,7 @@ public class FeedbackDAO {
     public void editFeedback(String img, String des, String id) {
         Connection conn = dbContext.getConnection();
         LocalDateTime curDate = java.time.LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String date = curDate.format(formatter);
+        Timestamp timestamp = Timestamp.valueOf(curDate);
         String sql = """
                      UPDATE [dbo].[Feedback]
                      SET
@@ -288,7 +344,7 @@ public class FeedbackDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, img);
             pstmt.setString(2, des);
-            pstmt.setString(3, date);
+            pstmt.setTimestamp(3, timestamp);
             pstmt.setString(4, id);
             pstmt.executeUpdate();
             System.out.println("Account created successfully!");
@@ -350,6 +406,27 @@ public class FeedbackDAO {
         return count;
     }
 
+    public int totalCommentByRid(int rid) {
+        int count = 0;
+        String sql = "SELECT  COUNT(*)  as comment from Feedback\n"
+                + "where roomid=?";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, rid);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("comment");
+            }
+
+        } catch (SQLException e) {
+            // Handle exception appropriately (log, notify user, etc.)
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
     public int totalCommentSearch(String des) {
         int count = 0;
         String sql = "SELECT COUNT(*) as totalS from [Feedback]\n"
@@ -372,23 +449,21 @@ public class FeedbackDAO {
         return count;
     }
 
-    public List<Count> topUserFeedback() {
+    public List<Count> topAccountFeedback() {
 
         List<Count> t = new ArrayList<>();
-        String sql = "SELECT TOP(5)  u.name, COUNT(*) AS comment_count\n"
-                + "FROM feedback f JOIN [User] u\n"
-                + "on f.userid=u.id\n"
-                + "GROUP BY u.name\n"
+        String sql = "select top(5) a.username ,count(*) as comment_count  from Feedback f\n"
+                + "join Account a on f.username=a.username\n"
+                + "group by a.username\n"
                 + "order by comment_count desc;";
 
-        try (
-                PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
+        try (PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery();) {
 
             while (rs.next()) {
                 Count c = new Count();
-                User u = new User();
-                u.setName(rs.getString(1));
-                c.setUser(u);
+                Account a = new Account();
+                a.setUsername(rs.getString(1));
+                c.setAcc(a);
                 c.setCount(rs.getInt(2));
                 t.add(c);
 
@@ -404,9 +479,12 @@ public class FeedbackDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Count> l = dao.topUserFeedback();
-        for (Count c : l) {
-            System.out.println(c);
-        }
+//        List<Feedback> list = dao.pagingFeedbackByRid(1, 604);
+//        for (Feedback f : list) {
+//            System.out.println(f);
+//        }
+//dao.insertFeedback("https://www.shutterstock.com/shutterstock/photos/2157520005/display_1500/stock-photo-empty-interior-room-d-illustration-2157520005.jpg", "asvsabvsab", "admin", 602);
+//       
+        dao.deleteFeedback("5");
     }
 }

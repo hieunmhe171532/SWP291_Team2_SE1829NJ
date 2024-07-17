@@ -563,10 +563,28 @@
             .room-booking button:hover {
                 background-color: #0056b3;
             }
+            .pagination-link {
+                display: inline-block;
+                align-content: center;
+                padding: 8px 12px;
+                margin: 4px;
+                text-decoration: none;
+                color: #007bff;
+                border: 1px solid #007bff;
+                border-radius: 4px;
+                transition: background-color 0.3s, color 0.3s;
+            }
 
+            .pagination-link:hover {
+                background-color: #007bff;
+                color: white;
+            }
 
-
-
+            .pagination-link.active {
+                background-color: #0056b3;
+                color: white;
+                border-color: #0056b3;
+            }
 
         </style>
     </head>
@@ -583,8 +601,7 @@
 
                             <div class="rd-text">
                                 <div class="rd-title">
-                                    <h3>Premium King Room</h3>
-
+                                    <h3>${vr.name}</h3>
                                 </div>
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
@@ -635,55 +652,61 @@
                                 <div class="block-21 mb-4 d-flex">
                                     <div class="text">
                                         <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
+
                                         <div class="meta">
-                                            <div id="price">${sr.price}</div>
+                                            <div>${sr.description} </div>
+
                                         </div>
+                                        <div style="display: flex ;justify-content: end" ><h6 id="price">${sr.price}</h6><h6>đ</h6></div>
                                     </div>
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
-                    <div class="review-add">
-                        <h4>Add Review</h4>
-                        <form action="addfeedback" class="ra-form" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <h5>New Comment:</h5>
-                                    <input type="type" name="id" value="${vr.id}" hidden="">
-                                    <input type="text" name="img" style="align-content: center">
-                                    <textarea name="comment" placeholder="Your Review"></textarea>
-                                    <button type="submit">Submit Now</button>
+                    <div class="row">
+                        <div class="review-add col-6">
+                            <h4>Add Review</h4>
+                            <form action="addfeedback" class="ra-form" method="post" >
+                                <div class="row">
+                                    <div class="col-lg-11">
+                                        <h5>New Comment:</h5>
+                                        <input type="type" name="id" value="${vr.id}" hidden="">
+                                        <input type="text" name="img" placeholder="Your Link Image" style="align-content: center">
+                                        <textarea name="comment" placeholder="Your Review"></textarea>
+                                        <button type="submit">Submit Now</button>
 
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="rd-reviews">
-                        <h4>Reviews</h4>
-                        <c:forEach items="${listf}" var="f">
-                            <div class="review-item">
-                                <div class="ri-pic">
-                                    <img src="../build/web/bootstrap/images/jpeg-3.jpg" alt="">
-                                </div>
-                                <div class="ri-text">
-                                    <span>27 Aug 2019</span>
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
                                     </div>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                        magnam.</p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="rd-reviews col-6">
+                            <h4>Reviews</h4>
+                            <c:forEach items="${listf}" var="f">
+                                <div class="review-item">
+                                    <div class="ri-pic">
+
+                                    </div>
+                                    <div class="ri-text">
+                                        <span>${f.createAt}</span>
+                                        <h5>${f.acc.getUsername()}</h5>
+                                        <img src="${f.img}" width="80%" height="80%" alt="">
+                                        <p>${f.description}</p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <div class="row mt-5">
+                                <div class="col text-center">
+                                    <div class="block-27">
+                                        <ul>
+                                            <c:forEach begin="1" end="${endP}" var="i">                                          
+                                                <li><a class="pagination-link"  href="viewroom?index=${i}&rid=${vr.id}">${i}</a></li>
+                                                </c:forEach>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </c:forEach>
 
-
+                        </div>
                     </div>
 
                 </div>
@@ -800,6 +823,14 @@
         priceElements.forEach(element => {
             let price = element.textContent;
             element.textContent = formatPrice(price);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".pagination-link");
+            links.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add("active");
+                }
+            });
         });
     </script>
 

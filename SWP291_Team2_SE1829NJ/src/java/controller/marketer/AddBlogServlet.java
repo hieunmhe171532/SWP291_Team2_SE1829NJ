@@ -72,16 +72,12 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
+
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-               HttpSession session = request.getSession();
-            model.Account acc = (Account) session.getAttribute("acc");
-            
-            
+
+        HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
+
         BlogDAO daob = new BlogDAO();
         String title = request.getParameter("title");
         String brief = request.getParameter("brief");
@@ -90,10 +86,10 @@ public class AddBlogServlet extends HttpServlet {
         String flag = request.getParameter("flag");
         if (flag == null) {
             flag = "0";
-        }else{
-            flag="1";
+        } else {
+            flag = "1";
         }
-        int f=Integer.parseInt(flag);
+        int f = Integer.parseInt(flag);
 
         daob.insertBlog(title, detail, brief, image, f, acc.getUsername());
         response.sendRedirect("listmanageblog");

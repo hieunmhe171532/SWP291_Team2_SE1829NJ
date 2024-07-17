@@ -43,7 +43,7 @@ public class ListBlogServlet extends HttpServlet {
         
         int count=daob.countBlog();
         int endpage=count/6;
-        if(count%3!=0){
+        if(count%6!=0){
             endpage++;
         }
         

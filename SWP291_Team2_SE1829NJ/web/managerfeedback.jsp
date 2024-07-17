@@ -20,8 +20,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
-
-
         <style>
             a {
                 text-decoration: none;
@@ -289,7 +287,6 @@
         </style>
 
 
-
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -311,7 +308,7 @@
                                     <div class="col col-stats ms-3 ms-sm-0">
                                         <div class="numbers">
                                             <p class="card-category">Total Of Users</p>
-                                            <h4 class="card-title">${totalUser}</h4>
+                                            <h4 class="card-title">${totalAcc}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +329,7 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category"> Users Commenting</p>
-                                        <h4 class="card-title">${totalUserComment}</h4>
+                                        <h4 class="card-title">${totalAccComment}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -377,11 +374,16 @@
                                 <div class="table-responsive table-hover table-sales">
                                     <table class="table">
                                         <tbody>
-                                            <c:forEach items="${listca}" var="ca">
+                                            <c:forEach items="${listgf}" var="gf">
                                                 <tr>
-                                                    <td>${ca.address}</td>
-                                                    <td>${ca.count}</td>
-                                                    <td>~${Math.round(ca.count / totalComment * 100)}%</td>
+                                                    <c:if test="${gf.user.isGender()=='false'}">
+                                                        <td>Female</td>
+                                                    </c:if>
+                                                    <c:if test="${gf.user.isGender()=='true'}">
+                                                        <td>Male</td>
+                                                    </c:if>
+                                                    <td>${gf.count}</td>
+                                                    <td>~${Math.round(gf.count / totalComment * 100)}%</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -408,10 +410,10 @@
                                 <div class="table-responsive table-hover table-sales">
                                     <table class="table">
                                         <tbody>
-                                            <c:forEach items="${listop}" var="top">
+                                            <c:forEach items="${listaf}" var="af">
                                                 <tr>
-                                                    <td>${top.user.getName()}</td>
-                                                    <td class="text-end">${top.count}</td>
+                                                    <td>${af.acc.getUsername()}</td>
+                                                    <td class="text-end">${af.count}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -496,7 +498,7 @@
                                             ${page.createAt}
                                         </td>
                                         <td>
-                                            ${page.user.getId()}
+                                            ${page.acc.getUsername()}
                                         </td>
                                         <td>
                                             ${page.room.getId()}
@@ -540,7 +542,7 @@
                 <!--detail infomation-->
 
                 <div class="modal" id="ModalDE${page.id}">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
@@ -551,24 +553,18 @@
                             <!-- Modal Body -->
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-7 mb-3 mb-sm-0">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title">User</h5>
-                                                <p class="card-text">Name:${page.user.getName()}</p>
-                                                <p class="card-text">Date of birth:${page.user.getDob()}</p>
-                                                <c:if test="${page.user.isGender()==true}">
-                                                    <p class="card-text">Gender:Male</p>
-                                                </c:if>
-                                                <c:if test="${page.user.isGender()==false}">
-                                                    <p class="card-text">Gender:Female</p>
-                                                </c:if>
-                                                <p class="card-text">Address:${page.user.getAddress()}</p>
+                                                <h5 class="card-title">Account</h5>
+                                                <p class="card-text">User Name:${page.acc.getUsername()}</p>
+                                                <p class="card-text">Number Phone:${page.acc.getPhone()}</p>
+                                                <p class="card-text">Email:${page.acc.getEmail()}</p>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title">Room</h5>
@@ -609,7 +605,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><b>Image</b></label>
-                                        <input name="img" type="url" value="${page.img}" class="form-control" required>
+                                        <input name="img" type="url" value="${page.img}" class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label><b>Comment</b></label>
@@ -632,18 +628,15 @@
                 <div class="modal" id="ModalDEL${page.id}">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <form method="POST" action="deletefeedback">
+                            <form method="POST" action="deletefb">
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <span class="thong-tin-thanh-toan">
                                                 <h5>Are you sure you want to delete this feedback?</h5>
                                             </span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <input hidden name="id" value="${b.id}">
+                                            <input hidden=""  name="id" value="${page.id}">
+
                                         </div>
                                     </div>
                                     <BR>
@@ -655,10 +648,6 @@
                         </div>
                     </div>
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
 
                 </div>
             </div>
