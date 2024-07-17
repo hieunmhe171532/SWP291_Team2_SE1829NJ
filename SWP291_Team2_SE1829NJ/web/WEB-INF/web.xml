@@ -149,13 +149,16 @@
         <servlet-class>controller.ViewOrder</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ForgotServlet</servlet-name>
         <servlet-class>controller.ForgotServlet</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>DeleteFeedbackServlet</servlet-name>
         <servlet-class>controller.marketer.DeleteFeedbackServlet</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmResetSixcode</servlet-name>
+        <servlet-class>controller.ConfirmResetSixcode</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -302,12 +305,15 @@
         <url-pattern>/vieworder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ForgotServlet</servlet-name>
         <url-pattern>/forgot</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DeleteFeedbackServlet</servlet-name>
         <url-pattern>/deletefb</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmResetSixcode</servlet-name>
+        <url-pattern>/confirm</url-pattern>
     </servlet-mapping>
 </web-app>

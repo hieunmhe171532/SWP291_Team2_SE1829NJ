@@ -64,6 +64,24 @@ public class AccountDAO {
         }
         return null;
     }
+       
+              public String getPassWordByEmail(String email) {
+        String sql = "SELECT password FROM [Account] WHERE email = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            //set ?
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString(1);
+                return name;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+       
     
             public String checkEmailExist(String email) {
         try {
