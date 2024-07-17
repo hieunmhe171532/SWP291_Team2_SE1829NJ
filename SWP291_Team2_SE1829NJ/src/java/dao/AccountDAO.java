@@ -509,10 +509,7 @@ public void updateAccountAndUser(String username,String password, String newPhon
 //        String address = "123 Main St, Cityville";
 //
 //        dao.register(username, password, phone, email, role, isActive, fullname, dob, gender, address);
-List<Count> l=dao.genderFeedback();
-        for (Count c : l) {
-            System.out.println(c);
-        }
+            System.out.println(dao.totalAccComment());
     }
     
     

@@ -24,8 +24,6 @@ public class Account {
     private String address;
     
 
-
-
     public Account() {
     }
 
@@ -83,9 +81,6 @@ public class Account {
         this.isActive = isActive;
     }
 
-
-    
-    
 
     public String getUsername() {
         return username;

@@ -20,8 +20,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
-
-
         <style>
             a {
                 text-decoration: none;
@@ -289,7 +287,6 @@
         </style>
 
 
-
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -410,7 +407,7 @@
                                         <tbody>
                                             <c:forEach items="${listaf}" var="af">
                                                 <tr>
-                                                    <td>${af.username}</td>
+                                                    <td>${af.acc.getUsername()}</td>
                                                     <td class="text-end">${af.count}</td>
                                                 </tr>
                                             </c:forEach>
@@ -496,7 +493,7 @@
                                             ${page.createAt}
                                         </td>
                                         <td>
-                                            ${page.user.getId()}
+                                            ${page.acc.getUsername()}
                                         </td>
                                         <td>
                                             ${page.room.getId()}
@@ -540,7 +537,7 @@
                 <!--detail infomation-->
 
                 <div class="modal" id="ModalDE${page.id}">
-                    <div class="modal-dialog modal-xl">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
@@ -551,24 +548,18 @@
                             <!-- Modal Body -->
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-7 mb-3 mb-sm-0">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title">User</h5>
-                                                <p class="card-text">Name:${page.user.getName()}</p>
-                                                <p class="card-text">Date of birth:${page.user.getDob()}</p>
-                                                <c:if test="${page.user.isGender()==true}">
-                                                    <p class="card-text">Gender:Male</p>
-                                                </c:if>
-                                                <c:if test="${page.user.isGender()==false}">
-                                                    <p class="card-text">Gender:Female</p>
-                                                </c:if>
-                                                <p class="card-text">Address:${page.user.getAddress()}</p>
+                                                <h5 class="card-title">Account</h5>
+                                                <p class="card-text">User Name:${page.acc.getUsername()}</p>
+                                                <p class="card-text">Number Phone:${page.acc.getPhone()}</p>
+                                                <p class="card-text">Email:${page.acc.getEmail()}</p>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title">Room</h5>
