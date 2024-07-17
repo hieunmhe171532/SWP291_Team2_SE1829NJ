@@ -11,6 +11,13 @@
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="jakarta.servlet.http.HttpSession" %>
+<%@page import="model.Account" %>
+<%@page import="model.Cart" %>
+<%@page import="dao.BillDAO" %>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +34,49 @@
         <!-- Custom styles for this template -->
         <link href="/vnpay_jsp/assets/jumbotron-narrow.css" rel="stylesheet"> 
         <script src="/vnpay_jsp/assets/jquery-1.11.3.min.js"></script>
+        <style>
+            button {
+                padding: 15px 25px;
+                border: unset;
+                border-radius: 15px;
+                color: #212121;
+                z-index: 1;
+                background: #e8e8e8;
+                position: relative;
+                font-weight: 1000;
+                font-size: 17px;
+                -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+                box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+                transition: all 250ms;
+                overflow: hidden;
+            }
+
+            button::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0;
+                border-radius: 15px;
+                background-color: #212121;
+                z-index: -1;
+                -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+                box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+                transition: all 250ms
+            }
+
+            button:hover {
+                color: #e8e8e8;
+            }
+
+            button:hover::before {
+                width: 100%;
+            }
+            a{
+                color: black;
+            }
+        </style>
     </head>
     <body>
         <%
@@ -51,6 +101,7 @@
 
         %>
         <!--Begin display -->
+        <button><a href="homepage">Back to Home Page</a></button>
         <div class="container">
             <div class="header clearfix">
                 <h3 class="text-muted">KẾT QUẢ THANH TOÁN</h3>
@@ -105,7 +156,24 @@
                 &nbsp;
             </p>
             <%
-                
+                HttpSession sessionObj = request.getSession(true);
+
+                // Lấy giá trị từ session
+                Cart cart = (Cart) sessionObj.getAttribute("cart");
+                Account acc = (Account) sessionObj.getAttribute("acc");
+
+                if (cart == null || acc == null) {
+                    response.sendRedirect("homepage");
+                    return;
+                }
+                BillDAO dao = new BillDAO();
+                int bill_id = dao.getLastBillId();
+
+                int userId = dao.getUserIdByAccountUsername(acc.getUsername());
+
+                dao.addBooking(cart, userId, bill_id);
+                session.removeAttribute("cart");
+                session.setAttribute("size", 0);
             %>
             <footer class="footer">
                 <p>&copy; VNPAY 2020</p>
