@@ -158,6 +158,12 @@
                             Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png" alt="">
                         </label>
                     </div>
+                    <div class="panel-default">
+                        <input id="payment_defult" value="vnp" name="payment_method" type="radio" />
+                        <label for="payment_defult">
+                            Thanh toán bằng vnpay <img src="assets/img/icon/papyel.png" alt="">
+                        </label>
+                    </div>
                     <div class="order_button">
                         <button type="submit">Đặt hàng</button>
                     </div>
