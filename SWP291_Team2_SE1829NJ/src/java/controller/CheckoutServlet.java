@@ -49,14 +49,16 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect("homepage");
             return;
         }
+        BillDAO dao = new BillDAO();
 
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String paymentMethod = request.getParameter("payment_method");
+        int bill_id = dao.getLastBillId();
+        int userId = dao.getUserIdByAccountUsername(acc.getUsername());
+
         try {
-            BillDAO dao = new BillDAO();
             if (paymentMethod.equals("cod")) {
-                int userId = dao.getUserIdByAccountUsername(acc.getUsername());
                 if (userId == -1) {
                     throw new Exception("User ID not found for username: " + acc.getUsername());
                 }
@@ -64,8 +66,6 @@ public class CheckoutServlet extends HttpServlet {
                 Bill bill = createBill(userId, acc.getEmail(), phone, address, cart, paymentMethod);
                 dao.addBill(bill);
 //            
-
-                int bill_id = dao.getLastBillId();
 
                 dao.addBooking(cart, userId, bill_id);
 
@@ -77,7 +77,7 @@ public class CheckoutServlet extends HttpServlet {
                 String vnp_Version = "2.1.0";
                 String vnp_Command = "pay";
                 String orderType = "other";
-                long amount =(long) cart.getTotalCost() * 100;
+                long amount = (long) cart.getTotalCost() * 100;
                 String bankCode = request.getParameter("bankCode");
 
                 String vnp_TxnRef = Config.getRandomNumber(8);
@@ -144,6 +144,8 @@ public class CheckoutServlet extends HttpServlet {
                 String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
                 queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
                 String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
+                Bill bill = createBillVNPay(userId, acc.getEmail(), phone, address, cart, paymentMethod);
+                dao.addBill(bill);
                 response.sendRedirect(paymentUrl);
             }
 
@@ -158,7 +160,7 @@ public class CheckoutServlet extends HttpServlet {
 
     }
 
-    private static Bill createBill(int userId, String email, String phone, String address, Cart cart, String payment) {
+    private  Bill createBill(int userId, String email, String phone, String address, Cart cart, String payment) {
         Bill bill = new Bill();
         bill.setDiscount(0); // Add logic for discount if needed
         bill.setPaymentDate(new Date());
@@ -173,6 +175,23 @@ public class CheckoutServlet extends HttpServlet {
         bill.setUpdateAt(new Date());
         bill.setDeleteAt(null);
         bill.setIsDelete(false);
+        return bill;
+    }
+    private  Bill createBillVNPay(int userId, String email, String phone, String address, Cart cart, String payment) {
+        Bill bill = new Bill();
+        bill.setDiscount(0); // Add logic for discount if needed
+        bill.setPaymentDate(new Date());
+        bill.setPaymentMode(true);
+        bill.setPaymentMethod(payment);
+        bill.setTotal((float) cart.getTotalCost());
+        bill.setBooking_id(userId);
+        bill.setPhone(phone);
+        bill.setEmail(email);
+        bill.setAddress(address);
+        bill.setCreateAt(new Date());
+        bill.setUpdateAt(new Date());
+        bill.setDeleteAt(null);
+        bill.setIsDelete(true);
         return bill;
     }
 

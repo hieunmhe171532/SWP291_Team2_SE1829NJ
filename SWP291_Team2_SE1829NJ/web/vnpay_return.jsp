@@ -104,7 +104,9 @@
             <p>
                 &nbsp;
             </p>
-            <%%>
+            <%
+                
+            %>
             <footer class="footer">
                 <p>&copy; VNPAY 2020</p>
             </footer>
