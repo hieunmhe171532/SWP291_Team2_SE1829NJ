@@ -103,6 +103,38 @@ public class FeedbackDAO {
         return t;
     }
 
+    public List<Feedback> getFeedbackByUsername(String username) {
+        Connection conn = dbContext.getConnection();
+        List<Feedback> t = new ArrayList<>();
+
+        try {
+            String sql = "select * from Feedback\n"
+                    + "where username like ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, username);
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                Feedback f = new Feedback();
+                Account a = new Account();
+                Room r = new Room();
+                f.setId(result.getInt(1));
+                f.setImg(result.getString(2));
+                f.setDescription(result.getString(3));
+                f.setCreateAt(result.getString(4));
+                a.setUsername(result.getString(6));
+                f.setAcc(a);
+                r.setId(result.getInt(5));
+                f.setRoom(r);
+                t.add(f);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return t;
+    }
+
     public Feedback getFeedbackById(int id) {
         Connection conn = dbContext.getConnection();
 
@@ -479,12 +511,12 @@ public class FeedbackDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-//        List<Feedback> list = dao.pagingFeedbackByRid(1, 604);
-//        for (Feedback f : list) {
-//            System.out.println(f);
-//        }
+        List<Feedback> list = dao.getFeedbackByUsername("admin");
+        for (Feedback f : list) {
+            System.out.println(f);
+        }
 //dao.insertFeedback("https://www.shutterstock.com/shutterstock/photos/2157520005/display_1500/stock-photo-empty-interior-room-d-illustration-2157520005.jpg", "asvsabvsab", "admin", 602);
 //       
-        dao.deleteFeedback("5");
+//        dao.deleteFeedback("5");
     }
 }

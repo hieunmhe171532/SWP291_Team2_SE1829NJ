@@ -109,7 +109,7 @@
                         <div class="account_form register">
                             <h2 class="text-danger">Confirm Reset Code</h2>
                             <p>Get the code from the new message at "${requestScope.email}".</p>
-                            <form action="confirmresetcode" method="post">
+                            <form action="confirm" method="post">
                                 <input type="hidden" name="email" value="${requestScope.email}">
                                 <p>
                                     <label>Enter 6 characters to get new password <span>*</span></label>

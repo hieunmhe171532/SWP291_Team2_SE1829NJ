@@ -13,7 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.Count;
 import model.Feedback;
 
@@ -35,6 +37,16 @@ public class ListManageFeedback extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
+
+        if(acc==null){
+            response.sendRedirect("login.jsp");
+            return ;
+        }else if(acc.getRole_id()=="5"||acc.getRole_id()=="3"){
+            response.sendRedirect("homepage");
+            return ;
+        }
         FeedbackDAO daof = new FeedbackDAO();
         UserDAO daou = new UserDAO();
         AccountDAO daoa=new AccountDAO();

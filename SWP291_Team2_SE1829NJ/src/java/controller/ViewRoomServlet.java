@@ -47,7 +47,7 @@ public class ViewRoomServlet extends HttpServlet {
         FeedbackDAO daof = new FeedbackDAO();
         RoomImageDAO daori = new RoomImageDAO();
         Room vr = daor.getRoomByRid(rid);
-        List<Room> listsr = daor.getSimilarRooms(vr.getUserQuantity(), rid);
+        List<RoomImage> listsr = daor.getSimilarRooms(vr.getUserQuantity(), rid);
         List<RoomImage> listri = daori.getRoomImage(rid);
         String index = request.getParameter("index");
         if (index == null) {

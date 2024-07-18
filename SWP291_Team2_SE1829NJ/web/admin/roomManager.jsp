@@ -123,10 +123,10 @@
                                                         Empty
                                                     </c:when>
                                                     <c:when test="${room.status == 2}">
-                                                        Using
+                                                       Booking
                                                     </c:when>
                                                     <c:when test="${room.status == 3}">
-                                                        Booking
+                                                        Using
                                                     </c:when>
                                              
                                                 </c:choose>
@@ -203,8 +203,8 @@
                                     <label for="status_id${room.id}">Status:</label>
                                     <select class="form-control" id="status_id${room.id}" name="status_id">
                                         <option value="1" ${room.status == 1 ? 'selected' : ''}>Empty</option>
-                                        <option value="2" ${room.status == 2 ? 'selected' : ''}>Using</option>
-                                        <option value="3" ${room.status == 3 ? 'selected' : ''}>Booking</option>
+                                        <option value="2" ${room.status == 2 ? 'selected' : ''}>Booking</option>
+                                        <option value="3" ${room.status == 3 ? 'selected' : ''}>Using</option>
                                     </select>
                                 </div>
 
@@ -328,13 +328,6 @@
                     }
                 </script            >
 
-//
-//$(document)            .re             ady(function() {
-//    $('.delete            ').click(function() {
-//        var ta            rget = $(this).data('target');
-//        $(targ            et). m odal('show');
-//    });
-/ /});
 
                     </body>
 
