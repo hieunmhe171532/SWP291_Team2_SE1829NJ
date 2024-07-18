@@ -70,6 +70,10 @@
                                         <a class="dropdown-item" href="accountmanagement">Account Management</a>
                                         <a class="dropdown-item" href="roommanagement">Room Management</a>
                                     </c:if>
+                                    <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
+                                        <a class="dropdown-item" href="viewcustomer">Marketer Management</a>
+
+                                    </c:if>
 
                                 </div>
                             </li>
