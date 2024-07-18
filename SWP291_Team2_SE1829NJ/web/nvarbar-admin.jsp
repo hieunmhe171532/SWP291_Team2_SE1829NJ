@@ -75,6 +75,9 @@
                 <li><a class="app-menu__item" href="listmanageblog"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
                 </li>
+                <li><a class="app-menu__item" href="listmanagefeedback"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                </li>
 
 
             </ul>
