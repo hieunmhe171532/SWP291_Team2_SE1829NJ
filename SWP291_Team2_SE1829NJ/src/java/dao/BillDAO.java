@@ -181,12 +181,56 @@ public class BillDAO {
                 psBooking.setTimestamp(7, new java.sql.Timestamp(System.currentTimeMillis())); // createAt
 
                 psBooking.executeUpdate();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 e.printStackTrace();
                 // Handle the exception or log it
             }
         }
     }
+   
+   
+    public void changeStatusInCart(Cart cart) throws SQLException {
+    // SQL query to update status_id to 3 for the given room_id
+    String sqlBooking = "UPDATE Room SET status_id = 2 WHERE id = ?";
+    
+    for (BookingItem item : cart.getItems()) {
+        try (PreparedStatement psBooking = connection.prepareStatement(sqlBooking)) {
+            // Set the room_id in the prepared statement
+            psBooking.setInt(1, item.getRoom().getId());
+            
+            // Execute the update query
+            psBooking.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or log it
+        }
+    }
+    
+    
+    
+    
+    
+}
+
+   
+      public void changeStatusInCartVNPAY(Cart cart) throws SQLException {
+    // SQL query to update status_id to 3 for the given room_id
+    String sqlBooking = "UPDATE Room SET status_id = 3 WHERE id = ?";
+    
+    for (BookingItem item : cart.getItems()) {
+        try (PreparedStatement psBooking = connection.prepareStatement(sqlBooking)) {
+            // Set the room_id in the prepared statement
+            psBooking.setInt(1, item.getRoom().getId());
+            
+            // Execute the update query
+            psBooking.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or log it
+        }
+    }
+   
 // public List<Booking> getBookingsByDay(LocalDate day) {
 //    List<Booking> bookingsByDay = new ArrayList<>();
 //    String sql = "SELECT " +
