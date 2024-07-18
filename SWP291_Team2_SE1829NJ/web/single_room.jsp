@@ -650,15 +650,18 @@
                         <div class="sidebar-box ftco-animate">
                             <h3>Similar rooms</h3>
                             <c:forEach items="${listsr}" var="sr">
-                                <div class="block-21 mb-4 d-flex">
-                                    <div class="text">
-                                        <h3 class="heading"><a href="viewroom?rid=${sr.id}">${sr.name}</a></h3>
+                                <div class="block-21 mb-4 d-flex row">
+                                    <img src="${sr.img}" class="col-5"  width="40%" height="40%" alt="no anh"/>
+
+                                    <div class="text col-7">
+
+                                        <h3 class="heading"><a href="viewroom?rid=${sr.room.getId()}">${sr.room.getName()}</a></h3>
 
                                         <div class="meta">
-                                            <div>${sr.description} </div>
+                                            <div>${sr.room.getDescription()} </div>
 
                                         </div>
-                                        <div style="display: flex ;justify-content: end" ><h6 id="price">${sr.price}</h6><h6>đ</h6></div>
+                                        <div style="display: flex ;justify-content: end;color: #dfa974" ><h6 id="price">${sr.room.getPrice()}</h6><h6>đ</h6></div>
                                     </div>
                                 </div>
                             </c:forEach>
