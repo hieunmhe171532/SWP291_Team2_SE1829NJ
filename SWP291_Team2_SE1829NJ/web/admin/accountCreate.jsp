@@ -52,14 +52,26 @@
             </div>
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                   <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
-              <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Quản lý Account</span></a></li>
-                 <li><a class="app-menu__item" href="acccreate"><i
+                <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Manage Account</span></a></li>
+                <li><a class="app-menu__item" href="acccreate"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
                 </li>
-
+    <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Manage Room</span></a></li>
+                <li><a class="app-menu__item" href="roomcreate"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Room</span></a>
+                </li>
+                <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">View Customer</span></a></li>
+                <li><a class="app-menu__item" href="listmanageblog"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                </li>
+                <li><a class="app-menu__item" href="listmanagefeedback"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                </li>
             </ul>
         </aside>
         <main class="app-content">

@@ -2,29 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+
+        <group/>
+
         <group>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/messForEnding.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/model/Account.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/nvarbar-admin.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/SubmitFeedbackus.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ViewListOrder.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/EditProfile.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ConfirmResetSixcode.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ListBlogServlet.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/BillDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/orderConfirmation.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/rooms.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/forgot.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ListRoomForCus.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ViewOrder.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/LoginController.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/dao/AccountDAO.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ViewBlogServlet.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/ForgotServlet.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/src/java/controller/RoomSearchServlet.java</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/login.jsp</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/WEB-INF/web.xml</file>
-            <file>file:/E:/codeDaybyDay/day1807/SWP291_Team2_SE1829NJ/SWP291_Team2_SE1829NJ/web/vnpay_return.jsp</file>
+           
         </group>
+
     </open-files>
 </project-private>
