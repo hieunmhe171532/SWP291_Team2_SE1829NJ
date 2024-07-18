@@ -34,6 +34,7 @@
         <link rel="stylesheet" href="bootstrap/css/flaticon.css">
         <link rel="stylesheet" href="bootstrap/css/icomoon.css">
         <link rel="stylesheet" href="bootstrap/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -691,7 +692,16 @@
                                         <h5>${f.acc.getUsername()}</h5>
                                         <img src="${f.img}" width="80%" height="80%" alt="">
                                         <p>${f.description}</p>
+                                        <c:if test="${f.acc.getUsername()==sessionScope.acc.getUsername()}">
+                                            <button type="button" class="btn btn-primary" style="margin-right: 5px; " data-toggle="modal" data-target="#ModalED${f.id}">
+                                                <i class="fa-solid fa-pen-to-square" style="color: yellow"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-primary" style="margin-right: 5px; " data-toggle="modal" data-target="#ModalDEL${f.id}">
+                                                <i class="fa-solid fa-trash" style="color: #ED1F2B"></i>
+                                            </button>
+                                        </c:if>
                                     </div>
+
                                 </div>
                             </c:forEach>
                             <div class="row mt-5">
@@ -808,6 +818,70 @@
             </div>
         </div>
     </div>
+
+    <!--Edit Feedback Modal-->                               
+    <c:forEach items="${listf}" var="f">
+        <div class="modal" id="ModalED${f.id}">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <form action="editfeedback" method="post">
+                        <div class="modal-body">
+                            <div class="modal-header">						
+                                <h2 class="modal-title" style="color: black">Edit Feedback</h2>
+                            </div>
+                            <div class="form-group">
+                                <label><b>Id</b></label>
+                                <input name="id" type="text" class="form-control" value="${f.id}" readonly="" required>
+                            </div>
+                            <div class="form-group">
+                                <label><b>Image</b></label>
+                                <input name="img" type="url" value="${f.img}" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label><b>Comment</b></label>
+                                <input name="comment" type="text" value="${f.description}" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
+                            <input type="submit" class="btn btn-success" value="Edit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Delete Feedback Modal-->                               
+
+
+        <div class="modal" id="ModalDEL${f.id}">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <form method="POST" action="deletefb">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span class="thong-tin-thanh-toan">
+                                        <h5>Are you sure you want to delete this feedback?</h5>
+                                    </span>
+                                    <input hidden=""  name="id" value="${f.id}">
+
+                                </div>
+                            </div>
+                            <BR>
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                            <button class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</button>
+                            <BR>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </c:forEach>
+
+
+    </div>
+
     <script>
         // Function to format number
         function formatPrice(price) {
@@ -854,6 +928,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
