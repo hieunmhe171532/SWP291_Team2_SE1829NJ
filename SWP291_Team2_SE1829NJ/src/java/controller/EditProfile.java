@@ -63,7 +63,7 @@ public class EditProfile extends HttpServlet {
             HttpSession session = request.getSession();
             model.Account acc = (model.Account) session.getAttribute("acc");
 
-            if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) {
+            if (acc != null) {
                 // Retrieve form data
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
