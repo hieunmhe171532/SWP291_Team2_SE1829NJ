@@ -32,6 +32,24 @@ public class BillDAO {
         connection = dbContext.getConnection();
     }
 
+    
+    public void updatePaymentModeByUserId(int billId, boolean newPaymentMode) {
+        String sql = "UPDATE [dbo].[Bill] SET [paymentMode] = ? WHERE [id] = ?";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setBoolean(1, newPaymentMode);
+            st.setInt(2, billId);
+            int rowsUpdated = st.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Payment mode updated successfully for user ID: " + billId);
+            } else {
+                System.out.println("No records found for user ID: " + billId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     // Method to count the number of bills
     public int countBill() {
         int count = 0;
@@ -163,12 +181,56 @@ public class BillDAO {
                 psBooking.setTimestamp(7, new java.sql.Timestamp(System.currentTimeMillis())); // createAt
 
                 psBooking.executeUpdate();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 e.printStackTrace();
                 // Handle the exception or log it
             }
         }
     }
+   
+   
+    public void changeStatusInCart(Cart cart) throws SQLException {
+    // SQL query to update status_id to 3 for the given room_id
+    String sqlBooking = "UPDATE Room SET status_id = 2 WHERE id = ?";
+    
+    for (BookingItem item : cart.getItems()) {
+        try (PreparedStatement psBooking = connection.prepareStatement(sqlBooking)) {
+            // Set the room_id in the prepared statement
+            psBooking.setInt(1, item.getRoom().getId());
+            
+            // Execute the update query
+            psBooking.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or log it
+        }
+    }
+    
+    
+    
+    
+    
+}
+
+   
+      public void changeStatusInCartVNPAY(Cart cart) throws SQLException {
+    // SQL query to update status_id to 3 for the given room_id
+    String sqlBooking = "UPDATE Room SET status_id = 3 WHERE id = ?";
+    
+    for (BookingItem item : cart.getItems()) {
+        try (PreparedStatement psBooking = connection.prepareStatement(sqlBooking)) {
+            // Set the room_id in the prepared statement
+            psBooking.setInt(1, item.getRoom().getId());
+            
+            // Execute the update query
+            psBooking.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or log it
+        }
+    }
+   
 // public List<Booking> getBookingsByDay(LocalDate day) {
 //    List<Booking> bookingsByDay = new ArrayList<>();
 //    String sql = "SELECT " +
@@ -319,16 +381,16 @@ public class BillDAO {
 //    }
 //}
 
-    
     public List<Map<String, Object>> getBookingSummaryByUserId(int userId) {
     List<Map<String, Object>> bookingSummaries = new ArrayList<>();
     String sql = "SELECT " +
                  "bk.id AS [Mã booking], " +
                  "bk.createAt AS [Ngày khởi tạo], " +
                  "CASE " +
-                 "    WHEN bl.paymentMode = 1 THEN 'Cash' " +
-                 "    ELSE 'Other' " +
-                 "END AS [Hình thức GD], " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
+                 "    ELSE 'Unpaid' " +
+                 "END AS PaymentStatus, " +
+                 "bl.paymentMethod AS PaymentMethod, " +
                  "bk.startDate AS [startdate], " +
                  "bk.endDate AS [endate], " +
                  "bk.cost AS [cost], " +
@@ -346,8 +408,8 @@ public class BillDAO {
 
                 bookingSummary.put("idbooking", rs.getInt("Mã booking"));
                 bookingSummary.put("daycreate", rs.getTimestamp("Ngày khởi tạo"));
-                bookingSummary.put("formpay", rs.getString("Hình thức GD"));
-
+                bookingSummary.put("PaymentStatus", rs.getString("PaymentStatus"));
+                bookingSummary.put("formpay", rs.getString("PaymentMethod"));
                 bookingSummary.put("startdate", rs.getDate("startdate"));
                 bookingSummary.put("endate", rs.getDate("endate"));
                 bookingSummary.put("cost", rs.getFloat("cost"));

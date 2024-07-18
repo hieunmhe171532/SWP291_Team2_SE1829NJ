@@ -118,136 +118,49 @@
     </script>
     </head>
     <body>
+        <% 
+    String userName = (String) request.getAttribute("username");
+    String passWord = (String) request.getAttribute("password");
+%>
+        
         <jsp:include page="layout/navbarmenu.jsp"/>
-
-        <section class="ftco-section ftco-no-pb ftco-room">
-<!--         <div class="d-flex justify-content-center">
+<section class="ftco-section ftco-no-pb ftco-room">
     <div class="container-fluid px-0">
         <div class="row no-gutters justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section text-center ftco-animate">
                 <span class="subheading">Harbor Lights Rooms</span>
                 <h2 class="mb-4">Hotel Master's Rooms</h2>
-                <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
-            </div>
-        </div>
-
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="sidebar-box" style="">
-                <form action="roomsearch" class="search-form">
-                    <div class="form-group row booking-container justify-content-center align-items-center">
-                        <label for="people" class="col-form-label mr-3">Số Người</label>
-                        <div class="input-group col-auto  text-center">
-                            <div class="input-group-prepend ">
-                                <button type="button" class="btn btn-outline-secondary" onclick="decrement('people')">-</button>
-                            </div>
-                            <input type="text" id="people" name="people" value="0" readonly class="form-control text-center center">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" onclick="increment('people')">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
+                <p class="text-success">
+                    Chúc mừng bạn đã nhập đúng mật khẩu 6 kí tự! Ấn vào đây để đăng nhập: 
+                    <form action="login?action=checkLogin" method="post" style="display:inline;">
+                        <input type="hidden" name="username" value="<%= userName %>">
+                        <input type="hidden" name="user_pass" value="<%= passWord %>">
+                        <button type="submit" class="small-button">Đăng nhập nhanh</button>
+                    </form>
+                </p>
+                <p>Và đừng quên vào edit mật khẩu bạn nhé.</p>
             </div>
         </div>
     </div>
-</div>-->
+</section>
 
+<style>
+    .small-button {
+        font-size: 0.875rem; /* Adjust font size as needed */
+        padding: 0.25rem 0.5rem; /* Adjust padding as needed */
+        border: 1px solid #28a745; /* Optional: match color to your design */
+        border-radius: 0.25rem; /* Optional: for rounded corners */
+        text-decoration: none; /* Remove underline */
+        color: #28a745; /* Optional: adjust color */
+        background-color: #f8f9fa; /* Optional: light background */
+    }
 
-<!--<div class="container-fluid px-0">
-    <div class="row no-gutters justify-content-center mb-5 pb-3">
-        <div class="col-md-7 heading-section text-center ftco-animate">
-            <span class="subheading">Harbor Lights Rooms</span>
-            <h2 class="mb-4">Hotel Master's Rooms</h2>
-            <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
-        </div>
-    </div>
+    .small-button:hover {
+        background-color: #28a745; /* Optional: change background on hover */
+        color: #fff; /* Optional: change text color on hover */
+    }
+</style>
 
-    <div class="row no-gutters justify-content-center mb-5 pb-3">
-        <div class="sidebar-box">
-            <form action="roomsearch" class="search-form">
-                <div class="form-group row booking-container justify-content-center align-items-center">
-                    <label for="people" class="col-form-label mr-3">Số Người</label>
-                    <div class="input-group col-auto text-center">
-                        <div class="input-group-prepend">
-                            <button type="button" class="btn btn-outline-secondary" onclick="decrement('people')">-</button>
-                        </div>
-                        <input type="text" id="people" name="people" value="0" readonly class="form-control text-center">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="increment('people')">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row justify-content-center">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>-->
- <div class="container-fluid px-0">
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section text-center ftco-animate">
-                <span class="subheading">Harbor Lights Rooms</span>
-                <h2 class="mb-4">Hotel Master's Rooms</h2>
-                <p>Bạn đi mấy người nhỉ? Vui lòng điền vào form bên dưới để chúng tôi dự đoán.</p>
-            </div>
-               <div class="col-md-7 heading-section text-center ftco-animate">
-         
-                                          <span style="font-size: 14px; font-weight: normal;">
-                và Bạn không hài lòng? ấn vào đây dể quay lại
-                <a href="listroomforcus" style="text-decoration: underline; color: #007bff;">link back</a>
-            </span>
-            </div>
-        </div>
-
-        <div class="row no-gutters justify-content-center mb-5 pb-3">
-            <div class="sidebar-box">
-                <form action="roomsearch" class="search-form" onsubmit="handleFormSubmit(event)">
-                    <div class="form-group row booking-container justify-content-center align-items-center">
-                        <label for="people" class="col-form-label mr-3">Số Người</label>
-                        <div class="input-group col-auto text-center">
-                            <div class="input-group-prepend">
-                                <button type="button" class="btn btn-outline-secondary" onclick="decrement('people')">-</button>
-                            </div>
-                            <input type="text" id="people" name="people" value="0" readonly class="form-control text-center" style="padding: 12px 16px;">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" onclick="increment('people')">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-                    <c:if test="${not empty rooms}">
-                        <div class="row no-gutters">
-                            <c:forEach var="room" items="${rooms}">
-                                <div class="col-lg-6">
-                                    <div class="room-wrap d-md-flex ftco-animate">
-                                   
-                                        <div class="half left-arrow d-flex align-items-center">
-                                            <div class="text p-4 text-center">
-                                                <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
-                                                <p class="mb-0"><span class="price mr-1">${room.area}</span> <span class="per">m</span></p>
-                                                <p class="mb-0"><span class="price mr-1">${room.price}</span> <span class="per">per night</span></p>
-                                            
-                                                <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </c:if>
-            
-        </section>
 
   <jsp:include page="layout/navbarfoot.jsp"/>
         <!-- loader -->
