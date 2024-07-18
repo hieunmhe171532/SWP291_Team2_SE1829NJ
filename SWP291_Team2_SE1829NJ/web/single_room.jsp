@@ -651,7 +651,7 @@
                             <h3>Similar rooms</h3>
                             <c:forEach items="${listsr}" var="sr">
                                 <div class="block-21 mb-4 d-flex row">
-                                    <img src="${sr.img}" class="col-5"  width="40%" height="40%" alt="no anh"/>
+                                    <a class="col-5"  href="viewroom?rid=${sr.room.getId()}"><img src="${sr.img}"  width="100%" height="100%" alt="no anh"/></a>
 
                                     <div class="text col-7">
 
