@@ -48,8 +48,6 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="homepage" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="roomsearch" class="nav-link">Our Rooms</a></li>
-                    <li class="nav-item"><a href="searchRooms" class="nav-link">Our Restaurants</a></li>
-                    <li class="nav-item"><a href="searchRooms" class="nav-link">Our Weddings</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="aboutus.jsp" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="listblog" class="nav-link">Blog</a></li>
