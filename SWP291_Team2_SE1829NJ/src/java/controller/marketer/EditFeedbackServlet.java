@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -56,7 +58,16 @@ public class EditFeedbackServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
+
+        if (acc == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        } else if (acc.getRole_id() == "5" || acc.getRole_id() == "3") {
+            response.sendRedirect("homepage");
+            return;
+        }
     }
 
     /**
