@@ -232,6 +232,7 @@ public class BillDAO {
     }
    
     
+
       }
 // public List<Booking> getBookingsByDay(LocalDate day) {
 //    List<Booking> bookingsByDay = new ArrayList<>();
@@ -279,7 +280,10 @@ public class BillDAO {
 //}
 // 
 // 
- public int getLastBillId() {
+ 
+
+
+public int getLastBillId() {
     String sql = "SELECT TOP 1 id FROM [Bill] ORDER BY id DESC";
     try (PreparedStatement ps = connection.prepareStatement(sql);
          ResultSet rs = ps.executeQuery()) {
