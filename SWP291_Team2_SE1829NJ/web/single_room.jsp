@@ -824,11 +824,13 @@
         <div class="modal" id="ModalED${f.id}">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <form action="editfeedback" method="post">
+                    <form action="editfeedbackforcus" method="post">
                         <div class="modal-body">
                             <div class="modal-header">						
                                 <h2 class="modal-title" style="color: black">Edit Feedback</h2>
                             </div>
+                            <input name="roomid" type="text" hidden="" class="form-control" value="${f.room.getId()}" readonly="" required>
+
                             <div class="form-group">
                                 <label><b>Id</b></label>
                                 <input name="id" type="text" class="form-control" value="${f.id}" readonly="" required>
