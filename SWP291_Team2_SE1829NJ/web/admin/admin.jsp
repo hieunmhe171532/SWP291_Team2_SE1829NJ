@@ -242,9 +242,9 @@
                                 <td>${bookingTodaygroup.totalAmount}</td>
                                 <td><span class="badge bg-success">${bookingTodaygroup.paymentStatus}</span></td>
                                 <td>${bookingTodaygroup.paymentMethod}</td>
-                                <td>
-                                    <a href="#" class="order-details-link" data-bill-id="${bookingTodaygroup.billId}" data-toggle="modal" data-target="#orderDetailsModal" style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;">
-                                        <i class="fa"></i> Order Details
+                                   <td>
+                                    <a href="#" class="order-details-link" data-bill-id="${booking.billId}" data-toggle="modal" data-target="#orderDetailsModal" style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;">
+                                        <i class="fa"></i> ChanStt
                                     </a>
                                 </td>
                             </tr>
@@ -281,9 +281,17 @@
                                 <td>${bill.CreationDate}</td>
                                 <td>${bill.RoomList}</td>
                                 <td>${bill.TotalAmount}</td>
-                                <td>${bill.PaymentStatus}</td>
+                                <td><span class="badge bg-success">${bill.PaymentStatus}</td>
                                 <td>${bill.PaymentMethod}</td>
-                                <td><a href="orderDetails?billId=${bill.BillID}">Details</a></td>
+                           <td>
+            <form action="dashboard" method="post" style="display: inline;">
+                <input type="hidden" name="billId" value="${bill.BillID}" />
+                <input type="hidden" name="newPaymentMode" value="${bill.PaymentStatus == 'Paid' ? false : true}" />
+                <button type="submit" class="badge bg-success" style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;">
+                    <i class="fa"></i> ChanStt
+                </button>
+            </form>
+        </td>
                             </tr>
                         </c:forEach>
                     </tbody>

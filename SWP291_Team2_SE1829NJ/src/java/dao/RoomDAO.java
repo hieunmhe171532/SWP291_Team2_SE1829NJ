@@ -160,6 +160,45 @@ count = rs.getInt("countRoom");
         return count;
     }
 
+     public List<Room> getAllRooms() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT r.id, r.name, r.room_floor, r.userQuantity, r.area, r.price, r.status_id, r.description, h.id AS hotel_id, h.name AS hotel_name, t.id AS type_id, t.name AS type_name "
+                   + "FROM Room r "
+                   + "JOIN Hotel h ON r.hotel_id = h.id "
+                   + "JOIN TypeRoom t ON r.type_id = t.id"
+                  + "WHERE r.status_id = 1";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Room room = new Room();
+                room.setId(rs.getInt("id"));
+                room.setName(rs.getString("name"));
+                room.setRoom_floor(rs.getString("room_floor"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setArea(rs.getFloat("area"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("status_id"));
+                room.setDescription(rs.getString("description"));
+
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("hotel_id"));
+                hotel.setName(rs.getString("hotel_name"));
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt("type_id"));
+                typeRoom.setName(rs.getString("type_name"));
+                room.setTypeRoom(typeRoom);
+
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+    
     private int countRoomsByStatus(int statusId) {
         int count = 0;
         String sql = "SELECT COUNT(*) AS countRoom FROM Room WHERE status_id = ?";
@@ -819,13 +858,91 @@ String sql = "UPDATE Room SET "
     }
 
 
+     public List<Room> getRoomsByType(int typeRoomId) {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT r.id, r.name, r.room_floor, r.userQuantity, r.area, r.price, r.status_id, r.description, r.hotel_id, r.type_id, r.createAt, r.deleteAt, r.updateAt, r.isActive, h.name AS hotelName, t.name AS typeRoomName "
+                   + "FROM Room r "
+                   + "JOIN Hotel h ON r.hotel_id = h.id "
+                   + "JOIN TypeRoom t ON r.type_id = t.id "
+                   + "WHERE r.type_id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, typeRoomId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Room room = new Room();
+                    room.setId(rs.getInt("id"));
+                    room.setName(rs.getString("name"));
+                    room.setRoom_floor(rs.getString("room_floor"));
+                    room.setUserQuantity(rs.getInt("userQuantity"));
+                    room.setArea(rs.getFloat("area"));
+                    room.setPrice(rs.getFloat("price"));
+                    room.setStatus(rs.getInt("status_id"));
+                    room.setDescription(rs.getString("description"));
+                    room.setIsActive(rs.getBoolean("isActive"));
+
+                    Hotel hotel = new Hotel();
+                    hotel.setId(rs.getInt("hotel_id"));
+                    hotel.setName(rs.getString("hotelName"));
+                    room.setHotel(hotel);
+
+                    TypeRoom typeRoom = new TypeRoom();
+                    typeRoom.setId(rs.getInt("type_id"));
+                    typeRoom.setName(rs.getString("typeRoomName"));
+                    room.setTypeRoom(typeRoom);
+
+                    rooms.add(room);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+    public List<TypeRoom> getTypeRooms() {
+        List<TypeRoom> typeRooms = new ArrayList<>();
+        String sql = "SELECT id, name FROM TypeRoom";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt("id"));
+                typeRoom.setName(rs.getString("name"));
+                typeRooms.add(typeRoom);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typeRooms;
+    }
+
+    public List<Room> getListByPage(List<Room> list, int start, int end) {
+        ArrayList<Room> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
     
     
-    public static void main(String[] args) {
-        // Database connection parameters
- 
-     
-            RoomDAO roomDAO = new RoomDAO();
+       public List<Room> getRoomsByFloor(String roomFloor) {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT * FROM Room WHERE room_floor = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, roomFloor);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Room room = new Room();
+                    room.setId(rs.getInt("id"));
+                    room.setName(rs.getString("name"));
+                    room.setRoom_floor(rs.getString("room_floor"));
+                    room.setUserQuantity(rs.getInt("userQuantity"));
+                    room.setArea(rs.getFloat("area"));
+                    room.setPrice(rs.getFloat("price"));
+                    room.setStatus(rs.getInt("status_id"));
+                    room.setDescription(rs.getString("description"));
+                    room.setIsActive(rs.getBoolean("isActive"));
 
             // Test the findListRoomByNumbersRoomNumberHuman method
 //            int numberOfHumans = 4;
@@ -840,14 +957,91 @@ String sql = "UPDATE Room SET "
 //                                   ", Hotel: " + room.getHotel().getName() +
 //                                   ", Type Room: " + room.getTypeRoom().getName());
 //            }
-    List<RoomImage> l=roomDAO.getSimilarRooms(4, 604);
-        for (RoomImage r : l) {
-            System.out.println(r);
+   
+                    // Add other fields as needed
+
+                    rooms.add(room);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        
+        return rooms;
     }
 
-}
+    public List<String> getAllFloors() {
+        List<String> floors = new ArrayList<>();
+        String sql = "SELECT DISTINCT room_floor FROM Room";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                floors.add(rs.getString("room_floor"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return floors;
+    }
+
+    // Method to get rooms sorted by high cost
+    public List<Room> getRoomHighCost() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT * FROM Room ORDER BY price DESC";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Room room = new Room();
+                room.setId(rs.getInt("id"));
+                room.setName(rs.getString("name"));
+                room.setRoom_floor(rs.getString("room_floor"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setArea(rs.getFloat("area"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("status_id"));
+                room.setDescription(rs.getString("description"));
+                room.setIsActive(rs.getBoolean("isActive"));
+
+                // Add other fields as needed
+
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+    // Method to get rooms sorted by low cost
+    public List<Room> getRoomLowCost() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT * FROM Room ORDER BY price ASC";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Room room = new Room();
+                room.setId(rs.getInt("id"));
+                room.setName(rs.getString("name"));
+                room.setRoom_floor(rs.getString("room_floor"));
+                room.setUserQuantity(rs.getInt("userQuantity"));
+                room.setArea(rs.getFloat("area"));
+                room.setPrice(rs.getFloat("price"));
+                room.setStatus(rs.getInt("status_id"));
+                room.setDescription(rs.getString("description"));
+                room.setIsActive(rs.getBoolean("isActive"));
+
+                // Add other fields as needed
+
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+    
+    }
+
+
 
 
 

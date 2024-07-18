@@ -98,11 +98,17 @@ public class Dashboard extends HttpServlet {
             processRequest(request, response);
         }
     
- @Override
+  @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int billId = Integer.parseInt(request.getParameter("billId"));
+        boolean newPaymentMode = Boolean.parseBoolean(request.getParameter("newPaymentMode"));
+ 
+        bidao.updatePaymentModeByUserId(billId, newPaymentMode);
+
+        response.sendRedirect("dashboard"); // Redirect back to the dashboard
     }
+
  @Override
     public String getServletInfo() {
         return "Dashboard servlet";

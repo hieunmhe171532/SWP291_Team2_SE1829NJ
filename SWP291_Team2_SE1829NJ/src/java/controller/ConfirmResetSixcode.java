@@ -5,22 +5,20 @@
 
 package controller;
 
-import dao.RoomDAO;
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Room;
-import model.TypeRoom;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author HUNG
  */
-public class ListRoomForCus extends HttpServlet {
+public class ConfirmResetSixcode extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,56 +27,22 @@ public class ListRoomForCus extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        RoomDAO roomDAO = new RoomDAO();
-        List<TypeRoom> typeRooms = roomDAO.getTypeRooms();
-        List<Room> roomList = null;
-        int page, numperpage = 9;
-
-        if (action == null || action.equalsIgnoreCase("all")) {
-            roomList = roomDAO.getAllRoomsWithStatusOne();
-        } else if (action.equalsIgnoreCase("listByCategory")) {
-            String typeRoomId = request.getParameter("typeRoom_id");
-            int typeRoomIdInt = Integer.parseInt(typeRoomId);
-            roomList = roomDAO.getRoomsByType(typeRoomIdInt);
-        } else if (action.equalsIgnoreCase("filterByFloor")) {
-            String roomFloor = request.getParameter("room_floor");
-            roomList = roomDAO.getRoomsByFloor(roomFloor);
-        } else if (action.equalsIgnoreCase("sort")) {
-            String type = request.getParameter("type");
-            if (type.equals("low")) {
-                roomList = roomDAO.getRoomLowCost();
-            } else if (type.equals("high")) {
-                roomList = roomDAO.getRoomHighCost();
-            }
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ConfirmResetSixcode</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ConfirmResetSixcode at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        int size = roomList.size();
-        int num = (size % numperpage == 0 ? (size / numperpage) : ((size / numperpage)) + 1);
-        String xpage = request.getParameter("page");
-        if (xpage == null) {
-            page = 1;
-        } else {
-            page = Integer.parseInt(xpage);
-        }
-        int start = (page - 1) * numperpage;
-        int end = Math.min(page * numperpage, size);
-        List<Room> rooms = roomDAO.getListByPage(roomList, start, end);
-
-        List<String> floorList = roomDAO.getAllFloors();
-        request.setAttribute("page", page);
-        request.setAttribute("num", num);
-        request.setAttribute("TypeRoomData", typeRooms);
-        request.setAttribute("RoomData", rooms);
-        request.setAttribute("floorList", floorList);
-        request.getRequestDispatcher("listAllRooms.jsp").forward(request, response);
-    }
-
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -101,11 +65,37 @@ public class ListRoomForCus extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+      HttpSession session = request.getSession();
+        AccountDAO accd = new AccountDAO();
+        String resetCode = request.getParameter("resetcode");
+        String code = (String) session.getAttribute("code");
+        String email = request.getParameter("email");
+        String message = (String) request.getAttribute("message");
+        String check = (String) request.getAttribute("check");
+        if (code.equalsIgnoreCase(resetCode)) {
+            check = "true";
+            String userName = accd.getUserNameByEmail(email);
+           String passWord = accd.getPassWordByEmail(email);
+            request.removeAttribute("code");
+            request.setAttribute("username", userName);
+            request.setAttribute("password", passWord);
+            request.getRequestDispatcher("messForEnding.jsp").forward(request, response);
+            
+     
+        } else {
+            check = "true";
+            message = "Sorry, reset code incorrect";
+            session.setAttribute("code", code);
+            request.setAttribute("email", email);
+            request.setAttribute("check", check);
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("forgot.jsp").forward(request, response);
+        }
     }
+
 
     /** 
      * Returns a short description of the servlet.

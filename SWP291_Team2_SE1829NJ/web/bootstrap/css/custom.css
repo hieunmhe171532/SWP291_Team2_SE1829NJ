@@ -1,0 +1,14 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Jul 18, 2024, 12:28:36 AM
+    Author     : HUNG
+*/
+
+.custom-input {
+    width: 100%;
+    max-width: 500px; /* Adjust max-width as needed */
+    box-sizing: border-box;
+}

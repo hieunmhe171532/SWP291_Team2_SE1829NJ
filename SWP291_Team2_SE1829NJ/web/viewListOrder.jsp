@@ -64,6 +64,7 @@
                         <tr>
                             <th>Mã booking</th>
                             <th>Ngày khởi tạo</th>
+                             <th>Trạng thái trả</th>
                             <th>Hình thức GD</th>
                             <th>Startdate</th>
                             <th>Endate</th>
@@ -74,13 +75,14 @@
                     <tbody>
                         <c:forEach var="order" items="${orderList}">
                             <tr>
-                                <td>${order.idbooking}</td>
-                                <td>${order.daycreate}</td>                           
-                                <td>${order.formpay}</td>
-                                <td>${order.startdate}</td>
-                                <td>${order.endate}</td>
-                                <td>${order.cost}</td>
-                                <td>${order.room}</td>
+                      <td>${order.idbooking}</td>
+                            <td>${order.daycreate}</td>
+                            <td>${order.PaymentStatus}</td>
+                            <td>${order.formpay}</td>
+                            <td>${order.startdate}</td>
+                            <td>${order.endate}</td>
+                            <td>${order.cost}</td>
+                            <td>${order.room}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

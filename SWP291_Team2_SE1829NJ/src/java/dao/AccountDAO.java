@@ -48,6 +48,56 @@ public class AccountDAO {
         }
     }
 
+       public String getUserNameByEmail(String email) {
+        String sql = "SELECT username FROM [Account] WHERE email = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            //set ?
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString(1);
+                return name;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+       
+              public String getPassWordByEmail(String email) {
+        String sql = "SELECT password FROM [Account] WHERE email = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            //set ?
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString(1);
+                return name;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+       
+    
+            public String checkEmailExist(String email) {
+        try {
+            String sql = "SELECT * FROM [Account] WHERE email = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return email;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+
+            
     public Account getAccountByUsername(Account acc) {
     
         try {
