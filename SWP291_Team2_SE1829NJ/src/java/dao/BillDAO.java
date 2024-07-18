@@ -232,8 +232,7 @@ public class BillDAO {
     }
    
     
-    
-    
+
       }
 // public List<Booking> getBookingsByDay(LocalDate day) {
 //    List<Booking> bookingsByDay = new ArrayList<>();
