@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -56,8 +58,13 @@ public class EditFeedbackForCusServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
+
+        if (acc == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -75,7 +82,13 @@ public class EditFeedbackForCusServlet extends HttpServlet {
         String img = request.getParameter("img");
         String comment = request.getParameter("comment");
         String rid = request.getParameter("roomid");
+HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
 
+        if (acc == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
         FeedbackDAO daof = new FeedbackDAO();
         daof.editFeedback(img, comment, id);
         response.sendRedirect("viewroom?rid="+rid);
