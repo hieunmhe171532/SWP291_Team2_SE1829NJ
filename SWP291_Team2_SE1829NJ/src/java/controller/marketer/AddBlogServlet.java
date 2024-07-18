@@ -58,6 +58,16 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
+
+        if(acc==null){
+            response.sendRedirect("login.jsp");
+            return ;
+        }else if(acc.getRole_id()=="5"||acc.getRole_id()=="3"){
+            response.sendRedirect("homepage");
+            return ;
+        }
         request.getRequestDispatcher("addblog.jsp").forward(request, response);
     }
 
@@ -77,14 +87,6 @@ public class AddBlogServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         model.Account acc = (Account) session.getAttribute("acc");
-
-        if(acc==null){
-            response.sendRedirect("login.jsp");
-            return ;
-        }else if(acc.getRole_id()=="5"||acc.getRole_id()=="3"){
-            request.setAttribute("err", "This account does not have access to this feature. Please log in with a higher-level account.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
         BlogDAO daob = new BlogDAO();
         String title = request.getParameter("title");
         String brief = request.getParameter("brief");

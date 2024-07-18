@@ -33,10 +33,6 @@
         <servlet-class>controller.marketer.ViewCustomerServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListFeedbackServlet</servlet-name>
-        <servlet-class>controller.marketer.ListFeedbackServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>homepage</servlet-name>
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
@@ -199,10 +195,6 @@
     <servlet-mapping>
         <servlet-name>ViewCustomerServlet</servlet-name>
         <url-pattern>/viewcustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListFeedbackServlet</servlet-name>
-        <url-pattern>/listmanagerfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>homepage</servlet-name>
