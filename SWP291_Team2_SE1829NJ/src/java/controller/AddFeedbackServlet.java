@@ -63,8 +63,13 @@ public class AddFeedbackServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+HttpSession session = request.getSession();
+        model.Account acc = (Account) session.getAttribute("acc");
+
+        if (acc == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -79,6 +84,11 @@ public class AddFeedbackServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Account acc = (Account) session.getAttribute("acc");
+
+        if (acc == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
         FeedbackDAO daof = new FeedbackDAO();
         try {
             String id = request.getParameter("id");

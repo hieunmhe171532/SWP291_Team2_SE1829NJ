@@ -33,10 +33,6 @@
         <servlet-class>controller.marketer.ViewCustomerServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListFeedbackServlet</servlet-name>
-        <servlet-class>controller.marketer.ListFeedbackServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>homepage</servlet-name>
         <servlet-class>controller.homepage</servlet-class>
     </servlet>
@@ -160,6 +156,14 @@
         <servlet-name>ConfirmResetSixcode</servlet-name>
         <servlet-class>controller.ConfirmResetSixcode</servlet-class>
     </servlet>
+   <servlet>
+        <servlet-name>EditFeedbackForCusServlet</servlet-name>
+        <servlet-class>controller.EditFeedbackForCusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedbackForCusServlet</servlet-name>
+        <servlet-class>controller.DeleteFeedbackForCusServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -191,10 +195,6 @@
     <servlet-mapping>
         <servlet-name>ViewCustomerServlet</servlet-name>
         <url-pattern>/viewcustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListFeedbackServlet</servlet-name>
-        <url-pattern>/listmanagerfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>homepage</servlet-name>
@@ -315,5 +315,13 @@
     <servlet-mapping>
         <servlet-name>ConfirmResetSixcode</servlet-name>
         <url-pattern>/confirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFeedbackForCusServlet</servlet-name>
+        <url-pattern>/editfeedbackforcus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedbackForCusServlet</servlet-name>
+        <url-pattern>/deletefeedbackforcus</url-pattern>
     </servlet-mapping>
 </web-app>
