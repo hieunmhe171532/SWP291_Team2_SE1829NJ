@@ -829,7 +829,7 @@
                             <div class="modal-header">						
                                 <h2 class="modal-title" style="color: black">Edit Feedback</h2>
                             </div>
-                            <input name="roomid" type="text" hidden="" class="form-control" value="${f.room.getId()}" readonly="" required>
+                            <input name="roomid" type="text" hidden="" class="form-control" value="${f.room.getId()}" readonly="">
 
                             <div class="form-group">
                                 <label><b>Id</b></label>
@@ -860,13 +860,14 @@
         <div class="modal" id="ModalDEL${f.id}">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <form method="POST" action="deletefb">
+                    <form method="POST" action="deletefeedbackforcus">
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <span class="thong-tin-thanh-toan">
                                         <h5>Are you sure you want to delete this feedback?</h5>
                                     </span>
+                                    <input name="roomid" type="text" hidden="" class="form-control" value="${f.room.getId()}" readonly="">
                                     <input hidden=""  name="id" value="${f.id}">
 
                                 </div>
