@@ -414,14 +414,23 @@ String sql = "UPDATE Room SET "
         }
     }
 
-    public List<Room> getSimilarRooms(int uquan,int rid) {
-        List<Room> t = new ArrayList<>();
+    public List<RoomImage> getSimilarRooms(int uquan,int rid) {
+        List<RoomImage> t = new ArrayList<>();
 
         try {
             String sql = """
-                         SELECT top(5) * from room r 
-                         where r.userQuantity=?
-                         and id <> ?""";
+                         SELECT TOP(5) r.*, ri.*
+                         FROM room r
+                         JOIN RoomImages ri ON r.id = ri.room_id
+                         WHERE r.userQuantity = ?
+                         AND r.id <> ?
+                         AND NOT EXISTS (
+                             SELECT 1
+                             FROM RoomImages ri2
+                             WHERE ri.room_id = ri2.room_id
+                             AND ri.id > ri2.id
+                         )
+                         ORDER BY r.id;""";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, uquan);
             stm.setInt(2, rid);
@@ -430,6 +439,7 @@ String sql = "UPDATE Room SET "
 
             while (rs.next()) {
                 Room room=new Room();
+                RoomImage ri=new RoomImage();
                 room.setId(rs.getInt(1));
                 room.setName(rs.getString(2));
                 room.setRoom_floor(rs.getString(3));
@@ -438,6 +448,9 @@ String sql = "UPDATE Room SET "
                 room.setPrice(rs.getFloat(6));
                 room.setStatus(rs.getInt(7));
                 room.setDescription(rs.getString(8));
+                ri.setId(rs.getInt(15));
+                ri.setImg(rs.getString(16));
+                ri.setRoom(room);
 
                 Hotel hotel = new Hotel();
                 hotel.setId(rs.getInt(9));
@@ -449,7 +462,7 @@ String sql = "UPDATE Room SET "
                 typeRoom.setId(rs.getInt(10));
 
                 room.setTypeRoom(typeRoom);
-                t.add(room);
+                t.add(ri);
             }
         } catch (SQLException ex) {
         }
@@ -827,8 +840,8 @@ String sql = "UPDATE Room SET "
 //                                   ", Hotel: " + room.getHotel().getName() +
 //                                   ", Type Room: " + room.getTypeRoom().getName());
 //            }
-    List<Room> l=roomDAO.getSimilarRooms(4, 604);
-        for (Room r : l) {
+    List<RoomImage> l=roomDAO.getSimilarRooms(4, 604);
+        for (RoomImage r : l) {
             System.out.println(r);
         }
         
