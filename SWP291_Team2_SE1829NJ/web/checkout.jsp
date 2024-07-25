@@ -96,7 +96,7 @@
                 <h3>Chi tiết đơn hàng</h3>
                 <div class="row">
                     <div class="col-lg-12 mb-20">
-                        <label>Tên khách hàng<span>*</span></label>
+                        <label>Tên account<span>*</span></label>
                         <input readonly="" value="${acc.username}" type="text">
                     </div>
                     <div class="col-lg-12 mb-20">
@@ -140,13 +140,10 @@
                             <th>Tổng giá</th>
                             <td>${cart.totalCost}</td>
                         </tr>
-                        <tr>
-                            <th>Phí ship</th>
-                            <td><strong>30000</strong></td>
-                        </tr>
+             
                         <tr class="order_total">
                             <th>Tổng đơn</th>
-                            <td><strong>${cart.totalCost + 30000}</strong></td>
+                            <td><strong>${cart.totalCost}</strong></td>
                         </tr>
                         </tfoot>
                     </table>

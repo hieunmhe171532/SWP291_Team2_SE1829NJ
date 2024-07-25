@@ -237,21 +237,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${bookingsTodayGroup}" var="bookingTodaygroup">
+                        <c:forEach items="${bookingsTodayGroup}" var="booki">
                             <tr>
-                                <td>${bookingTodaygroup.billId}</td>
-                                <td>${bookingTodaygroup.customerName}</td>
-                                <td>${bookingTodaygroup.phoneNumber}</td>
-                                <td>${bookingTodaygroup.creationDate}</td>
-                            
-                                <td>${bookingTodaygroup.roomList}</td>
-                                <td>${bookingTodaygroup.totalAmount}</td>
-                                <td><span class="badge bg-success">${bookingTodaygroup.paymentStatus}</span></td>
-                                <td>${bookingTodaygroup.paymentMethod}</td>
+                             \      <td>${booki.BillID}</td>
+                                <td>${booki.CustomerName}</td>
+                                <td>${booki.PhoneNumber}</td>
+                                <td>${booki.CreationDate}</td>
+                                <td>${booki.RoomList}</td>
+                                <td>${booki.TotalAmount}</td>
+                                <td><span class="badge bg-success">${booki.PaymentStatus}</td>
+                                <td>${booki.PaymentMethod}</td>
                                    <td>
-                                    <a href="#" class="order-details-link" data-bill-id="${booking.billId}" data-toggle="modal" data-target="#orderDetailsModal" style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;">
-                                        <i class="fa"></i> ChanStt
-                                    </a>
+                <button class="btn btn-danger btn-sm " type="button" title="Viewdetail" data-toggle="modal" data-target="#ModalDEL${booki.BillID}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                                    
                                 </td>
                             </tr>
                         </c:forEach>
@@ -275,7 +275,8 @@
                             <th>Total Amount</th>
                             <th>Payment Status</th>
                             <th>Payment Method</th>
-                            <th>Details</th>
+                            <th>Note</th>
+                            <th>Funtion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -289,7 +290,12 @@
                                 <td>${bill.TotalAmount}</td>
                                 <td><span class="badge bg-success">${bill.PaymentStatus}</td>
                                 <td>${bill.PaymentMethod}</td>
-                           <td>
+                                            <td>
+                <button class="btn btn-danger btn-sm " type="button" title="Viewdetail" data-toggle="modal" data-target="#ModalDEL${booki.BillID}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>                             
+                                </td>
+                                <td>
             <form action="dashboard" method="post" style="display: inline;">
                 <input type="hidden" name="billId" value="${bill.BillID}" />
                 <input type="hidden" name="newPaymentMode" value="${bill.PaymentStatus == 'Paid' ? false : true}" />
@@ -403,36 +409,108 @@
 </div>
 
         </div>
+<!-- Modal Structure -->
+  <c:forEach items="${bookingsTodayGroup}" var="booki">
+<         <div class="modal fade" id="ModalDEL${booki.BillID}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="POST" action="accdelete">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <h5>${booki.CustomerName}  </h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input type="hidden" name="username" value="${booki.BillID}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      
+                                        <button class="btn btn-cancel" type="button" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+                                    
+          </c:forEach>
+               
+<c:forEach items="${allBookingsGroup}" var="booki222">
+<         <div class="modal fade" id="ModalDEL${booki222.BillID}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="POST" action="accdelete">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <h5>${booki222.CustomerName}  </h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input type="hidden" name="username" value="${booki222.BillID}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      
+                                        <button class="btn btn-cancel" type="button" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+                                    
+          </c:forEach>
 
+     <script>
+    $(document).ready(function() {
+    $('.order-details-link').on('click', function() {
+        var billId = $(this).data('bill-id');
+        
+        // Fetch the booking details based on the billId (this part may need to be adapted based on your backend logic)
+        $.ajax({
+            url: 'dashboard',
+            type: 'GET',
+            data: {
+                action: 'getBillDetails',
+                billId: billId
+            },
+            success: function(response) {
+                // Assuming response contains the booking details
+                var customerName = response.CustomerName;
+                var phoneNumber = response.PhoneNumber;
+                var bookingDate = response.CreationDate;
+                var roomList = response.RoomList;
+                var totalAmount = response.TotalAmount;
+                var paymentStatus = response.PaymentStatus;
+                var paymentMethod = response.PaymentMethod;
+                
+                // Update the modal with the customer details
+                $('#modalCustomerName').text(customerName);
+                $('#modalCustomerPhoneNumber').text(phoneNumber);
+                $('#modalBookingDate').text(bookingDate);
+                $('#modalRoomList').text(roomList);
+                $('#modalTotalAmount').text(totalAmount);
+                $('#modalPaymentStatus').text(paymentStatus);
+                $('#modalPaymentMethod').text(paymentMethod);
+                
+                // Show the modal
+                $('#customerDetailsModal').modal('show');
+            }
+        });
+    });
+});
 
-        <script>
-            $(document).ready(function() {
-                $('.order-details-link').on('click', function() {
-                    var billId = $(this).data('bill-id');
-                    $.ajax({
-                        url: 'dashboard',
-                        type: 'GET',
-                        data: {
-                            action: 'getBillDetails',
-                            billId: billId
-                        },
-                        success: function(response) {
-                            var rooms = response.rooms;
-                            var tableBody = $('#roomDetailsTableBody');
-                            tableBody.empty();
-                            $.each(rooms, function(index, room) {
-                                var row = '<tr>' +
-                                    '<td>' + room.id + '</td>' +
-                                    '<td>' + room.name + '</td>' +
-                                    '<td>' + room.room_floor + '</td>' +
-                                    '<td>' + room.price + '</td>' +
-                                    '</tr>';
-                                tableBody.append(row);
-                            });
-                        }
-                    });
-                });
-            });
         </script>
  
 
