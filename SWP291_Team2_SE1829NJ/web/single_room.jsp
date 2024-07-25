@@ -913,7 +913,17 @@
             });
         });
     </script>
+  <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            var startDate = document.getElementById('start_date').value;
+            var endDate = document.getElementById('end_date').value;
 
+            if (new Date(startDate) > new Date(endDate)) {
+                event.preventDefault();
+                alert('End date must be later than start date.');
+            }
+        });
+    </script>
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="bootstrap/js/popper.min.js"></script>

@@ -61,8 +61,8 @@
                                     <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
-                                    <a class="dropdown-item" href="my-account.html">${sessionScope.acc.username}</a>
-                                    <a class="dropdown-item" href="editprofile">Edit Profile</a>
+                                    <a class="dropdown-item" >${sessionScope.acc.username}</a>
+                                    <a class="dropdown-item" href="editprofile">Your Account</a>
                                     <a class="dropdown-item" href="login?action=logout">Logout</a>
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
                                         <a class="dropdown-item" href="dashboard">Admin Management</a>

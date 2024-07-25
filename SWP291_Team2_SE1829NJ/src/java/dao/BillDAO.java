@@ -674,7 +674,7 @@ public int getLastBillId() {
         BillDAO billDAO = new BillDAO();
         
         // Fetch and print all bills
-        List<Map<String, Object>> allBills = billDAO.getAllBillsGroup();
+        List<Map<String, Object>> allBills = billDAO.getAllBillsTodayGroup();
         System.out.println("All Bills:");
         for (Map<String, Object> bill : allBills) {
             System.out.println(bill);
