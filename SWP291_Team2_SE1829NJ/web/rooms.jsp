@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html lang="en">
     <head>
         <title>Harborlights - Free Bootstrap 4 Template by Colorlib</title>
@@ -235,8 +236,9 @@
                                         <div class="half left-arrow d-flex align-items-center">
                                             <div class="text p-4 text-center">
                                                 <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
-                                                <p class="mb-0"><span class="price mr-1">${room.area}</span> <span class="per">m</span></p>
-                                                <p class="mb-0"><span class="price mr-1">${room.price}</span> <span class="per">per night</span></p>
+                                                   <p class="mb-0"><span class="price mr-1">${fn:substringBefore(room.area, ".")}</span> <span class="per">m</span></p>
+                                    <p class="mb-0"><span class="price mr-1">${fn:substringBefore(room.price, ".")}</span> <span class="per">per night</span></p>
+                                                    
                                             
                                                 <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
                                             </div>

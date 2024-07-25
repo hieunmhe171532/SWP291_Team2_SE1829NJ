@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -236,6 +237,10 @@
                             <th>Details</th>
                         </tr>
                     </thead>
+                    
+                 
+
+                    
                     <tbody>
                         <c:forEach items="${bookingsTodayGroup}" var="booki">
                             <tr>
@@ -244,7 +249,7 @@
                                 <td>${booki.PhoneNumber}</td>
                                 <td>${booki.CreationDate}</td>
                                 <td>${booki.RoomList}</td>
-                                <td>${booki.TotalAmount}</td>
+                                <td>${fn:substringBefore(booki.TotalAmount, ".")}</td>
                                 <td><span class="badge bg-success">${booki.PaymentStatus}</td>
                                 <td>${booki.PaymentMethod}</td>
                                    <td>

@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <html lang="en">
     <head>
         <title>Harborlights - Free Bootstrap 4 Template by Colorlib</title>
@@ -125,7 +127,10 @@
                     <td>${item.formattedStartDate}</td>
                     <td>${item.formattedEndDate}</td>
                     <td>${item.quantity}</td>
-                    <td>${item.calculateCost()}</td>
+                    <td>${fn:substringBefore(item.calculateCost(), ".")}</td>
+                    
+                  
+                    
                     <td>
                         <a href="cart?action=delete&room_id=${item.room.id}&start_date=${item.startDate}&end_date=${item.endDate}" class="btn btn-danger">Remove</a>
                     </td>

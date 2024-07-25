@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,8 +82,11 @@
                             <td>${order.formpay}</td>
                             <td>${order.startdate}</td>
                             <td>${order.endate}</td>
-                            <td>${order.cost}</td>
+                            <td>${fn:substringBefore(order.cost, ".")}</td>
                             <td>${order.room}</td>
+                            
+                            
+                            
                             </tr>
                         </c:forEach>
                     </tbody>

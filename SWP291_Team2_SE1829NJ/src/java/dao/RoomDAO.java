@@ -715,64 +715,67 @@ String sql = "UPDATE Room SET "
         return rooms;
     }
     
-    public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfHumans) {
-        List<Room> rooms = new ArrayList<>();
-        String sql = "WITH RoomWithRowNum AS ("
-                   + "    SELECT r.id, r.name, r.userQuantity, r.price, r.status_id, r.description, "
-                   + "           h.id AS hotelId, h.name AS hotelName, "
-                   + "           t.id AS typeRoomId, t.name AS typeRoomName, "
-                   + "           ROW_NUMBER() OVER (ORDER BY r.userQuantity DESC) AS rn "
-                   + "    FROM Room r "
-                   + "    JOIN Hotel h ON h.id = r.hotel_id "
-                   + "    JOIN TypeRoom t ON t.id = r.type_id "
-                   + "    WHERE r.status_id = 1 "
-                   + ") "
-                   + "SELECT id, name, userQuantity, price, status_id, description, hotelId, hotelName, typeRoomId, typeRoomName "
-                   + "FROM RoomWithRowNum "
-                   + "ORDER BY userQuantity DESC";
+  public List<Room> findListRoomByNumbersRoomNumberHuman(int numberOfHumans) {
+    List<Room> rooms = new ArrayList<>();
+    String sql = "WITH RoomWithRowNum AS ("
+               + "    SELECT r.id, r.name, r.userQuantity, r.area, r.price, r.status_id, r.description, "
+               + "           h.id AS hotelId, h.name AS hotelName, "
+               + "           t.id AS typeRoomId, t.name AS typeRoomName, "
+               + "           ROW_NUMBER() OVER (ORDER BY r.userQuantity DESC) AS rn "
+               + "    FROM Room r "
+               + "    JOIN Hotel h ON h.id = r.hotel_id "
+               + "    JOIN TypeRoom t ON t.id = r.type_id "
+               + "    WHERE r.status_id = 1 "
+               + ") "
+               + "SELECT id, name, userQuantity, area, price, status_id, description, hotelId, hotelName, typeRoomId, typeRoomName "
+               + "FROM RoomWithRowNum "
+               + "ORDER BY userQuantity DESC";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+    try (PreparedStatement ps = connection.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            List<Room> availableRooms = new ArrayList<>();
-            while (rs.next()) {
-                Room room = new Room();
-                room.setId(rs.getInt("id"));
-                room.setName(rs.getString("name"));
-                room.setUserQuantity(rs.getInt("userQuantity"));
-                room.setPrice(rs.getFloat("price"));
-                room.setStatus(rs.getInt("status_id"));
-                room.setDescription(rs.getString("description"));
+        List<Room> availableRooms = new ArrayList<>();
+        while (rs.next()) {
+            Room room = new Room();
+            room.setId(rs.getInt("id"));
+            room.setName(rs.getString("name"));
+            room.setUserQuantity(rs.getInt("userQuantity"));
+            room.setArea(rs.getFloat("area"));
+            room.setPrice(rs.getFloat("price"));
+            room.setStatus(rs.getInt("status_id"));
+            room.setDescription(rs.getString("description"));
 
-                Hotel hotel = new Hotel();
-                hotel.setId(rs.getInt("hotelId"));
-                hotel.setName(rs.getString("hotelName"));
-                room.setHotel(hotel);
+            Hotel hotel = new Hotel();
+            hotel.setId(rs.getInt("hotelId"));
+            hotel.setName(rs.getString("hotelName"));
+            room.setHotel(hotel);
 
-                TypeRoom typeRoom = new TypeRoom();
-                typeRoom.setId(rs.getInt("typeRoomId"));
-                typeRoom.setName(rs.getString("typeRoomName"));
-                room.setTypeRoom(typeRoom);
+            TypeRoom typeRoom = new TypeRoom();
+            typeRoom.setId(rs.getInt("typeRoomId"));
+            typeRoom.setName(rs.getString("typeRoomName"));
+            room.setTypeRoom(typeRoom);
 
-                availableRooms.add(room);
-            }
-
-            // Check if the total capacity is enough
-            int totalCapacity = availableRooms.stream().mapToInt(Room::getUserQuantity).sum();
-            if (totalCapacity < numberOfHumans) {
-                System.out.println("Not enough room for number of humans");
-                return new ArrayList<>();
-            } else {
-                System.out.println("Having enough room for number of humans");
-            }
-
-            rooms = findOptimalRoomCombination(availableRooms, numberOfHumans);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            availableRooms.add(room);
         }
-        return rooms;
+
+        // Check if the total capacity is enough
+        int totalCapacity = availableRooms.stream().mapToInt(Room::getUserQuantity).sum();
+        if (totalCapacity < numberOfHumans) {
+            System.out.println("Not enough room for number of humans");
+            return new ArrayList<>();
+        } else {
+            System.out.println("Having enough room for number of humans");
+        }
+
+        rooms = findOptimalRoomCombination(availableRooms, numberOfHumans);
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return rooms;
+}
+
+
 
 //    private List<Room> findOptimalRoomCombination(List<Room> availableRooms, int numberOfHumans) {
 //        List<Room> selectedRooms = new ArrayList<>();
@@ -944,21 +947,7 @@ String sql = "UPDATE Room SET "
                     room.setDescription(rs.getString("description"));
                     room.setIsActive(rs.getBoolean("isActive"));
 
-            // Test the findListRoomByNumbersRoomNumberHuman method
-//            int numberOfHumans = 4;
-//            List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfHumans);
-//
-//            // Print the results
-//            for (Room room : rooms) {
-//                System.out.println("Room ID: " + room.getId() +
-//                                   ", Name: " + room.getName() +
-//                                   ", User Quantity: " + room.getUserQuantity() +
-//                                   ", Price: " + room.getPrice() +
-//                                   ", Hotel: " + room.getHotel().getName() +
-//                                   ", Type Room: " + room.getTypeRoom().getName());
-//            }
-   
-                    // Add other fields as needed
+
 
                     rooms.add(room);
                 }
@@ -1039,6 +1028,31 @@ String sql = "UPDATE Room SET "
         return rooms;
     }
     
+     public static void main(String[] args) {
+        // Create an instance of RoomDAO
+        RoomDAO roomDAO = new RoomDAO();
+
+        // Test the findListRoomByNumbersRoomNumberHuman method
+        int numberOfHumans = 4;
+        List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfHumans);
+
+        // Print the results
+        if (rooms != null) {
+            for (Room room : rooms) {
+                System.out.println(room);
+            }
+        } else {
+            System.out.println("No rooms found for the given number of humans.");
+            
+            
+            
+        }
+        
+        
+    }
+            
+            
+            
     }
 
 

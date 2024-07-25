@@ -5,7 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html lang="en">
     <head>
         <title>Harborlights - Free Bootstrap 4 Template by Colorlib</title>
@@ -131,20 +132,26 @@
                             <tr>
                                 <td>${item.room.name}</td>
                                 <td>${item.quantity}</td>
-                                <td>${item.calculateCost()}</td>
+                                <td>${fn:substringBefore(item.calculateCost(), ".")}</td>
+                                
+                              
+                                
                             </tr>
                         </c:forEach>
                         </tbody>
                         <tfoot>
                         <tr>
                             <th>Tổng giá</th>
-                            <td>${cart.totalCost}</td>
+                            <td>${fn:substringBefore(cart.totalCost, ".")}</td>
                         </tr>
              
                         <tr class="order_total">
                             <th>Tổng đơn</th>
-                            <td><strong>${cart.totalCost}</strong></td>
+                            <td><strong>${fn:substringBefore(cart.totalCost, ".")}</strong></td>
                         </tr>
+                        
+                        
+                        
                         </tfoot>
                     </table>
                 </div>
