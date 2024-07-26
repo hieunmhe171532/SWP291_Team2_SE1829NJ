@@ -208,11 +208,13 @@ public class BillDAO {
         }
     }
     
+    }
     
     
+
     
     
-}
+
 
    
       public void changeStatusInCartVNPAY(Cart cart) throws SQLException {
@@ -693,21 +695,82 @@ public int getLastBillId() {
 
 
 
+ public float calculateTotalIncome() {
+        String sql = "SELECT SUM(total) AS TotalIncome FROM [dbo].[Bill] ";
+        float totalIncome = 0;
 
-    
-  
-    public static void main(String[] args) {
-        BillDAO billDAO = new BillDAO();
-        
-        // Fetch and print all bills
-        List<Map<String, Object>> allBills = billDAO.getAllBillsTodayGroup();
-        System.out.println("All Bills:");
-        for (Map<String, Object> bill : allBills) {
-            System.out.println(bill);
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                totalIncome = rs.getFloat("TotalIncome");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-       
+        return totalIncome;
+    
  
+ }
+
+//    public static void main(String[] args) {
+//        BillDAO billDAO = new BillDAO();
+//        float totalIncome = billDAO.calculateTotalIncome();
+//        System.out.println("Total Income: " + totalIncome);
+//    }
+    
+  
+//    public static void main(String[] args) {
+//        BillDAO billDAO = new BillDAO();
+//        
+//        // Fetch and print all bills
+//        List<Map<String, Object>> allBills = billDAO.getAllBillsTodayGroup();
+//        System.out.println("All Bills:");
+//        for (Map<String, Object> bill : allBills) {
+//            System.out.println(bill);
+//        }
+//
+//       
+// 
+//    }
+    
+    
+      public void changeStatusRoomByBillId(int billId) throws SQLException {
+        // Step 1: Retrieve the room IDs associated with the given bill ID
+        String getRoomsSql = "SELECT room_id FROM [dbo].[Booking] WHERE bill_id = ?";
+        String updateRoomStatusSql = "UPDATE [dbo].[Room] SET status_id = ? WHERE id = ?";
+        int newStatusId = 1; // Assuming status '3' represents the new status you want to set
+
+        try (PreparedStatement getRoomsStmt = connection.prepareStatement(getRoomsSql);
+             PreparedStatement updateRoomStatusStmt = connection.prepareStatement(updateRoomStatusSql)) {
+
+            getRoomsStmt.setInt(1, billId);
+            ResultSet rs = getRoomsStmt.executeQuery();
+
+            while (rs.next()) {
+                int roomId = rs.getInt("room_id");
+
+                // Step 2: Update the status of each room
+                updateRoomStatusStmt.setInt(1, newStatusId);
+                updateRoomStatusStmt.setInt(2, roomId);
+                updateRoomStatusStmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public static void main(String[] args) {
+        BillDAO billDAO = new BillDAO();
+        float totalIncome = billDAO.calculateTotalIncome();
+        System.out.println("Total Income: " + totalIncome);
+
+        try {
+            billDAO.changeStatusRoomByBillId(1); // Change status for rooms associated with bill ID 1
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

@@ -118,8 +118,8 @@
                     <div class="col-md-6">
                         <div class="widget-small blogadmin coloured-icon"><i class='icon bx bxs-food-menu fa-3x'></i>
                             <div class="info">
-                                <h4>All Foods</h4>
-                                <p><b>${requestScope.totalFood} dish</b></p>
+                                <h4>All Income</h4>
+                                <p><b id = "price">${fn:substringBefore(requestScope.totalIncome, ".")} VND</b></p>
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                                                         <td>${bookingtoday.CustomerName}</td>
                                                         <td>${bookingtoday.PhoneNumber}</td>
                                                         <td>${bookingtoday.RoomList}</td>
-                                                        <td id="price">${fn:substringBefore(bookingtoday.TotalAmount, ".")}</td>
+                                                        <td id = "price" >${fn:substringBefore(bookingtoday.TotalAmount, ".")}</td>
                                                         <td><span class="badge bg-success">${bookingtoday.PaymentStatus}</span></td>
                                                         <td>${bookingtoday.PaymentMethod}</td>
                                                         <td>
@@ -250,7 +250,7 @@
                                                         <td>${booking.CustomerName}</td>
                                                         <td>${booking.PhoneNumber}</td>
                                                         <td>${booking.RoomList}</td>
-                                                        <td id="price">${booking.TotalAmount}</td>
+                                                        <td id = "price">${booking.TotalAmount}</td>
                                                         <td><span class="badge bg-success">${booking.PaymentStatus}</span></td>
                                                         <td>${booking.PaymentMethod}</td>
                                                         <td>
@@ -326,7 +326,7 @@
                                                         <td>${bookingtoday.startDate}</td>
                                                         <td>${bookingtoday.endDate}</td>
                                                         <td>${bookingtoday.roomList}</td>
-                                                        <td id="price">${bookingtoday.totalAmount}</td>
+                                                        <td id = "price" >${bookingtoday.totalAmount}</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -356,7 +356,7 @@
                                                         <td>${booking.startDate}</td>
                                                         <td>${booking.endDate}</td>
                                                         <td>${booking.roomList}</td>
-                                                        <td id="price">${booking.totalAmount}</td>
+                                                        <td id = "price" >${booking.totalAmount}</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

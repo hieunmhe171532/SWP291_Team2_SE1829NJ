@@ -263,7 +263,7 @@
                 </tr>
                 <tr>
                     <th>Price:</th>
-                    <td>${room.price}</td>
+                    <td id = "price">${room.price}</td>
                 </tr>
                <tr>
     <th>Status:</th>
@@ -323,72 +323,84 @@
 
 
         
-<div class="modal fade" id="ModalUP${room.id}" tabindex="-1" role="dialog" aria-labelledby="editRoomModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="roomedit" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editRoomModalLabel">Edit Room - ID: ${room.id}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="id" value="${room.id}"> <!-- Hidden field to pass Room ID -->
-                    <div class="form-group">
-                        <label for="name${room.id}">Room Name:</label>
-                        <input type="text" class="form-control" id="name${room.id}" name="name" value="${room.name}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_floor${room.id}">Room Floor:</label>
-                        <input type="text" class="form-control" id="room_floor${room.id}" name="room_floor" value="${room.room_floor}" required>
-                    </div>
-              
-                    <div class="form-group">
-                        <label for="userQuantity${room.id}">User Quantity:</label>
-                        <input type="number" class="form-control" id="userQuantity${room.id}" name="userQuantity" value="${room.userQuantity}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="area${room.id}">Area:</label>
-                        <input type="number" class="form-control" id="area${room.id}" name="area" value="${room.area}" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price${room.id}">Price:</label>
-                        <input type="number" class="form-control" id="price${room.id}" name="price" value="${room.price}" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status_id${room.id}">Status:</label>
-                        <select class="form-control" id="status_id${room.id}" name="status_id">
-                            <option value="1" ${room.status == 1 ? 'selected' : ''}>Empty</option>
-                            <option value="2" ${room.status == 2 ? 'selected' : ''}>Using</option>
-                            <option value="3" ${room.status == 3 ? 'selected' : ''}>Booking</option>
-                        </select>
-                    </div>
-                       <input type="hidden" name="hotel_id" value="${room.hotel.id}"> <!-- Hidden field to pass Hotel ID -->
 
-              <div class="form-group">
-    <label for="type_id${room.id}">Room Type:</label>
-    <select class="form-control" id="type_id${room.id}" name="type_id">
-        <option value="1" ${room.typeRoom.id == 1 ? 'selected' : ''}>Normal</option>
-        <option value="2" ${room.typeRoom.id == 2 ? 'selected' : ''}>vippro</option>
-    </select>
-</div>
-
-                    <div class="form-group">
-                        <label for="description${room.id}">Description:</label>
-                        <textarea class="form-control" id="description${room.id}" name="description" rows="3">${room.description}</textarea>
-                    </div>
+        <!-- Edit Room Modal -->
+        <div class="modal fade" id="ModalUP${room.id}" tabindex="-1" role="dialog" aria-labelledby="editRoomModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="roomedit" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editRoomModalLabel">Edit Room - ID: ${room.id}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" value="${room.id}"> <!-- Hidden field to pass Room ID -->
+                            <!-- Your existing form fields -->
+                            <div class="form-group">
+                                <label for="name${room.id}">Room Name:</label>
+                                <input type="text" class="form-control" id="name${room.id}" name="name" value="${room.name}" required>
+                            </div>
+                            <!-- Add more fields here as needed -->
+                            <div class="form-group">
+                                <label for="room_floor${room.id}">Room Floor:</label>
+                                <input type="text" class="form-control" id="room_floor${room.id}" name="room_floor" value="${room.room_floor}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userQuantity${room.id}">User Quantity:</label>
+                                <input type="number" class="form-control" id="userQuantity${room.id}" name="userQuantity" value="${room.userQuantity}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="area${room.id}">Area:</label>
+                                <input type="number" class="form-control" id="area${room.id}" name="area" value="${room.area}" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="price${room.id}">Price:</label>
+                                <input type="number" class="form-control" id="price${room.id}" name="price" value="${room.price}" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="status_id${room.id}">Status:</label>
+                                <select class="form-control" id="status_id${room.id}" name="status_id">
+                                    <option value="1" ${room.status == 1 ? 'selected' : ''}>Empty</option>
+                                    <option value="2" ${room.status == 2 ? 'selected' : ''}>Using</option>
+                                    <option value="3" ${room.status == 3 ? 'selected' : ''}>Booking</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="type_id${room.id}">Room Type:</label>
+                                <select class="form-control" id="type_id${room.id}" name="type_id">
+                                    <option value="1" ${room.typeRoom.id == 1 ? 'selected' : ''}>Normal</option>
+                                    <option value="2" ${room.typeRoom.id == 2 ? 'selected' : ''}>vippro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description${room.id}">Description:</label>
+                                <textarea class="form-control" id="description${room.id}" name="description" rows="3">${room.description}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Images:</label>
+                                <c:forEach var="image" items="${listImg}">
+                                    <div class="img-edit">
+                                        <img src="${image.img}" alt="Room Image" class="img-thumbnail" style="max-width: 150px; margin-right: 10px;"/>
+                                        <input type="text" name="imageUrls" value="${image.img}" class="form-control" style="max-width: 400px; display: inline-block;">
+                                    </div>
+                                </c:forEach>
+                                <div class="new-image">
+                                <input type="hidden" name="hotel_id" value="${room.hotel.id}"> <!-- Hidden field to pass Hotel ID -->
+                                    <input type="text" name="newImageUrls" placeholder="Add new image URL" class="form-control" style="max-width: 400px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
-
 
 
 
@@ -527,5 +539,17 @@
             });
                                 };);
 </script>
-
+  
+<script>
+        function formatPrice(price) {
+            return parseFloat(price).toLocaleString('en-US', {
+                maximumFractionDigits: 2
+            });
+        };
+        const priceElements = document.querySelectorAll('#price');
+        priceElements.forEach(element => {
+            let price = element.textContent;
+            element.textContent = formatPrice(price);
+        });
+    </script>
 </html>

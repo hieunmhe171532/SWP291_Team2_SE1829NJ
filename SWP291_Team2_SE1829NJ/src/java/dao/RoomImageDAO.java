@@ -88,7 +88,29 @@ public class RoomImageDAO {
             return false;
         }
     }
-    
+       
+       public void deleteRoomImagesByRoomId(int roomId) {
+        String sql = "DELETE FROM RoomImages WHERE room_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, roomId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+   
+    public void updateRoomImage(RoomImage roomImage) {
+        String sql = "UPDATE RoomImages SET img = ? WHERE room_id = ? AND id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, roomImage.getImg());
+            ps.setInt(2, roomImage.getRoom().getId());
+            ps.setInt(3, roomImage.getId());  // Assuming you have an ID for the RoomImage
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+       
     public static void main(String[] args) {
         RoomImageDAO daori=new RoomImageDAO();
         List<RoomImage> l=daori.getRoomImage(601);
