@@ -194,17 +194,7 @@
     <script src="admin/js/main.js"></script>
     <script>
         function time() {
-            var today = new Date();
-            var weekday = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-            var day = weekday[today.getDay()];
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            m = checkTime(m);
-            var nowTime = h + ":" + m;
-            if (dd < 10) {
+            
                 dd = '0' + dd;
             }
             if (mm < 10) {

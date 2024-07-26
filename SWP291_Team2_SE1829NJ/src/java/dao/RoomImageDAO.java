@@ -5,6 +5,7 @@
 package dao;
 
 import dal.DBContext;
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,6 +73,22 @@ public class RoomImageDAO {
 
         return t;
     }
+    
+    
+       public boolean insertRoomImage(RoomImage roomImage) {
+        String sql = "INSERT INTO RoomImages (img, room_id, createAt) VALUES (?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, roomImage.getImg());
+            ps.setInt(2, roomImage.getRoom().getId());
+            ps.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            System.out.println("Insert RoomImage Error: " + e.getMessage());
+            return false;
+        }
+    }
+    
     public static void main(String[] args) {
         RoomImageDAO daori=new RoomImageDAO();
         List<RoomImage> l=daori.getRoomImage(601);
