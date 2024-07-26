@@ -44,6 +44,82 @@
 
 
         <!-- END nav -->
+  
+
+        <section class="ftco-booking ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-12">
+                        <form action="#" class="booking-form aside-stretch">
+                            <div class="row">
+                                <div class="col-md d-flex py-md-4">
+                                    <div class="form-group align-self-stretch d-flex align-items-end">
+                                        <div class="wrap align-self-stretch py-3 px-4">
+                                            <label for="#">Check-in Date</label>
+                                            <input type="text" class="form-control checkin_date" placeholder="Check-in date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md d-flex py-md-4">
+                                    <div class="form-group align-self-stretch d-flex align-items-end">
+                                        <div class="wrap align-self-stretch py-3 px-4">
+                                            <label for="#">Check-out Date</label>
+                                            <input type="text" class="form-control checkout_date" placeholder="Check-out date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md d-flex py-md-4">
+                                    <div class="form-group align-self-stretch d-flex align-items-end">
+                                        <div class="wrap align-self-stretch py-3 px-4">
+                                            <label for="#">Room</label>
+                                            <div class="form-field">
+                                                <div class="select-wrap">
+                                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                                    <select name="" id="" class="form-control">
+                                                        <option value="">Suite</option>
+                                                        <option value="">Family Room</option>
+                                                        <option value="">Deluxe Room</option>
+                                                        <option value="">Classic Room</option>
+                                                        <option value="">Superior Room</option>
+                                                        <option value="">Luxury Room</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md d-flex py-md-4">
+                                    <div class="form-group align-self-stretch d-flex align-items-end">
+                                        <div class="wrap align-self-stretch py-3 px-4">
+                                            <label for="#">Guests</label>
+                                            <div class="form-field">
+                                                <div class="select-wrap">
+                                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                                    <select name="" id="" class="form-control">
+                                                        <option value="">1 Adult</option>
+                                                        <option value="">2 Adult</option>
+                                                        <option value="">3 Adult</option>
+                                                        <option value="">4 Adult</option>
+                                                        <option value="">5 Adult</option>
+                                                        <option value="">6 Adult</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md d-flex">
+                                    <div class="form-group d-flex align-self-stretch">
+                                        <a href="#" class="btn btn-primary py-5 py-md-3 px-4 align-self-stretch d-block"><span>Check Availability <small>Best Price Guaranteed!</small></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <section class="ftco-section">
             <div class="container">
@@ -311,6 +387,111 @@
         </section>
 
 
+
+
+
+
+        <section class="ftco-section ftco-menu bg-light">
+            <div class="container-fluid px-md-4">
+                <div class="row justify-content-center mb-5 pb-3">
+                    <div class="col-md-7 heading-section text-center ftco-animate">
+                        <span class="subheading">Restaurant</span>
+                        <h2>Restaurant</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-xl-4 d-flex">
+                        <div class="pricing-entry rounded d-flex ftco-animate">
+                            <div class="img" style="background-image: url(bootstrap/images/menu-1.jpg);"></div>
+                            <div class="desc p-4">
+                                <div class="d-md-flex text align-items-start">
+                                    <h3><span>Grilled Crab with Onion</span></h3>
+                                    <span class="price">$20.00</span>
+                                </div>
+                                <div class="d-block">
+                                    <p>A small river named Duden flows by their place and supplies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 d-flex">
+                        <div class="pricing-entry rounded d-flex ftco-animate">
+                            <div class="img" style="background-image: url(bootstrap/images/menu-2.jpg);"></div>
+                            <div class="desc p-4">
+                                <div class="d-md-flex text align-items-start">
+                                    <h3><span>Grilled Crab with Onion</span></h3>
+                                    <span class="price">$20.00</span>
+                                </div>
+                                <div class="d-block">
+                                    <p>A small river named Duden flows by their place and supplies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 d-flex">
+                        <div class="pricing-entry rounded d-flex ftco-animate">
+                            <div class="img" style="background-image: url(bootstrap/images/menu-3.jpg);"></div>
+                            <div class="desc p-4">
+                                <div class="d-md-flex text align-items-start">
+                                    <h3><span>Grilled Crab with Onion</span></h3>
+                                    <span class="price">$20.00</span>
+                                </div>
+                                <div class="d-block">
+                                    <p>A small river named Duden flows by their place and supplies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 d-flex">
+                        <div class="pricing-entry rounded d-flex ftco-animate">
+                            <div class="img" style="background-image: url(bootstrap/images/menu-4.jpg);"></div>
+                            <div class="desc p-4">
+                                <div class="d-md-flex text align-items-start">
+                                    <h3><span>Grilled Crab with Onion</span></h3>
+                                    <span class="price">$20.00</span>
+                                </div>
+                                <div class="d-block">
+                                    <p>A small river named Duden flows by their place and supplies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 d-flex">
+                        <div class="pricing-entry rounded d-flex ftco-animate">
+                            <div class="img" style="background-image: url(bootstrap/images/menu-5.jpg);"></div>
+                            <div class="desc p-4">
+                                <div class="d-md-flex text align-items-start">
+                                    <h3><span>Grilled Crab with Onion</span></h3>
+                                    <span class="price">$20.00</span>
+                                </div>
+                                <div class="d-block">
+                                    <p>A small river named Duden flows by their place and supplies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 d-flex">
+                        <div class="pricing-entry rounded d-flex ftco-animate">
+                            <div class="img" style="background-image: url(bootstrap/images/menu-6.jpg);"></div>
+                            <div class="desc p-4">
+                                <div class="d-md-flex text align-items-start">
+                                    <h3><span>Grilled Crab with Onion</span></h3>
+                                    <span class="price">$20.00</span>
+                                </div>
+                                <div class="d-block">
+                                    <p>A small river named Duden flows by their place and supplies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center ftco-animate">
+                        <p><a href="#" class="btn btn-primary rounded">View All Menu</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <section class="ftco-section">
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-3">
@@ -366,7 +547,7 @@
             </div>
         </section>
 
-<!--        <section class="instagram">
+        <section class="instagram">
             <div class="container-fluid">
                 <div class="row no-gutters justify-content-center pb-5">
                     <div class="col-md-7 text-center heading-section ftco-animate">
@@ -412,7 +593,7 @@
                     </div>
                 </div>
             </div>
-        </section>-->
+        </section>
 
         <footer class="ftco-footer ftco-section img" style="background-image: url(bootstrap/images/bg_4.jpg);">
             <div class="overlay"></div>

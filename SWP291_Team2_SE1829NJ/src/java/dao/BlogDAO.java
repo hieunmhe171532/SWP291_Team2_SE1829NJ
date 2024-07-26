@@ -118,36 +118,6 @@ public class BlogDAO {
         return null;
     }
 
-    public Blog getBlogFlagNew() {
-        List<Blog> t = new ArrayList<>();
-
-        try {
-            String sql = "select top(1) * from Blog\n"
-                    + "order by flag desc,createAt desc";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet result = stm.executeQuery();
-
-            while (result.next()) {
-                Blog b = new Blog();
-                Account a = new Account();
-                b.setId(result.getInt(1));
-                b.setTitle(result.getString(2));
-                b.setDetail(result.getString(3));
-                b.setBriefinfo(result.getString(4));
-                b.setImage(result.getString(5));
-                b.setCreateAt(result.getString(6));
-                b.setFlag(result.getInt(7));
-                a.setUsername(result.getString(8));
-                b.setAccount(a);
-                t.add(b);
-                return b;
-            }
-        } catch (SQLException ex) {
-        }
-
-        return null;
-    }
-
     public List<Blog> getAllBlog() {
         List<Blog> t = new ArrayList<>();
 
@@ -294,8 +264,10 @@ public class BlogDAO {
 
     public static void main(String[] args) {
         BlogDAO dao = new BlogDAO();
-        Blog b=dao.getBlogFlagNew();
-        System.out.println(b);
+        List<Blog> l = dao.getRecentBlog(2);
+        for (Blog b : l) {
+            System.out.println(b);
+        }
 //int c=dao.countBlog();
 //        System.out.println(c);
     }
