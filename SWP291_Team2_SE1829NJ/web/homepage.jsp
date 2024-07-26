@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -265,7 +267,7 @@
                                 <a href="#" class="img" style="background-image: url(${r.img});"></a>
                                 <div class="half left-arrow d-flex align-items-center">
                                     <div class="text p-4 text-center">
-                                        <p class="mb-0"><span class="price mr-1">${r.room.price}</span> <span class="per">per night</span></p>
+                                        <p  class="mb-0"><span id="price" class="price mr-1">${r.room.price}</span> <span class="per">per night</span></p>
                                         <h3 class="mb-3"><a href="rooms.html">${r.room.name}</a></h3>
                                         <p class="pt-1"><a href="viewroom?rid=${r.room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
                                     </div>
@@ -399,7 +401,7 @@
                                 </a>
                                 <div class="text mt-3 text-center">
                                     <div class="meta mb-2">
-                                        <div>${b.createAt}</div>
+                                        <div >${fn:substringBefore(b.createAt, ".")}</div>
                                         <div>${b.account.username}</div>
                                     </div>
                                     <h3 class="heading"><a href="viewblog?id=${b.id}">${b.title}</a></h3>
@@ -525,7 +527,21 @@
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+        <script>
+            function formatPrice(price) {
+                return parseFloat(price).toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                });
+            }
+            // Select all elements with id 'price'
+            const priceElements = document.querySelectorAll('#price');
 
+            // Loop through each element and format its content
+            priceElements.forEach(element => {
+                let price = element.textContent;
+                element.textContent = formatPrice(price);
+            });
+        </script>
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script>
@@ -542,6 +558,11 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="bootstrap/js/google-map.js"></script>
         <script src="bootstrap/js/main.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
     </body>
 </html>

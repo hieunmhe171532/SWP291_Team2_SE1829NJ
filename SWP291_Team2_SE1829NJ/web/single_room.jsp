@@ -887,46 +887,58 @@
 
 
     </div>
-<script>
-    // Function to format number
-    function formatPrice(price) {
-        return parseFloat(price).toLocaleString('en-US', {
-            maximumFractionDigits: 2
+    <script>
+        // Function to format number
+        function formatPrice(price) {
+            return parseFloat(price).toLocaleString('en-US', {
+                maximumFractionDigits: 2
+            });
+        }
+        function formatCreateAt(date) {
+            const createAtDate = new Date(date);
+            return createAtDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false  // Use 24-hour format; set to true for 12-hour format
+            });
+        }
+
+        // Select all elements with id 'price'
+        const priceElements = document.querySelectorAll('#price');
+
+        // Loop through each element and format its content
+        priceElements.forEach(element => {
+            let price = element.textContent;
+            element.textContent = formatPrice(price);
         });
-    }
 
-    // Select all elements with id 'price'
-    const priceElements = document.querySelectorAll('#price');
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".pagination-link");
+            links.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add("active");
+                }
+            });
+        });
 
-    // Loop through each element and format its content
-    priceElements.forEach(element => {
-        let price = element.textContent;
-        element.textContent = formatPrice(price);
-    });
+        document.getElementById('bookingForm').addEventListener('submit', function (event) {
+            var startDate = document.getElementById('start_date').value;
+            var endDate = document.getElementById('end_date').value;
+            var currentDate = new Date().toISOString().split('T')[0];
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const links = document.querySelectorAll(".pagination-link");
-        links.forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add("active");
+            if (new Date(startDate) < new Date(currentDate)) {
+                event.preventDefault();
+                alert('Start date must be later than the current date.');
+            } else if (new Date(startDate) > new Date(endDate)) {
+                event.preventDefault();
+                alert('End date must be later than start date.');
             }
         });
-    });
-
-    document.getElementById('bookingForm').addEventListener('submit', function(event) {
-        var startDate = document.getElementById('start_date').value;
-        var endDate = document.getElementById('end_date').value;
-        var currentDate = new Date().toISOString().split('T')[0];
-
-        if (new Date(startDate) < new Date(currentDate)) {
-            event.preventDefault();
-            alert('Start date must be later than the current date.');
-        } else if (new Date(startDate) > new Date(endDate)) {
-            event.preventDefault();
-            alert('End date must be later than start date.');
-        }
-    });
-</script>
+    </script>
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="bootstrap/js/popper.min.js"></script>
