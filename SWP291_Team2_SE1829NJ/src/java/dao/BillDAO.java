@@ -50,6 +50,21 @@ public class BillDAO {
             e.printStackTrace();
         }
     }
+    public void deletePaymentModeByUserId(int billId) {
+        String sql = "delete from Bil where id=? ";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, billId);
+            int rowsUpdated = st.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Payment mode updated successfully for user ID: " + billId);
+            } else {
+                System.out.println("No records found for user ID: " + billId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     // Method to count the number of bills
     public int countBill() {

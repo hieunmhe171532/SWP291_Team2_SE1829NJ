@@ -148,7 +148,6 @@ public class CheckoutServlet extends HttpServlet {
                 String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
                 Bill bill = createBillVNPay(userId, acc.getEmail(), phone, address, cart, paymentMethod);
                 dao.addBill(bill);
-                dao.changeStatusInCartVNPAY(cart);
                 response.sendRedirect(paymentUrl);
             }
 
@@ -185,7 +184,7 @@ public class CheckoutServlet extends HttpServlet {
         Bill bill = new Bill();
         bill.setDiscount(0); // Add logic for discount if needed
         bill.setPaymentDate(new Date());
-        bill.setPaymentMode(true);
+        bill.setPaymentMode(false);
         bill.setPaymentMethod(payment);
         bill.setTotal((float) cart.getTotalCost());
         bill.setBooking_id(userId);
