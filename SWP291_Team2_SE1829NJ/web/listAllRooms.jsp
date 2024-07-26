@@ -170,7 +170,7 @@
                                                     <p class="mb-0"><span id="price" class="price mr-1">${fn:substringBefore(room.price, ".")}</span> <span class="per">per night</span></p>
 
                                                     <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
-                                                </div>
+                                                </div>a href="viewroom?rid=${room.id}"
                                             </div>
                                         </div>
                                     </div>

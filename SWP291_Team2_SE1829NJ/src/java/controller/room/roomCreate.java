@@ -8,6 +8,7 @@ package controller.room;
 
 import dao.AccountDAO;
 import dao.RoomDAO;
+import dao.RoomImageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import model.Hotel;
 import model.Room;
+import model.RoomImage;
 import model.TypeRoom;
 
 /**
@@ -77,59 +79,65 @@ throws ServletException, IOException {
     try {
         // Retrieve user object from session to check user role or login status
         model.Account acc = (model.Account) session.getAttribute("acc");
-        if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id()) && !"4".equalsIgnoreCase(acc.getRole_id())) { // Assuming '1' is the role ID for admins
+        if (acc != null && !"1".equalsIgnoreCase(acc.getRole_id()) && !"2".equalsIgnoreCase(acc.getRole_id())) { // Assuming '1' is the role ID for admins
             response.sendRedirect("login"); // Redirect to login page if not authorized
             return;
         }
 
         // Extract room data from the form submission
-  int id  = Integer.parseInt(request.getParameter("id"));     
-String name = request.getParameter("name");
-String roomFloor = request.getParameter("room_floor");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String roomFloor = request.getParameter("room_floor");
+        int userQuantity = Integer.parseInt(request.getParameter("userQuantity"));
+        float area = Float.parseFloat(request.getParameter("area"));
+        float price = Float.parseFloat(request.getParameter("price"));
+        int statusId = Integer.parseInt(request.getParameter("status_id"));
+        int hotelId = Integer.parseInt(request.getParameter("hotel_id"));
+        int typeId = Integer.parseInt(request.getParameter("type_id"));
+        String description = request.getParameter("description");
+        boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+        String images = request.getParameter("images");
 
-int userQuantity = Integer.parseInt(request.getParameter("userQuantity"));
-float area = Float.parseFloat(request.getParameter("area"));
-float price = Float.parseFloat(request.getParameter("price"));
-int statusId = Integer.parseInt(request.getParameter("status_id"));
-int hotelId = Integer.parseInt(request.getParameter("hotel_id"));
-int typeId = Integer.parseInt(request.getParameter("type_id"));
-String description = request.getParameter("description");
-boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
-
-// Creating a new Room object
-Room room = new Room(); // Assume constructor and setters are available
- room.setId(id); // Assuming ID is manually set for testing
-room.setName(name);
-room.setRoom_floor(roomFloor);
-
-room.setUserQuantity(userQuantity);
-room.setArea(area);
-room.setPrice(price);
-room.setStatus(statusId);
-room.setHotel(new Hotel(hotelId)); // Correct instantiation
-room.setTypeRoom(new TypeRoom(typeId)); // Correct instantiation
-room.setDescription(description);
-room.setIsActive(isActive);
-
-
+        // Creating a new Room object
+        Room room = new Room(); // Assume constructor and setters are available
+        room.setId(id); // Assuming ID is manually set for testing
+        room.setName(name);
+        room.setRoom_floor(roomFloor);
+        room.setUserQuantity(userQuantity);
+        room.setArea(area);
+        room.setPrice(price);
+        room.setStatus(statusId);
+        room.setHotel(new Hotel(hotelId)); // Correct instantiation
+        room.setTypeRoom(new TypeRoom(typeId)); // Correct instantiation
+        room.setDescription(description);
+        room.setIsActive(isActive);
 
         RoomDAO roomDAO = new RoomDAO();
         boolean result = roomDAO.insertRoom(room);
 
         if (result) {
+            // If room is successfully added, then add images
+            String[] imageUrls = images.split(",");
+            RoomImageDAO roomImageDAO = new RoomImageDAO();
+            for (String imageUrl : imageUrls) {
+                RoomImage roomImage = new RoomImage();
+                roomImage.setImg(imageUrl.trim());
+                roomImage.setRoom(room);
+                roomImageDAO.insertRoomImage(roomImage);
+            }
+
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Room has been added successfully');");
             out.println("window.location.href = 'roomList';"); // Redirect to room list or appropriate page
             out.println("</script>");
-            
         } else {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Failed to add room');");
             out.println("window.location.href = 'roomCreate';"); // Stay on the create page for correction
             out.println("</script>");
         }
-        
-          request.getRequestDispatcher("roommanagement").forward(request, response);
+
+        request.getRequestDispatcher("roommanagement").forward(request, response);
 
     } catch (ServletException | IOException | NumberFormatException e) {
         out.println("<script type=\"text/javascript\">");
@@ -141,18 +149,19 @@ room.setIsActive(isActive);
     }
 }
 
-    public static void main(String[] args) {
+
+ public static void main(String[] args) {
         RoomDAO roomDAO = new RoomDAO();  // Assuming RoomDAO has a default constructor and does not require a servlet context
+        RoomImageDAO roomImageDAO = new RoomImageDAO(); // Assuming RoomImageDAO has a default constructor
 
         // Create a new Room object manually for testing
         Room room = new Room();
-        room.setId(12); // Assuming ID is manually set for testing
+        room.setId(674); // Assuming ID is manually set for testing
         room.setName("Deluxe Room");
-        room.setRoom_floor("1st");
-     
+        room.setRoom_floor("1");
         room.setUserQuantity(2);
         room.setArea(30.5f);
-        room.setPrice(150.0f);
+        room.setPrice(200000.0f);
         room.setStatus(1); // Assuming status '1' is for 'Available'
         room.setDescription("A luxurious room with ocean view.");
         room.setIsActive(true);
@@ -170,12 +179,30 @@ room.setIsActive(isActive);
         boolean result = roomDAO.insertRoom(room);
         if (result) {
             System.out.println("Room has been added successfully.");
+
+            // Add RoomImages
+            String[] imageUrls = {
+               "images/anh001.jpg",
+                "images/anh002.jpg",
+                "images/anh003.jpg"
+            };
+
+            for (String imageUrl : imageUrls) {
+                RoomImage roomImage = new RoomImage();
+                roomImage.setImg(imageUrl.trim());
+                roomImage.setRoom(room);
+                boolean imageResult = roomImageDAO.insertRoomImage(roomImage);
+
+                if (imageResult) {
+                    System.out.println("Room image " + imageUrl + " has been added successfully.");
+                } else {
+                    System.out.println("Failed to add room image " + imageUrl);
+                }
+            }
         } else {
             System.out.println("Failed to add room.");
         }
     }
-
-
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

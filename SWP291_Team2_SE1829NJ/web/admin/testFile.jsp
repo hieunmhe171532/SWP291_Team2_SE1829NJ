@@ -63,7 +63,7 @@
             <hr>
             <ul class="app-menu">
                    <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Bảng điều khiển</span></a></li>
+                            class="app-menu__label">DashBoard</span></a></li>
                 <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Manage Account</span></a></li>
                 <li><a class="app-menu__item" href="acccreate"><i

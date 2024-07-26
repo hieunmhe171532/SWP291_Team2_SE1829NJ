@@ -407,14 +407,13 @@ hotel.setId(rs.getInt("hId"));
         return room;
     }
 
-    public boolean insertRoom(Room room) {
+public boolean insertRoom(Room room) {
         String sql = "SET IDENTITY_INSERT Room ON;"
-                + "INSERT INTO Room (id, name, room_floor, userQuantity, area, price, status_id, description, hotel_id, type_id, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                + "INSERT INTO Room (id, name, room_floor, userQuantity, area, price, status_id, description, hotel_id, type_id, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 + "SET IDENTITY_INSERT Room OFF;";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, room.getId()); // Only include this if you're sure you want to manually set the ID
             ps.setString(2, room.getName());
-
             ps.setString(3, room.getRoom_floor());
             ps.setInt(4, room.getUserQuantity());
             ps.setFloat(5, room.getArea());
@@ -432,7 +431,6 @@ hotel.setId(rs.getInt("hId"));
             return false;
         }
     }
-
     public boolean updateRoomStatus(int roomId, int status) {
         String sql = "UPDATE Room SET status_id = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql

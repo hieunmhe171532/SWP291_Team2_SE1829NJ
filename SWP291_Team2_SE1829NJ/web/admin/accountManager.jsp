@@ -60,7 +60,7 @@
 
 
                             <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+                                        class="app-menu__label">DashBoard</span></a></li>
 
                             <li><a class="app-menu__item" href="accountmanagement"><i
                                         class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
@@ -99,7 +99,7 @@
 
 
                             <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+                                        class="app-menu__label">DashBoard</span></a></li>
 
 
                             <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
@@ -409,13 +409,7 @@
                 function time() {
                     var today = new Date();
             var weekday = new Array(7);
-            weekday[0] = "Chủ Nhật";
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
+            
             var day = weekday[today.getDay()];
             var dd = today.getDate();
             var mm = today.getMonth() + 1;
@@ -430,7 +424,7 @@
             if (mm < 10) {
             mm = '0' + mm;
             }
-            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            today = dd + '/' + mm + '/' + yyyy;
             tmp = '<span class="date"> ' + today + ' - ' + nowTime +
                     '</span>';
             document.getElementById("clock").innerHTML = tmp;
@@ -444,13 +438,6 @@
             }
                                     </script            >
 
-//
-//$(document)            .re             ady(function() {
-//    $('.delete            ').click(function() {
-//        var ta            rget = $(this).data('target');
-//        $(targ            et).modal('show');
-//    });
-//});
 
                       </body>
 

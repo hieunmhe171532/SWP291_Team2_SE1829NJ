@@ -61,7 +61,7 @@
 
 
                             <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+                                        class="app-menu__label">DashBoard</span></a></li>
 
                             <li><a class="app-menu__item" href="accountmanagement"><i
                                         class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
@@ -100,7 +100,7 @@
 
 
                             <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+                                        class="app-menu__label">DashBoard</span></a></li>
 
 
                             <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
@@ -180,7 +180,7 @@
                                         <th>Status</th>
                                         <th>User Quantity</th>
                                         <th>Price</th>
-                                        <th>Edit</th>
+                                        <th>Funtion</th>
                                         <th>Details</th>
                                     </tr>
                                 </thead>
@@ -214,6 +214,10 @@
                                                 <button class="btn btn-danger btn-sm delete" type="button" title="Delete" data-toggle="modal" data-target="#ModalDEL${room.id}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
+                                        <a href="viewroom?rid=${room.id}" class="btn btn-info btn-sm more-details" title="More details">
+                                                    <i class="fas fa-camera"></i>
+                                                </a>
+                                                    
                                             </td>
                                             <td>
                                                 <button class="btn btn-info btn-sm more-details" type="button" title="More details" onclick="redirectToRoomDetails('${room.id}')">
@@ -370,13 +374,7 @@
                             function time() {
                     var today = new Date();
             var weekday = new Array(7);
-            weekday[0] = "Chủ Nhật";
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
+      
             var day = weekday[today.getDay()];
             var dd = today.getDate();
             var mm = today.getMonth() + 1;

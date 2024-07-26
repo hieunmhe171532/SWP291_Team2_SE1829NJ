@@ -61,7 +61,7 @@
 
 
                             <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+                                        class="app-menu__label">DashBoard</span></a></li>
 
                             <li><a class="app-menu__item" href="accountmanagement"><i
                                         class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
@@ -100,7 +100,7 @@
 
 
                             <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+                                        class="app-menu__label">DashBoard</span></a></li>
 
 
                             <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
@@ -177,10 +177,7 @@
                                     <label for="room_floor">Room Floor:</label>
                                     <input type="text" class="form-control" id="room_floor" name="room_floor" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="image">Image URL:</label>
-                                    <input type="text" class="form-control" id="image" name="image" required>
-                                </div>
+                      
                                 <div class="form-group">
                                     <label for="userQuantity">User Quantity:</label>
                                     <input type="number" class="form-control" id="userQuantity" name="userQuantity" required>
@@ -204,9 +201,9 @@
                                 <div class="form-group">
                                     <label for="hotel_id">Hotel:</label>
                                     <select class="form-control" id="hotel_id" name="hotel_id">
-                                        <option value="1">Bac </option>
-                                        <option value="2">Trung</option>
-                                        <option value="3">Nam</option>
+                                        <option value="1">Hotel 1 </option>
+                                        <option value="2">Hotel 2</option>
+                                 
 
                                     </select>
                                 </div>
@@ -219,7 +216,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description:</label>
-                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="6"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="isActive">Active:</label>
@@ -228,6 +225,11 @@
                                             <option value="false">Inactive</option>
                                     </select>
                                 </div>
+                                 <!-- Add fields for room images -->
+    <div class="form-group">
+        <label for="images">Room Images:</label>
+        <textarea class="form-control" id="images" name="images" rows="9" placeholder="Enter image URLs, separated by commas" ></textarea>
+    </div>
                                 <button type="submit" class="btn btn-primary">Create Room</button>
                             </form>
                         </div>
@@ -319,13 +321,7 @@
                 function time() {
                     var today = new Date();
             var weekday = new Array(7);
-            weekday[0] = "Chủ Nhật";
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
+         
             var day = weekday[today.getDay()];
             var dd = today.getDate();
             var mm = today.getMonth() + 1;
