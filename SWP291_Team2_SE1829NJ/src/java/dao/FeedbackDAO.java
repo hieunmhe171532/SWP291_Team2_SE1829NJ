@@ -71,6 +71,66 @@ public class FeedbackDAO {
         return t;
     }
 
+    public List<Feedback> getTop4Feedback() {
+        Connection conn = dbContext.getConnection();
+        List<Feedback> t = new ArrayList<>();
+
+        try {
+            String sql = "WITH RankedFeedback AS (\n"
+                    + "    SELECT\n"
+                    + "        id,\n"
+                    + "        img,\n"
+                    + "        description,\n"
+                    + "        createAt,\n"
+                    + "        roomid,\n"
+                    + "        username,\n"
+                    + "        ROW_NUMBER() OVER (PARTITION BY username ORDER BY createAt DESC) AS rn\n"
+                    + "    FROM\n"
+                    + "        dbo.Feedback\n"
+                    + ")\n"
+                    + "SELECT\n"
+                    + "    id,\n"
+                    + "    img,\n"
+                    + "    description,\n"
+                    + "    createAt,\n"
+                    + "    roomid,\n"
+                    + "    username\n"
+                    + "FROM\n"
+                    + "    RankedFeedback\n"
+                    + "WHERE\n"
+                    + "    rn = 1\n"
+                    + "    AND username IN (\n"
+                    + "        SELECT DISTINCT TOP 4 username\n"
+                    + "        FROM dbo.Feedback\n"
+                    + "        ORDER BY username\n"
+                    + "    )\n"
+                    + "ORDER BY\n"
+                    + "    username;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                Feedback f = new Feedback();
+                Account a = new Account();
+                Room r = new Room();
+                f.setId(result.getInt(1));
+                f.setImg(result.getString(2));
+                f.setDescription(result.getString(3));
+                f.setCreateAt(result.getString(4));
+                a.setUsername(result.getString(6));
+                f.setAcc(a);
+                r.setId(result.getInt(5));
+                f.setRoom(r);
+                t.add(f);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return t;
+    }
+
     public List<Feedback> getFeedbackByRid(int rid) {
         Connection conn = dbContext.getConnection();
         List<Feedback> t = new ArrayList<>();
@@ -511,7 +571,7 @@ public class FeedbackDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Feedback> list = dao.getFeedbackByUsername("admin");
+        List<Feedback> list = dao.getTop4Feedback();
         for (Feedback f : list) {
             System.out.println(f);
         }
