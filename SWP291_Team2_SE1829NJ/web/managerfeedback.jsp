@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -497,7 +495,7 @@
                                             ${page.description}
                                         </td>
                                         <td>
-                                            ${fn:substringBefore(page.createAt, ".")}
+                                            ${page.createAt}
                                         </td>
                                         <td>
                                             ${page.acc.getUsername()}
@@ -574,7 +572,7 @@
                                                 <p class="card-text">User Quantity:${page.room.getUserQuantity()}</p>
 
                                                 <p class="card-text">Area:${page.room.getArea()}</p>
-                                                <p class="card-text">Price:<i id="price">${Math.round(page.room.getPrice())}</i>đ</p>
+                                                <p class="card-text">Price:${Math.round(page.room.getPrice())}đ</p>
 
                                             </div>
                                         </div>
@@ -667,20 +665,6 @@
                     link.classList.add("active");
                 }
             });
-        });
-        function formatPrice(price) {
-            return parseFloat(price).toLocaleString('en-US', {
-                maximumFractionDigits: 2
-            });
-        }
-
-        // Select all elements with id 'price'
-        const priceElements = document.querySelectorAll('#price');
-
-        // Loop through each element and format its content
-        priceElements.forEach(element => {
-            let price = element.textContent;
-            element.textContent = formatPrice(price);
         });
 
     </script>
