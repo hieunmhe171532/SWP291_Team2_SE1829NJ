@@ -77,7 +77,7 @@ throws ServletException, IOException {
     try {
         // Retrieve user object from session to check user role or login status
         model.Account acc = (model.Account) session.getAttribute("acc");
-        if (acc == null || !acc.getRole_id().equals("1")) { // Assuming '1' is the role ID for admins
+        if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id()) && !"4".equalsIgnoreCase(acc.getRole_id())) { // Assuming '1' is the role ID for admins
             response.sendRedirect("login"); // Redirect to login page if not authorized
             return;
         }

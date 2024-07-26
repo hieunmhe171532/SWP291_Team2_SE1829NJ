@@ -131,21 +131,10 @@
 
                         </c:if>
                            
-                                                              <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
+             <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
 
 
-                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                                        class="app-menu__label">Bảng điều khiển</span></a></li>
-
-
-                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
-                                        class="app-menu__label">Manage room</span></a></li>
-                                        
-                                        
-                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
-                                        class="app-menu__label">Creat room</span></a></li>   
-
-
+              
                             <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
                                         class="app-menu__label">View Customer</span></a></li>
 

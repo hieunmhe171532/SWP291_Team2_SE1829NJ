@@ -34,7 +34,7 @@ public class Dashboard extends HttpServlet {
     HttpSession session = request.getSession();
     Account acc = (Account) session.getAttribute("acc");
     
-    if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id())) {
+    if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id()) && !"4".equalsIgnoreCase(acc.getRole_id())) {
         UserDAO udao = new UserDAO();
         BlogDAO bldao = new BlogDAO();
         MenuDAO mdao = new MenuDAO();
