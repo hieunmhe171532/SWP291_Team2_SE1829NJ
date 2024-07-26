@@ -138,7 +138,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <h3 id="price">Total Cost: ${cart.totalCost}</h3>
+            <h3 class="d-flex" >Total Cost: <p id="price">${cart.totalCost}</p>đ</h3>
             <a href="checkout" class="btn btn-primary">Proceed to Checkout</a>
         </c:if>
         <c:if test="${empty cart.items}">

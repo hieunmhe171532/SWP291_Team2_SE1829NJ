@@ -368,7 +368,6 @@
                                                                 <td>${bill.CreationDate}</td>
                                                                 <td>${bill.RoomList}</td>
                                                                 <td id="price">${bill.TotalAmount}</td>
-                                                               
                                                                 <td><span class="badge bg-success">${bill.PaymentStatus}</td>
                                                                 <td>${bill.PaymentMethod}</td>
                                                                 <td>
