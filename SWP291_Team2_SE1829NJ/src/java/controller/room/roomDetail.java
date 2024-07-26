@@ -6,13 +6,16 @@
 package controller.room;
 
 import dao.RoomDAO;
+import dao.RoomImageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Room;
+import model.RoomImage;
 
 /**
  *
@@ -47,9 +50,12 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
     int roomId = Integer.parseInt(request.getParameter("id")); // Get the room ID from the request
     RoomDAO roomDAO = new RoomDAO();
     Room room = roomDAO.getRoomByRid(roomId); // Fetch the room details from the database
-
+  RoomImageDAO daorimage = new RoomImageDAO();
+     List<RoomImage> listImage = daorimage.getRoomImage(roomId);
+    
     if (room != null) {
         request.setAttribute("room", room); // Set the room in the request scope
+         request.setAttribute("listImg", listImage); // Set the room in the request scope
         request.getRequestDispatcher("admin/roomDetail.jsp").forward(request, response); // Forward to the JSP
     } else {
         response.sendRedirect("errorPage.jsp"); // Redirect to an error page or similar

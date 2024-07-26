@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,6 +79,101 @@
                 <li><a class="app-menu__item" href="listmanagefeedback"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
                 </li>
+                <c:choose>
+                    <c:when test="${sessionScope.acc != null}">
+                        <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
+
+
+                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+
+                            <li><a class="app-menu__item" href="accountmanagement"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
+                            </li>    
+
+                            <li><a class="app-menu__item" href="acccreate"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
+                            </li>
+
+
+                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Manage room</span></a></li>
+                                        
+                                        
+                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Creat room</span></a></li>   
+
+
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                            
+                                  <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '2'}">
+
+
+                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+
+
+                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Manage room</span></a></li>
+                                        
+                                        
+                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Creat room</span></a></li>   
+
+
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                           
+             <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
+
+
+              
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                            
+                    </c:when>
+                </c:choose>
+
             </ul>
         </aside>
 
@@ -238,18 +334,16 @@
                                                         </tr>
                                                     </thead>
 
-
-
-
                                                     <tbody>
                                                         <c:forEach items="${bookingsTodayGroup}" var="booki">
                                                             <tr>
-                                                                \      <td>${booki.BillID}</td>
+                                                                <td>${booki.BillID}</td>
                                                                 <td>${booki.CustomerName}</td>
                                                                 <td>${booki.PhoneNumber}</td>
                                                                 <td>${booki.CreationDate}</td>
                                                                 <td>${booki.RoomList}</td>
                                                                 <td id="price">${fn:substringBefore(booki.TotalAmount, ".")}</td>
+                                                                <td>${booki.TotalAmount}</td>
                                                                 <td><span class="badge bg-success">${booki.PaymentStatus}</td>
                                                                 <td>${booki.PaymentMethod}</td>
                                                                 <td>
@@ -293,6 +387,7 @@
                                                                 <td>${bill.CreationDate}</td>
                                                                 <td>${bill.RoomList}</td>
                                                                 <td id="price">${bill.TotalAmount}</td>
+                                                                <td>${bill.TotalAmount}</td>
                                                                 <td><span class="badge bg-success">${bill.PaymentStatus}</td>
                                                                 <td>${bill.PaymentMethod}</td>
                                                                 <td>
@@ -348,6 +443,7 @@
                                                                 <td>${bookingtoday.endDate}</td>
                                                                 <td>${bookingtoday.roomList}</td>
                                                                 <td id="price">${bookingtoday.totalAmount}</td>
+                                                                <td>${bookingtoday.totalAmount}</td>
                                                                 <td><span class="badge bg-success">${bookingtoday.paymentStatus}</span></td>
                                                                 <td>${bookingtoday.paymentMethod}</td>
                                                                 <td>
@@ -409,8 +505,53 @@
                                         </div>
                                     </div>
 
+                                    </div>
 
-
+                                    <div class="col-md-12">
+                                        <div class="tile">
+                                            <h3 class="tile-title">Total Boooking </h3>
+                                            <div>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Booking ID</th>
+                                                            <th>Customer Name</th>
+                                                            <th>Phone Number</th>
+                                                            <th>Creation Date</th>
+                                                            <th>Start Date</th>
+                                                            <th>End Date</th>
+                                                            <th>Room List</th>
+                                                            <th>Total Amount</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Payment Method</th>
+                                                            <th>Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="${allBookings}" var="booking">
+                                                            <tr>
+                                                                <td>${booking.billId}</td>
+                                                                <td>${booking.customerName}</td>
+                                                                <td>${booking.phoneNumber}</td>
+                                                                <td>${booking.creationDate}</td>
+                                                                <td>${booking.startDate}</td>
+                                                                <td>${booking.endDate}</td>
+                                                                <td>${booking.roomList}</td>
+                                                                <td>${booking.totalAmount}</td>
+                                                                <td><span class="badge bg-success">${booking.paymentStatus}</span></td>
+                                                                <td>${booking.paymentMethod}</td>
+                                                                <td>
+                                                                    <a href="#" class="order-details-link" data-bill-id="${booking.billId}" data-toggle="modal" data-target="#orderDetailsModal" style="color: rgb(245, 157, 57); background-color: rgb(251, 226, 197); padding: 5px; border-radius: 5px;">
+                                                                        <i class="fa"></i> Order Details
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -516,8 +657,6 @@
                                     });
                                 });
 
-
-
                             </script>
 
 
@@ -617,7 +756,6 @@
                                     element.textContent = formatPrice(price);
                                 });
                             </script>
-
 
                             </body>
 

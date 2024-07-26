@@ -76,7 +76,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     HttpSession session = request.getSession();
     model.Account acc = (model.Account) session.getAttribute("acc");
 
-    if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) { // Ensure admin role
+    if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id()) && !"4".equalsIgnoreCase(acc.getRole_id())) { // Ensure admin role
         int roomId = Integer.parseInt(request.getParameter("id"));
         RoomDAO dao = new RoomDAO();
         boolean deleteSuccessful = dao.deleteRoom(roomId);

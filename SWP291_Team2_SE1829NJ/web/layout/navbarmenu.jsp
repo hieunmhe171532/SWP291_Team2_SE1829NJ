@@ -65,10 +65,17 @@
                                     <a class="dropdown-item" href="editprofile">Your Account</a>
                                     <a class="dropdown-item" href="login?action=logout">Logout</a>
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
-                                        <a class="dropdown-item" href="dashboard">Admin Management</a>
-                                        <a class="dropdown-item" href="accountmanagement">Account Management</a>
-                                        <a class="dropdown-item" href="roommanagement">Room Management</a>
+                                        
+                                      <a class="dropdown-item" href="dashboard">DashBoard</a
+                                        
+                                        
                                     </c:if>
+                                            <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '2'}">
+                                        <a class="dropdown-item" href="dashboard">DashBoard</a>
+                                      
+                                            </c:if>
+                                        
+                                        
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
                                         <a class="dropdown-item" href="viewcustomer">Marketer Management</a>
 

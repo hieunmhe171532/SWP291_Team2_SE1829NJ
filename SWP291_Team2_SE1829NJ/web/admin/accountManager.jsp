@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,31 +49,105 @@
                                                 alt="User Image">
                 <div>
                     <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
-                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+                    <p class="app-sidebar__user-designation">WELCOME TO HOME</p>
                 </div>
             </div>
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Bảng điều khiển</span></a></li>
-                <li><a class="app-menu__item" href="accountmanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Manage Account</span></a></li>
-                <li><a class="app-menu__item" href="acccreate"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
-                </li>
-    <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Manage Room</span></a></li>
-                <li><a class="app-menu__item" href="roomcreate"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Room</span></a>
-                </li>
-                <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">View Customer</span></a></li>
-                <li><a class="app-menu__item" href="listmanageblog"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
-                </li>
-                <li><a class="app-menu__item" href="listmanagefeedback"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
-                </li>
+  <c:choose>
+                    <c:when test="${sessionScope.acc != null}">
+                        <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
+
+
+                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+
+                            <li><a class="app-menu__item" href="accountmanagement"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
+                            </li>    
+
+                            <li><a class="app-menu__item" href="acccreate"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
+                            </li>
+
+
+                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Manage room</span></a></li>
+                                        
+                                        
+                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Creat room</span></a></li>   
+
+
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                            
+                                  <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '2'}">
+
+
+                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+
+
+                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Manage room</span></a></li>
+                                        
+                                        
+                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Creat room</span></a></li>   
+
+
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                           
+             <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
+
+
+              
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                            
+                    </c:when>
+                </c:choose>
             </ul>
         </aside>
         <main class="app-content">

@@ -4,7 +4,7 @@
     Author     : admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,17 @@
         <!-- Main CSS-->
         <link rel="stylesheet" href="bootstrap/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="bootstrap/css/animate.css">
+<link rel="stylesheet" type="text/css" href="admin/maincss/newcss.css">
+<link rel="stylesheet" type="text/css" href="maincss/newcss.css">
+                      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <!-- or -->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+     
+                <link rel="stylesheet" type="text/css"
+                      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
         <link rel="stylesheet" href="bootstrap/css/owl.carousel.min.css">
         <link rel="stylesheet" href="bootstrap/css/owl.theme.default.min.css">
@@ -32,7 +43,7 @@
 
         <link rel="stylesheet" href="bootstrap/css/flaticon.css">
         <link rel="stylesheet" href="bootstrap/css/icomoon.css">
-        <!--<link rel="stylesheet" href="bootstrap/css/style.css">-->
+        <link rel="stylesheet" href="bootstrap/css/style.css">
         <link rel="stylesheet" href="bootstrap/css/newcss.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -70,15 +81,101 @@
             <!--menu cac phan nho-->
             <ul class="app-menu">
 
-                <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">View Customer</span></a></li>
-                <li><a class="app-menu__item" href="listmanageblog"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
-                </li>
-                <li><a class="app-menu__item" href="listmanagefeedback"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
-                </li>
+       
+                <c:choose>
+                    <c:when test="${sessionScope.acc != null}">
+                        <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
 
+
+                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+
+                            <li><a class="app-menu__item" href="accountmanagement"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
+                            </li>    
+
+                            <li><a class="app-menu__item" href="acccreate"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Create Account</span></a>
+                            </li>
+
+
+                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Manage room</span></a></li>
+                                        
+                                        
+                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Creat room</span></a></li>   
+
+
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                            
+                                  <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '2'}">
+
+
+                            <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">Bảng điều khiển</span></a></li>
+
+
+                            <li><a class="app-menu__item" href="roommanagement"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Manage room</span></a></li>
+                                        
+                                        
+                            <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
+                                        class="app-menu__label">Creat room</span></a></li>   
+
+
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                           
+             <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '4'}">
+
+
+              
+                            <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                                        class="app-menu__label">View Customer</span></a></li>
+
+
+
+                            <li><a class="app-menu__item" href="listmanageblog"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
+                            </li>
+                            <li><a class="app-menu__item" href="listmanagefeedback"><i
+                                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Feedback Management</span></a>
+                            </li>
+
+
+
+                        </c:if>
+                            
+                    </c:when>
+                </c:choose>
 
             </ul>
         </aside>

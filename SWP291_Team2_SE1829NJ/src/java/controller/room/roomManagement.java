@@ -39,7 +39,7 @@ public class roomManagement extends HttpServlet {
         try {
             HttpSession session = request.getSession(); 
             model.Account acc = (Account) session.getAttribute("acc");
-            if (acc.getRole_id().equalsIgnoreCase("1")) {
+            if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id()) && !"4".equalsIgnoreCase(acc.getRole_id())) {
 
 //             
                RoomDAO rdao = new RoomDAO();
