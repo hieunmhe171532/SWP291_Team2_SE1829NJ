@@ -46,7 +46,7 @@
         <!-- END nav -->
   
 
-        <section class="ftco-booking ftco-section ftco-no-pt ftco-no-pb">
+<!--        <section class="ftco-booking ftco-section ftco-no-pt ftco-no-pb">
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-12">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
         <section class="ftco-section">
@@ -391,7 +391,7 @@
 
 
 
-        <section class="ftco-section ftco-menu bg-light">
+<!--        <section class="ftco-section ftco-menu bg-light">
             <div class="container-fluid px-md-4">
                 <div class="row justify-content-center mb-5 pb-3">
                     <div class="col-md-7 heading-section text-center ftco-animate">
@@ -489,7 +489,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
         <section class="ftco-section">
@@ -547,7 +547,7 @@
             </div>
         </section>
 
-        <section class="instagram">
+<!--        <section class="instagram">
             <div class="container-fluid">
                 <div class="row no-gutters justify-content-center pb-5">
                     <div class="col-md-7 text-center heading-section ftco-animate">
@@ -593,7 +593,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
         <footer class="ftco-footer ftco-section img" style="background-image: url(bootstrap/images/bg_4.jpg);">
             <div class="overlay"></div>
