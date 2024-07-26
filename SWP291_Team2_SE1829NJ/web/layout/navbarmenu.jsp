@@ -49,7 +49,6 @@
                     <li class="nav-item active"><a href="homepage" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="listroomforcus" class="nav-link">List Room</a></li>
                       <li class="nav-item"><a href="roomsearch" class="nav-link">Tool search</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="aboutus.jsp" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="listblog" class="nav-link">Blog</a></li>
 
