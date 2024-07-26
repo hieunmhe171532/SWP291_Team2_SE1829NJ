@@ -894,18 +894,6 @@
                 maximumFractionDigits: 2
             });
         }
-        function formatCreateAt(date) {
-            const createAtDate = new Date(date);
-            return createAtDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false  // Use 24-hour format; set to true for 12-hour format
-            });
-        }
 
         // Select all elements with id 'price'
         const priceElements = document.querySelectorAll('#price');
