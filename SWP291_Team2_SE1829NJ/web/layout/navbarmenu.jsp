@@ -61,16 +61,16 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
                                     <a class="dropdown-item" >${sessionScope.acc.username}</a>
-                                    <a class="dropdown-item" href="editprofile">Your Account</a>
+                                    <a class="dropdown-item" href="editprofile">Your Personal profile here</a>
                                     <a class="dropdown-item" href="login?action=logout">Logout</a>
                                     <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '1'}">
                                         
-                                      <a class="dropdown-item" href="dashboard">DashBoard</a
+                                      <a class="dropdown-item" href="dashboard">Admin Management</a
                                         
                                         
                                     </c:if>
                                             <c:if test="${fn:toUpperCase(sessionScope.acc.role_id) == '2'}">
-                                        <a class="dropdown-item" href="dashboard">DashBoard</a>
+                                        <a class="dropdown-item" href="dashboard">Manager Management</a>
                                       
                                             </c:if>
                                         

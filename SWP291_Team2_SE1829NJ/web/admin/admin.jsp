@@ -286,11 +286,7 @@
                         <div class="tile">
                             <div class="tile-body">
                                 <div class="row element-button">
-                                    <div class="col-sm-2">
-                                        <a class="btn btn-delete btn-sm print-file" type="button" title="Print" onclick="myApp.printTable()">
-                                            <i class="fas fa-print"></i> Print Data
-                                        </a>
-                                    </div>
+                                   
                                 </div>
 
                                 <ul class="nav nav-tabs" id="bookingTabs" role="tablist">
