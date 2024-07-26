@@ -394,6 +394,7 @@
             var yyyy = today.getFullYear();
             var h = today.getHours();
             var m = today.getMinutes();
+            
             m = checkTime(m);
             nowTime = h + ":" + m + "";
             if (dd < 10) {
