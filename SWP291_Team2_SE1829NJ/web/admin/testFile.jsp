@@ -1,6 +1,14 @@
+<%-- 
+    Document   : testFile
+    Created on : Jul 26, 2024, 12:47:02 AM
+    Author     : HUNG
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -159,162 +167,50 @@
                 </div>-->
 
 
- <div class="container">
+
         <div class="header">
             <h1>Room Details</h1>
         </div>
-        <div>
+     
             <h3>Room Information</h3>
             <table class="table table-striped">
-                <tr>
-                    <th>Room ID:</th>
-                    <td>${room.id}</td>
-                </tr>
-                <tr>
-                    <th>Room Name:</th>
-                    <td>${room.name}</td>
-                </tr>
-                <tr>
-                    <th>Room Floor:</th>
-                    <td>${room.room_floor}</td>
-                </tr>
+         
        
                 
-                <tr>
-                    <th>User Quantity:</th>
-                    <td>${room.userQuantity}</td>
-                </tr>
-                <tr>
-                    <th>Area (sqm):</th>
-                    <td>${room.area}</td>
-                </tr>
-                <tr>
-                    <th>Price:</th>
-                    <td>${room.price}</td>
-                </tr>
+            
                <tr>
     <th>Status:</th>
     <td>
-        <c:choose>
-            <c:when test="${room.status == 1}">
-                Empty
-            </c:when>
-            <c:when test="${room.status == 2}">
-                Using
-            </c:when>
-            <c:when test="${room.status == 3}">
-                Booking
-            </c:when>
-            <c:otherwise>
-                Unknown
-            </c:otherwise>
-        </c:choose>
+  
     </td>
 </tr>
-                <tr>
-                    <th>Hotel:</th>
-                    <td>${room.hotel.name}</td>
-                </tr>
-                <tr>
-                    <th>Type of Room:</th>
-                    <td>${room.typeRoom.name}</td>
-                </tr>
-                <tr>
-                    <th>Description:</th>
-                    <td>${room.description}</td>
-                </tr>
+              
                  <tr>
                         <th>Hình ảnh:</th>
                         <td>
-                            <c:forEach var="image" items="${listImg}">
-                                <img src="${image.img}" alt="Room Image" class="img-thumbnail" style="max-width: 150px; margin-right: 10px;"/>
-                            </c:forEach>
+                       
+                                <img src="https://cf2.bstatic.com/xdata/images/hotel/max1024x768/489131270.jpg?k=63aae875cf83f0a4b0dd2976772dbc7d3f9cbf3ba6913a9825efeac628fdc399&o=" alt="Room Image" class="img-thumbnail" style="max-width: 150px; margin-right: 10px;"/>
+                    
                         </td>
                     </tr>
-                <tr>
-                    <th>Active:</th>
-                    <td>${room.isActive ? 'Yes' : 'No'}</td>
-                </tr>
+              
+                 <tr>
+                        <th>Hình ảnh:</th>
+                        <td>
+                       
+                              
+                    <img src="../images/room-1.jpg" alt="Room Image" class="img-thumbnail" style="max-width: 150px; margin-right: 10px;" />
+              
+                        </td>
+                    </tr>
             </table>
      <div class="buttons">
-            <a href="roommanagement" class="btn btn-primary">Back to List</a>
-            <button class="btn btn-primary btn-sm edit" type="button" title="Edit" data-toggle="modal"
-                data-target="#ModalUP${room.id}">
-                <i class="fas fa-edit"></i> Edit
-            </button>
+  
         </div>
         </main>
 
 
 
-
-
-        
-<div class="modal fade" id="ModalUP${room.id}" tabindex="-1" role="dialog" aria-labelledby="editRoomModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="roomedit" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editRoomModalLabel">Edit Room - ID: ${room.id}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="id" value="${room.id}"> <!-- Hidden field to pass Room ID -->
-                    <div class="form-group">
-                        <label for="name${room.id}">Room Name:</label>
-                        <input type="text" class="form-control" id="name${room.id}" name="name" value="${room.name}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_floor${room.id}">Room Floor:</label>
-                        <input type="text" class="form-control" id="room_floor${room.id}" name="room_floor" value="${room.room_floor}" required>
-                    </div>
-              
-                    <div class="form-group">
-                        <label for="userQuantity${room.id}">User Quantity:</label>
-                        <input type="number" class="form-control" id="userQuantity${room.id}" name="userQuantity" value="${room.userQuantity}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="area${room.id}">Area:</label>
-                        <input type="number" class="form-control" id="area${room.id}" name="area" value="${room.area}" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price${room.id}">Price:</label>
-                        <input type="number" class="form-control" id="price${room.id}" name="price" value="${room.price}" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status_id${room.id}">Status:</label>
-                        <select class="form-control" id="status_id${room.id}" name="status_id">
-                            <option value="1" ${room.status == 1 ? 'selected' : ''}>Empty</option>
-                            <option value="2" ${room.status == 2 ? 'selected' : ''}>Using</option>
-                            <option value="3" ${room.status == 3 ? 'selected' : ''}>Booking</option>
-                        </select>
-                    </div>
-                       <input type="hidden" name="hotel_id" value="${room.hotel.id}"> <!-- Hidden field to pass Hotel ID -->
-
-              <div class="form-group">
-    <label for="type_id${room.id}">Room Type:</label>
-    <select class="form-control" id="type_id${room.id}" name="type_id">
-        <option value="1" ${room.typeRoom.id == 1 ? 'selected' : ''}>Normal</option>
-        <option value="2" ${room.typeRoom.id == 2 ? 'selected' : ''}>vippro</option>
-    </select>
-</div>
-
-                    <div class="form-group">
-                        <label for="description${room.id}">Description:</label>
-                        <textarea class="form-control" id="description${room.id}" name="description" rows="3">${room.description}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 
 
@@ -460,4 +356,3 @@
                                 };);
 </script>
 
-</html>

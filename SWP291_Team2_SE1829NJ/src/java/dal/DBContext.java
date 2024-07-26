@@ -12,7 +12,7 @@ public class DBContext {
     private static DBContext instance;
     private final String DB_HOST = "localhost";
     private final String DB_PORT = "1433";
-    private final String DB_NAME = "hotel140";
+    private final String DB_NAME = "hotel152";
     private final String DB_USER = "test";
     private final String DB_PASS = "12345678";
 

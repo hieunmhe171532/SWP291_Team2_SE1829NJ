@@ -30,66 +30,60 @@ public class Dashboard extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        try {
-            HttpSession session = request.getSession();
-            Account acc = (Account) session.getAttribute("acc");
-            if (acc != null && acc.getRole_id().equalsIgnoreCase("1")) {
+     try {
+    HttpSession session = request.getSession();
+    Account acc = (Account) session.getAttribute("acc");
+    
+    if (acc != null && !"5".equalsIgnoreCase(acc.getRole_id())) {
+        UserDAO udao = new UserDAO();
+        BlogDAO bldao = new BlogDAO();
+        MenuDAO mdao = new MenuDAO();
+        RoomDAO rdao = new RoomDAO();
+        BillDAO bidao = new BillDAO();  // Assuming you have this DAO initialized
 
-                UserDAO udao = new UserDAO();
-                BlogDAO bldao = new BlogDAO();
-                MenuDAO mdao = new MenuDAO();
-                RoomDAO rdao = new RoomDAO();
+        // Retrieve counts
+        int countUser = udao.countUsers();
+        int countBill = bidao.countBill();
+        int countBlog = bldao.countBlog();
+        int countFood = mdao.countFood();
+        int countRoom = rdao.countRoom();
+        int countReparingRoom = rdao.countRepairingRoom();
+        int countEmptyRoom = rdao.countEmptyRoom();
+        int countBookingRoom = rdao.countBookingRoom();
+        int countUsingRoom = rdao.countUsingRoom();
 
-                // Retrieve counts
-                int countUser = udao.countUsers();
-                int countBill = bidao.countBill();
-                int countBlog = bldao.countBlog();
-                int countFood = mdao.countFood();
-                int countRoom = rdao.countRoom();
-                int countReparingRoom = rdao.countRepairingRoom();
-                int countEmptyRoom = rdao.countEmptyRoom();
-                int countBookingRoom = rdao.countBookingRoom();
-                int countUsingRoom = rdao.countUsingRoom();
+        // Set attributes in the request scope
+        request.setAttribute("totalUser", countUser);
+        request.setAttribute("totalBill", countBill);
+        request.setAttribute("totalBlog", countBlog);
+        request.setAttribute("totalFood", countFood);
+        request.setAttribute("totalRoom", countRoom);
+        request.setAttribute("reRoom", countReparingRoom);
+        request.setAttribute("emRoom", countEmptyRoom);
+        request.setAttribute("boRoom", countBookingRoom);
+        request.setAttribute("usRoom", countUsingRoom);
 
-                // Set attributes in the request scope
-                request.setAttribute("totalUser", countUser);
-                request.setAttribute("totalBill", countBill);
-                request.setAttribute("totalBlog", countBlog);
-                request.setAttribute("totalFood", countFood);
-                request.setAttribute("totalRoom", countRoom);
-                request.setAttribute("reRoom", countReparingRoom);
-                request.setAttribute("emRoom", countEmptyRoom);
-                request.setAttribute("boRoom", countBookingRoom);
-                request.setAttribute("usRoom", countUsingRoom);
+        // Retrieve booking details
+        List<Map<String, Object>> bookingsToday = bidao.getAllBillsToday();
+        List<Map<String, Object>> allBookings = bidao.getAllBills();
+        List<Map<String, Object>> bookingsGroupToday = bidao.getAllBillsTodayGroup();
+        List<Map<String, Object>> allBookingsGroup = bidao.getAllBillsGroup();
 
-                // Retrieve booking details
-                List<Map<String, Object>> bookingsToday = bidao.getAllBillsToday();
-                List<Map<String, Object>> allBookings = bidao.getAllBills();
+        request.setAttribute("bookingsToday", bookingsToday);
+        request.setAttribute("allBookings", allBookings);
+        request.setAttribute("bookingsTodayGroup", bookingsGroupToday);
+        request.setAttribute("allBookingsGroup", allBookingsGroup);
 
-                List<Map<String, Object>> bookingsGroupToday = bidao.getAllBillsTodayGroup();
-                List<Map<String, Object>> allBookingsGroup = bidao.getAllBillsGroup();
-                
-                request.setAttribute("bookingsTodayGroup", bookingsGroupToday);
-                request.setAttribute("allBookingsGroup", allBookingsGroup);
- 
-                
-                request.setAttribute("bookingsToday", bookingsToday);
-                request.setAttribute("allBookings", allBookings);
-                // Forward the request to the admin JSP page
-                request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
-                
-                
-                
-                
-                
-                
-                
-            } else {
-                response.sendRedirect("login");
-            }
-        } catch (ServletException | IOException e) {
-            response.sendRedirect("404.jsp");
-        }
+        // Forward the request to the admin JSP page
+        request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
+    } else {
+        response.sendRedirect("login");
+    }
+} catch (ServletException | IOException e) {
+    e.printStackTrace();  // Log the exception
+    response.sendRedirect("404.jsp");
+}
+
     }
  @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

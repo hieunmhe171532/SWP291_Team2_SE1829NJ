@@ -216,7 +216,7 @@ public class BillDAO {
    
       public void changeStatusInCartVNPAY(Cart cart) throws SQLException {
     // SQL query to update status_id to 3 for the given room_id
-    String sqlBooking = "UPDATE Room SET status_id = 3 WHERE id = ?";
+    String sqlBooking = "UPDATE Room SET status_id = 2 WHERE id = ?";
     
     for (BookingItem item : cart.getItems()) {
         try (PreparedStatement psBooking = connection.prepareStatement(sqlBooking)) {
