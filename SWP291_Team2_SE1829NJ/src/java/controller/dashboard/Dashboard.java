@@ -11,8 +11,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Account;
 import model.Booking;
 import model.Room;
@@ -42,8 +45,10 @@ public class Dashboard extends HttpServlet {
         BillDAO bidao = new BillDAO();  // Assuming you have this DAO initialized
 
         // Retrieve counts
+        
         int countUser = udao.countUsers();
         int countBill = bidao.countBill();
+        float countIncome = bidao.calculateTotalIncome();;
         int countBlog = bldao.countBlog();
         int countFood = mdao.countFood();
         int countRoom = rdao.countRoom();
@@ -55,6 +60,7 @@ public class Dashboard extends HttpServlet {
         // Set attributes in the request scope
         request.setAttribute("totalUser", countUser);
         request.setAttribute("totalBill", countBill);
+         request.setAttribute("totalIncome", countIncome);
         request.setAttribute("totalBlog", countBlog);
         request.setAttribute("totalFood", countFood);
         request.setAttribute("totalRoom", countRoom);
@@ -98,8 +104,12 @@ public class Dashboard extends HttpServlet {
         int billId = Integer.parseInt(request.getParameter("billId"));
         boolean newPaymentMode = Boolean.parseBoolean(request.getParameter("newPaymentMode"));
  
-        bidao.updatePaymentModeByUserId(billId, newPaymentMode);
-
+        bidao.updatePaymentModeByUserId(billId, false);
+        try {
+            bidao.changeStatusRoomByBillId(billId);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         response.sendRedirect("dashboard"); // Redirect back to the dashboard
     }
 

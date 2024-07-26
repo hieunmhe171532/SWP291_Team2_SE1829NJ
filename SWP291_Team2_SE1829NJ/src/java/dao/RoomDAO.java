@@ -338,9 +338,9 @@ if (rs.next()) {
 
                     Hotel hotel = new Hotel();
                     hotel.setId(rs.getInt(9));
-                    hotel.setName(rs.getString(17));
+                    hotel.setName(rs.getString(16));
                     // Set other hotel fields if needed
-
+                room.setIsActive(rs.getBoolean("isActive"));
                     room.setHotel(hotel);
 
                     TypeRoom typeRoom = new TypeRoom();
@@ -356,6 +356,47 @@ if (rs.next()) {
         return room;
     }
 
+    
+     public boolean editRoomById(Room room, List<RoomImage> images) {
+        String sql = "UPDATE Room SET "
+                + "name = ?, "
+                + "room_floor = ?, "
+                + "userQuantity = ?, "
+                + "area = ?, "
+                + "price = ?, "
+                + "status_id = ?, "
+                + "description = ?, "
+                + "hotel_id = ?, "
+                + "type_id = ?, "
+                + "isActive = ? "
+                + "WHERE id = ?;";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, room.getName());
+            ps.setString(2, room.getRoom_floor());
+            ps.setInt(3, room.getUserQuantity());
+            ps.setFloat(4, room.getArea());
+            ps.setFloat(5, room.getPrice());
+            ps.setInt(6, room.getStatus());
+            ps.setString(7, room.getDescription());
+            ps.setInt(8, room.getHotel().getId());
+            ps.setInt(9, room.getTypeRoom().getId());
+            ps.setBoolean(10, room.isIsActive());
+            ps.setInt(11, room.getId());
+
+            int result = ps.executeUpdate();
+            if (result > 0) {
+                updateRoomImages(room.getId(), images);
+                return true; // Return true if the update was successful
+            }
+            return false;
+        } catch (SQLException e) {
+            System.out.println("Update Room Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    
     public List<Room> getAll() {
         List<Room> rooms = new ArrayList<>();
         Connection conn = dbContext.getConnection();
@@ -462,40 +503,61 @@ public boolean insertRoom(Room room) {
         }
     }
 
-    public boolean editRoomById(Room room) {
-String sql = "UPDATE Room SET "
-                + "name = ?, "
-            
-                + "room_floor = ?, "
-                + "userQuantity = ?, "
-                + "area = ?, "
-                + "price = ?, "
-                + "status_id = ?, "
-                + "description = ?, "
-                + "hotel_id = ?, "
-                + "type_id = ?, "
-                + "isActive = ? "
-                + "WHERE id = ?;";
+//  
+//    public boolean editRoomById(Room room, List<RoomImage> images) {
+//        String sql = "UPDATE Room SET "
+//                + "name = ?, "
+//                + "room_floor = ?, "
+//                + "userQuantity = ?, "
+//                + "area = ?, "
+//                + "price = ?, "
+//                + "status_id = ?, "
+//                + "description = ?, "
+//                + "hotel_id = ?, "
+//                + "type_id = ?, "
+//                + "isActive = ? "
+//                + "WHERE id = ?;";
+//
+//        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+//            ps.setString(1, room.getName());
+//            ps.setString(2, room.getRoom_floor());
+//            ps.setInt(3, room.getUserQuantity());
+//            ps.setFloat(4, room.getArea());
+//            ps.setFloat(5, room.getPrice());
+//            ps.setInt(6, room.getStatus());
+//            ps.setString(7, room.getDescription());
+//            ps.setInt(8, room.getHotel().getId());
+//            ps.setInt(9, room.getTypeRoom().getId());
+//            ps.setBoolean(10, room.isIsActive());
+//            ps.setInt(11, room.getId());
+//
+//            int result = ps.executeUpdate();
+//            if (result > 0) {
+//                updateRoomImages(room.getId(), images);
+//                return true; // Return true if the update was successful
+//            }
+//            return false;
+//        } catch (SQLException e) {
+//            System.out.println("Update Room Error: " + e.getMessage());
+//            return false;
+//        }
+//    }
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, room.getName());
-  
-            ps.setString(2, room.getRoom_floor());
-            ps.setInt(3, room.getUserQuantity());
-            ps.setFloat(4, room.getArea());
-            ps.setFloat(5, room.getPrice());
-            ps.setInt(6, room.getStatus());
-            ps.setString(7, room.getDescription());
-            ps.setInt(8, room.getHotel().getId()); // Ensures that the Hotel object is not null
-            ps.setInt(9, room.getTypeRoom().getId()); // Ensures that the TypeRoom object is not null
-            ps.setBoolean(10, room.isIsActive());
-            ps.setInt(11, room.getId());
+    private void updateRoomImages(int roomId, List<RoomImage> images) throws SQLException {
+        String deleteSql = "DELETE FROM RoomImages WHERE room_id = ?";
+        try (PreparedStatement deletePs = connection.prepareStatement(deleteSql)) {
+            deletePs.setInt(1, roomId);
+            deletePs.executeUpdate();
+        }
 
-            int result = ps.executeUpdate();
-            return result > 0; // Return true if the update was successful
-        } catch (SQLException e) {
-            System.out.println("Update Room Error: " + e.getMessage());
-            return false;
+        String insertSql = "INSERT INTO RoomImages (img, room_id, createAt) VALUES (?, ?, ?)";
+        try (PreparedStatement insertPs = connection.prepareStatement(insertSql)) {
+            for (RoomImage image : images) {
+                insertPs.setString(1, image.getImg());
+                insertPs.setInt(2, roomId);
+                insertPs.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
+                insertPs.executeUpdate();
+            }
         }
     }
 

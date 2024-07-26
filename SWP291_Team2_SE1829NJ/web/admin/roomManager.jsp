@@ -416,11 +416,11 @@
             window.location.href = url;
                                 }
             </script>
-                                <script>
+                                <script>;
                                     function formatPrice(price) {
                     return parseFloat(price).toLocaleString('en-US', {
                                     maximumFractionDigits: 2             });
-                                    }
+                                    };
                                     // Select all elements with id 'price'
                                     const priceElements = document.querySelectorAll('#price');
                             

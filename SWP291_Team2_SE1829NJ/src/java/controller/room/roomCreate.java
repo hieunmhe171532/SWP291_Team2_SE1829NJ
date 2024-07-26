@@ -149,60 +149,6 @@ throws ServletException, IOException {
     }
 }
 
-
- public static void main(String[] args) {
-        RoomDAO roomDAO = new RoomDAO();  // Assuming RoomDAO has a default constructor and does not require a servlet context
-        RoomImageDAO roomImageDAO = new RoomImageDAO(); // Assuming RoomImageDAO has a default constructor
-
-        // Create a new Room object manually for testing
-        Room room = new Room();
-        room.setId(674); // Assuming ID is manually set for testing
-        room.setName("Deluxe Room");
-        room.setRoom_floor("1");
-        room.setUserQuantity(2);
-        room.setArea(30.5f);
-        room.setPrice(200000.0f);
-        room.setStatus(1); // Assuming status '1' is for 'Available'
-        room.setDescription("A luxurious room with ocean view.");
-        room.setIsActive(true);
-
-        // Mock Hotel and TypeRoom data
-        Hotel hotel = new Hotel();
-        hotel.setId(1); // Assuming an existing hotel ID
-        room.setHotel(hotel);
-
-        TypeRoom typeRoom = new TypeRoom();
-        typeRoom.setId(1); // Assuming an existing type ID
-        room.setTypeRoom(typeRoom);
-
-        // Try to insert the room using the RoomDAO
-        boolean result = roomDAO.insertRoom(room);
-        if (result) {
-            System.out.println("Room has been added successfully.");
-
-            // Add RoomImages
-            String[] imageUrls = {
-               "images/anh001.jpg",
-                "images/anh002.jpg",
-                "images/anh003.jpg"
-            };
-
-            for (String imageUrl : imageUrls) {
-                RoomImage roomImage = new RoomImage();
-                roomImage.setImg(imageUrl.trim());
-                roomImage.setRoom(room);
-                boolean imageResult = roomImageDAO.insertRoomImage(roomImage);
-
-                if (imageResult) {
-                    System.out.println("Room image " + imageUrl + " has been added successfully.");
-                } else {
-                    System.out.println("Failed to add room image " + imageUrl);
-                }
-            }
-        } else {
-            System.out.println("Failed to add room.");
-        }
-    }
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
