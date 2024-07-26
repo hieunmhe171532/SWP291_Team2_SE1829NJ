@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dao.BlogDAO;
 import dao.FeedbackDAO;
+import dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,45 +16,48 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Blog;
 import model.Feedback;
+import model.Room;
 
 /**
  *
  * @author HUNG
  */
 public class homepage extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       response.setCharacterEncoding("UTF-8");
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        
-        
-        BlogDAO daob=new BlogDAO();
-        FeedbackDAO daofb=new FeedbackDAO();
-        
-        
-        Blog bl=daob.getBlogTop1();
-        List<Feedback> listfbt=daofb.getTop4Feedback();
-        
-        
-        
-                request.setAttribute("listfbt", listfbt);
 
+        BlogDAO daob = new BlogDAO();
+        FeedbackDAO daofb = new FeedbackDAO();
+        RoomDAO daor=new RoomDAO();
+
+        Blog bl = daob.getBlogTop1();
+        List<Feedback> listfbt = daofb.getTop4Feedback();
+        List<Room> listrfh=daor.getRoomsForHomePage();
+        List<Blog> listbfh=daob.getBlogForHomePage();
+
+        request.setAttribute("listfbt", listfbt);
+        request.setAttribute("listrfh", listrfh);
+        request.setAttribute("listbfh", listbfh);
         request.setAttribute("blog", bl);
-    request.getRequestDispatcher("homepage.jsp").forward(request, response);
-        }
-    
+        request.getRequestDispatcher("homepage.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -62,12 +65,13 @@ public class homepage extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -75,12 +79,13 @@ public class homepage extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
