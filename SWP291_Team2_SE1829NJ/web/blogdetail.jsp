@@ -5,6 +5,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +66,7 @@
                                     <div class="text">
                                         <h3 class="heading"><a href="viewblog?id=${rb.id}">${rb.title}</a></h3>
                                         <div class="meta">
-                                            <div>${rb.createAt}</div>
+                                            <div>${fn:substringBefore(rb.createAt, ".")}</div>
                                         </div>
                                     </div>
                                 </div>
