@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +56,8 @@
 
                                 <div class="text mt-3">
                                     <div class="meta mb-2">
-                                        <div>${b.createAt}</div>
+                                        <!--<div >${b.createAt}</div>-->
+                                        <td>${fn:substringBefore(b.createAt, ".")}</td>
                                         <div>${b.account.getUsername()}</div>
                                     </div>
                                         <h3 class="heading"><a href="viewblog?id=${b.id}">${b.title}</a></h3>
@@ -143,7 +145,6 @@
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
 
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>

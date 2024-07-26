@@ -28,8 +28,8 @@
         <link rel="stylesheet" href="bootstrap/css/style.css">
         <link rel="stylesheet" href="bootstrap/css/custom.css"> <!-- Di chuyển CSS tùy chỉnh vào file custom.css -->
 
-        
-      <style>
+
+        <style>
             .pagination {
                 display: flex;
                 justify-content: center;
@@ -61,45 +61,48 @@
                 cursor: default;
             }
         </style>
-         <script>
-        function increment(id) {
-            const input = document.getElementById(id);
-            let value = parseInt(input.value);
-            if (isNaN(value)) value = 0;
-            input.value = value + 1;
-        }
-
-        function decrement(id) {
-            const input = document.getElementById(id);
-            let value = parseInt(input.value);
-            if (isNaN(value)) value = 0;
-            if (value > 0) input.value = value - 1;
-        }
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const peopleValue = document.getElementById('people').value;
-            localStorage.setItem('peopleValue', peopleValue);
-            event.target.submit();
-        }
-
-        function restoreFormValue() {
-            const peopleValue = localStorage.getItem('peopleValue');
-            if (peopleValue !== null) {
-                document.getElementById('people').value = peopleValue;
+        <script>
+            function increment(id) {
+                const input = document.getElementById(id);
+                let value = parseInt(input.value);
+                if (isNaN(value))
+                    value = 0;
+                input.value = value + 1;
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', restoreFormValue);
-    </script>
+            function decrement(id) {
+                const input = document.getElementById(id);
+                let value = parseInt(input.value);
+                if (isNaN(value))
+                    value = 0;
+                if (value > 0)
+                    input.value = value - 1;
+            }
+
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                const peopleValue = document.getElementById('people').value;
+                localStorage.setItem('peopleValue', peopleValue);
+                event.target.submit();
+            }
+
+            function restoreFormValue() {
+                const peopleValue = localStorage.getItem('peopleValue');
+                if (peopleValue !== null) {
+                    document.getElementById('people').value = peopleValue;
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', restoreFormValue);
+        </script>
     </head>
     <body>
         <jsp:include page="layout/navbarmenu.jsp"/>
 
-<!--        
-  
-     
-     
+        <!--        
+          
+             
+             
         <!-- Shop area start -->
         <div class="shop_area shop_reverse">
             <div class="container">
@@ -112,9 +115,9 @@
                                     <h2>Room Types</h2>
                                     <ul>
                                         <li><a href="listroomforcus?action=all">All</a></li>
-                                        <c:forEach items="${TypeRoomData}" var="t">
+                                            <c:forEach items="${TypeRoomData}" var="t">
                                             <li><a href="listroomforcus?action=listByCategory&typeRoom_id=${t.id}">${t.name}</a></li>
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </div>
                                 <div class="widget_list">
@@ -137,10 +140,10 @@
                             <!-- Shop wrapper start -->
                             <div class="shop_title">
                                 <h2>Rooms</h2>
-                                      <span style="font-size: 14px; font-weight: normal;">
-                Nếu đoàn bạn đông và muốn thử dùng tool hỗ trợ thì vào 
-                <a href="roomsearch" style="text-decoration: underline; color: #007bff;">đây</a>
-            </span>
+                                <span style="font-size: 14px; font-weight: normal;">
+                                    Nếu đoàn bạn đông và muốn thử dùng tool hỗ trợ thì vào 
+                                    <a href="roomsearch" style="text-decoration: underline; color: #007bff;">đây</a>
+                                </span>
                             </div>
                             <div class="shop_toolbar_wrapper" style="border:none">
                                 <div class="dropdown">
@@ -162,10 +165,10 @@
                                                 <div class="text p-4 text-center">
                                                     <h3>${room.name}</h3>
                                                     <p class="mb-0"><span class="price mr-1">${room.userQuantity}</span> <span class="per">person(s)</span></p>
-                                                   
-                                                     <p class="mb-0"><span class="price mr-1">${fn:substringBefore(room.area, ".")}</span> <span class="per">m</span></p>
-                                    <p class="mb-0"><span class="price mr-1">${fn:substringBefore(room.price, ".")}</span> <span class="per">per night</span></p>
-                                                    
+
+                                                    <p class="mb-0"><span class="price mr-1">${fn:substringBefore(room.area, ".")}</span> <span class="per">m</span></p>
+                                                    <p class="mb-0"><span id="price" class="price mr-1">${fn:substringBefore(room.price, ".")}</span> <span class="per">per night</span></p>
+
                                                     <p class="pt-1"><a href="viewroom?rid=${room.id}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
                                                 </div>
                                             </div>
@@ -182,7 +185,7 @@
                                     <ul>
                                         <c:forEach begin="${1}" end="${num}" var="i">
                                             <li class="${i == page ? 'current' : ''}"><a href="listroomforcus?action=all&page=${i}">${i}</a></li>
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </div>
                             </div>
@@ -192,9 +195,9 @@
             </div>
         </div>
         <!-- Shop area end -->
-        
-               <jsp:include page="layout/navbarfoot.jsp"/>
-   
+
+        <jsp:include page="layout/navbarfoot.jsp"/>
+
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -217,25 +220,38 @@
         <script src="bootstrap/js/main.js"></script>
         <script src="bootstrap/js/custom.js"></script> <!-- Di chuyển JS tùy chỉnh vào file custom.js -->
         <script >
-                                function increment(id) {
-                                    let input = document.getElementById(id);
-                                    input.value = parseInt(input.value) + 1;
-                                }
+             function increment(id) {
+                 let input = document.getElementById(id);
+                 input.value = parseInt(input.value) + 1;
+             }
 
-                                function decrement(id) {
-                                    let input = document.getElementById(id);
-                                    if (parseInt(input.value) > 0) {
-                                        input.value = parseInt(input.value) - 1;
-                                    }
-                                }
+             function decrement(id) {
+                 let input = document.getElementById(id);
+                 if (parseInt(input.value) > 0) {
+                     input.value = parseInt(input.value) - 1;
+                 }
+             }
 
-                                function confirmBooking(event) {
-                                    event.preventDefault();
-                                    const people = document.getElementById('people').value;
-                                    const rooms = document.getElementById('rooms').value;
-                                    alert(`Bạn đã đặt ${people} người và ${rooms} phòng.`);
-                                    event.target.submit();
-                                }
+             function confirmBooking(event) {
+                 event.preventDefault();
+                 const people = document.getElementById('people').value;
+                 const rooms = document.getElementById('rooms').value;
+                 alert(`Bạn đã đặt ${people} người và ${rooms} phòng.`);
+                 event.target.submit();
+             }
+             function formatPrice(price) {
+                 return parseFloat(price).toLocaleString('en-US', {
+                     maximumFractionDigits: 2
+                 });
+             }
+             // Select all elements with id 'price'
+             const priceElements = document.querySelectorAll('#price');
+
+             // Loop through each element and format its content
+             priceElements.forEach(element => {
+                 let price = element.textContent;
+                 element.textContent = formatPrice(price);
+             });
 
 
         </script> 

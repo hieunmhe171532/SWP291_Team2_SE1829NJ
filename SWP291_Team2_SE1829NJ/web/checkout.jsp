@@ -86,200 +86,213 @@
                 cursor: pointer;
             }
         </style>
- 
-          <jsp:include page="layout/navbarmenu.jsp"/>
-<div class="container">
-    <h1>Checkout</h1>
-    <form action="checkout" method="POST">
-        <input type="hidden" name="action" value="placeOrder">
-        <div class="row">
-            <div class="col-lg-5 col-md-5">
-                <h3>Chi tiết đơn hàng</h3>
-                <div class="row">
-                    <div class="col-lg-12 mb-20">
-                        <label>Tên account<span>*</span></label>
-                        <input readonly="" value="${acc.username}" type="text">
+
+        <jsp:include page="layout/navbarmenu.jsp"/>
+    <div class="container">
+        <h1>Checkout</h1>
+        <form action="checkout" method="POST">
+            <input type="hidden" name="action" value="placeOrder">
+            <div class="row">
+                <div class="col-lg-5 col-md-5">
+                    <h3>Chi tiết đơn hàng</h3>
+                    <div class="row">
+                        <div class="col-lg-12 mb-20">
+                            <label>Tên account<span>*</span></label>
+                            <input readonly="" value="${acc.username}" type="text">
+                        </div>
+                        <div class="col-lg-12 mb-20">
+                            <label>Email <span>*</span></label>
+                            <input readonly="" value="${acc.email}" type="text">
+                        </div>
+                        <div class="col-lg-12 mb-20">
+                            <label>Địa chỉ<span>*</span></label>
+                            <input required name="address"  value="${acc.address}" type="text">
+                        </div>
+                        <div class="col-lg-12 mb-20">
+                            <label>Số điện thoại<span>*</span></label>
+                            <input required name="phone"  value="${acc.phone}" type="number">
+                        </div>
+
+
                     </div>
-                    <div class="col-lg-12 mb-20">
-                        <label>Email <span>*</span></label>
-                        <input readonly="" value="${acc.email}" type="text">
+                </div>
+                <div class="col-lg-7 col-md-7">
+                    <h3>Sản phẩm</h3>
+                    <div class="order_table table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Room</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${cart.items}" var="item">
+                                    <tr>
+                                        <td>${item.room.name}</td>
+                                        <td>${item.quantity}</td>
+                                        <td id="price">${fn:substringBefore(item.calculateCost(), ".")}</td>
+
+
+
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tổng giá</th>
+                                    <td id="price">${fn:substringBefore(cart.totalCost, ".")}</td>
+                                </tr>
+
+                                <tr class="order_total">
+                                    <th>Tổng đơn</th>
+                                    <td id="price"><strong>${fn:substringBefore(cart.totalCost, ".")}</strong></td>
+                                </tr>
+
+
+
+                            </tfoot>
+                        </table>
                     </div>
-                    <div class="col-lg-12 mb-20">
-                        <label>Địa chỉ<span>*</span></label>
-                        <input required name="address"  value="${acc.address}" type="text">
+                    <div class="payment_method">
+                        <div class="panel-default">
+                            <input id="payment_defult" value="cod" name="payment_method" type="radio" checked />
+                            <label for="payment_defult">
+                                Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png" alt="">
+                            </label>
+                        </div>
+                        <div class="panel-default">
+                            <input id="payment_defult" value="vnp" name="payment_method" type="radio" />
+                            <label for="payment_defult">
+                                Thanh toán bằng vnpay <img src="assets/img/icon/papyel.png" alt="">
+                            </label>
+                        </div>
+                        <div class="order_button">
+                            <button type="submit">Đặt hàng</button>
+                        </div>
                     </div>
-                    <div class="col-lg-12 mb-20">
-                        <label>Số điện thoại<span>*</span></label>
-                        <input required name="phone"  value="${acc.phone}" type="number">
-                    </div>
-                    
-                    
                 </div>
             </div>
-            <div class="col-lg-7 col-md-7">
-                <h3>Sản phẩm</h3>
-                <div class="order_table table-responsive">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Room</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${cart.items}" var="item">
-                            <tr>
-                                <td>${item.room.name}</td>
-                                <td>${item.quantity}</td>
-                                <td>${fn:substringBefore(item.calculateCost(), ".")}</td>
-                                
-                              
-                                
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Tổng giá</th>
-                            <td>${fn:substringBefore(cart.totalCost, ".")}</td>
-                        </tr>
-             
-                        <tr class="order_total">
-                            <th>Tổng đơn</th>
-                            <td><strong>${fn:substringBefore(cart.totalCost, ".")}</strong></td>
-                        </tr>
-                        
-                        
-                        
-                        </tfoot>
-                    </table>
+        </form>
+    </div>
+
+    <footer class="ftco-footer ftco-section img" style="background-image: url(images/bg_4.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Harbor Lights</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="payment_method">
-                    <div class="panel-default">
-                        <input id="payment_defult" value="cod" name="payment_method" type="radio" checked />
-                        <label for="payment_defult">
-                            Thanh toán khi nhận hàng <img src="assets/img/icon/papyel.png" alt="">
-                        </label>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Useful Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Blog</a></li>
+                            <li><a href="#" class="py-2 d-block">Rooms</a></li>
+                            <li><a href="#" class="py-2 d-block">Amenities</a></li>
+                            <li><a href="#" class="py-2 d-block">Gift Card</a></li>
+                        </ul>
                     </div>
-                    <div class="panel-default">
-                        <input id="payment_defult" value="vnp" name="payment_method" type="radio" />
-                        <label for="payment_defult">
-                            Thanh toán bằng vnpay <img src="assets/img/icon/papyel.png" alt="">
-                        </label>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Privacy</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Career</a></li>
+                            <li><a href="#" class="py-2 d-block">About Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                        </ul>
                     </div>
-                    <div class="order_button">
-                        <button type="submit">Đặt hàng</button>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </footer>
 
-        <footer class="ftco-footer ftco-section img" style="background-image: url(images/bg_4.jpg);">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Harbor Lights</h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4 ml-md-5">
-                            <h2 class="ftco-heading-2">Useful Links</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Blog</a></li>
-                                <li><a href="#" class="py-2 d-block">Rooms</a></li>
-                                <li><a href="#" class="py-2 d-block">Amenities</a></li>
-                                <li><a href="#" class="py-2 d-block">Gift Card</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Privacy</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Career</a></li>
-                                <li><a href="#" class="py-2 d-block">About Us</a></li>
-                                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                                <li><a href="#" class="py-2 d-block">Services</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Have a Questions?</h2>
-                            <div class="block-23 mb-3">
-                                <ul>
-                                    <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-        <!-- loader -->
-        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.easing.1.3.js"></script>
+    <script src="bootstrap/js/jquery.waypoints.min.js"></script>
+    <script src="bootstrap/js/jquery.stellar.min.js"></script>
+    <script src="bootstrap/js/owl.carousel.min.js"></script>
+    <script src="bootstrap/js/jquery.magnific-popup.min.js"></script>
+    <script src="bootstrap/js/aos.js"></script>
+    <script src="bootstrap/js/jquery.animateNumber.min.js"></script>
+    <script src="bootstrap/js/bootstrap-datepicker.js"></script>
+    <script src="bootstrap/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="bootstrap/js/google-map.js"></script>
+    <script src="bootstrap/js/main.js"></script>
+    <script src="bootstrap/js/custom.js"></script> <!-- Di chuyển JS tùy chỉnh vào file custom.js -->
+    <script >
+                            function increment(id) {
+                                let input = document.getElementById(id);
+                                input.value = parseInt(input.value) + 1;
+                            }
 
-        <script src="bootstrap/js/jquery.min.js"></script>
-        <script src="bootstrap/js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="bootstrap/js/popper.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="bootstrap/js/jquery.easing.1.3.js"></script>
-        <script src="bootstrap/js/jquery.waypoints.min.js"></script>
-        <script src="bootstrap/js/jquery.stellar.min.js"></script>
-        <script src="bootstrap/js/owl.carousel.min.js"></script>
-        <script src="bootstrap/js/jquery.magnific-popup.min.js"></script>
-        <script src="bootstrap/js/aos.js"></script>
-        <script src="bootstrap/js/jquery.animateNumber.min.js"></script>
-        <script src="bootstrap/js/bootstrap-datepicker.js"></script>
-        <script src="bootstrap/js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="bootstrap/js/google-map.js"></script>
-        <script src="bootstrap/js/main.js"></script>
-        <script src="bootstrap/js/custom.js"></script> <!-- Di chuyển JS tùy chỉnh vào file custom.js -->
-        <script >
-                                function increment(id) {
-                                    let input = document.getElementById(id);
-                                    input.value = parseInt(input.value) + 1;
+                            function decrement(id) {
+                                let input = document.getElementById(id);
+                                if (parseInt(input.value) > 0) {
+                                    input.value = parseInt(input.value) - 1;
                                 }
+                            }
 
-                                function decrement(id) {
-                                    let input = document.getElementById(id);
-                                    if (parseInt(input.value) > 0) {
-                                        input.value = parseInt(input.value) - 1;
-                                    }
-                                }
+                            function confirmBooking(event) {
+                                event.preventDefault();
+                                const people = document.getElementById('people').value;
+                                const rooms = document.getElementById('rooms').value;
+                                alert(`Bạn đã đặt ${people} người và ${rooms} phòng.`);
+                                event.target.submit();
+                            }
+                            function formatPrice(price) {
+                                return parseFloat(price).toLocaleString('en-US', {
+                                    maximumFractionDigits: 2
+                                });
+                            }
+                            // Select all elements with id 'price'
+                            const priceElements = document.querySelectorAll('#price');
 
-                                function confirmBooking(event) {
-                                    event.preventDefault();
-                                    const people = document.getElementById('people').value;
-                                    const rooms = document.getElementById('rooms').value;
-                                    alert(`Bạn đã đặt ${people} người và ${rooms} phòng.`);
-                                    event.target.submit();
-                                }
+                            // Loop through each element and format its content
+                            priceElements.forEach(element => {
+                                let price = element.textContent;
+                                element.textContent = formatPrice(price);
+                            });
 
 
-        </script> 
+    </script> 
 
-    </body>
+</body>
 </html>

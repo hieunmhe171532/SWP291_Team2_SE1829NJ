@@ -56,7 +56,7 @@
             <ul class="app-menu">
                 <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
-                                  <li><a class="app-menu__item" href="accountmanagement"><i
+                <li><a class="app-menu__item" href="accountmanagement"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Manage Account</span></a>
                 </li>    
 
@@ -67,7 +67,7 @@
                             class="app-menu__label">Manage room</span></a></li>
                 <li><a class="app-menu__item" href="roomcreate"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Creat room</span></a></li>   
-          <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
+                <li><a class="app-menu__item" href="viewcustomer"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">View Customer</span></a></li>
                 <li><a class="app-menu__item" href="listmanageblog"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Blog Management</span></a>
@@ -116,24 +116,24 @@
                                         <tr>
                                             <td>${room.id}</td>
                                             <td>${room.name}</td>
-                                      
+
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${room.status == 1}">
                                                         Empty
                                                     </c:when>
                                                     <c:when test="${room.status == 2}">
-                                                       Booking
+                                                        Booking
                                                     </c:when>
                                                     <c:when test="${room.status == 3}">
                                                         Using
                                                     </c:when>
-                                             
+
                                                 </c:choose>
                                             </td>
 
                                             <td>${room.userQuantity}</td>
-                                            <td>${room.price}</td>
+                                            <td id="price">${room.price}</td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm edit" type="button" title="Edit" data-toggle="modal" data-target="#ModalUP${room.id}">
                                                     <i class="fas fa-edit"></i>
@@ -198,7 +198,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-  <input type="hidden" name="id" value="${room.id}"> <!-- Hidden field to pass Room ID -->
+                                <input type="hidden" name="id" value="${room.id}"> <!-- Hidden field to pass Room ID -->
                                 <div class="form-group">
                                     <label for="status_id${room.id}">Status:</label>
                                     <select class="form-control" id="status_id${room.id}" name="status_id">
@@ -285,61 +285,79 @@
                             data: [48, 48, 49, 39, 86, 10]
                     }
                     ]
-            };                             var ctxl = $("#lineChartDemo").get(0).getContext("2d");                 var lineChart = new Chart(ctxl).Line(data);
+
+                    
+                    };                             var ctxl = $("#lineChartDemo").get(
+                0).get
+            Context("2d");                 var lineChart = new Chart(ctxl).Line(data);
             var ctxb = $("#barChartDemo").get(0).getContext("2d");
-                            var barChart = new Chart(ctxb).Bar(data);
-        </        script>
-        <script type="text/javascript">                             //Thời Gian
-        function time() {
-            var today = new Date();
-    var weekday = new Array(7);
-    weekday[0] = "Chủ Nhật";
-    weekday[1] = "Thứ Hai";
-    weekday[2] = "Thứ Ba";
-    weekday[3] = "Thứ Tư";
-    weekday[4] = "Thứ Năm";
-    weekday[5] = "Thứ Sáu";
-    weekday[6] = "Thứ Bảy";
-    var day = weekday[today.getDay()];
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    m = checkTime(m);
-    nowTime = h + ":" + m + "";
-    if (dd < 10) {
-    dd = '0' + dd;
-    }
-    if (mm < 10) {
-    mm = '0' + mm;
-    }
-    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-            '</span>';
-    document.getElementById("clock").innerHTML = tmp;
-    clocktime = setTimeout("time()", "1000", "Javascript");
-    function checkTime(i) {
-    if (i < 10) {
-    i = "0" + i;
+            var barChart = new Chart(ctxb).Bar(data) ; 
+                </          sc ript>
+                    <script type="text/javascript">                             //Thời Gian
+                            function time() {
+                    var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            m = checkTime(m);
+            nowTime = h + ":" + m + "";
+            if (dd < 10) {
+            dd = '0' + dd;
             }
-    return i;
-     }
-                    }
-                </script            >
+            if (mm < 10) {
+            mm = '0' + mm;
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                    '</span>';
+            docu m ent.getElementBy I d("clo ck").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+            function checkTime(i) {
+            if (i < 10) {
+            i = "0" + i;
+            }
+            return i;
+            }
+                     }
+                    </script              >
 
 
                     </body>
 
 
 
-            <script>
-                    function redirectToRoomDetails(id) {
-            // Construct the URL with the username pa r ameter 
-            var url = "roomdetail?id=" + encodeURIComponent(id);
-    // Redirect to the URL
-    window.location.href = url;
-            }
+                    <script>
+                function redirectToRoomDetails(id) {
+                    // Construct the URL with the username pa r ameter 
+                    var url = "roomdetail?id=" + encodeURIComponent(id);
+            // Redirect to the URL
+            window.location.href = url;
+                                }
             </script>
+                                <script>
+                                    function formatPrice(price) {
+                    return parseFloat(price).toLocaleString('en-US', {
+                                    maximumFractionDigits: 2             });
+                                    }
+                                    // Select all elements with id 'price'
+                                    const priceElements = document.querySelectorAll('#price');
+                            
+                                    // Loop through each element and format its content
+                                priceElements.forEach(element => {
+                    let price = element.textContent;
+            element.textContent = formatPrice(price);
+                                        });
+                                        </script>
 
                     </html>
