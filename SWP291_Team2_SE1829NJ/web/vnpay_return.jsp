@@ -139,8 +139,26 @@
                     <label >Tình trạng giao dịch:</label>
                     <label>
                         <%
+                            HttpSession sessionObj = request.getSession(true);
+
+                            // Lấy giá trị từ session
+                            Cart cart = (Cart) sessionObj.getAttribute("cart");
+                            Account acc = (Account) sessionObj.getAttribute("acc");
+
+                            if (cart == null || acc == null) {
+                                response.sendRedirect("homepage");
+                            return;
+                            }
+                            BillDAO dao = new BillDAO();
+                            int bill_id = dao.getLastBillId();
+
+                            int userId = dao.getUserIdByAccountUsername(acc.getUsername());
+
                             if (signValue.equals(vnp_SecureHash)) {
                                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
+                                dao.addBooking(cart, userId, bill_id);
+                                    session.removeAttribute("cart");
+                                    session.setAttribute("size", 0);
                                     out.print("Thành công");
                                 } else {
                                     out.print("Không thành công");
@@ -155,26 +173,6 @@
             <p>
                 &nbsp;
             </p>
-            <%
-                HttpSession sessionObj = request.getSession(true);
-
-                // Lấy giá trị từ session
-                Cart cart = (Cart) sessionObj.getAttribute("cart");
-                Account acc = (Account) sessionObj.getAttribute("acc");
-
-                if (cart == null || acc == null) {
-                    response.sendRedirect("homepage");
-                    return;
-                }
-                BillDAO dao = new BillDAO();
-                int bill_id = dao.getLastBillId();
-
-                int userId = dao.getUserIdByAccountUsername(acc.getUsername());
-
-                dao.addBooking(cart, userId, bill_id);
-                session.removeAttribute("cart");
-                session.setAttribute("size", 0);
-            %>
             <footer class="footer">
                 <p>&copy; VNPAY 2020</p>
             </footer>

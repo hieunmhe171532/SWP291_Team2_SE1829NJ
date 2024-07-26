@@ -49,6 +49,7 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect("homepage");
             return;
         }
+        
         BillDAO dao = new BillDAO();
 
         String address = request.getParameter("address");
