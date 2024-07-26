@@ -49,7 +49,7 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect("homepage");
             return;
         }
-        
+
         BillDAO dao = new BillDAO();
 
         String address = request.getParameter("address");
@@ -59,22 +59,23 @@ public class CheckoutServlet extends HttpServlet {
         int userId = dao.getUserIdByAccountUsername(acc.getUsername());
 
         try {
-            if (paymentMethod.equals("cod")) {
-                if (userId == -1) {
-                    throw new Exception("User ID not found for username: " + acc.getUsername());
-                }
-
-                Bill bill = createBill(userId, acc.getEmail(), phone, address, cart, paymentMethod);
-                dao.addBill(bill);
-//            
-
-                dao.addBooking(cart, userId, bill_id);
-               dao.changeStatusInCart(cart);
-                session.removeAttribute("cart");
-                session.setAttribute("size", 0);
-
-                response.sendRedirect("homepage");
-            } else if (paymentMethod.equals("vnp")) {
+//            if (paymentMethod.equals("cod")) {
+//                if (userId == -1) {
+//                    throw new Exception("User ID not found for username: " + acc.getUsername());
+//                }
+//
+//                Bill bill = createBill(userId, acc.getEmail(), phone, address, cart, paymentMethod);
+//                dao.addBill(bill);
+////            
+//
+//                dao.addBooking(cart, userId, bill_id);
+//               dao.changeStatusInCart(cart);
+//                session.removeAttribute("cart");
+//                session.setAttribute("size", 0);
+//
+//                response.sendRedirect("homepage");
+//            } else 
+            if (paymentMethod.equals("vnp")) {
                 String vnp_Version = "2.1.0";
                 String vnp_Command = "pay";
                 String orderType = "other";
@@ -147,8 +148,7 @@ public class CheckoutServlet extends HttpServlet {
                 String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
                 Bill bill = createBillVNPay(userId, acc.getEmail(), phone, address, cart, paymentMethod);
                 dao.addBill(bill);
-                      dao.addBooking(cart, userId, bill_id);
-                   dao.changeStatusInCartVNPAY(cart);
+                dao.changeStatusInCartVNPAY(cart);
                 response.sendRedirect(paymentUrl);
             }
 
@@ -163,7 +163,7 @@ public class CheckoutServlet extends HttpServlet {
 
     }
 
-    private  Bill createBill(int userId, String email, String phone, String address, Cart cart, String payment) {
+    private Bill createBill(int userId, String email, String phone, String address, Cart cart, String payment) {
         Bill bill = new Bill();
         bill.setDiscount(0); // Add logic for discount if needed
         bill.setPaymentDate(new Date());
@@ -180,7 +180,8 @@ public class CheckoutServlet extends HttpServlet {
         bill.setIsDelete(false);
         return bill;
     }
-    private  Bill createBillVNPay(int userId, String email, String phone, String address, Cart cart, String payment) {
+
+    private Bill createBillVNPay(int userId, String email, String phone, String address, Cart cart, String payment) {
         Bill bill = new Bill();
         bill.setDiscount(0); // Add logic for discount if needed
         bill.setPaymentDate(new Date());

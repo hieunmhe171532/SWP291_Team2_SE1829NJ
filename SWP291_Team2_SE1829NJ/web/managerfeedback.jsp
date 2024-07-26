@@ -491,7 +491,9 @@
                                             ${page.id}
                                         </td>
                                         <td>
-                                            <img src="${page.img}" alt="no image" style="width: 50%"/>
+
+                                            <img src="${page.img}" alt="" style="width: 50%"/>
+
                                         </td>
                                         <td>
                                             ${page.description}
@@ -674,7 +676,7 @@
                 maximumFractionDigits: 2
             });
         }
-        
+
 
         // Select all elements with id 'price'
         const priceElements = document.querySelectorAll('#price');
