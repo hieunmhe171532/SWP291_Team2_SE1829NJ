@@ -198,24 +198,53 @@ count = rs.getInt("countRoom");
         }
         return rooms;
     }
-     public List<Room> getRoomsForHomePage() {
-        List<Room> rooms = new ArrayList<>();
-        String sql = "select top(6) * from Room where isActive=1 and status_id=1";
+     public List<RoomImage> getRoomsForHomePage() {
+        List<RoomImage> t = new ArrayList<>();
+        String sql = "SELECT TOP(6) r.*, ri.*\n" +
+"                         FROM room r\n" +
+"                         JOIN RoomImages ri ON r.id = ri.room_id\n" +
+"						 where isActive=1 and status_id=1\n" +
+"                         AND NOT EXISTS (\n" +
+"                             SELECT 1\n" +
+"                             FROM RoomImages ri2\n" +
+"                             WHERE ri.room_id = ri2.room_id\n" +
+"                             AND ri.id > ri2.id\n" +
+"                         )\n" +
+"                         ORDER BY r.id;";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                Room r = new Room();
-                r.setId(rs.getInt(1));
-                r.setPrice(rs.getFloat(6));
-                r.setName(rs.getString(2));
+                Room room=new Room();
+                RoomImage ri=new RoomImage();
+                room.setId(rs.getInt(1));
+                room.setName(rs.getString(2));
+                room.setRoom_floor(rs.getString(3));
+                room.setArea(rs.getFloat(5));
+                room.setUserQuantity(rs.getInt(4));
+                room.setPrice(rs.getFloat(6));
+                room.setStatus(rs.getInt(7));
+                room.setDescription(rs.getString(8));
+                ri.setId(rs.getInt(15));
+                ri.setImg(rs.getString(16));
+                ri.setRoom(room);
 
-                rooms.add(r);
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt(9));
+                // Set other hotel fields if needed
+
+                room.setHotel(hotel);
+
+                TypeRoom typeRoom = new TypeRoom();
+                typeRoom.setId(rs.getInt(10));
+
+                room.setTypeRoom(typeRoom);
+                t.add(ri);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rooms;
+        return t;
     }
     
     private int countRoomsByStatus(int statusId) {
@@ -1066,8 +1095,8 @@ String sql = "UPDATE Room SET "
 //            
 //            
 //        }
-        List<Room> l=roomDAO.getRoomsForHomePage();
-         for (Room r : l) {
+        List<RoomImage> l=roomDAO.getRoomsForHomePage();
+         for (RoomImage r : l) {
              System.out.println(r);
          }
         

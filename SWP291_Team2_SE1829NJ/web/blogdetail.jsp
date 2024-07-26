@@ -65,7 +65,6 @@
                                         <h3 class="heading"><a href="viewblog?id=${rb.id}">${rb.title}</a></h3>
                                         <div class="meta">
                                             <div>${rb.createAt}</div>
-                                            <div>${rb.account.getUsername()}</div>
                                         </div>
                                     </div>
                                 </div>

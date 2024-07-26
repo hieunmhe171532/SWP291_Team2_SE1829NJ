@@ -17,6 +17,7 @@ import java.util.List;
 import model.Blog;
 import model.Feedback;
 import model.Room;
+import model.RoomImage;
 
 /**
  *
@@ -44,7 +45,7 @@ public class homepage extends HttpServlet {
 
         Blog bl = daob.getBlogTop1();
         List<Feedback> listfbt = daofb.getTop4Feedback();
-        List<Room> listrfh=daor.getRoomsForHomePage();
+        List<RoomImage> listrfh=daor.getRoomsForHomePage();
         List<Blog> listbfh=daob.getBlogForHomePage();
 
         request.setAttribute("listfbt", listfbt);
