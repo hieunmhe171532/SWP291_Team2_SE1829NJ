@@ -5,12 +5,17 @@
 
 package controller;
 
+import dao.BlogDAO;
+import dao.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Blog;
+import model.Feedback;
 
 /**
  *
@@ -29,6 +34,20 @@ public class homepage extends HttpServlet {
     throws ServletException, IOException {
        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+        
+        
+        BlogDAO daob=new BlogDAO();
+        FeedbackDAO daofb=new FeedbackDAO();
+        
+        
+        Blog bl=daob.getBlogTop1();
+        List<Feedback> listfbt=daofb.getTop4Feedback();
+        
+        
+        
+                request.setAttribute("listfbt", listfbt);
+
+        request.setAttribute("blog", bl);
     request.getRequestDispatcher("homepage.jsp").forward(request, response);
         }
     

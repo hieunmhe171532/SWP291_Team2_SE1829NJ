@@ -198,6 +198,25 @@ count = rs.getInt("countRoom");
         }
         return rooms;
     }
+     public List<Room> getRoomsForHomePage() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "select top(6) * from Room where isActive=1 and status_id=1";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Room r = new Room();
+                r.setId(rs.getInt(1));
+                r.setPrice(rs.getFloat(6));
+                r.setName(rs.getString(2));
+
+                rooms.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
     
     private int countRoomsByStatus(int statusId) {
         int count = 0;
@@ -1032,21 +1051,25 @@ String sql = "UPDATE Room SET "
         // Create an instance of RoomDAO
         RoomDAO roomDAO = new RoomDAO();
 
-        // Test the findListRoomByNumbersRoomNumberHuman method
-        int numberOfHumans = 4;
-        List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfHumans);
-
-        // Print the results
-        if (rooms != null) {
-            for (Room room : rooms) {
-                System.out.println(room);
-            }
-        } else {
-            System.out.println("No rooms found for the given number of humans.");
-            
-            
-            
-        }
+//        // Test the findListRoomByNumbersRoomNumberHuman method
+//        int numberOfHumans = 4;
+//        List<Room> rooms = roomDAO.findListRoomByNumbersRoomNumberHuman(numberOfHumans);
+//
+//        // Print the results
+//        if (rooms != null) {
+//            for (Room room : rooms) {
+//                System.out.println(room);
+//            }
+//        } else {
+//            System.out.println("No rooms found for the given number of humans.");
+//            
+//            
+//            
+//        }
+        List<Room> l=roomDAO.getRoomsForHomePage();
+         for (Room r : l) {
+             System.out.println(r);
+         }
         
         
     }
