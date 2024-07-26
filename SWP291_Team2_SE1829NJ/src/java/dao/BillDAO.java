@@ -316,6 +316,33 @@ public int getLastBillId() {
 
     // Method to add a new Bill
      
+//   public void addBill(Bill bill) {
+//    String sql = "INSERT INTO Bill (used_id, phone, email, address, discount, paymentDate, paymentMode, paymentMethod, total, createAt, updateAt, deleteAt, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//    try (PreparedStatement st = connection.prepareStatement(sql)) {
+//        st.setInt(1, bill.getBooking_id());
+//        st.setString(2, bill.getPhone());
+//        st.setString(3, bill.getEmail());
+//        st.setString(4, bill.getAddress());
+//        st.setFloat(5, bill.getDiscount());
+//        st.setDate(6, new java.sql.Date(bill.getPaymentDate().getTime()));
+//        st.setBoolean(7, bill.isPaymentMode());
+//        st.setString(8, bill.getPaymentMethod());
+//        st.setFloat(9, bill.getTotal());
+//        st.setTimestamp(10, new java.sql.Timestamp(bill.getCreateAt().getTime()));
+//        st.setTimestamp(11, new java.sql.Timestamp(bill.getUpdateAt().getTime()));
+//        if (bill.getDeleteAt() != null) {
+//            st.setTimestamp(12, new java.sql.Timestamp(bill.getDeleteAt().getTime()));
+//        } else {
+//            st.setNull(12, java.sql.Types.TIMESTAMP);
+//        }
+//        st.setBoolean(13, bill.isIsDelete());
+//        st.executeUpdate();
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    }
+//}
+//   
+   
    public void addBill(Bill bill) {
     String sql = "INSERT INTO Bill (used_id, phone, email, address, discount, paymentDate, paymentMode, paymentMethod, total, createAt, updateAt, deleteAt, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement st = connection.prepareStatement(sql)) {
@@ -342,8 +369,6 @@ public int getLastBillId() {
     }
 }
    
-   
-
    
     // Method to get a Bill by ID
     public Bill getBillById(int id) {
@@ -491,8 +516,8 @@ public int getLastBillId() {
                  "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS RoomList, " +
                  "bl.total AS TotalAmount, " +
                  "CASE " +
-                 "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
-                 "    ELSE 'Unpaid' " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Keep' " +
+                 "    ELSE 'Throw' " +
                  "END AS PaymentStatus, " +
                  "bl.paymentMethod AS PaymentMethod " +
                  "FROM Bill bl " +
@@ -536,8 +561,8 @@ public int getLastBillId() {
                  "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS RoomList, " +
                  "bl.total AS TotalAmount, " +
                  "CASE " +
-                 "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
-                 "    ELSE 'Unpaid' " +
+                 "    WHEN bl.paymentMode = 1 THEN 'Keep' " +
+                 "    ELSE 'Throw' " +
                  "END AS PaymentStatus, " +
                  "bl.paymentMethod AS PaymentMethod " +
                  "FROM Bill bl " +
@@ -585,8 +610,8 @@ public int getLastBillId() {
                      "STRING_AGG(r.name, ', ') WITHIN GROUP (ORDER BY r.name) AS roomList, " +
                      "bk.cost AS totalAmount, " +
                      "CASE " +
-                     "    WHEN bl.paymentMode = 1 THEN 'Paid' " +
-                     "    ELSE 'Unpaid' " +
+                     "    WHEN bl.paymentMode = 1 THEN 'Keep' " +
+                     "    ELSE 'Throw' " +
                      "END AS paymentStatus, " +
                      "bl.paymentMethod AS paymentMethod " +
                      "FROM Booking bk " +

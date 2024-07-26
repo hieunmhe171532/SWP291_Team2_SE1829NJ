@@ -194,7 +194,7 @@ public class CheckoutServlet extends HttpServlet {
         bill.setCreateAt(new Date());
         bill.setUpdateAt(new Date());
         bill.setDeleteAt(null);
-        bill.setIsDelete(true);
+        bill.setIsDelete(false);
         return bill;
     }
 
