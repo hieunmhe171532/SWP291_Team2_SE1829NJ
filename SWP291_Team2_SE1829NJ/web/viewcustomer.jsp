@@ -2,6 +2,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -268,7 +270,7 @@
                                 </div>
                                 <div class="form-group">
                                     <h4>CreateAt</h4>
-                                    <input name="create" type="text" value="${u.createAt}" class="form-control" readonly required>
+                                    <input name="create" type="text" value="${fn:substringBefore(u.createAt, ".")}" class="form-control" readonly required>
                                 </div>
 
 
