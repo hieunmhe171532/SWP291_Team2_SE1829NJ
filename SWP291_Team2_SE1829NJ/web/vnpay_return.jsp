@@ -76,6 +76,112 @@
             a{
                 color: black;
             }
+            /* General container styling */
+            .container {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            /* Header styling */
+            .header {
+                border-bottom: 2px solid #e8e8e8;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
+
+            .header h3 {
+                margin: 0;
+                font-size: 24px;
+                color: #333;
+            }
+
+            /* Form group styling */
+            .form-group {
+                margin-bottom: 20px;
+                padding: 10px;
+                border: 1px solid #e8e8e8;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 5px;
+            }
+
+            /* Price label styling */
+            #price {
+                font-size: 18px;
+                color: #e74c3c; /* Red color for emphasis */
+            }
+
+            /* Responsive table styling */
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            /* Footer styling */
+            .footer {
+                text-align: center;
+                padding: 20px 0;
+                border-top: 2px solid #e8e8e8;
+                margin-top: 20px;
+                background-color: #f1f1f1;
+            }
+
+            .footer p {
+                margin: 0;
+                color: #555;
+            }
+
+            /* Button styling */
+            button {
+                padding: 15px 25px;
+                border: none;
+                border-radius: 15px;
+                color: #212121;
+                background: #e8e8e8;
+                font-weight: bold;
+                font-size: 17px;
+                box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+                transition: background-color 250ms, color 250ms;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            button:hover {
+                color: #e8e8e8;
+                background-color: #212121;
+            }
+
+            button::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0;
+                border-radius: 15px;
+                background-color: #212121;
+                transition: width 250ms;
+                z-index: -1;
+            }
+
+            button:hover::before {
+                width: 100%;
+            }
+
+            /* Anchor tags inside buttons */
+            button a {
+                color: inherit;
+                text-decoration: none;
+            }
+
         </style>
     </head>
     <body>
@@ -113,7 +219,7 @@
                 </div>    
                 <div class="form-group">
                     <label >Số tiền:</label>
-                    <label>${cart.totalCost}</label>
+                    <label id="price">${cart.totalCost}</label>
                 </div>  
                 <div class="form-group">
                     <label >Mô tả giao dịch:</label>
@@ -156,11 +262,14 @@
 
                             if (signValue.equals(vnp_SecureHash)) {
                                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                                dao.addBooking(cart, userId, bill_id);
+                                    dao.addBooking(cart, userId, bill_id);
+                                    dao.changeStatusInCartVNPAY(cart);
+                                    dao.updatePaymentModeByUserId(bill_id,true);
                                     session.removeAttribute("cart");
                                     session.setAttribute("size", 0);
                                     out.print("Thành công");
                                 } else {
+                                    dao.deletePaymentModeByUserId(bill_id);
                                     out.print("Không thành công");
                                 }
 
@@ -177,5 +286,22 @@
                 <p>&copy; VNPAY 2020</p>
             </footer>
         </div>  
+        <script>
+            function formatPrice(price) {
+                return parseFloat(price).toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                });
+            }
+
+
+// Select all elements with id 'price'
+            const priceElements = document.querySelectorAll('#price');
+
+// Loop through each element and format its content
+            priceElements.forEach(element => {
+                let price = element.textContent;
+                element.textContent = formatPrice(price);
+            });
+        </script>
     </body>
 </html>

@@ -50,6 +50,21 @@ public class BillDAO {
             e.printStackTrace();
         }
     }
+    public void deletePaymentModeByUserId(int billId) {
+        String sql = "delete from Bill where id=? ";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, billId);
+            int rowsUpdated = st.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Payment mode updated successfully for user ID: " + billId);
+            } else {
+                System.out.println("No records found for user ID: " + billId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     // Method to count the number of bills
     public int countBill() {
@@ -761,16 +776,3 @@ public int getLastBillId() {
         }
     }
 
-    public static void main(String[] args) {
-        BillDAO billDAO = new BillDAO();
-        float totalIncome = billDAO.calculateTotalIncome();
-        System.out.println("Total Income: " + totalIncome);
-
-        try {
-            billDAO.changeStatusRoomByBillId(1); // Change status for rooms associated with bill ID 1
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-}
