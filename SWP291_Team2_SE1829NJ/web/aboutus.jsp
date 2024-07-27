@@ -140,9 +140,9 @@
                     <h3 class="section-heading">Contact Us</h3>
                     <p class="lead">We look forward to welcoming you to Hotel 688. For reservations or inquiries, please contact us at:</p>
                     <p class="lead">
-                        <strong>Address:</strong> [Hotel Address]<br>
-                        <strong>Phone:</strong> [Hotel Phone Number]<br>
-                        <strong>Email:</strong> [Hotel Email Address]<br>
+                        
+                        <strong>Phone:</strong> 0912 345 678<br>
+                        <strong>Email:</strong> hotelbooking688@gmail.com<br>
                         
                     </p>
                 </div>
