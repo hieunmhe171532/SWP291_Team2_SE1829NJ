@@ -105,24 +105,24 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="text-center">
-                    <h2 class="display-5 fw-bold">About Harborlights</h2>
+                    <h2 class="display-5 fw-bold">About Hotel 688</h2>
                 </div>
                 <div class="section-content">
-                    <h3 class="section-heading">Welcome to Harborlights Hotel</h3>
-                    <p class="lead">Nestled in the heart of the City, Harborlights Hotel is the perfect escape from the excitement of everyday life. Harborlights has grown into a favorite spot for both leisure and business travelers, offering a combination of modern elegance and timeless charm.</p>
+                    <h3 class="section-heading">Welcome to Hotel 688</h3>
+                    <p class="lead">Nestled in the heart of the City, Hotel 688 is the perfect escape from the excitement of everyday life. Hotel 688 has grown into a favorite spot for both leisure and business travelers, offering a combination of modern elegance and timeless charm.</p>
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Our Story</h3>
-                    <p class="lead">Harborlights Hotel was born with the vision of creating a sanctuary where guests can experience unparalleled luxury and comfort. Our journey began with a commitment to exceptional service, and over the years we have continued to evolve, embracing new trends and innovations while staying true to our roots. Today, Harborlights is a testament to our passion for hospitality and dedication to making every stay memorable.</p>
+                    <p class="lead">Hotel 688 was born with the vision of creating a sanctuary where guests can experience unparalleled luxury and comfort. Our journey began with a commitment to exceptional service, and over the years we have continued to evolve, embracing new trends and innovations while staying true to our roots. Today, Harborlights is a testament to our passion for hospitality and dedication to making every stay memorable.</p>
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Our Mission and Vision</h3>
-                    <p class="lead"><strong>Mission:</strong> At Harborlights Hotel, our mission is to provide an exceptional hotel experience that exceeds our guests' expectations. We are committed to personalized service, luxurious accommodations, and unforgettable experiences.</p>
+                    <p class="lead"><strong>Mission:</strong> At Hotel 688, our mission is to provide an exceptional hotel experience that exceeds our guests' expectations. We are committed to personalized service, luxurious accommodations, and unforgettable experiences.</p>
                     <p class="lead"><strong>Vision:</strong> Our vision is to be recognized as the leading hospitality destination in the City, known for our exceptional service, sustainable operations, and deep connection to the local community.</p>
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Services and Amenities</h3>
-                    <p class="lead">At Harborlights Hotel, we offer a range of services and amenities designed to cater to your every need:</p>
+                    <p class="lead">At Hotel 688, we offer a range of services and amenities designed to cater to your every need:</p>
                     <ul class="lead">
                         <li>Elegant interiors equipped with the latest amenities.</li>
                         <li>Gourmet cuisine: Enjoy exquisite dishes prepared by our renowned chefs.</li>
@@ -130,15 +130,15 @@
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Our Team</h3>
-                    <p class="lead">Our dedicated team of professionals is at the heart of Harborlights Hotel. From our experienced management to our friendly front-line staff, everyone is committed to making your stay unforgettable. Our team's passion ensures that every guest feels welcomed and valued.</p>
+                    <p class="lead">Our dedicated team of professionals is at the heart of Hotel 688. From our experienced management to our friendly front-line staff, everyone is committed to making your stay unforgettable. Our team's passion ensures that every guest feels welcomed and valued.</p>
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Social Responsibility</h3>
-                    <p class="lead">At Harborlights Hotel, we believe in giving back to our community and protecting our planet. We actively participate in various sustainability initiatives, such as green practices and community outreach programs that support local charities and organizations.</p>
+                    <p class="lead">At Hotel 688, we believe in giving back to our community and protecting our planet. We actively participate in various sustainability initiatives, such as green practices and community outreach programs that support local charities and organizations.</p>
                 </div>
                 <div class="section-content">
                     <h3 class="section-heading">Contact Us</h3>
-                    <p class="lead">We look forward to welcoming you to Harborlights Hotel. For reservations or inquiries, please contact us at:</p>
+                    <p class="lead">We look forward to welcoming you to Hotel 688. For reservations or inquiries, please contact us at:</p>
                     <p class="lead">
                         <strong>Address:</strong> [Hotel Address]<br>
                         <strong>Phone:</strong> [Hotel Phone Number]<br>
